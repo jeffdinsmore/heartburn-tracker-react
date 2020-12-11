@@ -18,8 +18,9 @@ _The heartburn tracker website is designed to follow a persons path of heartburn
 
 ## Articles of Info to Help Build the Website
 
-* _https://auth0.com/_
-* 
+* _Login and authorization - https://auth0.com/_
+* _Hooks documentation - https://reactjs.org/docs/hooks-intro.html_
+* _Hooks tutorial - https://youtu.be/dpw9EHDh2bM_
 
 ## Component Diagram
 
