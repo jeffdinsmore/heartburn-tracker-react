@@ -1,4 +1,4 @@
-# _Heartburn Tracker Website - Capstone Project _
+# _Heartburn Tracker Website - Capstone Project_
 
 #### _This heartburn tracker website will allow a user to sign in and submit eaten food items and confirm if there is heartburn or not, 12/11/2020_
 
@@ -16,6 +16,8 @@ _The heartburn tracker website is designed to follow a persons path of heartburn
 * _Website will show in list and detail format the inputs received above and give the user the option to delete and edit these fields_
 * _An algorithm will be working in the background to match specific ingredients to instances of heartburn and display these ingredients on the home page_
 
+Further Capstone Info Listed Below
+
 ## Articles of Info to Help Build the Website
 
 * _Login and authorization - https://auth0.com/_
@@ -30,7 +32,7 @@ _The heartburn tracker website is designed to follow a persons path of heartburn
 
 ## Component Diagram
 
-
+<img src="./public/Component-Diagram.PNG">
 
 ## Setup/Installation Requirements
 
