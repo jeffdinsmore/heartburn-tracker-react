@@ -8,6 +8,19 @@
 
 _The heartburn tracker website is designed to follow a persons path of heartburn by having the person input food they ate, the ingredients, and then submit if they had heartburn or not. Algorithms will then analyze the data to see if there are common trends in the ingredients of food and the instances of heartburn and will show this data on the website._
 
+## Items Needed for MVP
+
+* _Login capability - each user will have their own login that tracks and records their personal data and inputs_
+* _Website will receive three inputs - A user will input three fields of data: food item, ingredients of this food item, and if they have heartburn or not_
+* _NoSQL will be used for the data to be stored from each user and called upon as needed_
+* _Website will show in list and detail format the inputs received above and give the user the option to delete and edit these fields_
+* _An algorithm will be working in the background to match specific ingredients to instances of heartburn and display these ingredients on the home page_
+
+## Articles of Info to Help Build the Website
+
+* _https://auth0.com/_
+* 
+
 ## Component Diagram
 
 
