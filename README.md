@@ -5,7 +5,6 @@
 #### By _Jeff Dinsmore_
 
 ### Table of Contents
-* <a href="#component-diagram">Component Diagram</a>
 * <a href="#description">Description</a>
 * <a href="#items-needed-for-mvp">Items Needed for MVP</a>
 * <a href="#articles-of-info-to-help-build-the-website">Articles of Info to Help Build the Website</a>
@@ -13,6 +12,15 @@
   * <a href="#login-and-authentication">Login and Authentication</a>
   * <a href="#react-routing-info">React Routing Info</a>
   * <a href="#react-hooks">React Hooks</a>
+  * <a href="#data-structuring-firestore">Data Structuring Firestore</a>
+  * <a href="#firestore-querying">Firestore Querying</a>
+  * <a href="#styling-components">Styling Components</a>
+* <a href="#component-diagram">Component Diagram</a>
+* <a href="#setupinstallation-requirements">Setup/Installation Requirements</a>
+* <a href="#known-bugs">Known Bugs</a>
+* <a href="#support-and-contact-details">Support and Contact Details</a>
+* <a href="#technologies-used">Technologies Used</a>
+* <a href="#license">License</a>
 
 ## Description
 
@@ -75,7 +83,7 @@ Further Capstone Info Listed Below
 
 _No known bugs at the this time._
 
-## Support and contact details
+## Support and Contact Details
 
 _Any known issues, please reach out to Jeff Dinsmore by email at hello@jeffdinsmore.com._
 
