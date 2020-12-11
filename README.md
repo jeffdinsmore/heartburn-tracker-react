@@ -4,6 +4,16 @@
 
 #### By _Jeff Dinsmore_
 
+### Table of Contents
+* <a href="#component-diagram">Component Diagram</a>
+* <a href="#description">Description</a>
+* <a href="#items-needed-for-mvp">Items Needed for MVP</a>
+* <a href="#articles-of-info-to-help-build-the-website">Articles of Info to Help Build the Website</a>
+  * <a href="#firebase-hosting">Firebase Hosting</a>
+  * <a href="#login-and-authentication">Login and Authentication</a>
+  * <a href="#react-routing-info">React Routing Info</a>
+  * <a href="#react-hooks">React Hooks</a>
+
 ## Description
 
 _The heartburn tracker website is designed to follow a persons path of heartburn by having the person input food they ate, the ingredients, and then submit if they had heartburn or not. Algorithms will then analyze the data to see if there are common trends in the ingredients of food and the instances of heartburn and will show this data on the website._
@@ -34,7 +44,7 @@ Further Capstone Info Listed Below
 * _React Router quick-start - https://reactrouter.com/web/guides/quick-start_
 * _React Routing tutorial - https://reactrouter.com/web/example/basic_
 
-### Hooks
+### React Hooks
 * _Hooks documentation - https://reactjs.org/docs/hooks-intro.html_
 * _Hooks tutorial - https://youtu.be/dpw9EHDh2bM_
 
