@@ -19,8 +19,14 @@ _The heartburn tracker website is designed to follow a persons path of heartburn
 ## Articles of Info to Help Build the Website
 
 * _Login and authorization - https://auth0.com/_
+* _Firebase Authentication - https://firebase.google.com/docs/auth_
+* _React authentication flow - https://reactrouter.com/web/example/auth-workflow_
+* _React Firebase Authorization recipes - http://react-redux-firebase.com/docs/recipes/auth.html_
 * _Hooks documentation - https://reactjs.org/docs/hooks-intro.html_
 * _Hooks tutorial - https://youtu.be/dpw9EHDh2bM_
+* _Data structures for firestore - https://firebase.google.com/docs/firestore/manage-data/structure-data_
+
+
 
 ## Component Diagram
 
