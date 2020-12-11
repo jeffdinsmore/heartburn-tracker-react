@@ -20,6 +20,10 @@ Further Capstone Info Listed Below
 
 ## Articles of Info to Help Build the Website
 
+### Firebase Hosting
+* _Firebase hosting - https://firebase.google.com/docs/hosting/custom-domain_
+* _Firebase hosting rules - https://firebase.google.com/docs/rules_
+
 ### Login and Authentication
 * _Login and authorization - https://auth0.com/_
 * _Firebase Authentication - https://firebase.google.com/docs/auth_
@@ -36,6 +40,13 @@ Further Capstone Info Listed Below
 
 ### Data Structuring Firestore
 * _Data structures for firestore - https://firebase.google.com/docs/firestore/manage-data/structure-data_
+
+### Firestore Querying
+* _Simple & compound queries - https://firebase.google.com/docs/firestore/query-data/queries_
+* _Queries with Indexing - https://firebase.google.com/docs/firestore/query-data/indexing_
+
+### Styling Components
+* _Styled components documentation - https://styled-components.com/docs_
 
 ## Component Diagram
 
