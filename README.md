@@ -1,3 +1,52 @@
+# _Heartburn Tracker Website - Capstone Project _
+
+#### _This heartburn tracker website will allow a user to sign in and submit eaten food items and confirm if there is heartburn or not, 12/11/2020_
+
+#### By _Jeff Dinsmore_
+
+## Description
+
+_The heartburn tracker website is designed to follow a persons path of heartburn by having the person input food they ate, the ingredients, and then submit if they had heartburn or not. Algorithms will then analyze the data to see if there are common trends in the ingredients of food and the instances of heartburn and will show this data on the website._
+
+## Component Diagram
+
+
+
+## Setup/Installation Requirements
+
+* _Clone this repository_
+* _Open repository in your preferred code builder program. (This was built in VS Code)_
+* _In the terminal, cd into the heartburn-tracker-react folder_
+* _Type in the terminal "npm install" and press enter_
+* _To run the program, type "npm run start" in the terminal_
+* _The program should now be running_
+
+## Known Bugs
+
+_No known bugs at the this time._
+
+## Support and contact details
+
+_Any known issues, please reach out to Jeff Dinsmore by email at hello@jeffdinsmore.com._
+
+## Technologies Used
+
+* _JavaScript_
+* _JSX_
+* _CSS_
+* _VS Code_
+* _React_
+* _Redux_
+* _NoSQL - Firebase/Firestore_
+
+## License
+
+Copyright (c) 2020, **_Jeff Dinsmore_**
+
+This software is licensed under the MIT license.
+
+----------------------------------------------------------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
