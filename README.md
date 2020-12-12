@@ -89,12 +89,12 @@ _Any known issues, please reach out to Jeff Dinsmore by email at hello@jeffdinsm
 
 ## Technologies Used
 
+* _React_
+* _Redux_
 * _JavaScript_
 * _JSX_
 * _CSS_
 * _VS Code_
-* _React_
-* _Redux_
 * _NoSQL - Firebase/Firestore_
 
 ## License
