@@ -7,9 +7,8 @@ function ReusableForm(props) {
       <form onSubmit={props.formSubmissionHandler}>
         <input
           type='text'
-          name='foodItem'
-          placeholder='Food Item'
-          defaultValue={props.nameText} />
+          name='foodName'
+          placeholder='Food Item'/>
           <br></br>
         <input
           type='text'
