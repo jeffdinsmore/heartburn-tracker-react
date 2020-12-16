@@ -48,9 +48,9 @@ class FoodItemControl extends React.Component {
   handleChangingSelectedFoodItem = (id) => {
     this.props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
       const firestoreFoodItem = {
-        names: foodItem.get("names"),
-        location: foodItem.get("location"),
-        issue: foodItem.get("issue"),
+        foodName: foodItem.get("foodName"),
+        ingredients: foodItem.get("ingredients"),
+        heartburn: foodItem.get("heartburn"),
         id: foodItem.id
       }
       this.setState({ selectedFoodItem: firestoreFoodItem });

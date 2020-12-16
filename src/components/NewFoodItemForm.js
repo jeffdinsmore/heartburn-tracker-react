@@ -11,9 +11,9 @@ function NewFoodItemForm(props){
   
     return firestore.collection('foodItems').add(
       {
-        names: event.target.names.value,
-        location: event.target.location.value, 
-        issue: event.target.issue.value,
+        foodName: event.target.foodName.value,
+        ingredients: event.target.ingredients.value, 
+        heartburn: event.target.heartburn.value,
         timeOpen: firestore.FieldValue.serverTimestamp()
       }
     );

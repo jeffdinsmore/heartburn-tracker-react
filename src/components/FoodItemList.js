@@ -16,7 +16,7 @@ function FoodItemList(props) {
         {foodItems.map((foodItem) => {
           return <FoodItem
             whenFoodItemClicked = { props.onFoodItemSelection }
-            name={foodItem.names}
+            foodName={foodItem.foodName}
             ingredients={foodItem.ingredients}
             heartburn={foodItem.heartburn}
             // formattedWaitTime={foodItem.formattedWaitTime}

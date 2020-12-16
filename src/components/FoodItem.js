@@ -5,7 +5,7 @@ function FoodItem(props){
   return (
     <React.Fragment>
       <div onClick = {() => props.whenFoodItemClicked(props.id)}>
-        <h3>{props.name} - {props.ingredients}</h3>
+        <h3>{props.foodName} - {props.ingredients}</h3>
         <p><em>{props.heartburn}</em></p>
         <hr/>
       </div>
@@ -14,7 +14,7 @@ function FoodItem(props){
 }
 
 FoodItem.propTypes = {
-  name: PropTypes.string,
+  foodName: PropTypes.string,
   ingredients: PropTypes.string,
   heartburn: PropTypes.bool,
   id: PropTypes.string,
