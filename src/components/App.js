@@ -2,11 +2,11 @@ import React from 'react';
 import Header from './Header';
 import FoodItemControl from './FoodItemControl';
 import Footer from './Footer';
-import Signin from './Signin';
-import { Route } from 'react-router-dom';
+import Signin from "./Signin";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
-  return (
+function App(){
+  return ( 
     <Router>
       <Header />
       <Switch>
@@ -17,7 +17,6 @@ function App() {
           <FoodItemControl />
         </Route>
       </Switch>
-      <Footer />
     </Router>
   );
 }

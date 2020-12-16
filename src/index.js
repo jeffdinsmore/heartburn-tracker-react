@@ -3,16 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import rootReducer from './reducers/index';
+import { Provider } from 'react-redux';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 import firebase from "./firebase";
-import { firestoreReducer } from 'redux-firestore';
+import 'firebase/auth';
 
-const rootReducer = combineReducers({
-  formVisibleOnPage: formVisibleReducer,
-  masterFoodList: foodListReducer,
-  firestore: firestoreReducer
-});
+const store = createStore(rootReducer);
+
+// const rootReducer = combineReducers({
+//   formVisibleOnPage: formVisibleReducer,
+//   masterFoodItemList: foodItemListReducer,
+//   firestore: firestoreReducer
+// });
 
 const rrfProps = {
   firebase,
