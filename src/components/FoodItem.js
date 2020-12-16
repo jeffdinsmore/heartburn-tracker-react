@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function FoodItem(props){
+function FoodItem(props) {
   return (
     <React.Fragment>
-      <div onClick = {() => props.whenFoodItemClicked(props.id)}>
+      <div onClick={() => props.whenFoodItemClicked(props.id)}>
         <h3>{props.foodName} - {props.ingredients}</h3>
         <p><em>{props.heartburn}</em></p>
-        <hr/>
+        <hr />
       </div>
     </React.Fragment>
   );

@@ -25,13 +25,13 @@ function Signin() {
   }
 
   function doSignOut() {
-    firebase.auth().signOut().then(function() {
+    firebase.auth().signOut().then(function () {
       alert("Successfully signed out!");
-    }).catch(function(error) {
+    }).catch(function (error) {
       alert(error.message);
     });
   }
-  
+
   return (
     <React.Fragment>
       <h1>Sign In</h1>

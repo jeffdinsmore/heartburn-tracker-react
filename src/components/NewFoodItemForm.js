@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import ReusableForm from "./ReusableForm";
 import { useFirestore } from 'react-redux-firebase'
 
-function NewFoodItemForm(props){
+function NewFoodItemForm(props) {
   const firestore = useFirestore();
   function addFoodItemToFirestore(event) {
     event.preventDefault();
     props.onNewFoodItemCreation();
-  
+
     return firestore.collection('foodItems').add(
       {
         foodName: event.target.foodName.value,
-        ingredients: event.target.ingredients.value, 
+        ingredients: event.target.ingredients.value,
         heartburn: event.target.heartburn.value,
         timeOpen: firestore.FieldValue.serverTimestamp()
       }
@@ -21,7 +21,7 @@ function NewFoodItemForm(props){
 
   return (
     <React.Fragment>
-      <ReusableForm 
+      <ReusableForm
         formSubmissionHandler={addFoodItemToFirestore}
         buttonText="Help!" />
     </React.Fragment>

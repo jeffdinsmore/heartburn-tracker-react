@@ -12,16 +12,16 @@ function FoodItemList(props) {
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>
-        <hr/>
+        <hr />
         {foodItems.map((foodItem) => {
           return <FoodItem
-            whenFoodItemClicked = { props.onFoodItemSelection }
+            whenFoodItemClicked={props.onFoodItemSelection}
             foodName={foodItem.foodName}
             ingredients={foodItem.ingredients}
             heartburn={foodItem.heartburn}
             // formattedWaitTime={foodItem.formattedWaitTime}
             id={foodItem.id}
-            key={foodItem.id}/>
+            key={foodItem.id} />
         })}
       </React.Fragment>
     );

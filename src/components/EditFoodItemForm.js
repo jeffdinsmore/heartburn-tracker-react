@@ -3,7 +3,7 @@ import ReusableForm from "./ReusableForm";
 import PropTypes from "prop-types";
 import { useFirestore } from 'react-redux-firebase';
 
-function EditFoodItemForm(props){
+function EditFoodItemForm(props) {
   const firestore = useFirestore();
   const { foodItem } = props;
 
@@ -15,15 +15,15 @@ function EditFoodItemForm(props){
       ingredients: event.target.ingredients.value,
       heartburn: event.target.heartburn.value
     }
-    return firestore.update({collection: 'foodItems', doc: foodItem.id }, propertiesToUpdate)
+    return firestore.update({ collection: 'foodItems', doc: foodItem.id }, propertiesToUpdate)
   }
 
   return (
     <React.Fragment>
-      <ReusableForm 
-        formSubmissionHandler={handleEditFoodItemFormSubmission} 
+      <ReusableForm
+        formSubmissionHandler={handleEditFoodItemFormSubmission}
         buttonText="Update FoodItem"
-        nameText={props.foodName}/>
+        nameText={props.foodName} />
     </React.Fragment>
   );
 }
