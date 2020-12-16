@@ -1,6 +1,5 @@
 import * as c from './../actions/ActionTypes';
 
-
 export default (state = {}, action) => {
   const { foodName, ingredients, heartburn, id } = action;
   switch (action.type) {

@@ -19,7 +19,6 @@ function FoodItemList(props) {
             foodName={foodItem.foodName}
             ingredients={foodItem.ingredients}
             heartburn={foodItem.heartburn}
-            // formattedWaitTime={foodItem.formattedWaitTime}
             id={foodItem.id}
             key={foodItem.id} />
         })}

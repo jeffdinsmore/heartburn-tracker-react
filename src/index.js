@@ -13,26 +13,19 @@ import 'firebase/auth';
 
 const store = createStore(rootReducer);
 
-// const rootReducer = combineReducers({
-//   formVisibleOnPage: formVisibleReducer,
-//   masterFoodItemList: foodItemListReducer,
-//   firestore: firestoreReducer
-// });
+store.subscribe(() =>
+  console.log(store.getState())
+);
 
 const rrfProps = {
   firebase,
   config: {
-        userProfile: "users"
-    },
+    userProfile: "users",
+    useFirestoreForProfile: true,
+  },
   dispatch: store.dispatch,
   createFirestoreInstance
 }
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
 
 ReactDOM.render(
   <Provider store={store}>

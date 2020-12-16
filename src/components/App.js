@@ -17,6 +17,7 @@ function App(){
           <FoodItemControl />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }

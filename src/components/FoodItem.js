@@ -16,7 +16,7 @@ function FoodItem(props) {
 FoodItem.propTypes = {
   foodName: PropTypes.string,
   ingredients: PropTypes.string,
-  heartburn: PropTypes.bool,
+  heartburn: PropTypes.string,
   id: PropTypes.string,
   whenFoodItemClicked: PropTypes.func
 };
