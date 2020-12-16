@@ -1,15 +1,24 @@
 import React from 'react';
 import Header from './Header';
-import Homepage from './Homepage';
+import FoodItemControl from './FoodItemControl';
 import Footer from './Footer';
+import Signin from './Signin';
+import { Route } from 'react-router-dom';
 
 function App() {
   return (
-    <React.Fragment>
+    <Router>
       <Header />
-      <Homepage />
+      <Switch>
+        <Route path="/signin">
+          <Signin />
+        </Route>
+        <Route path="/">
+          <FoodItemControl />
+        </Route>
+      </Switch>
       <Footer />
-    </React.Fragment>
+    </Router>
   );
 }
 
