@@ -24,7 +24,6 @@ describe('foodItemListReducer', () => {
     foodName: 'Cookies',
     ingredients: 'flour, sugar, butter, vanilla',
     heartburn: 'Redux action is not working correctly.',
-    timeOpen: 0,
     id: 1
   };
 

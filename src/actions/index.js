@@ -1,15 +1,13 @@
 import * as c from './../actions/ActionTypes';
 
 export const addFoodItem = (foodItem) => {
-  const { names, location, issue, id, formattedWaitTime, timeOpen } = foodItem;
+  const { foodName, ingredients, heartburn, id } = foodItem;
   return {
     type: c.ADD_FOODITEM,
-    names: names,
-    location: location,
-    issue: issue,
+    foodName: foodName,
+    ingredients: ingredients,
+    heartburn: heartburn,
     id: id,
-    formattedWaitTime,
-    timeOpen: timeOpen
   }
 }
 
@@ -18,6 +16,6 @@ export const toggleForm = () => ({
 });
 
 export const deleteFoodItem = id => ({
-  type: c.DELETE_FoodItem,
+  type: c.DELETE_FOODITEM,
   id
 });
