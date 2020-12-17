@@ -6,10 +6,10 @@ import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 
 function FoodItemList(props) {
   useFirestoreConnect([
-    { collection: 'tickets' }
+    { collection: 'foodItems' }
   ]);
   
-  const foodItems = useSelector(state => state.firestore.ordered.tickets);
+  const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   console.log("food Items: ", foodItems);
   if (isLoaded(foodItems)) {
     return (
@@ -18,9 +18,9 @@ function FoodItemList(props) {
         {foodItems.map((foodItem) => {
           return <FoodItem
             whenFoodItemClicked={props.onFoodItemSelection}
-            names={foodItem.names}
-            location={foodItem.location}
-            issue={foodItem.issue}
+            foodName={foodItem.foodName}
+            ingredients={foodItem.ingredients}
+            heartburn={foodItem.heartburn}
             id={foodItem.id}
             key={foodItem.id} />
         })}
