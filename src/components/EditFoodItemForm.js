@@ -22,7 +22,7 @@ function EditFoodItemForm(props) {
     <React.Fragment>
       <ReusableForm
         formSubmissionHandler={handleEditFoodItemFormSubmission}
-        buttonText="Update FoodItem"
+        buttonText="Update Food Item"
         nameText={props.foodName} />
     </React.Fragment>
   );

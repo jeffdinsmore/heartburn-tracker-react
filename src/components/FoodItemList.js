@@ -6,9 +6,11 @@ import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 
 function FoodItemList(props) {
   useFirestoreConnect([
-    { collection: 'foodItems' }
+    { collection: 'tickets' }
   ]);
-  const foodItems = useSelector(state => state.firestore.ordered.foodItems);
+  
+  const foodItems = useSelector(state => state.firestore.ordered.tickets);
+  console.log("food Items: ", foodItems);
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>
@@ -16,9 +18,9 @@ function FoodItemList(props) {
         {foodItems.map((foodItem) => {
           return <FoodItem
             whenFoodItemClicked={props.onFoodItemSelection}
-            foodName={foodItem.foodName}
-            ingredients={foodItem.ingredients}
-            heartburn={foodItem.heartburn}
+            names={foodItem.names}
+            location={foodItem.location}
+            issue={foodItem.issue}
             id={foodItem.id}
             key={foodItem.id} />
         })}
@@ -32,7 +34,6 @@ function FoodItemList(props) {
     )
   }
 }
-
 
 FoodItemList.propTypes = {
   // foodItemList: PropTypes.object,

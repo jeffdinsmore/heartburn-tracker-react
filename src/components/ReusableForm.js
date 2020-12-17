@@ -16,6 +16,7 @@ function ReusableForm(props) {
           placeholder='Ingredients' />
         <br></br>
         <input
+          type="text"
           name='heartburn'
           placeholder='Heartburn Yes/No' />
         <button className="Submit" type='submit'>{props.buttonText}</button>

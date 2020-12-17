@@ -14,7 +14,7 @@ class FoodItemControl extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      // selectedFoodItem: null,
+      selectedFoodItem: null,
       editing: false
     };
   }
@@ -99,22 +99,22 @@ class FoodItemControl extends React.Component {
   // }
 
   render() {
-    const auth = this.props.firebase.auth();
-    if (!isLoaded(auth)) {
-      return (
-        <React.Fragment>
-          <h1>Loading...</h1>
-        </React.Fragment>
-      )
-    }
-    if ((isLoaded(auth)) && (auth.currentUser == null)) {
-      return (
-        <React.Fragment>
-          <h1>You must be signed in to access the queue.</h1>
-        </React.Fragment>
-      )
-    }
-    if ((isLoaded(auth)) && (auth.currentUser != null)) {
+    // const auth = this.props.firebase.auth();
+    // if (!isLoaded(auth)) {
+    //   return (
+    //     <React.Fragment>
+    //       <h1>Loading...</h1>
+    //     </React.Fragment>
+    //   )
+    // }
+    // if ((isLoaded(auth)) && (auth.currentUser == null)) {
+    //   return (
+    //     <React.Fragment>
+    //       <h1>You must be signed in to access the queue.</h1>
+    //     </React.Fragment>
+    //   )
+    // }
+    // if ((isLoaded(auth)) && (auth.currentUser != null)) {
       let currentlyVisibleState = null;
       let buttonText = null;
       if (this.state.editing) {
@@ -122,7 +122,7 @@ class FoodItemControl extends React.Component {
         buttonText = "Return to FoodItem List";
       } else if (this.state.selectedFoodItem != null) {
         currentlyVisibleState = <FoodItemDetail foodItem={this.state.selectedFoodItem} onClickingDelete={this.handleDeletingFoodItem} onClickingEdit={this.handleEditClick} />
-        buttonText = "Return to FoodItem List";
+        buttonText = "Return to Food Item List";
         // }
         // else if (this.state.count === 1) {
         //   currentlyVisibleState = <Steps />
@@ -146,7 +146,7 @@ class FoodItemControl extends React.Component {
           <button onClick={this.handleClick}>{buttonText}</button>
         </React.Fragment>
       );
-    }
+    // }
   }
 }
 FoodItemControl.propTypes = {

@@ -23,7 +23,7 @@ function NewFoodItemForm(props) {
     <React.Fragment>
       <ReusableForm
         formSubmissionHandler={addFoodItemToFirestore}
-        buttonText="Help!" />
+        buttonText="Submit" />
     </React.Fragment>
   );
 }
