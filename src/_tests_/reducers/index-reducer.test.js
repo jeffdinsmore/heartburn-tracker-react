@@ -21,4 +21,31 @@ describe("rootReducer", () => {
     });
   });
 
+  test('Check that initial state of foodItemListReducer matches root reducer', () => {
+    expect(store.getState().masterFoodItemList).toEqual(foodItemListReducer(undefined, { type: null }));
+  });
+
+  test('Check that initial state of formVisibleReducer matches root reducer', () => {
+    expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, { type: null }));
+  });
+
+  test('Check that ADD_FOODITEM action works for foodItemListReducer and root reducer', () => {
+    const action = {
+      type: c.ADD_FOODITEM,
+      foodName: 'Cookies',
+      ingredients: 'flour, sugar, butter, vanilla',
+      heartburn: 'No',
+      id: 1
+    }
+    store.dispatch(action);
+    expect(store.getState().masterFoodItemList).toEqual(foodItemListReducer(undefined, action));
+  });
+
+  test('Check that TOGGLE_FORM action works for formVisibleReducer and root reducer', () => {
+    const action = {
+      type: c.TOGGLE_FORM
+    }
+    store.dispatch(action);
+    expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
+  });
 });
