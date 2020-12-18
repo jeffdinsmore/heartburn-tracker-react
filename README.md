@@ -47,6 +47,7 @@ Further Capstone Info Listed Below
 * _Firebase Authentication - https://firebase.google.com/docs/auth_
 * _React authentication flow - https://reactrouter.com/web/example/auth-workflow_
 * _React Firebase Authorization recipes - http://react-redux-firebase.com/docs/recipes/auth.html_
+* _Handling user authentication - https://blog.logrocket.com/user-authentication-firebase-react-apps/_
 
 ### React Routing Info
 * _React Router quick-start - https://reactrouter.com/web/guides/quick-start_
