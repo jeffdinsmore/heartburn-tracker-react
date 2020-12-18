@@ -5,7 +5,6 @@ import foodItemListReducer from '../../reducers/foodItem-list-reducer';
 import * as c from '../../actions/ActionTypes';
 import editingReducer from '../../reducers/editing-reducer';
 // import selectFoodItemReducer from '../../reducers/select-foodItem-reducer';
-import { firestoreReducer } from 'redux-firestore';
 
 let store = createStore(rootReducer);
 

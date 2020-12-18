@@ -99,12 +99,6 @@ class FoodItemControl extends React.Component {
     dispatch(action);
   }
 
-  // handleClick = () => {
-  //   this.setState(prevState => {
-  //     return { count: prevState.count + 1 }
-  //   })
-  // }
-
   render() {
     const auth = this.props.firebase.auth();
     if (!isLoaded(auth)) {
