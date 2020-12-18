@@ -2,19 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { useFirestore } from 'react-redux-firebase';
 
 // function FoodItemList() {
 
 
 function ReusableForm(props) {
-  useFirestoreConnect([
-    { collection: 'foodItems' }
-  ]);
+  // const firestore = useFirestore();
+  const { foodItem } = props;
+  // useFirestoreConnect([
+  //   { collection: 'foodItems' }
+  // ]);
   console.log("props: ", props);
 
-  const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  console.log("food: ", foodItems);
-  if (isLoaded(foodItems)) {
+  // const foodItems = useSelector(state => state.firestore.ordered.foodItems);
+  console.log("food: ", foodItem);
+  if (isLoaded(foodItem)) {
     let formHandle;
     if (props.foodItem) {
       formHandle = <form onSubmit={props.formSubmissionHandler}>
@@ -22,7 +25,7 @@ function ReusableForm(props) {
           type='text'
           name='foodName'
           placeholder='Food Item'
-          defaultValue={foodItems[0].foodName}
+          defaultValue={foodItem.foodName}
           required='required' />
         <br></br>
         <input className="field"
@@ -79,7 +82,7 @@ ReusableForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
   buttonText: PropTypes.string,
   masterFoodItemList: PropTypes.object,
-  foodItem: PropTypes.object
+  // foodItem: PropTypes.object
 };
 
 export default ReusableForm;

@@ -20,17 +20,44 @@ function EditFoodItemForm(props) {
 
   return (
     <React.Fragment>
-      <ReusableForm
+      
+      <form onSubmit={handleEditFoodItemFormSubmission}>
+        <input className="field"
+          type='text'
+          name='foodName'
+          placeholder='Food Item'
+          defaultValue={foodItem.foodName}
+          required='required' />
+        <br></br>
+        <input className="field"
+          type='text'
+          name='ingredients'
+          placeholder='Ingredients'
+          defaultValue={props.foodItem.ingredients}
+          required='required' />
+        <br></br>
+        <input className="field"
+          type="text"
+          name='heartburn'
+          placeholder='Heartburn Yes/No'
+          defaultValue={props.foodItem.heartburn}
+          required='required' />
+        <br></br>
+        <button className="btn-success" type='submit'>Update Food Item</button>
+      </form>
+      
+      {/* buttonText="Update Food Item" */}
+      {/* <ReusableForm
         formSubmissionHandler={handleEditFoodItemFormSubmission}
         buttonText="Update Food Item"
-        nameText={props.foodName} />
+        nameText={props.foodName} /> */}
     </React.Fragment>
   );
 }
 
 EditFoodItemForm.propTypes = {
   masterFoodItemList: PropTypes.object,
-  onEditFoodItem: PropTypes.func
+  onEditFoodItem: PropTypes.func,
 };
 
 export default EditFoodItemForm;
