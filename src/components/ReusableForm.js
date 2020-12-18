@@ -10,6 +10,7 @@ function ReusableForm(props) {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);
+  console.log("props: ", props);
 
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   console.log("food: ", foodItems);
@@ -77,6 +78,10 @@ function ReusableForm(props) {
 ReusableForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
   buttonText: PropTypes.string,
+  foodName: PropTypes.string,
+  ingredients: PropTypes.string,
+  heartburn: PropTypes.string,
+  id: PropTypes.string,
   foodItem: PropTypes.object
 };
 
