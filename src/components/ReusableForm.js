@@ -81,7 +81,7 @@ function ReusableForm(props) {
 ReusableForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
   buttonText: PropTypes.string,
-  masterFoodItemList: PropTypes.object,
+  // masterFoodItemList: PropTypes.object,
   // foodItem: PropTypes.object
 };
 
