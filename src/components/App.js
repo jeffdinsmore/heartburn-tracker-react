@@ -6,7 +6,7 @@ import Signin from "./Signin";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from 'styled-components';
 
-const ItemControl = styled.p`
+const BodyStyling = styled.p`
   // background-color: lightGray;
   // text-align: center;
   padding: 6px 0px 16px 0px;
@@ -24,9 +24,9 @@ function App(){
           <Signin />
         </Route>
         <Route path="/">
-          <ItemControl>
+          <BodyStyling>
           <FoodItemControl />
-          </ItemControl>
+          </BodyStyling>
         </Route>
       </Switch>
       <Footer />

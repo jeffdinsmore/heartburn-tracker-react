@@ -5,8 +5,9 @@ function FoodItem(props) {
   return (
     <React.Fragment>
       <div onClick={() => props.whenFoodItemClicked(props.id)}>
-        <h3>{props.foodName} - {props.ingredients}</h3>
-        <p><em>{props.heartburn}</em></p>
+        <p><strong>Food:</strong> {props.foodName}</p>
+        <p><strong>Indgredients:</strong> {props.ingredients}</p>
+        <p><em><strong>Heartburn:</strong> {props.heartburn}</em></p>
         <hr />
       </div>
     </React.Fragment>

@@ -18,25 +18,25 @@ class FoodItemControl extends React.Component {
     };
   }
   
-  componentDidMount() {
-    this.waitTimeUpdateTimer = setInterval(() =>
-      this.updateFoodItemElapsedWaitTime(),
-      60000
-    );
-  }
+  // componentDidMount() {
+  //   this.waitTimeUpdateTimer = setInterval(() =>
+  //     this.updateFoodItemElapsedWaitTime(),
+  //     60000
+  //   );
+  // }
 
   componentDidUpdate() {
     console.log("component updated!");
   }
 
-  componentWillUnmount() {
-    console.log("component unmounted!");
-    clearInterval(this.waitTimeUpdateTimer);
-  }
+  // componentWillUnmount() {
+  //   console.log("component unmounted!");
+  //   clearInterval(this.waitTimeUpdateTimer);
+  // }
 
-  updateFoodItemElapsedWaitTime = () => {
-    console.log("tick");
-  }
+  // updateFoodItemElapsedWaitTime = () => {
+  //   console.log("tick");
+  // }
 
   handleAddingNewFoodItemToList = () => {
     const { dispatch } = this.props;
