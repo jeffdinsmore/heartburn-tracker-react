@@ -59,7 +59,7 @@ function ReusableForm(props) {
         <button className="Submit" type='submit'>{props.buttonText}</button>
       </form>
     }
-    console.log("resuse: ", props.foodItem);
+    
     return (
       <React.Fragment>
         {formHandle}
@@ -77,7 +77,7 @@ function ReusableForm(props) {
 ReusableForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
   buttonText: PropTypes.string,
-  // foodItem: PropTypes.object
+  foodItem: PropTypes.object
 };
 
 export default ReusableForm;
