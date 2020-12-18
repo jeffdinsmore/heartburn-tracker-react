@@ -1,5 +1,4 @@
 import React from "react";
-import ReusableForm from "./ReusableForm";
 import PropTypes from "prop-types";
 import { useFirestore } from 'react-redux-firebase';
 
@@ -45,12 +44,6 @@ function EditFoodItemForm(props) {
         <br></br>
         <button className="btn-success" type='submit'>Update Food Item</button>
       </form>
-      
-      {/* buttonText="Update Food Item" */}
-      {/* <ReusableForm
-        formSubmissionHandler={handleEditFoodItemFormSubmission}
-        buttonText="Update Food Item"
-        nameText={props.foodName} /> */}
     </React.Fragment>
   );
 }

@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReusableForm from "./ReusableForm";
 import { useFirestore } from 'react-redux-firebase'
-import { addFoodItem } from "../actions";
 
 function NewFoodItemForm(props) {
   const firestore = useFirestore();
@@ -40,6 +38,7 @@ function NewFoodItemForm(props) {
           name='heartburn'
           placeholder='Heartburn Yes/No'
           required='required' />
+          <br></br>
         <button className="Submit" type='submit'>Submit</button>
       </form>
     </React.Fragment>
