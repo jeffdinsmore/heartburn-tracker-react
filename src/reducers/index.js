@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   formVisibleOnPage: formVisibleReducer,
   masterFoodItemList: foodItemListReducer,
   editing: editingReducer,
-  // firestore: firestoreReducer
+  firestore: firestoreReducer
 });
 
 export default rootReducer;

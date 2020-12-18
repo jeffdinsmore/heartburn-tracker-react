@@ -15,7 +15,6 @@ class FoodItemControl extends React.Component {
     console.log(props);
     this.state = {
       selectedFoodItem: null,
-      editing: false
     };
   }
 
@@ -58,14 +57,18 @@ class FoodItemControl extends React.Component {
   }
 
   handleClick = () => {
+    const { dispatch } = this.props;
+    const action = a.toggleForm();
+    const action2 = a.editing();
+
     if (this.state.selectedFoodItem != null) {
+      if (this.props.editing) {
+        dispatch(action2);
+      }
       this.setState({
         selectedFoodItem: null,
-        editing: false
       });
     } else {
-      const { dispatch } = this.props;
-      const action = a.toggleForm();
       dispatch(action);
     }
   }
@@ -78,18 +81,21 @@ class FoodItemControl extends React.Component {
   }
 
   handleEditingFoodItemInList = () => {
-    // const { dispatch } = this.props;
+    const { dispatch } = this.props;
     // const action = a.addFoodItem(foodItemToEdit);
     // dispatch(action);
+    const action = a.editing();
+    dispatch(action);
     this.setState({
-      editing: false,
       selectedFoodItem: null
     });
   }
 
   handleEditClick = () => {
     console.log("handleEditClick reached!");
-    this.setState({ editing: true });
+    const { dispatch } = this.props;
+    const action = a.editing();
+    dispatch(action);
   }
 
   // handleClick = () => {
@@ -117,22 +123,12 @@ class FoodItemControl extends React.Component {
     if ((isLoaded(auth)) && (auth.currentUser != null)) {
       let currentlyVisibleState = null;
       let buttonText = null;
-      if (this.state.editing) {
+      if (this.props.editing) {
         currentlyVisibleState = <EditFoodItemForm foodItem={this.state.selectedFoodItem} onEditFoodItem={this.handleEditingFoodItemInList} />
         buttonText = "Return to FoodItem List";
       } else if (this.state.selectedFoodItem != null) {
         currentlyVisibleState = <FoodItemDetail foodItem={this.state.selectedFoodItem} onClickingDelete={this.handleDeletingFoodItem} onClickingEdit={this.handleEditClick} />
         buttonText = "Return to Food Item List";
-        // }
-        // else if (this.state.count === 1) {
-        //   currentlyVisibleState = <Steps />
-        //   buttonText = "Yes";
-        // } else if (this.state.count === 2) {
-        //   currentlyVisibleState = <Help />
-        //   buttonText = "Yes";
-        // } else if (this.state.count === 3) {
-        //   currentlyVisibleState = <Question />
-        //   buttonText = "Go to Form";
       } else if (this.props.formVisibleOnPage) {
         currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={this.handleAddingNewFoodItemToList} />;
         buttonText = "Return to FoodItem List";
@@ -151,13 +147,15 @@ class FoodItemControl extends React.Component {
 }
 FoodItemControl.propTypes = {
   masterFoodItemList: PropTypes.object,
-  formVisibleOnPage: PropTypes.bool
+  formVisibleOnPage: PropTypes.bool,
+  editing: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
     masterFoodItemList: state.masterFoodItemList,
-    formVisibleOnPage: state.formVisibleOnPage
+    formVisibleOnPage: state.formVisibleOnPage,
+    editing: state.editing
   }
 }
 
