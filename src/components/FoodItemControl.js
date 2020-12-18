@@ -99,22 +99,22 @@ class FoodItemControl extends React.Component {
   // }
 
   render() {
-    // const auth = this.props.firebase.auth();
-    // if (!isLoaded(auth)) {
-    //   return (
-    //     <React.Fragment>
-    //       <h1>Loading...</h1>
-    //     </React.Fragment>
-    //   )
-    // }
-    // if ((isLoaded(auth)) && (auth.currentUser == null)) {
-    //   return (
-    //     <React.Fragment>
-    //       <h1>You must be signed in to access the queue.</h1>
-    //     </React.Fragment>
-    //   )
-    // }
-    // if ((isLoaded(auth)) && (auth.currentUser != null)) {
+    const auth = this.props.firebase.auth();
+    if (!isLoaded(auth)) {
+      return (
+        <React.Fragment>
+          <h1>Loading...</h1>
+        </React.Fragment>
+      )
+    }
+    if ((isLoaded(auth)) && (auth.currentUser == null)) {
+      return (
+        <React.Fragment>
+          <h1>You must be signed in to access the queue.</h1>
+        </React.Fragment>
+      )
+    }
+    if ((isLoaded(auth)) && (auth.currentUser != null)) {
       let currentlyVisibleState = null;
       let buttonText = null;
       if (this.state.editing) {
@@ -146,7 +146,7 @@ class FoodItemControl extends React.Component {
           <button onClick={this.handleClick}>{buttonText}</button>
         </React.Fragment>
       );
-    // }
+    }
   }
 }
 FoodItemControl.propTypes = {

@@ -11,8 +11,8 @@ import { createFirestoreInstance } from 'redux-firestore';
 import firebase from "./firebase";
 import 'firebase/auth';
 
-let firebase = require('firebase');
-let firebaseui = require('firebaseui');
+// let firebase = require('firebase');
+// let firebaseui = require('firebaseui');
 
 const store = createStore(rootReducer);
 
