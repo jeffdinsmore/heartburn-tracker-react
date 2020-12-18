@@ -12,12 +12,12 @@ class FoodItemControl extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log("props: ", props);
     this.state = {
       selectedFoodItem: null,
     };
   }
-
+  
   componentDidMount() {
     this.waitTimeUpdateTimer = setInterval(() =>
       this.updateFoodItemElapsedWaitTime(),
@@ -45,6 +45,7 @@ class FoodItemControl extends React.Component {
   }
 
   handleChangingSelectedFoodItem = (id) => {
+    console.log("hey ", this.props.firestore);
     this.props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
       const firestoreFoodItem = {
         foodName: foodItem.get("foodName"),

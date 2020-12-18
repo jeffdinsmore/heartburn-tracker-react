@@ -31,3 +31,20 @@ export const editingFalse = () => {
     type: c.EDITING_FALSE
   }
 }
+
+export const selectFoodItem = (foodItem) => {
+  const { foodName, ingredients, heartburn, id } = foodItem;
+  return {
+    type: c.SELECT_FOODITEM,
+    foodName: foodName,
+    ingredients: ingredients,
+    heartburn: heartburn,
+    id: id,
+  }
+}
+
+export const unSelectedFoodItem = () => {
+  return {
+    type: c.UNSELECT_FOODITEM,
+  }
+}

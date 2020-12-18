@@ -17,7 +17,7 @@ describe("rootReducer", () => {
       masterFoodItemList: {},
       formVisibleOnPage: false,
       // firestore: firestoreReducer,
-      // selectedFoodItem: null
+      selectedFoodItem: null
     });
   });
 
