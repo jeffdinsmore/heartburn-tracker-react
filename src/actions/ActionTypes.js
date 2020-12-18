@@ -1,3 +1,5 @@
 export const ADD_FOODITEM = 'ADD_FOODITEM';
 export const DELETE_FOODITEM = 'DELETE_FOODITEM';
 export const TOGGLE_FORM = 'TOGGLE_FORM';
+export const EDITING = 'EDITING';
+export const EDITING_FALSE = 'EDITING_FALSE';

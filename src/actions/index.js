@@ -19,3 +19,15 @@ export const deleteFoodItem = id => ({
   type: c.DELETE_FOODITEM,
   id
 });
+
+export const editing = () => {
+  return {
+    type: c.EDITING
+  }
+}
+
+export const editingFalse = () => {
+  return {
+    type: c.EDITING_FALSE
+  }
+}
