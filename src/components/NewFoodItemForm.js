@@ -39,7 +39,7 @@ function NewFoodItemForm(props) {
           placeholder='Heartburn Yes/No'
           required='required' />
           <br></br>
-        <button className="Submit" type='submit'>Submit</button>
+        <button className="btn btn-success btn-sm" type='submit'>Submit</button>
       </form>
     </React.Fragment>
   );

@@ -120,21 +120,21 @@ class FoodItemControl extends React.Component {
       let buttonText = null;
       if (this.props.editing) {
         currentlyVisibleState = <EditFoodItemForm foodItem={this.state.selectedFoodItem} onEditFoodItem={this.handleEditingFoodItemInList} />
-        buttonText = "Return to FoodItem List";
+        buttonText = "Return to Food List";
       } else if (this.state.selectedFoodItem != null) {
         currentlyVisibleState = <FoodItemDetail foodItem={this.state.selectedFoodItem} onClickingDelete={this.handleDeletingFoodItem} onClickingEdit={this.handleEditClick} />
-        buttonText = "Return to Food Item List";
+        buttonText = "Return to Food List";
       } else if (this.props.formVisibleOnPage) {
         currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={this.handleAddingNewFoodItemToList} />;
-        buttonText = "Return to FoodItem List";
+        buttonText = "Return to Food List";
       } else {
         currentlyVisibleState = <FoodItemList foodItemList={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />;
-        buttonText = "Add FoodItem";
+        buttonText = "Add Food Item";
       }
       return (
         <React.Fragment>
           {currentlyVisibleState}
-          <button onClick={this.handleClick}>{buttonText}</button>
+          <button className="btn btn-success btn-sm"onClick={this.handleClick}>{buttonText}</button>
         </React.Fragment>
       );
     }

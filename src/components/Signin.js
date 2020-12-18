@@ -44,10 +44,10 @@ function Signin() {
           type='password'
           name='signinPassword'
           placeholder='Password' />
-        <button type='submit'>Sign in</button>
+        <button className="btn btn-sm btn-success" type='submit'>Sign in</button>
       </form>
       <h1>Sign Out</h1>
-      <button onClick={doSignOut}>Sign out</button>
+      <button className="btn btn-info btn-sm" onClick={doSignOut}>Sign out</button>
       <h1>Sign up</h1>
       <form onSubmit={doSignUp}>
         <input
@@ -58,7 +58,7 @@ function Signin() {
           type='password'
           name='password'
           placeholder='Password' />
-        <button type='submit'>Sign up</button>
+        <button className="btn btn-sm btn-success" type='submit'>Sign up</button>
       </form>
     </React.Fragment>
   );

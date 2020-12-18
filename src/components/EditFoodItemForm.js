@@ -42,7 +42,7 @@ function EditFoodItemForm(props) {
           defaultValue={props.foodItem.heartburn}
           required='required' />
         <br></br>
-        <button className="btn-success" type='submit'>Update Food Item</button>
+        <button className="btn btn-success btn-sm" type='submit'>Update Food Item</button>
       </form>
     </React.Fragment>
   );
