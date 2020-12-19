@@ -8,7 +8,7 @@ function FoodItemList(props) {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);
-  
+  let heartburnResult;
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   console.log("food Items: ", foodItems);
   if (isLoaded(foodItems)) {
@@ -16,11 +16,16 @@ function FoodItemList(props) {
       <React.Fragment>
         <hr />
         {foodItems.map((foodItem) => {
+          if(foodItem.heartburn === "Yes") {
+            heartburnResult="Yes";
+          } else {
+            heartburnResult="No";
+          }
           return <FoodItem
             whenFoodItemClicked={props.onFoodItemSelection}
             foodName={foodItem.foodName}
             ingredients={foodItem.ingredients}
-            heartburn={foodItem.heartburn}
+            heartburn={heartburnResult}
             id={foodItem.id}
             key={foodItem.id} />
         })}

@@ -40,8 +40,8 @@ function NewFoodItemForm(props) {
           required='required' />
         <br></br> */}
         <select name="heartburn" id="heartburnInput">
-          <option value={true}>Yes</option>
-          <option value={false}>No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
         </select>
         <br></br><br></br>
         <button className="btn btn-success btn-sm" type='submit'>Submit</button>

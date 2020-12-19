@@ -35,13 +35,18 @@ function EditFoodItemForm(props) {
           defaultValue={props.foodItem.ingredients}
           required='required' />
         <br></br>
-        <input className="field"
+        {/* <input className="field"
           type="text"
           name='heartburn'
           placeholder='Heartburn Yes/No'
           defaultValue={props.foodItem.heartburn}
           required='required' />
-        <br></br>
+        <br></br> */}
+        <select name="heartburn" className="field" id="heartburnInput">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+        <br></br><br></br>
         <button className="btn btn-success btn-sm" type='submit'>Update Food Item</button>
       </form>
     </React.Fragment>
