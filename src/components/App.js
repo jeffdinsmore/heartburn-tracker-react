@@ -15,17 +15,19 @@ const BodyStyling = styled.p`
   // border-radius: 20px;
 `;
 
-function App(){
-  return ( 
+function App() {
+  return (
     <Router>
       <Header />
       <Switch>
         <Route path="/signin">
-          <Signin />
+          <BodyStyling>
+            <Signin />
+          </BodyStyling>
         </Route>
         <Route path="/">
           <BodyStyling>
-          <FoodItemControl />
+            <FoodItemControl />
           </BodyStyling>
         </Route>
       </Switch>

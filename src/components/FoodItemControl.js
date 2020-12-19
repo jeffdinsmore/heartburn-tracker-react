@@ -115,9 +115,13 @@ class FoodItemControl extends React.Component {
         currentlyVisibleState = <FoodItemList foodItemList={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />;
         buttonText = "Add Food Item";
       }
+      // else if (this.props.signin) {
+          // currentlyVisibleState = <SigninSubmit 
+      // }
       return (
         <React.Fragment>
           {currentlyVisibleState}
+          <br></br>
           <button className="btn btn-success btn-sm"onClick={this.handleClick}>{buttonText}</button>
         </React.Fragment>
       );
