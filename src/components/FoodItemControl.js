@@ -18,25 +18,26 @@ class FoodItemControl extends React.Component {
     };
   }
   
-  // componentDidMount() {
-  //   this.waitTimeUpdateTimer = setInterval(() =>
-  //     this.updateFoodItemElapsedWaitTime(),
-  //     60000
-  //   );
-  // }
-
   componentDidUpdate() {
     console.log("component updated!");
   }
 
-  // componentWillUnmount() {
-  //   console.log("component unmounted!");
-  //   clearInterval(this.waitTimeUpdateTimer);
-  // }
+  handleClick = () => {
+    const { dispatch } = this.props;
+    const action = a.toggleForm();
+    const action2 = a.editing();
 
-  // updateFoodItemElapsedWaitTime = () => {
-  //   console.log("tick");
-  // }
+    if (this.state.selectedFoodItem != null) {
+      if (this.props.editing) {
+        dispatch(action2);
+      }
+      this.setState({
+        selectedFoodItem: null,
+      });
+    } else {
+      dispatch(action);
+    }
+  }
 
   handleAddingNewFoodItemToList = () => {
     const { dispatch } = this.props;
@@ -55,23 +56,6 @@ class FoodItemControl extends React.Component {
       }
       this.setState({ selectedFoodItem: firestoreFoodItem });
     });
-  }
-
-  handleClick = () => {
-    const { dispatch } = this.props;
-    const action = a.toggleForm();
-    const action2 = a.editing();
-
-    if (this.state.selectedFoodItem != null) {
-      if (this.props.editing) {
-        dispatch(action2);
-      }
-      this.setState({
-        selectedFoodItem: null,
-      });
-    } else {
-      dispatch(action);
-    }
   }
 
   handleDeletingFoodItem = (id) => {

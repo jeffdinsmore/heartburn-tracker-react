@@ -33,12 +33,17 @@ function NewFoodItemForm(props) {
           placeholder='Ingredients'
           required='required' />
         <br></br>
-        <input className="field"
+        {/* <input className="field"
           type="text"
           name='heartburn'
           placeholder='Heartburn Yes/No'
           required='required' />
-          <br></br>
+        <br></br> */}
+        <select name="heartburn" id="heartburnInput">
+          <option value={true}>Yes</option>
+          <option value={false}>No</option>
+        </select>
+        <br></br><br></br>
         <button className="btn btn-success btn-sm" type='submit'>Submit</button>
       </form>
     </React.Fragment>
