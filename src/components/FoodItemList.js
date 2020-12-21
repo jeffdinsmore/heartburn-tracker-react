@@ -41,7 +41,6 @@ function FoodItemList(props) {
 }
 
 FoodItemList.propTypes = {
-  // foodItemList: PropTypes.object,
   onFoodItemSelection: PropTypes.func
 };
 

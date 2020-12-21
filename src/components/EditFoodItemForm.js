@@ -35,13 +35,6 @@ function EditFoodItemForm(props) {
           defaultValue={props.foodItem.ingredients}
           required='required' />
         <br></br>
-        {/* <input className="field"
-          type="text"
-          name='heartburn'
-          placeholder='Heartburn Yes/No'
-          defaultValue={props.foodItem.heartburn}
-          required='required' />
-        <br></br> */}
         <select name="heartburn" className="field" id="heartburnInput">
           <option value="Yes">Yes</option>
           <option value="No">No</option>

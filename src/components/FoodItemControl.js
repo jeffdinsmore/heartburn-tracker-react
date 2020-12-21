@@ -67,8 +67,6 @@ class FoodItemControl extends React.Component {
 
   handleEditingFoodItemInList = () => {
     const { dispatch } = this.props;
-    // const action = a.addFoodItem(foodItemToEdit);
-    // dispatch(action);
     const action = a.editing();
     dispatch(action);
     this.setState({
