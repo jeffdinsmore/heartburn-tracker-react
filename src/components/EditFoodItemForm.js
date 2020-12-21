@@ -11,6 +11,7 @@ function EditFoodItemForm(props) {
     props.onEditFoodItem();
     const propertiesToUpdate = {
       foodName: event.target.foodName.value,
+      brand: event.target.brand.value,
       ingredients: event.target.ingredients.value,
       heartburn: event.target.heartburn.value
     }
@@ -19,7 +20,7 @@ function EditFoodItemForm(props) {
 
   return (
     <React.Fragment>
-      
+
       <form onSubmit={handleEditFoodItemFormSubmission}>
         <input className="field"
           type='text'
@@ -30,9 +31,16 @@ function EditFoodItemForm(props) {
         <br></br>
         <input className="field"
           type='text'
+          name='brand'
+          placeholder='Name brand'
+          defaultValue={foodItem.brand}
+          required='required' />
+        <br></br>
+        <input className="field"
+          type='text'
           name='ingredients'
           placeholder='Ingredients'
-          defaultValue={props.foodItem.ingredients}
+          defaultValue={foodItem.ingredients}
           required='required' />
         <br></br>
         <select name="heartburn" className="field" id="heartburnInput">

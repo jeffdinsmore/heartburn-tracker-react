@@ -11,6 +11,7 @@ function NewFoodItemForm(props) {
     return firestore.collection('foodItems').add(
       {
         foodName: event.target.foodName.value,
+        brand: event.target.brand.value,
         ingredients: event.target.ingredients.value,
         heartburn: event.target.heartburn.value,
         timeOpen: firestore.FieldValue.serverTimestamp()
@@ -25,6 +26,12 @@ function NewFoodItemForm(props) {
           type='text'
           name='foodName'
           placeholder='Food Item'
+          required='required' />
+        <br></br>
+        <input className="field"
+          type='text'
+          name='brand'
+          placeholder='Name brand'
           required='required' />
         <br></br>
         <input className="field"

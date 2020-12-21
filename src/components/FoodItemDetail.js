@@ -8,8 +8,8 @@ function FoodItemDetail(props) {
   return (
     <React.Fragment>
       <h1>Food Item Detail</h1>
-      <h3>{foodItem.foodName}</h3>
-      <h4>Ingredients: {foodItem.ingredients}</h4>
+      <h4>{foodItem.foodName} - {foodItem.brand}</h4>
+      <p>Ingredients: {foodItem.ingredients}</p>
       <p><em>{foodItem.heartburn}</em></p>
       <p>{ingredients[0]}</p>
       <button className="btn btn-success btn-sm" onClick={props.onClickingEdit}>Update Food Item</button>

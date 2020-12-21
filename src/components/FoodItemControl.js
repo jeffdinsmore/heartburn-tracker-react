@@ -50,6 +50,7 @@ class FoodItemControl extends React.Component {
     this.props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
       const firestoreFoodItem = {
         foodName: foodItem.get("foodName"),
+        brand: foodItem.get("brand"),
         ingredients: foodItem.get("ingredients"),
         heartburn: foodItem.get("heartburn"),
         id: foodItem.id
