@@ -38,7 +38,7 @@ class FoodItemControl extends React.Component {
       });
     } else {
       dispatch(action);
-      dispatch(action3);
+      // dispatch(action3);
     }
   }
 
@@ -113,7 +113,7 @@ class FoodItemControl extends React.Component {
       } else if (this.props.formVisibleOnPage) {
         currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={this.handleAddingNewFoodItemToList} />;
         buttonText = "Return to Food List";
-      } else if (this.props.foodItemList) {
+      } else if (this.props.foodList) {
         currentlyVisibleState = <FoodItemList foodItemList={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />;
         buttonText = "Add Food Item";
       } else {
@@ -136,6 +136,7 @@ class FoodItemControl extends React.Component {
 FoodItemControl.propTypes = {
   masterFoodItemList: PropTypes.object,
   formVisibleOnPage: PropTypes.bool,
+  foodList: PropTypes.bool,
   editing: PropTypes.bool,
   homepageShowing: PropTypes.bool
 };
@@ -144,6 +145,7 @@ const mapStateToProps = state => {
   return {
     masterFoodItemList: state.masterFoodItemList,
     formVisibleOnPage: state.formVisibleOnPage,
+    foodList: state.foodList,
     editing: state.editing,
     homepageShowing: state.homepageShowing
   }
