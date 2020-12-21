@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function FoodItemDetail(props) {
   const { foodItem, onClickingDelete } = props;
   const ingredients = foodItem.ingredients.split(",");
-  // console.log(ingredients);
+  console.log("ggg", ingredients);
   return (
     <React.Fragment>
       <h1>Food Item Detail</h1>

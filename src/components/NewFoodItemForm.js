@@ -34,7 +34,7 @@ function NewFoodItemForm(props) {
           placeholder='Name brand'
           required='required' />
         <br></br>
-        <input className="field"
+        <textarea className="field2"
           type='text'
           name='ingredients'
           placeholder='Ingredients'

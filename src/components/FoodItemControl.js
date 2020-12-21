@@ -121,7 +121,7 @@ class FoodItemControl extends React.Component {
         <React.Fragment>
           {currentlyVisibleState}
           <br></br>
-          <button className="btn btn-success btn-sm"onClick={this.handleClick}>{buttonText}</button>
+          <button className="btn btn-info btn-sm"onClick={this.handleClick}>{buttonText}</button>
         </React.Fragment>
       );
     }
