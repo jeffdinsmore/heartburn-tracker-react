@@ -3,6 +3,7 @@ import NewFoodItemForm from './NewFoodItemForm';
 import FoodItemList from './FoodItemList';
 import FoodItemDetail from './FoodItemDetail';
 import EditFoodItemForm from './EditFoodItemForm';
+import Homepage from './Homepage';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
@@ -26,6 +27,7 @@ class FoodItemControl extends React.Component {
     const { dispatch } = this.props;
     const action = a.toggleForm();
     const action2 = a.editing();
+    const action3 = a.toggleHomepageShowing();
 
     if (this.state.selectedFoodItem != null) {
       if (this.props.editing) {
@@ -36,6 +38,7 @@ class FoodItemControl extends React.Component {
       });
     } else {
       dispatch(action);
+      dispatch(action3);
     }
   }
 
@@ -110,8 +113,11 @@ class FoodItemControl extends React.Component {
       } else if (this.props.formVisibleOnPage) {
         currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={this.handleAddingNewFoodItemToList} />;
         buttonText = "Return to Food List";
-      } else {
+      } else if (this.props.foodItemList) {
         currentlyVisibleState = <FoodItemList foodItemList={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />;
+        buttonText = "Add Food Item";
+      } else {
+        currentlyVisibleState = <Homepage homepage={this.props.masterFoodItemList} />
         buttonText = "Add Food Item";
       }
       // else if (this.props.signin) {
@@ -130,14 +136,16 @@ class FoodItemControl extends React.Component {
 FoodItemControl.propTypes = {
   masterFoodItemList: PropTypes.object,
   formVisibleOnPage: PropTypes.bool,
-  editing: PropTypes.bool
+  editing: PropTypes.bool,
+  homepageShowing: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
     masterFoodItemList: state.masterFoodItemList,
     formVisibleOnPage: state.formVisibleOnPage,
-    editing: state.editing
+    editing: state.editing,
+    homepageShowing: state.homepageShowing
   }
 }
 

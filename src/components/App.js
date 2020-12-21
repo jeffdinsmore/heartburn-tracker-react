@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import FoodItemControl from './FoodItemControl';
+import FoodItemList from './FoodItemList'
 import Footer from './Footer';
 import Signin from "./Signin";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -23,6 +24,11 @@ function App() {
         <Route path="/signin">
           <BodyStyling>
             <Signin />
+          </BodyStyling>
+        </Route>
+        <Route path="/fooditemlist">
+          <BodyStyling>
+            <FoodItemList />
           </BodyStyling>
         </Route>
         <Route path="/">
