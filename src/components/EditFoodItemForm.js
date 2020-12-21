@@ -43,7 +43,7 @@ function EditFoodItemForm(props) {
           defaultValue={foodItem.ingredients}
           required='required' />
         <br></br>
-        <select name="heartburn" className="field" id="heartburnInput">
+        <select name="heartburn" className="field" id="heartburnInput" defaultValue={foodItem.heartburn}>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>

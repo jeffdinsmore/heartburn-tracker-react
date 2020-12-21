@@ -40,7 +40,8 @@ function NewFoodItemForm(props) {
           placeholder='Ingredients'
           required='required' />
         <br></br>
-        <select name="heartburn" id="heartburnInput">
+        <select name="heartburn" id="heartburnInput" required='required' >
+          <option value="" disabled selected>Please Select</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
