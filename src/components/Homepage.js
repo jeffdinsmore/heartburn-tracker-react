@@ -17,7 +17,7 @@ function Homepage(props) {
         {foodItems.map((foodItem) => {
           return <FoodItem
             whenFoodItemClicked={props.onFoodItemSelection}
-            foodName={foodItem.foodName}
+            // foodName={foodItem.foodName}
             ingredients={foodItem.ingredients}
             heartburn={foodItem.heartburn}
             id={foodItem.id}

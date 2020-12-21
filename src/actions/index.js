@@ -52,3 +52,7 @@ export const unSelectedFoodItem = () => {
 export const toggleHomepageShowing = () => ({
   type: c.TOGGLE_HOMEPAGE_SHOWING
 });
+
+export const togglefooditemlistShowing = () => ({
+  type: c.TOGGLE_FOODITEM_LIST_SHOWING
+});
