@@ -9,11 +9,12 @@ function Homepage(props) {
     { collection: 'foodItems' }
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  console.log("hey", foodItems);
-  // const ingredients = foodItems.ingredients.split(",");
-  function findHeartburn() {
-
+  let heartburnItems;
+  if (isLoaded(foodItems)) {
+    heartburnItems =  foodItems.filter(f => f.heartburn == "Yes");
   }
+  
+  console.log("output", heartburnItems);
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>
@@ -32,11 +33,12 @@ function Homepage(props) {
   } else {
     return (
       <React.Fragment>
-        <h1>Loading...</h1>
+        <h3>Loading...</h3>
       </React.Fragment>
-    );
+    )
   }
 }
+
 Homepage.propTypes = {
   onFoodItemSelection: PropTypes.func
 };
