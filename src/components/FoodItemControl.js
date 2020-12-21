@@ -38,7 +38,7 @@ class FoodItemControl extends React.Component {
       });
     } else {
       dispatch(action);
-      // dispatch(action3);
+      dispatch(action3);
     }
   }
 
@@ -113,11 +113,11 @@ class FoodItemControl extends React.Component {
       } else if (this.props.formVisibleOnPage) {
         currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={this.handleAddingNewFoodItemToList} />;
         buttonText = "Return to Food List";
-      } else if (this.props.foodList) {
+      } else if (this.props.foodItemList) {
         currentlyVisibleState = <FoodItemList foodItemList={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />;
         buttonText = "Add Food Item";
       } else {
-        currentlyVisibleState = <Homepage homepage={this.props.masterFoodItemList} />
+        currentlyVisibleState = <Homepage homepage={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />
         buttonText = "Add Food Item";
       }
       // else if (this.props.signin) {

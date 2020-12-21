@@ -2,8 +2,9 @@ import React from 'react';
 import FoodItem from "./FoodItem";
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import PropTypes from "prop-types";
 
-function Homepage() {
+function Homepage(props) {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);
@@ -15,10 +16,10 @@ function Homepage() {
         <hr />
         {foodItems.map((foodItem) => {
           return <FoodItem
-            // whenFoodItemClicked={props.onFoodItemSelection}
-            // foodName={foodItem.foodName}
+            whenFoodItemClicked={props.onFoodItemSelection}
+            foodName={foodItem.foodName}
             ingredients={foodItem.ingredients}
-            // heartburn={foodItem.heartburn}
+            heartburn={foodItem.heartburn}
             id={foodItem.id}
             key={foodItem.id} />
         })}
@@ -32,5 +33,8 @@ function Homepage() {
     );
   }
 }
+Homepage.propTypes = {
+  onFoodItemSelection: PropTypes.func
+};
 
 export default Homepage;
