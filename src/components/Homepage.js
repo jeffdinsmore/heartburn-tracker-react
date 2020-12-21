@@ -9,7 +9,11 @@ function Homepage(props) {
     { collection: 'foodItems' }
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  console.log("food Items: ", foodItems);
+  console.log("hey", foodItems);
+  // const ingredients = foodItems.ingredients.split(",");
+  function findHeartburn() {
+
+  }
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>
@@ -17,7 +21,7 @@ function Homepage(props) {
         {foodItems.map((foodItem) => {
           return <FoodItem
             whenFoodItemClicked={props.onFoodItemSelection}
-            // foodName={foodItem.foodName}
+            foodName={foodItem.foodName}
             ingredients={foodItem.ingredients}
             heartburn={foodItem.heartburn}
             id={foodItem.id}
@@ -28,7 +32,7 @@ function Homepage(props) {
   } else {
     return (
       <React.Fragment>
-        <h1>Body</h1>
+        <h1>Loading...</h1>
       </React.Fragment>
     );
   }

@@ -9,7 +9,6 @@ function FoodItemList(props) {
     { collection: 'foodItems' }
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  console.log("food Items: ", foodItems);
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>

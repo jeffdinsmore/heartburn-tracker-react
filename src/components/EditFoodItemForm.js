@@ -5,7 +5,6 @@ import { useFirestore } from 'react-redux-firebase';
 function EditFoodItemForm(props) {
   const firestore = useFirestore();
   const { foodItem } = props;
-  console.log("edit ", props);
   function handleEditFoodItemFormSubmission(event) {
     event.preventDefault();
     props.onEditFoodItem();

@@ -1,13 +1,14 @@
 import React from 'react';
 import Header from './Header';
 import FoodItemControl from './FoodItemControl';
-import FoodItemList from './FoodItemList'
+import FoodItemList from './FoodItemList';
+import Homepage from './Homepage';
 import Footer from './Footer';
 import Signin from "./Signin";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from 'styled-components';
 
-const BodyStyling = styled.p`
+const BodyStyling = styled.div`
   // background-color: lightGray;
   // text-align: center;
   padding: 6px 0px 16px 0px;
@@ -28,12 +29,12 @@ function App() {
         </Route>
         <Route path="/fooditemlist">
           <BodyStyling>
-            <FoodItemList />
+            <FoodItemControl />
           </BodyStyling>
         </Route>
         <Route path="/">
           <BodyStyling>
-            <FoodItemControl />
+            <Homepage />
           </BodyStyling>
         </Route>
       </Switch>
