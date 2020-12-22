@@ -20,21 +20,24 @@ function Homepage(props) {
     }
     let count = heartburnArray.length;
     let count2=0;
+    let count3=0;
     let element;
     matchedItems = [];
-    for (let i=0; i < heartburnArray.length-1; i++) {
+    for (let i=0; i < count; i++) {
       count--;
-      console.log("count: ", count);
-      for (let j=0; j < heartburnArray[count].length; j++) {
-        count2++;
+      count2++;
+      console.log("count: ", count, count2);
+      for (let j=0; j < heartburnArray[i].length; j++) {
+        count3++;
         element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
-        heartburnArray[i+1].forEach(function(item) {
+        console.log(element);
+        heartburnArray[count2].forEach(function(item) {
           if (element.includes(item)) {
             matchedItems.push(heartburnArray[i][j]);
             
           }
         })
-        // console.log(count2);
+        console.log(count3);
 
         // if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
         //   matchedItems.push(heartburnArray[1][j]);
@@ -45,13 +48,13 @@ function Homepage(props) {
         //   } else {
         //     count++;
         //   }
-        //   console.log(count);
+          // console.log(count);
         // }
         
       }
       
     }
-    console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
+    // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
     console.log("match", matchedItems);
   }
   
