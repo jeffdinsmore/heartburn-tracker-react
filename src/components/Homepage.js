@@ -63,6 +63,7 @@ function Homepage(props) {
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>
+        {matchedItems}
         <hr />
         {foodItems.map((foodItem) => {
           return <FoodItem
