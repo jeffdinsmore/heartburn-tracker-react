@@ -19,16 +19,23 @@ function Homepage(props) {
       heartburnArray.push(heartburnItems[i].ingredients.split(","))
     }
     let count=0;
+    let element;
     matchedItems = [];
-    for (let i=0; i < heartburnArray[0].length; i++) {
-      for (let j=0; j < heartburnArray[2].length; j++) {
-        if (heartburnArray[0][i] === heartburnArray[2][j]) {
-          matchedItems.push(heartburnArray[1][j]);
-          
-        }
-        console.log(heartburnArray[0][i]);
+    for (let i=0; i < heartburnArray.length-1; i++) {
+      count++;
+      console.log(count);
+      for (let j=0; j < heartburnArray[i].length; j++) {
+        element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
+        heartburnArray[i+1].forEach(function(item) {
+          if (element.includes(item)) {
+            matchedItems.push(heartburnArray[i][j]);
+          }
+        })
 
-        // for (let k=0; k < heartburnArray[i].length; k++) {
+        // if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
+        //   matchedItems.push(heartburnArray[1][j]);
+
+        // for (let k=0; k < heartburnArray[i].length-1; k++) {
         //   if (heartburnArray[i][k] === heartburnArray[j][k]) {
         //     matchedItems.push(heartburnArray[i][k]);
         //   } else {
