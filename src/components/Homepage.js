@@ -18,15 +18,21 @@ function Homepage(props) {
     for(let i=0; i < heartburnItems.length; i++) {
       heartburnArray.push(heartburnItems[i].ingredients.split(","))
     }
+    let count=0;
     matchedItems = [];
-    for (let i=0; i < heartburnArray.length -1; i++) {
-      for (let j=0; j < heartburnArray[i].length; j++) {
-        if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
-          matchedItems.push(heartburnArray[i][j]);
+    for (let i=0; i < heartburnArray.length; i++) {
+      for (let j=1; j < heartburnArray.length; j++) {
+        for (let k=0; k < heartburnArray[i].length; k++) {
+          if (heartburnArray[i][k] === heartburnArray[j][k]) {
+            matchedItems.push(heartburnArray[i][k]);
+          } else {
+            count++;
+          }
+          console.log(count);
         }
-        console.log(heartburnArray[i+1][j]);
+        
       }
-      // console.log(heartburnArray[i].length);
+      console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
     }
     console.log("match", matchedItems);
   }
