@@ -31,7 +31,7 @@ function Homepage(props) {
         count3++;
         element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
         console.log(element);
-        heartburnArray[count2].forEach(function(item) {
+        heartburnArray[i].forEach(function(item) {
           if (element.includes(item)) {
             matchedItems.push(heartburnArray[i][j]);
             
@@ -56,6 +56,7 @@ function Homepage(props) {
     }
     // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
     console.log("match", matchedItems);
+    console.log("first: ", heartburnArray[1])
   }
   
   // console.log("output", heartburnItems[2].heartburn);
