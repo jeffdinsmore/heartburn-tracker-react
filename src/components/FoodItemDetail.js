@@ -9,7 +9,7 @@ function FoodItemDetail(props) {
       <h4>{foodItem.foodName} - {foodItem.brand}</h4>
       <p>Ingredients: {foodItem.ingredients}</p>
       <p><em>{foodItem.heartburn}</em></p>
-      <button className="btn btn-success btn-sm" onClick={props.onClickingEdit}>Update Food Item</button>
+      <button className="btn btn-success btn-sm" onClick={props.onClickingEdit}>Update Food Item</button>&nbsp;&nbsp;
       <button className="btn btn-danger btn-sm" onClick={() => onClickingDelete(foodItem.id)}>Delete Food Item</button>
       <hr />
     </React.Fragment>

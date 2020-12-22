@@ -10,11 +10,17 @@ function Homepage(props) {
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   let heartburnItems;
+  let heartburnObject;
   if (isLoaded(foodItems)) {
     heartburnItems =  foodItems.filter(f => f.heartburn == "Yes");
+    heartburnObject = [];
+    for(let i=0; i < heartburnItems.length; i++) {
+      heartburnObject.push(heartburnItems[i].ingredients.split(","))
+    }
+    console.log(heartburnObject);
   }
   
-  console.log("output", heartburnItems);
+  // console.log("output", heartburnItems[2].heartburn);
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>

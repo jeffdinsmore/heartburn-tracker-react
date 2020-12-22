@@ -8,7 +8,7 @@ function FoodItem(props) {
         <p><strong>Food:</strong> {props.foodName}</p>
         <p><strong>Indgredients:</strong> {props.ingredients}</p>
         <p><em><strong>Heartburn:</strong> {props.heartburn}</em></p>
-        <button onClick = {() => props.whenFoodItemClicked(props.id)}>Details</button>
+        <button className="btn btn-sm btn-info" onClick = {() => props.whenFoodItemClicked(props.id)}>Details</button>
         <hr />
       {/* </div> */}
     </React.Fragment>
