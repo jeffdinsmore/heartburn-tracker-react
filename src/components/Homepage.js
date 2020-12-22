@@ -1,5 +1,5 @@
 import React from 'react';
-import FoodItem from "./FoodItem";
+// import FoodItem from "./FoodItem";
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import PropTypes from "prop-types";
@@ -31,7 +31,7 @@ function Homepage(props) {
         count3++;
         element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
         console.log(element);
-        heartburnArray[i].forEach(function(item) {
+        heartburnArray[count2].forEach(function(item) {
           if (element.includes(item)) {
             matchedItems.push(heartburnArray[i][j]);
             
@@ -56,7 +56,6 @@ function Homepage(props) {
     }
     // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
     console.log("match", matchedItems);
-    console.log("first: ", heartburnArray[1])
   }
   
   // console.log("output", heartburnItems[2].heartburn);
@@ -65,7 +64,7 @@ function Homepage(props) {
       <React.Fragment>
         {matchedItems}
         <hr />
-        {foodItems.map((foodItem) => {
+        {/* {foodItems.map((foodItem) => {
           return <FoodItem
             whenFoodItemClicked={props.onFoodItemSelection}
             foodName={foodItem.foodName}
@@ -73,7 +72,7 @@ function Homepage(props) {
             heartburn={foodItem.heartburn}
             id={foodItem.id}
             key={foodItem.id} />
-        })}
+        })} */}
       </React.Fragment>
     );
   } else {

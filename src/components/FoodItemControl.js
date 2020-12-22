@@ -26,7 +26,7 @@ class FoodItemControl extends React.Component {
     const { dispatch } = this.props;
     const action = a.toggleForm();
     const action2 = a.editing();
-    const action3 = a.toggleHomepageShowing();
+    // const action3 = a.toggleHomepageShowing();
 
     if (this.state.selectedFoodItem != null) {
       if (this.props.editing) {
@@ -37,7 +37,7 @@ class FoodItemControl extends React.Component {
       });
     } else {
       dispatch(action);
-      dispatch(action3);
+      // dispatch(action3);
     }
   }
 
@@ -111,12 +111,12 @@ class FoodItemControl extends React.Component {
       } else if (this.props.formVisibleOnPage) {
         currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={this.handleAddingNewFoodItemToList} />;
         buttonText = "Return to Food List";
-      } else if (this.props.foodItemListShowing) {
+      } else {
         currentlyVisibleState = <FoodItemList foodItemList={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />;
         buttonText = "Add Food Item";
-      } else {
-        currentlyVisibleState = <Homepage homepage={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />
-        buttonText = "Add Food Item";
+      // } else {
+      //   currentlyVisibleState = <Homepage homepage={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />
+      //   buttonText = "Add Food Item";
       }
       // else if (this.props.signin) {
           // currentlyVisibleState = <SigninSubmit 
@@ -134,18 +134,18 @@ class FoodItemControl extends React.Component {
 FoodItemControl.propTypes = {
   masterFoodItemList: PropTypes.object,
   formVisibleOnPage: PropTypes.bool,
-  foodItemListShowing: PropTypes.bool,
+  // foodItemListShowing: PropTypes.bool,
   editing: PropTypes.bool,
-  homepageShowing: PropTypes.bool
+  // homepageShowing: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
     masterFoodItemList: state.masterFoodItemList,
     formVisibleOnPage: state.formVisibleOnPage,
-    foodItemListShowing: state.foodItemListShowing,
+    // foodItemListShowing: state.foodItemListShowing,
     editing: state.editing,
-    homepageShowing: state.homepageShowing
+    // homepageShowing: state.homepageShowing
   }
 }
 
