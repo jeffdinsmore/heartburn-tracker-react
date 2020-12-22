@@ -29,14 +29,16 @@ function Signin() {
         <input
           type='text'
           name='signinEmail'
-          placeholder='email' />
+          placeholder='email' />&nbsp;&nbsp;&nbsp;
         <input
           type='password'
           name='signinPassword'
-          placeholder='Password' />
-        <button className="btn btn-sm btn-success" type='submit'>Sign in</button>
+          placeholder='Password' />&nbsp;&nbsp;&nbsp;
+        <button className="btn btn-sm btn-success" type='submit'>Login</button>
       </form>
-      <h1>Logout</h1>
+      <br></br>
+      <p>Already signed in? Logout here:</p>
+      
       <button className="btn btn-info btn-sm" onClick={doSignOut}>Logout</button>
     </React.Fragment>
   );

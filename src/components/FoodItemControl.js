@@ -3,7 +3,7 @@ import NewFoodItemForm from './NewFoodItemForm';
 import FoodItemList from './FoodItemList';
 import FoodItemDetail from './FoodItemDetail';
 import EditFoodItemForm from './EditFoodItemForm';
-import Homepage from './Homepage';
+// import Homepage from './Homepage';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';

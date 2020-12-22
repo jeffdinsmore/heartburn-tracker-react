@@ -50,6 +50,7 @@ function Header() {
 </Navbar> */}
 
       <ul>
+        
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -57,7 +58,7 @@ function Header() {
           <Link to="/foodlist">Food List</Link>
         </li>
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/login">Login/Logout</Link>
         </li>
         <li>
           <Link to="/signup">Sign up</Link>
