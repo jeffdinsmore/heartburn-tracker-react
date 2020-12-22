@@ -10,14 +10,25 @@ function Homepage(props) {
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   let heartburnItems;
-  let heartburnObject;
+  let heartburnArray;
+  let matchedItems;
   if (isLoaded(foodItems)) {
     heartburnItems =  foodItems.filter(f => f.heartburn == "Yes");
-    heartburnObject = [];
+    heartburnArray = [];
     for(let i=0; i < heartburnItems.length; i++) {
-      heartburnObject.push(heartburnItems[i].ingredients.split(","))
+      heartburnArray.push(heartburnItems[i].ingredients.split(","))
     }
-    console.log(heartburnObject);
+    matchedItems = [];
+    for (let i=0; i < heartburnArray.length -1; i++) {
+      for (let j=0; j < heartburnArray[i].length; j++) {
+        if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
+          matchedItems.push(heartburnArray[i][j]);
+        }
+        console.log(heartburnArray[i+1][j]);
+      }
+      // console.log(heartburnArray[i].length);
+    }
+    console.log("match", matchedItems);
   }
   
   // console.log("output", heartburnItems[2].heartburn);
