@@ -20,11 +20,11 @@ function Signup() {
         <input
           type='text'
           name='email'
-          placeholder='email' />
+          placeholder='email' />&nbsp;&nbsp;&nbsp;
         <input
           type='password'
           name='password'
-          placeholder='Password' />
+          placeholder='Password' />&nbsp;&nbsp;&nbsp;
         <button className="btn btn-sm btn-success" type='submit'>Sign up</button>
       </form>
     </React.Fragment>

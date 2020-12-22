@@ -20,11 +20,8 @@ const HeartburnHeader = styled.h1`
 function Header() {
   return (
     <React.Fragment>
+      <div id="header">
       
-      <img className="imageHeader" src="/lava_flow2.jpg"></img>
-      <HeartburnHeader>
-        <h3>My Heartburn Tracker</h3>
-      </HeartburnHeader>
       {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -49,21 +46,27 @@ function Header() {
   </Navbar.Collapse>
 </Navbar> */}
 
-      <ul>
+      <ul id="headerUl">
+      <img className="imageHeader" src="/lava_flow2.jpg"></img>
+      {/* <HeartburnHeader> */}
+        <li id="headerLiLeft">My Heartburn Tracker</li>
+      {/* </HeartburnHeader> */}
         
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/foodlist">Food List</Link>
-        </li>
-        <li>
+        
+        <li id="headerLi">
           <Link to="/login">Login/Logout</Link>
         </li>
-        <li>
+        <li id="headerLi">
           <Link to="/signup">Sign up</Link>
         </li>
+        <li id="headerLi">
+          <Link to="/foodlist">Food List</Link>
+        </li>
+        <li id="headerLi">
+          <Link to="/">Home</Link>
+        </li>
       </ul>
+      </div>
       <hr></hr>
     </React.Fragment>
   );
