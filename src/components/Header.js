@@ -11,7 +11,7 @@ const HeartburnHeader = styled.h1`
   background-color: lightGray;
   text-align: center;
   padding: 6px 0px 16px 0px;
-  border-radius: 20px;
+  border-radius: 20px ;
 `;
 
 function Header() {
