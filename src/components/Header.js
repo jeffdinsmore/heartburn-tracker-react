@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import Navbar from 'react-bootstrap/Navbar'
-
-
-
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/Navbar';
+// import { Navbar } from 'react-bootstrap/Navbar'
 
 const HeartburnHeader = styled.h1`
   font-size: 32px;
