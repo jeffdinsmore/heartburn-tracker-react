@@ -62,17 +62,8 @@ function Homepage(props) {
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>
-        {matchedItems}
-        <hr />
-        {/* {foodItems.map((foodItem) => {
-          return <FoodItem
-            whenFoodItemClicked={props.onFoodItemSelection}
-            foodName={foodItem.foodName}
-            ingredients={foodItem.ingredients}
-            heartburn={foodItem.heartburn}
-            id={foodItem.id}
-            key={foodItem.id} />
-        })} */}
+        <p>Here are the food ingredients that may be causing your heartburn:</p>
+        <strong><em>{matchedItems}</em></strong>
       </React.Fragment>
     );
   } else {

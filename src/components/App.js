@@ -5,6 +5,7 @@ import FoodItemControl from './FoodItemControl';
 import Homepage from './Homepage';
 import Footer from './Footer';
 import Signin from "./Signin";
+import Signup from './Signup';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from 'styled-components';
 
@@ -22,12 +23,17 @@ function App() {
     <Router>
       <Header />
       <Switch>
-        <Route path="/signin">
+        <Route path="/login">
           <BodyStyling>
             <Signin />
           </BodyStyling>
         </Route>
-        <Route path="/fooditemlist">
+        <Route path="/signup">
+          <BodyStyling>
+            <Signup />
+          </BodyStyling>
+        </Route>
+        <Route path="/foodlist">
           <BodyStyling>
             <FoodItemControl />
           </BodyStyling>

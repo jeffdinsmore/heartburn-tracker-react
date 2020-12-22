@@ -28,3 +28,10 @@ code {
   width: 100%;
   background-color: lightblue;
 }
+
+.imageHeader {
+  width: 100px;
+  margin-left: 10%;
+  margin-top: 20px;
+  float: left;
+}

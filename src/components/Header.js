@@ -1,24 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/Navbar';
+import firebase from "firebase/app";
+// import Navbar from 'react-bootstrap/Navbar';
+// import Nav from 'react-bootstrap/Navbar';
+// import NavDropdown from 'react-bootstrap/Navbar';
 // import { Navbar } from 'react-bootstrap/Navbar'
 
 const HeartburnHeader = styled.h1`
   font-size: 32px;
-  background-color: lightGray;
-  text-align: center;
-  padding: 6px 0px 16px 0px;
-  border-radius: 20px ;
+  // background-color: lightGray;
+  // text-align: center;
+  // margin-top: 20px;
+  padding: 36px 0px 16px 0px;
+  // border-radius: 20px;
+
 `;
 
 function Header() {
   return (
     <React.Fragment>
+      
+      <img className="imageHeader" src="/lava_flow2.jpg"></img>
       <HeartburnHeader>
-        <h1>Heartburn Tracker</h1>
+        <h3>My Heartburn Tracker</h3>
       </HeartburnHeader>
       {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
@@ -49,12 +54,16 @@ function Header() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/fooditemlist">Food List</Link>
+          <Link to="/foodlist">Food List</Link>
         </li>
         <li>
-          <Link to="/signin">Sign In</Link>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/signup">Sign up</Link>
         </li>
       </ul>
+      <hr></hr>
     </React.Fragment>
   );
 }
