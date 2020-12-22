@@ -18,19 +18,23 @@ function Homepage(props) {
     for(let i=0; i < heartburnItems.length; i++) {
       heartburnArray.push(heartburnItems[i].ingredients.split(","))
     }
-    let count=0;
+    let count = heartburnArray.length;
+    let count2=0;
     let element;
     matchedItems = [];
     for (let i=0; i < heartburnArray.length-1; i++) {
-      count++;
-      console.log(count);
-      for (let j=0; j < heartburnArray[i].length; j++) {
+      count--;
+      console.log("count: ", count);
+      for (let j=0; j < heartburnArray[count].length; j++) {
+        count2++;
         element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
         heartburnArray[i+1].forEach(function(item) {
           if (element.includes(item)) {
             matchedItems.push(heartburnArray[i][j]);
+            
           }
         })
+        // console.log(count2);
 
         // if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
         //   matchedItems.push(heartburnArray[1][j]);
