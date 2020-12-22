@@ -20,20 +20,27 @@ function Homepage(props) {
     }
     let count=0;
     matchedItems = [];
-    for (let i=0; i < heartburnArray.length; i++) {
-      for (let j=1; j < heartburnArray.length; j++) {
-        for (let k=0; k < heartburnArray[i].length; k++) {
-          if (heartburnArray[i][k] === heartburnArray[j][k]) {
-            matchedItems.push(heartburnArray[i][k]);
-          } else {
-            count++;
-          }
-          console.log(count);
+    for (let i=0; i < heartburnArray[0].length; i++) {
+      for (let j=0; j < heartburnArray[2].length; j++) {
+        if (heartburnArray[0][i] === heartburnArray[2][j]) {
+          matchedItems.push(heartburnArray[1][j]);
+          
         }
+        console.log(heartburnArray[0][i]);
+
+        // for (let k=0; k < heartburnArray[i].length; k++) {
+        //   if (heartburnArray[i][k] === heartburnArray[j][k]) {
+        //     matchedItems.push(heartburnArray[i][k]);
+        //   } else {
+        //     count++;
+        //   }
+        //   console.log(count);
+        // }
         
       }
-      console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
+      
     }
+    console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
     console.log("match", matchedItems);
   }
   
