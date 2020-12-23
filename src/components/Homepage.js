@@ -15,6 +15,8 @@ function Homepage(props) {
   let heartburnItems;
   let arrays;
   let matchedItems;
+  let matchItems;
+  let matchItems2;
   let heartburnArray;
   if (isLoaded(foodItems)) {
     heartburnItems = foodItems.filter(f => f.heartburn == "Yes");
@@ -48,6 +50,8 @@ function Homepage(props) {
     };
     console.log(calculateCommonValues(heartburnArray));
     matchedItems = calculateCommonValues(heartburnArray);
+    matchItems = getMatch(heartburnArray[0], heartburnArray[2]);
+    matchItems2 = getMatch(heartburnArray[1], heartburnArray[2]);
     // let count = heartburnArray.length;
     // let count2=0;
     // let count3=0;
@@ -91,7 +95,7 @@ function Homepage(props) {
   // console.log("output", heartburnItems[2].heartburn);
   function loadingFirestore(foodItems) {
     if (isLoaded(foodItems)) {
-      return <strong><em>"{matchedItems.array - 0}"</em></strong>;
+      return <strong><em>"{matchItems.join(",")+ matchItems2.join(",")}"</em></strong>;
     } else {
       return <h3>Loading...</h3>;
     }
@@ -118,8 +122,8 @@ function Homepage(props) {
       </ul>
       <h3>Your stats</h3>
       <p>Here are the food ingredients that may be causing your heartburn:</p>
-      {getMatch(heartburnArray[0], heartburnArray[1])}
-      {/* {loadingFirestore(foodItems)} */}
+      {/* {} */}
+      {loadingFirestore(foodItems)}
     </React.Fragment>
   );
 
