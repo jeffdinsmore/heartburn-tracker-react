@@ -76,9 +76,7 @@ th {
 .bg-dark {
   background-color: rgb(0, 36, 104)!important;
 }
-.navbar {
-  height: 80px;
-}
+
 .navbar-brand {
   margin-left: 9%;
 }
@@ -188,6 +186,17 @@ div.spacer {
 }
 
 /*--- Media Queries ---*/
+@media screen and (min-width: 992px) {
+  .navbar {
+    height: 80px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .navbar-collapse {
+    margin-left: 9%;
+  }
+}
+
 @media screen and (max-width: 840px) {
   li#headerLiLeft {
     margin-top: 11px;
@@ -205,7 +214,9 @@ div.spacer {
   .navbar-brand {
     margin-left: 0%;
   }
-
+  .navbar-collapse {
+    margin-left: 0%;
+  }
 }
 
 @media screen and (max-width: 760px) {
