@@ -40,7 +40,7 @@ function NewFoodItemForm(props) {
         <textarea className="field2"
           type='text'
           name='ingredients'
-          placeholder='Ingredients separated by commas'
+          placeholder='Separate ingredients with commas'
           required='required' />
         <p className="pTagForm">Heartburn:</p>
         <select name="heartburn" id="heartburnInput" required='required' >

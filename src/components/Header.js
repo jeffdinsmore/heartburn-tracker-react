@@ -19,7 +19,7 @@ const HeartburnHeader = styled.h1`
 function Header() {
   return (
     <React.Fragment>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar className="nav-bar" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="/" to="/">My Heartburn Tracker</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

@@ -21,11 +21,11 @@ function EditFoodItemForm(props) {
     <React.Fragment>
 
       <form onSubmit={handleEditFoodItemFormSubmission}>
-        <p className="pTagForm">Food Item:</p>
+        <p className="pTagForm">Food Name:</p>
         <input className="field"
           type='text'
           name='foodName'
-          placeholder='Food Item'
+          placeholder='Food name'
           defaultValue={foodItem.foodName}
           required='required' />
         <p className="pTagForm">Brand:</p>
@@ -39,7 +39,7 @@ function EditFoodItemForm(props) {
         <textarea className="field2"
           type='text'
           name='ingredients'
-          placeholder='Ingredients'
+          placeholder='Separate ingredients with commas'
           defaultValue={foodItem.ingredients}
           required='required' />
         <p className="pTagForm">Heartburn:</p>

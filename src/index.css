@@ -73,6 +73,19 @@ th {
   background-color: lightblue;
 }
 
+.bg-dark {
+  background-color: rgb(0, 36, 104)!important;
+}
+.navbar {
+  height: 80px;
+}
+.navbar-brand {
+  margin-left: 9%;
+}
+.navbar-nav {
+  margin-right: 12%;
+}
+
 .imageHeader {
   width: 100px;
   margin-left: 10%;
@@ -150,7 +163,7 @@ div#footer {
   bottom:0px;
   left:0px;
   width:100%;
-  background-color: rgb(52, 58, 64);
+  background-color:rgb(0, 30, 85);
   padding:10px;
   height: 60px;
 }
@@ -189,7 +202,9 @@ div.spacer {
     font-size: 16px;
     margin-left: 4%;
   }
-  
+  .navbar-brand {
+    margin-left: 0%;
+  }
 
 }
 
