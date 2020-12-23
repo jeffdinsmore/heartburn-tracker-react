@@ -86,21 +86,25 @@ function Homepage(props) {
   }
   return (
     <React.Fragment>
-      <h2>How do people have heartburn?</h2>
+      <h2><strong>Reducing heartburn starts with what you eat and what drink!</strong></h2>
+      <br />
+      <h3>How do people have heartburn?</h3>
       <p>Heartburn occurs when the lower esophageal sphincter relaxes and allows stomach fluids (stomach acid and food) back up into the esophagus.</p>
-      <h2>What triggers heartburn?</h2>
-      <p>There are several food items that are listed to be risk factors in causing heartburn.</p>
+      <h3>What triggers heartburn?</h3>
+      <p>There are several foods that are listed to be risk factors in causing heartburn.</p>
       <p>Some of these include:</p>
       <ul>
+        <li className="list">Spicy foods</li>
+        <li className="list">Citrus foods</li>
         <li className="list">Onions</li>
         <li className="list">Tomatoes and tomato products</li>
         <li className="list">Fried foods</li>
         <li className="list">Alcohol</li>
         <li className="list">Coffee and some teas</li>
         <li className="list">Peppermint</li>
-        <li className="list">Spicy foods</li>
-        <li className="list">Citrus foods</li>
+
       </ul>
+      <h3>Your stats</h3>
       <p>Here are the food ingredients that may be causing your heartburn:</p>
       {loadingFirestore(foodItems)}
     </React.Fragment>

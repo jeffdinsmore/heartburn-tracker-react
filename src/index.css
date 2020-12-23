@@ -98,6 +98,9 @@ th {
 li {
   list-style-type: none;
 }
+li.list {
+  list-style-type: disc;
+}
 li.joinLine {
   padding: 4px 0px 4px 0px;
 }
