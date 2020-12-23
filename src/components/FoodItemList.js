@@ -14,7 +14,13 @@ function FoodItemList(props) {
       <React.Fragment>
         <h2>Your Recorded Food List</h2>
         <hr />
-        
+        <table className="Table-mobile-large">
+          <tr>
+            <th>Food Item</th>
+            <th>Ingredients</th>
+            <th>Heartburn</th>
+            <th>Details</th>
+          </tr>
           {foodItems.map((foodItem) => {
             return <FoodItem
               whenFoodItemClicked={props.onFoodItemSelection}
@@ -24,7 +30,7 @@ function FoodItemList(props) {
             id={foodItem.id}
             key={foodItem.id} />
           })}
-        
+        </table>
         {/* // {foodItems.map((foodItem) => {
         //   return <FoodItem
         //     whenFoodItemClicked={props.onFoodItemSelection}

@@ -4,20 +4,12 @@ import PropTypes from "prop-types";
 function FoodItem(props) {
   return (
     <React.Fragment>
-      <table>
-          <tr>
-            <th>Food Item</th>
-            <th>Ingredients</th>
-            <th>Heartburn</th>
-            <th>Details</th>
-          </tr>
       <tr>
       <td>{props.foodName}</td>
       <td>{props.ingredients}</td>
       <td><em>{props.heartburn}</em></td>
       <td><button className="btn btn-sm btn-info" onClick={() => props.whenFoodItemClicked(props.id)}>Details</button></td></tr>
-      <hr />
-      </table>
+      {/* <hr /> */}
     </React.Fragment>
   );
 }

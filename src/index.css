@@ -26,6 +26,15 @@ code {
   font-weight: bold;
 }
 
+.Table-mobile-large{
+  font-family: Benton;
+  border-collapse: collapse;
+  width: 86%;
+  background-color: #CADBF9;
+  display: block;
+  margin: auto;
+}
+
 .footer {
   font-size: 24px;
   font-weight: bold;
