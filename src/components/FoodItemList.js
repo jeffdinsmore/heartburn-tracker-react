@@ -12,16 +12,28 @@ function FoodItemList(props) {
   if (isLoaded(foodItems)) {
     return (
       <React.Fragment>
+        <h2>Your Recorded Food List</h2>
         <hr />
-        {foodItems.map((foodItem) => {
-          return <FoodItem
-            whenFoodItemClicked={props.onFoodItemSelection}
-            foodName={foodItem.foodName}
+        
+          {foodItems.map((foodItem) => {
+            return <FoodItem
+              whenFoodItemClicked={props.onFoodItemSelection}
+              foodName={foodItem.foodName}
             ingredients={foodItem.ingredients}
             heartburn={foodItem.heartburn}
             id={foodItem.id}
             key={foodItem.id} />
-        })}
+          })}
+        
+        {/* // {foodItems.map((foodItem) => {
+        //   return <FoodItem
+        //     whenFoodItemClicked={props.onFoodItemSelection}
+        //     foodName={foodItem.foodName}
+        //     ingredients={foodItem.ingredients}
+        //     heartburn={foodItem.heartburn}
+        //     id={foodItem.id}
+        //     key={foodItem.id} />
+        // })} */}
       </React.Fragment>
     );
   } else {
