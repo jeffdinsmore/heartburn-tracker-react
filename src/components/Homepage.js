@@ -102,7 +102,13 @@ function Homepage(props) {
   }
   return (
     <React.Fragment>
-      <h2><strong>Reducing heartburn starts with what you eat and what drink!</strong></h2>
+      <br />
+      <h2><strong>What if heartburn is caused by a specific ingredient or group of ingredients?</strong></h2>
+      <blockquote>
+        I had heartburn from a chocolate chip cookie made by a specific company but when I have a chocolate chip cookie made by a different company, I do not get heartburn.<br /><br />
+        -- Jeff Dinsmore, Owner
+      </blockquote>
+      <h3><strong>Reducing heartburn starts with what you eat and what drink!</strong></h3>
       <br />
       <h3>How do people have heartburn?</h3>
       <p>Heartburn occurs when the lower esophageal sphincter relaxes and allows stomach fluids (stomach acid and food) back up into the esophagus.</p>
