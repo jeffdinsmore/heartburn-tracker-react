@@ -14,10 +14,10 @@ function Homepage(props) {
   let matchedItems;
   let heartburnArray;
   if (isLoaded(foodItems)) {
-    heartburnItems =  foodItems.filter(f => f.heartburn == "Yes");
+    heartburnItems = foodItems.filter(f => f.heartburn == "Yes");
     arrays = [];
-    heartburnArray= [];
-    for(let i=0; i < heartburnItems.length; i++) {
+    heartburnArray = [];
+    for (let i = 0; i < heartburnItems.length; i++) {
       heartburnArray.push(heartburnItems[i].ingredients.split(","))
     }
 
@@ -52,46 +52,62 @@ function Homepage(props) {
     //     heartburnArray[count2].forEach(function(item) {
     //       if (element.includes(item)) {
     //         matchedItems.push(heartburnArray[i][j]);
-            
+
     //       }
     //     })
     //     console.log(count3);
 
-        // if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
-        //   matchedItems.push(heartburnArray[1][j]);
+    // if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
+    //   matchedItems.push(heartburnArray[1][j]);
 
-        // for (let k=0; k < heartburnArray[i].length-1; k++) {
-        //   if (heartburnArray[i][k] === heartburnArray[j][k]) {
-        //     matchedItems.push(heartburnArray[i][k]);
-        //   } else {
-        //     count++;
-        //   }
-          // console.log(count);
-        // }
-        
-      }
-      
+    // for (let k=0; k < heartburnArray[i].length-1; k++) {
+    //   if (heartburnArray[i][k] === heartburnArray[j][k]) {
+    //     matchedItems.push(heartburnArray[i][k]);
+    //   } else {
+    //     count++;
+    //   }
+    // console.log(count);
     // }
-    // // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
-    // console.log("match", matchedItems);
-  
-  
-  // console.log("output", heartburnItems[2].heartburn);
-  if (isLoaded(foodItems)) {
-    return (
-      <React.Fragment>
-        <p>Here are the food ingredients that may be causing your heartburn:</p>
-        <strong><em>"{matchedItems.array-0}"</em></strong>
-      </React.Fragment>
-    );
-  } else {
-    return (
-      <React.Fragment>
-        <h3>Loading...</h3>
-      </React.Fragment>
-    )
+
   }
+
+  // }
+  // // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
+  // console.log("match", matchedItems);
+
+
+  // console.log("output", heartburnItems[2].heartburn);
+  function loadingFirestore(foodItems) {
+    if (isLoaded(foodItems)) {
+      return <strong><em>"{matchedItems.array - 0}"</em></strong>;
+    } else {
+      return <h3>Loading...</h3>;
+    }
+  }
+  return (
+    <React.Fragment>
+      <h2>How do people have heartburn?</h2>
+      <p>Heartburn occurs when the lower esophageal sphincter relaxes and allows stomach fluids (stomach acid and food) back up into the esophagus.</p>
+      <h2>What triggers heartburn?</h2>
+      <p>There are several food items that are listed to be risk factors in causing heartburn.</p>
+      <p>Some of these include:</p>
+      <ul>
+        <li className="list">Onions</li>
+        <li className="list">Tomatoes and tomato products</li>
+        <li className="list">Fried foods</li>
+        <li className="list">Alcohol</li>
+        <li className="list">Coffee and some teas</li>
+        <li className="list">Peppermint</li>
+        <li className="list">Spicy foods</li>
+        <li className="list">Citrus foods</li>
+      </ul>
+      <p>Here are the food ingredients that may be causing your heartburn:</p>
+      {loadingFirestore(foodItems)}
+    </React.Fragment>
+  );
+
 }
+
 
 Homepage.propTypes = {
   onFoodItemSelection: PropTypes.func
