@@ -8,6 +8,9 @@ function Homepage(props) {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);
+
+  
+
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   let heartburnItems;
   let arrays;
@@ -20,7 +23,16 @@ function Homepage(props) {
     for (let i = 0; i < heartburnItems.length; i++) {
       heartburnArray.push(heartburnItems[i].ingredients.split(","))
     }
-
+    let matches;
+    function getMatch(a, b) {
+      matches = [];
+      for (let i = 0; i < a.length; i++) {
+        for (let e = 0; e < b.length; e++) {
+          if (a[i] === b[e]) matches.push(a[i]);
+        }
+      }
+      return matches;
+    }
     let calculateCommonValues = (arrays) => {
       return arrays.reduce((total, currentArray, index) => {
         arrays.map((array, index2) => {
@@ -106,7 +118,8 @@ function Homepage(props) {
       </ul>
       <h3>Your stats</h3>
       <p>Here are the food ingredients that may be causing your heartburn:</p>
-      {loadingFirestore(foodItems)}
+      {getMatch(heartburnArray[0], heartburnArray[1])}
+      {/* {loadingFirestore(foodItems)} */}
     </React.Fragment>
   );
 
