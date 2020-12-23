@@ -22,30 +22,31 @@ function NewFoodItemForm(props) {
   return (
     <React.Fragment>
       <form onSubmit={addFoodItemToFirestore}>
+      <p className="pTagForm">Food Item:</p>
         <input className="field"
           type='text'
           name='foodName'
           placeholder='Food Item'
           required='required' />
-        <br></br>
+        <p className="pTagForm">Brand:</p>
         <input className="field"
           type='text'
           name='brand'
           placeholder='Name brand'
           required='required' />
-        <br></br>
+        <p className="pTagForm">Ingredients:</p>
         <textarea className="field2"
           type='text'
           name='ingredients'
           placeholder='Ingredients'
           required='required' />
-        <br></br>
+        <p className="pTagForm">Heartburn:</p>
         <select name="heartburn" id="heartburnInput" required='required' >
           <option value="" disabled selected>Please Select</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
-        <br></br><br></br>
+        <br></br><br></br><br></br>
         <button className="btn btn-success btn-sm" type='submit'>Submit</button>
       </form>
     </React.Fragment>

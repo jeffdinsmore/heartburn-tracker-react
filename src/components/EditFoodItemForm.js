@@ -21,27 +21,28 @@ function EditFoodItemForm(props) {
     <React.Fragment>
 
       <form onSubmit={handleEditFoodItemFormSubmission}>
+        <p className="pTagForm">Food Item:</p>
         <input className="field"
           type='text'
           name='foodName'
           placeholder='Food Item'
           defaultValue={foodItem.foodName}
           required='required' />
-        <br></br>
+        <p className="pTagForm">Brand:</p>
         <input className="field"
           type='text'
           name='brand'
           placeholder='Name brand'
           defaultValue={foodItem.brand}
           required='required' />
-        <br></br>
+        <p className="pTagForm">Ingredients:</p>
         <textarea className="field2"
           type='text'
           name='ingredients'
           placeholder='Ingredients'
           defaultValue={foodItem.ingredients}
           required='required' />
-        <br></br>
+        <p className="pTagForm">Heartburn:</p>
         <select name="heartburn" className="field" id="heartburnInput" defaultValue={foodItem.heartburn}>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
