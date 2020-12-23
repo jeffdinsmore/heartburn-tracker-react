@@ -34,7 +34,7 @@ function Header() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <hr></hr>
+      <br /><br />
     </React.Fragment>
   );
 }

@@ -21,12 +21,14 @@ function NewFoodItemForm(props) {
 
   return (
     <React.Fragment>
+      <h2>Add A Food Item To Your Tracker</h2>
+      <br />
       <form onSubmit={addFoodItemToFirestore}>
-      <p className="pTagForm">Food Item:</p>
+      <p className="pTagForm">Food Name:</p>
         <input className="field"
           type='text'
           name='foodName'
-          placeholder='Food Item'
+          placeholder='Food name'
           required='required' />
         <p className="pTagForm">Brand:</p>
         <input className="field"
@@ -38,7 +40,7 @@ function NewFoodItemForm(props) {
         <textarea className="field2"
           type='text'
           name='ingredients'
-          placeholder='Ingredients'
+          placeholder='Ingredients separated by commas'
           required='required' />
         <p className="pTagForm">Heartburn:</p>
         <select name="heartburn" id="heartburnInput" required='required' >
