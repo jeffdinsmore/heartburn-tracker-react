@@ -81,7 +81,7 @@ function Homepage(props) {
     return (
       <React.Fragment>
         <p>Here are the food ingredients that may be causing your heartburn:</p>
-        <strong><em>{matchedItems}</em></strong>
+        <strong><em>"{matchedItems.array-0}"</em></strong>
       </React.Fragment>
     );
   } else {
