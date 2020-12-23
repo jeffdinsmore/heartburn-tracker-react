@@ -105,15 +105,18 @@ function Homepage(props) {
       <br />
       <h2><strong>What if heartburn is caused by a specific ingredient or group of ingredients?</strong></h2>
       <blockquote>
-        I had heartburn from a chocolate chip cookie made by a specific company but when I have a chocolate chip cookie made by a different company, I do not get heartburn.<br /><br />
+        I had heartburn from a chocolate chip cookie made by a specific company, but when I had a chocolate chip cookie made by a different company, I did not get heartburn.<br /><br />
         -- Jeff Dinsmore, Owner
       </blockquote>
-      <h3><strong>Reducing heartburn starts with what you eat and what drink!</strong></h3>
+      <p>It is our opinion that heartburn may be caused by a specific ingredient or group of ingredients rather than a type of food a person eats.</p>
+      {/* <h3><strong>Reducing heartburn starts with what you eat and what drink!</strong></h3>
+      <br /> */}
       <br />
       <h3>How do people have heartburn?</h3>
       <p>Heartburn occurs when the lower esophageal sphincter relaxes and allows stomach fluids (stomach acid and food) back up into the esophagus.</p>
+      <br />
       <h3>What triggers heartburn?</h3>
-      <p>There are several foods that are listed to be risk factors in causing heartburn.</p>
+      <p>Many doctors believe there are several foods that are listed to be risk factors in causing heartburn.</p>
       <p>Some of these include:</p>
       <ul>
         <li className="list">Spicy foods</li>
@@ -124,11 +127,10 @@ function Homepage(props) {
         <li className="list">Alcohol</li>
         <li className="list">Coffee and some teas</li>
         <li className="list">Peppermint</li>
-
       </ul>
+      <br />
       <h3>Your stats</h3>
       <p>Here are the food ingredients that may be causing your heartburn:</p>
-      {/* {} */}
       {loadingFirestore(foodItems)}
     </React.Fragment>
   );
