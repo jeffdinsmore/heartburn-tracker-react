@@ -38,7 +38,7 @@ function Signin() {
       </form>
       <br></br>
       <p>Already signed in? Logout here:</p>
-      
+
       <button className="btn btn-info btn-sm" onClick={doSignOut}>Logout</button>
     </React.Fragment>
   );

@@ -14,7 +14,7 @@ function EditFoodItemForm(props) {
       ingredients: event.target.ingredients.value,
       heartburn: event.target.heartburn.value
     }
-    return firestore.update({ collection: 'foodItems', doc: foodItem.id } , propertiesToUpdate)
+    return firestore.update({ collection: 'foodItems', doc: foodItem.id }, propertiesToUpdate)
   }
 
   return (
