@@ -10,34 +10,52 @@ function Homepage(props) {
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   let heartburnItems;
-  let heartburnArray;
+  let arrays;
   let matchedItems;
+  let heartburnArray;
   if (isLoaded(foodItems)) {
     heartburnItems =  foodItems.filter(f => f.heartburn == "Yes");
-    heartburnArray = [];
+    arrays = [];
+    heartburnArray= [];
     for(let i=0; i < heartburnItems.length; i++) {
       heartburnArray.push(heartburnItems[i].ingredients.split(","))
     }
-    let count = heartburnArray.length;
-    let count2=0;
-    let count3=0;
-    let element;
-    matchedItems = [];
-    for (let i=0; i < count; i++) {
-      count--;
-      count2++;
-      console.log("count: ", count, count2);
-      for (let j=0; j < heartburnArray[i].length; j++) {
-        count3++;
-        element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
-        console.log(element);
-        heartburnArray[count2].forEach(function(item) {
-          if (element.includes(item)) {
-            matchedItems.push(heartburnArray[i][j]);
+
+    let calculateCommonValues = (arrays) => {
+      return arrays.reduce((total, currentArray, index) => {
+        arrays.map((array, index2) => {
+          if (index <= index2) return total;
+          let combinedArrays = [...array, ...currentArray];
+          let uniqueValuesArray = new Set(combinedArrays);
+          let commonCount = combinedArrays.length - uniqueValuesArray.size;
+          if (combinedArrays.length - uniqueValuesArray.size > 0)
+            total[`array-${index2} array-${index}`] = commonCount;
+        });
+        return total;
+      }, {});
+    };
+    console.log(calculateCommonValues(heartburnArray));
+    matchedItems = calculateCommonValues(heartburnArray);
+    // let count = heartburnArray.length;
+    // let count2=0;
+    // let count3=0;
+    // let element;
+    // matchedItems = [];
+    // for (let i=0; i < count; i++) {
+    //   count--;
+    //   count2++;
+    //   console.log("count: ", count, count2);
+    //   for (let j=0; j < heartburnArray[i].length; j++) {
+    //     count3++;
+    //     element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
+    //     console.log(element);
+    //     heartburnArray[count2].forEach(function(item) {
+    //       if (element.includes(item)) {
+    //         matchedItems.push(heartburnArray[i][j]);
             
-          }
-        })
-        console.log(count3);
+    //       }
+    //     })
+    //     console.log(count3);
 
         // if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
         //   matchedItems.push(heartburnArray[1][j]);
@@ -53,10 +71,10 @@ function Homepage(props) {
         
       }
       
-    }
-    // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
-    console.log("match", matchedItems);
-  }
+    // }
+    // // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
+    // console.log("match", matchedItems);
+  
   
   // console.log("output", heartburnItems[2].heartburn);
   if (isLoaded(foodItems)) {

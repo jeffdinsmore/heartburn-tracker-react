@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import firebase from "firebase/app";
-// import Navbar from 'react-bootstrap/Navbar';
-// import Nav from 'react-bootstrap/Navbar';
-// import NavDropdown from 'react-bootstrap/Navbar';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 // import { Navbar } from 'react-bootstrap/Navbar'
 
 const HeartburnHeader = styled.h1`
@@ -22,7 +22,7 @@ function Header() {
     <React.Fragment>
       <div id="header">
       
-      {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
@@ -44,7 +44,7 @@ function Header() {
       </Nav.Link>
     </Nav>
   </Navbar.Collapse>
-</Navbar> */}
+</Navbar>
 
       <ul id="headerUl">
       <img className="imageHeader" src="/lava_flow2.jpg"></img>
