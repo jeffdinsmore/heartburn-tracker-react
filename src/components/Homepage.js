@@ -9,8 +9,6 @@ function Homepage(props) {
     { collection: 'foodItems' }
   ]);
 
-  
-
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   let heartburnItems;
   let arrays;

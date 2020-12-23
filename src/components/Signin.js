@@ -24,7 +24,8 @@ function Signin() {
 
   return (
     <React.Fragment>
-      <h1>Login</h1>
+      <h2>Login</h2>
+      <br />
       <form onSubmit={doSignIn}>
         <input
           type='text'

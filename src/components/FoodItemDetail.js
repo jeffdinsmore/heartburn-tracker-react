@@ -5,7 +5,7 @@ function FoodItemDetail(props) {
   const { foodItem, onClickingDelete } = props;
   return (
     <React.Fragment>
-      <h1>Food Item Detail</h1>
+      <h2>Food Item Detail</h2>
       <br></br>
       <p><strong>Food:</strong> {foodItem.foodName}</p>
       <p><strong>Brand:</strong> {foodItem.brand}</p>
