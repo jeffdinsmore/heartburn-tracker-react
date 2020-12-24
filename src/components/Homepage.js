@@ -135,7 +135,6 @@ function Homepage(props) {
 
 }
 
-
 Homepage.propTypes = {
   onFoodItemSelection: PropTypes.func
 };
