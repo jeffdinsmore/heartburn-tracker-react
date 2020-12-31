@@ -11,68 +11,107 @@ function YourStats(props) {
 
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   let heartburnItems;
+  let noHeartburnItems;
   let arrays;
   let heartburnArray;
+  let noHeartburnArray;
   let count3;
   let count4 = 0;
   let array2;
+  let comparison;
+  let comparison2;
 
   if (isLoaded(foodItems)) {
     heartburnItems = foodItems.filter(f => f.heartburn == "Yes");
+    noHeartburnItems = foodItems.filter(f => f.heartburn == "No");
+    
     arrays = [];
     heartburnArray = [];
-    array2 = [];
+    noHeartburnArray = [];
+
     count3 = heartburnItems.length;
 
     for (let i = 0; i < heartburnItems.length; i++) {
-      heartburnArray.push(heartburnItems[i].ingredients.split(","))
+      heartburnArray.push(heartburnItems[i].ingredients.split(","));
     }
 
-    for (let i = 0; i <= heartburnArray.length; i++) {
-      count3 = count3 - 1;
-      for (let j = 0; j < count3; j++) {
-        console.log("car", count4);
-        if (count4 === heartburnArray.length) {
-          count4 = heartburnArray.length - 1;
-        } else {
-          count4++;
-        }
-        for (let k = 0; k < heartburnArray[i].length; k++) {
-          console.log("count4", count4);
-          if (count4 >= heartburnArray.length) {
-            count4 = heartburnArray.length - 1;
+    for (let i = 0; i < noHeartburnItems.length; i++) {
+      noHeartburnArray.push(noHeartburnItems[i].ingredients.split(","));
+    }
+    console.log(noHeartburnArray);
+
+  }
+  function LoopingMultipleArrays(array) {
+    array2 = [];
+    if (isLoaded(foodItems)) {
+      for (let i = 0; i <= array.length; i++) {
+        count3 = count3 - 1;
+        for (let j = 0; j < count3; j++) {
+          console.log("car", count4);
+          if (count4 === array.length) {
+            count4 = array.length - 1;
           } else {
-            for (let e = 0; e < heartburnArray[count4].length; e++) {
-              if (heartburnArray[i][k] === heartburnArray[count4][e]) {
-                array2.push(heartburnArray[i][k]);
+            count4++;
+          }
+          for (let k = 0; k < array[i].length; k++) {
+            console.log("count4", count4);
+            if (count4 >= array.length) {
+              count4 = array.length - 1;
+            } else {
+              for (let e = 0; e < array[count4].length; e++) {
+                if (array[i][k] === array[count4][e]) {
+                  array2.push(array[i][k]);
+                }
               }
             }
           }
         }
       }
+      return array2;
     }
   }
-
+  LoopingMultipleArrays(heartburnArray);
+  if (isLoaded(foodItems)) {
+    comparison = [];
+  for (let e = 0; e < noHeartburnArray.length; e++) {
+    for(let i = 0; i < array2.length; i++) {
+      for (let j = 0; j < noHeartburnArray[e].length; j++) {
+        if (array2[i] === noHeartburnArray[e][j]) {
+          comparison.push(array2[i]);
+        }
+      }
+    }
+  }
+  comparison2 = [...new Set(comparison)];
+  }
+  
+  
+  
+  
   function myFunction(item, index, arr) {
     arr[index] = <li>{item}</li>;
   }
 
-  function loadingFirestore(foodItems) {
+  function loadingFirestore(foodItems, array) {
     if (isLoaded(foodItems)) {
-      console.log(array2.forEach(myFunction));
+      array.forEach(myFunction);
       // for (let i = 0; i < boom.length; i++) {
-      return array2;
+      return array;
       // }
     } else {
       return <h3>Loading...</h3>;
     }
   }
-
+  
   return (
     <React.Fragment>
       <h2>Your stats</h2>
       <p>Here are the food ingredients that may be causing your heartburn:</p>
-      {loadingFirestore(foodItems)}
+      {loadingFirestore(foodItems, array2)}
+      <br />
+      <p>Ingredients that are unlikely to give you heartburn on the list above:</p>
+      {/* {LoopingMultipleArrays(heartburnArray)} */}
+      {loadingFirestore(foodItems, comparison2)}
     </React.Fragment>
   );
 }
