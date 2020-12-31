@@ -16,10 +16,15 @@ function Homepage(props) {
   let matchItems;
   let matchItems2;
   let heartburnArray;
+  let count3;
+  let count4 = 0;
+  let array2;
   if (isLoaded(foodItems)) {
     heartburnItems = foodItems.filter(f => f.heartburn == "Yes");
     arrays = [];
     heartburnArray = [];
+    array2 = [];
+    count3 = heartburnItems.length;
     for (let i = 0; i < heartburnItems.length; i++) {
       heartburnArray.push(heartburnItems[i].ingredients.split(","))
     }
@@ -46,44 +51,79 @@ function Homepage(props) {
         return total;
       }, {});
     };
-    console.log(calculateCommonValues(heartburnArray));
+    // console.log(heartburnArray);
+    // console.log(count3);
     matchedItems = calculateCommonValues(heartburnArray);
     matchItems = getMatch(heartburnArray[0], heartburnArray[2]);
     matchItems2 = getMatch(heartburnArray[1], heartburnArray[2]);
-    // let count = heartburnArray.length;
-    // let count2=0;
-    // let count3=0;
-    // let element;
-    // matchedItems = [];
-    // for (let i=0; i < count; i++) {
-    //   count--;
-    //   count2++;
-    //   console.log("count: ", count, count2);
-    //   for (let j=0; j < heartburnArray[i].length; j++) {
-    //     count3++;
-    //     element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
-    //     console.log(element);
-    //     heartburnArray[count2].forEach(function(item) {
-    //       if (element.includes(item)) {
-    //         matchedItems.push(heartburnArray[i][j]);
 
-    //       }
-    //     })
-    //     console.log(count3);
-
-    // if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
-    //   matchedItems.push(heartburnArray[1][j]);
-
-    // for (let k=0; k < heartburnArray[i].length-1; k++) {
-    //   if (heartburnArray[i][k] === heartburnArray[j][k]) {
-    //     matchedItems.push(heartburnArray[i][k]);
-    //   } else {
-    //     count++;
-    //   }
-    // console.log(count);
-    // }
-
+    for (let i = 0; i <= heartburnArray.length; i++) {
+      count3=count3 -1;
+      
+      for (let j = 0; j < count3; j++ ) {
+        console.log("car", count4);
+        if (count4 === heartburnArray.length) {
+          count4 = heartburnArray.length -1;
+          
+        } else {
+          count4++;
+        }
+        
+        
+        // console.log(j);
+        for (let k = 0; k < heartburnArray[i].length; k++) {console.log("count4", count4);
+          if(count3 >= heartburnArray.length) {
+            return;
+          }
+          for (let e = 0; e < heartburnArray[count4].length; e++) {console.log(count3);
+            // console.log("e", heartburnArray[count4].length);
+            if (heartburnArray[i][k] === heartburnArray[count4][e]) {
+              array2.push(heartburnArray[i][k]);
+            }
+            // console.log("d", count4);
+          }
+          console.log("b", count4);
+        }
+        console.log("c", count3);
+      }
+      console.log("a", array2);
+    }
+    console.log("j");
   }
+  // let count = heartburnArray.length;
+  // let count2=0;
+  // let count3=0;
+  // let element;
+  // matchedItems = [];
+  // for (let i=0; i < count; i++) {
+  //   count--;
+  //   count2++;
+  //   console.log("count: ", count, count2);
+  //   for (let j=0; j < heartburnArray[i].length; j++) {
+  //     count3++;
+  //     element = heartburnArray[i].filter(input => input.includes(heartburnArray[i][j]));
+  //     console.log(element);
+  //     heartburnArray[count2].forEach(function(item) {
+  //       if (element.includes(item)) {
+  //         matchedItems.push(heartburnArray[i][j]);
+
+  //       }
+  //     })
+  //     console.log(count3);
+
+  // if (heartburnArray[i][j] === heartburnArray[i+1][j]) {
+  //   matchedItems.push(heartburnArray[1][j]);
+
+  // for (let k=0; k < heartburnArray[i].length-1; k++) {
+  //   if (heartburnArray[i][k] === heartburnArray[j][k]) {
+  //     matchedItems.push(heartburnArray[i][k]);
+  //   } else {
+  //     count++;
+  //   }
+  // console.log(count);
+  // }
+
+  // }
 
   // }
   // // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
@@ -93,7 +133,7 @@ function Homepage(props) {
   // console.log("output", heartburnItems[2].heartburn);
   function loadingFirestore(foodItems) {
     if (isLoaded(foodItems)) {
-      return <strong><em>"{matchItems.join(",")+ matchItems2.join(",")}"</em></strong>;
+      return <strong><em>"{matchItems.join(",") + matchItems2.join(",")}"</em></strong>;
     } else {
       return <h3>Loading...</h3>;
     }
