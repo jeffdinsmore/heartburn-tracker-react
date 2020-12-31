@@ -130,11 +130,17 @@ function Homepage(props) {
   // // console.log(heartburnArray[0].length, heartburnArray[1].length, heartburnArray[2].length);
   // console.log("match", matchedItems);
 
+  function myFunction(item, index, arr) {
+    arr[index] = item + "<br />";
+  }
 
   // console.log("output", heartburnItems[2].heartburn);
   function loadingFirestore(foodItems) {
     if (isLoaded(foodItems)) {
-      return <strong><em>"{array2.join(",")}"</em></strong>;
+      let boom = array2;
+      // for (let i = 0; i < boom.length; i++) {
+        return boom.forEach(myFunction);  
+      // }
     } else {
       return <h3>Loading...</h3>;
     }
