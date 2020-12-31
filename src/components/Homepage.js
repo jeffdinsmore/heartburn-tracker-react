@@ -72,23 +72,24 @@ function Homepage(props) {
         
         // console.log(j);
         for (let k = 0; k < heartburnArray[i].length; k++) {console.log("count4", count4);
-          if(count3 >= heartburnArray.length) {
-            return;
-          }
-          for (let e = 0; e < heartburnArray[count4].length; e++) {console.log(count3);
+          if(count4 >= heartburnArray.length) {
+            count4 = heartburnArray.length -1;
+          } else {
+          for (let e = 0; e < heartburnArray[count4].length; e++) {
             // console.log("e", heartburnArray[count4].length);
             if (heartburnArray[i][k] === heartburnArray[count4][e]) {
               array2.push(heartburnArray[i][k]);
             }
             // console.log("d", count4);
           }
-          console.log("b", count4);
         }
-        console.log("c", count3);
+          // console.log("b", count4);
+        }
+        // console.log("c", count3);
       }
-      console.log("a", array2);
+      // console.log("a", array2);
     }
-    console.log("j");
+    console.log("j", array2);
   }
   // let count = heartburnArray.length;
   // let count2=0;
@@ -133,7 +134,7 @@ function Homepage(props) {
   // console.log("output", heartburnItems[2].heartburn);
   function loadingFirestore(foodItems) {
     if (isLoaded(foodItems)) {
-      return <strong><em>"{matchItems.join(",") + matchItems2.join(",")}"</em></strong>;
+      return <strong><em>"{array2.join(",")}"</em></strong>;
     } else {
       return <h3>Loading...</h3>;
     }
