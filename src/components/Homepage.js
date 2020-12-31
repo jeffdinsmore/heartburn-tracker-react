@@ -138,8 +138,9 @@ function Homepage(props) {
   function loadingFirestore(foodItems) {
     if (isLoaded(foodItems)) {
       let boom = array2;
+      console.log(boom.forEach(myFunction));
       // for (let i = 0; i < boom.length; i++) {
-        return boom.forEach(myFunction);  
+        return boom;  
       // }
     } else {
       return <h3>Loading...</h3>;
