@@ -54,7 +54,7 @@ function YourStats(props) {
   }
 
   function myFunction(item, index, arr) {
-    arr[index] = item + ",";
+    arr[index] = <li>{item}</li>;
   }
 
   function loadingFirestore(foodItems) {
