@@ -3,6 +3,7 @@ import Header from './Header';
 import FoodItemControl from './FoodItemControl';
 // import FoodItemList from './FoodItemList';
 import Homepage from './Homepage';
+import YourStats from './YourStats';
 import Footer from './Footer';
 import Signin from "./Signin";
 import Signup from './Signup';
@@ -31,6 +32,11 @@ function App() {
         <Route path="/signup">
           <BodyStyling>
             <Signup />
+          </BodyStyling>
+        </Route>
+        <Route path="/yourstats">
+          <BodyStyling>
+            <YourStats />
           </BodyStyling>
         </Route>
         <Route path="/foodlist">
