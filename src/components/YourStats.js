@@ -89,7 +89,7 @@ function YourStats(props) {
   
   
   function myFunction(item, index, arr) {
-    arr[index] = <li>{item}</li>;
+    arr[index] = <li className="stats"><strong>{item}</strong></li>;
   }
 
   function loadingFirestore(foodItems, array) {

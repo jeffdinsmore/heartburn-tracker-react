@@ -36,6 +36,9 @@ code {
   margin-top: 30px;
 }
 
+li.stats {
+  margin-left: 20px;
+}
 td {
   border: 1px solid rgb(177, 177, 177);
   text-align: left;
