@@ -51,8 +51,6 @@ function Homepage(props) {
         return total;
       }, {});
     };
-    // console.log(heartburnArray);
-    // console.log(count3);
     matchedItems = calculateCommonValues(heartburnArray);
     matchItems = getMatch(heartburnArray[0], heartburnArray[2]);
     matchItems2 = getMatch(heartburnArray[1], heartburnArray[2]);
@@ -175,9 +173,6 @@ function Homepage(props) {
         <li className="list">Peppermint</li>
       </ul>
       <br />
-      <h3>Your stats</h3>
-      <p>Here are the food ingredients that may be causing your heartburn:</p>
-      {loadingFirestore(foodItems)}
     </React.Fragment>
   );
 
