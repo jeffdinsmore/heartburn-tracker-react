@@ -1,8 +1,8 @@
+import * as c from './../actions/ActionTypes';
 
-
-// const firestoreFoodItem = {
-//   foodName: foodItem.get("foodName"),
-//   ingredients: foodItem.get("ingredients"),
-//   heartburn: foodItem.get("heartburn"),
-//   id: foodItem.id
-// }
+const firestoreFoodItem = {
+  foodName: foodItem.get("foodName"),
+  ingredients: foodItem.get("ingredients"),
+  heartburn: foodItem.get("heartburn"),
+  id: foodItem.id
+}
