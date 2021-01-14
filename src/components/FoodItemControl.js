@@ -26,7 +26,7 @@ class FoodItemControl extends React.Component {
     const action = a.toggleForm();
     const action2 = a.editing();
 
-    if (this.props.selectedFoodItem != null) {
+    if (this.state.selectedFoodItem != null) {
       if (this.props.editing) {
         dispatch(action2);
       }
@@ -52,6 +52,8 @@ class FoodItemControl extends React.Component {
         brand: foodItem.get("brand"),
         ingredients: foodItem.get("ingredients"),
         heartburn: foodItem.get("heartburn"),
+        timeOpen: foodItem.get("timeOpen"),
+        nanoseconds: foodItem.get("timeOpen.nanoseconds"),
         id: foodItem.id
       }
       this.setState({ selectedFoodItem: firestoreFoodItem });
@@ -101,10 +103,10 @@ class FoodItemControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.props.editing) {
-      currentlyVisibleState = <EditFoodItemForm foodItem={this.props.selectedFoodItem} onEditFoodItem={this.handleEditingFoodItemInList} />
+      currentlyVisibleState = <EditFoodItemForm foodItem={this.state.selectedFoodItem} onEditFoodItem={this.handleEditingFoodItemInList} />
       buttonText = "Return to Food List";
-    } else if (this.props.selectedFoodItem != null) {
-      currentlyVisibleState = <FoodItemDetail foodItem={this.props.selectedFoodItem} onClickingDelete={this.handleDeletingFoodItem} onClickingEdit={this.handleEditClick} />
+    } else if (this.state.selectedFoodItem != null) {
+      currentlyVisibleState = <FoodItemDetail foodItem={this.state.selectedFoodItem} onClickingDelete={this.handleDeletingFoodItem} onClickingEdit={this.handleEditClick} />
       buttonText = "Return to Food List";
     } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={this.handleAddingNewFoodItemToList} />;
