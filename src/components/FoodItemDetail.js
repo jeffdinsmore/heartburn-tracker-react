@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 function FoodItemDetail(props) {
   const { foodItem, onClickingDelete } = props;
   console.log("open", foodItem);
-  function convertDate(seconds, nanoseconds){
-    let d = new Date(seconds/1000000 + nanoseconds * 1000);
-    let month = d.toDateString().substring(7,3);
-    let day = d.toDateString().substring(10,8);
-    let year = d.toDateString().substring(15,11);
+  function convertDate(seconds, nanoseconds) {
+    let d = new Date(seconds / 1000000 + nanoseconds * 1000);
+    let month = d.toDateString().substring(7, 3);
+    let day = d.toDateString().substring(10, 8);
+    let year = d.toDateString().substring(15, 11);
     let n = d.toDateString().substring(4);
     return month + "-" + day + "-" + year;
   }

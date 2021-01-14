@@ -12,14 +12,14 @@ function FoodItemList(props) {
   // let seconds = foodItems.timeOpen.seconds;
   // console.log("Joe", foodItems[0].timeOpen.seconds);
   if (isLoaded(foodItems)) {
-    
-    function convertDate(seconds, nanoseconds){
-      let d = new Date(seconds/1000000 + nanoseconds * 1000);
-    let month = d.toDateString().substring(7,3);
-    let day = d.toDateString().substring(10,8);
-    let year = d.toDateString().substring(15,11);
-    let n = d.toDateString().substring(15,3);
-    return month + "-" + day + "-" + year;
+
+    function convertDate(seconds, nanoseconds) {
+      let d = new Date(seconds / 1000000 + nanoseconds * 1000);
+      let month = d.toDateString().substring(7, 3);
+      let day = d.toDateString().substring(10, 8);
+      let year = d.toDateString().substring(15, 11);
+      let n = d.toDateString().substring(15, 3);
+      return month + "-" + day + "-" + year;
     }
     function joe(seconds, nanoseconds) {
       console.log(convertDate(seconds, nanoseconds))
@@ -40,12 +40,12 @@ function FoodItemList(props) {
             return <FoodItem
               whenFoodItemClicked={props.onFoodItemSelection}
               foodName={foodItem.foodName}
-            ingredients={foodItem.ingredients}
-            heartburn={foodItem.heartburn}
-            timeOpen={convertDate(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}
-            jane={joe(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}
-            id={foodItem.id}
-            key={foodItem.id} />
+              ingredients={foodItem.ingredients}
+              heartburn={foodItem.heartburn}
+              timeOpen={convertDate(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}
+              jane={joe(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}
+              id={foodItem.id}
+              key={foodItem.id} />
           })}
         </table>
         <hr />
