@@ -23,12 +23,19 @@ function FoodItemList(props) {
       let n = d.toDateString().substring(15, 3);
       return month + "-" + day + "-" + year;
     }
+    console.log(foodItems);
+    let todd = foodItems.map((element) => {
+      console.log(element.timeOpen.nanoseconds, element.timeOpen.seconds);
+      let j = new Date((element.timeOpen.seconds / 1000000) + (element.timeOpen.nanoseconds * 1000));
+      return j;
+  }) 
+    console.log("todd", todd.sort((a, b) => b - a));
     // const byTimeOpen = foodItems.orderBy('timeOpen').get();
     // console.log("Go", byTimeOpen);
     // const sortedList = foodItems.sort((a, b) => b.(timeOpen.seconds / 1000000 + timeOpen.nanoseconds * 1000) - a.(timeOpen.seconds / 1000000 + timeOpen.nanoseconds* 1000));
     function joe(seconds, nanoseconds) {
       console.log(convertDate(seconds, nanoseconds))
-
+      
     }
     return (
       <React.Fragment>
@@ -36,12 +43,14 @@ function FoodItemList(props) {
         {/* <hr /> */}
         <table className="Table-mobile-large">
           <tr className="tableHeader">
-            <th>Food Item</th>
-            <th>Ingredients</th>
-            <th>Heartburn</th>
-            <th>Details</th>
+            <th className="headerName">Food Item</th>
+            <th className="headerIngredients">Ingredients</th>
+            <th className="headerHeartburn">Heartburn</th>
+            <th className="headerDate">Date Opened</th>
+            <th className="headerDetails">Details</th>
           </tr>
           {foodItems.map((foodItem) => {
+            console.log(foodItem.timeOpen.nanoseconds);
             return <FoodItem
               whenFoodItemClicked={props.onFoodItemSelection}
               foodName={foodItem.foodName}

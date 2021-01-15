@@ -111,6 +111,22 @@ li.joinLine {
   margin: 0px 0px 0px 14px;
 }
 
+.headerName {
+  width: 100px;
+}
+.headerIngredients {
+  width: 200px;
+}
+.headerHeartburn {
+  width: 20px;
+}
+th.headerDate {
+  width: 100px;
+}
+.headerDetails {
+  width: 20px;
+}
+
 div#header {
   height: 120px;
   background-color: rgb(37, 74, 143);
