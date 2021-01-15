@@ -1,7 +1,7 @@
 import * as c from './../actions/ActionTypes';
 
 export default (state = {}, action) => {
-  const { foodName, ingredients, heartburn, heartburn2, id } = action;
+  const { foodName, ingredients, heartburn, timeOpen, id } = action;
   switch (action.type) {
     case c.ADD_FOODITEM:
       return Object.assign({}, state, {
@@ -9,7 +9,7 @@ export default (state = {}, action) => {
           foodName: foodName,
           ingredients: ingredients,
           heartburn: heartburn,
-          heartburn2: heartburn2,
+          timeOpen: timeOpen,
           id: id,
         }
       });

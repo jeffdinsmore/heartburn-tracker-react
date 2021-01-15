@@ -9,6 +9,8 @@ function FoodItemList(props) {
     { collection: 'foodItems' }
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
+  
+  console.log();
   // let seconds = foodItems.timeOpen.seconds;
   // console.log("Joe", foodItems[0].timeOpen.seconds);
   if (isLoaded(foodItems)) {
@@ -21,6 +23,9 @@ function FoodItemList(props) {
       let n = d.toDateString().substring(15, 3);
       return month + "-" + day + "-" + year;
     }
+    // const byTimeOpen = foodItems.orderBy('timeOpen').get();
+    // console.log("Go", byTimeOpen);
+    // const sortedList = foodItems.sort((a, b) => b.(timeOpen.seconds / 1000000 + timeOpen.nanoseconds * 1000) - a.(timeOpen.seconds / 1000000 + timeOpen.nanoseconds* 1000));
     function joe(seconds, nanoseconds) {
       console.log(convertDate(seconds, nanoseconds))
 

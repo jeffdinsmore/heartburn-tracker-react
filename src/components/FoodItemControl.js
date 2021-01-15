@@ -53,7 +53,6 @@ class FoodItemControl extends React.Component {
         ingredients: foodItem.get("ingredients"),
         heartburn: foodItem.get("heartburn"),
         timeOpen: foodItem.get("timeOpen"),
-        nanoseconds: foodItem.get("timeOpen.nanoseconds"),
         id: foodItem.id
       }
       this.setState({ selectedFoodItem: firestoreFoodItem });

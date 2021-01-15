@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function FoodItemDetail(props) {
   const { foodItem, onClickingDelete } = props;
-  console.log("open", foodItem);
+  // console.log("open", foodItem);
   function convertDate(seconds, nanoseconds) {
     let d = new Date(seconds / 1000000 + nanoseconds * 1000);
     let month = d.toDateString().substring(7, 3);
