@@ -34,7 +34,7 @@ function YourStats(props) {
     for (let i = 0; i < heartburnItems.length; i++) {
       heartburnArray.push(heartburnItems[i].ingredients.split(","));
     }
-
+    console.log("h", heartburnArray);
     for (let i = 0; i < noHeartburnItems.length; i++) {
       noHeartburnArray.push(noHeartburnItems[i].ingredients.split(","));
     }
