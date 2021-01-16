@@ -45,9 +45,10 @@ function YourStats(props) {
     array2 = [];
     if (isLoaded(foodItems)) {
       for (let i = 0; i <= array.length; i++) {
+        console.log("i", i);
         count3 = count3 - 1;
         for (let j = 0; j < count3; j++) {
-          console.log("car", count4);
+          console.log("car", count3);
           if (count4 === array.length) {
             count4 = array.length - 1;
           } else {
