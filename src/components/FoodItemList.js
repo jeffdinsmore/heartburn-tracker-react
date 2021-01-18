@@ -10,7 +10,7 @@ function FoodItemList(props) {
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   
-  console.log();
+  // console.log();
   // let seconds = foodItems.timeOpen.seconds;
   // console.log("Joe", foodItems[0].timeOpen.seconds);
   if (isLoaded(foodItems)) {
@@ -30,8 +30,10 @@ function FoodItemList(props) {
       let n = date.toDateString().substring(15, 3);
       return month + "-" + day + "-" + year;
     }
-    console.log(foodItems);
+    // console.log(foodItems);
+
     let todd = foodItems.map((foodItem) => {
+      console.log(foodItem.timeOpen.nanoseconds);
       let date = new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));;
       return <FoodItem
       // whenFoodItemClicked={props.onFoodItemSelection}
@@ -71,7 +73,7 @@ function FoodItemList(props) {
             <th className="headerDetails">Details</th>
           </tr>
           {todd.map((foodItem) => {
-            console.log("hey", foodItem.props.timeOpen);
+            // console.log("hey", foodItem.props.timeOpen);
             return <FoodItem
               whenFoodItemClicked={props.onFoodItemSelection}
               foodName={foodItem.props.foodName}

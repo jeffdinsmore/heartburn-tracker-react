@@ -30,36 +30,30 @@ function YourStats(props) {
     noHeartburnArray = [];
 
     count3 = heartburnItems.length;
-
-    for (let i = 0; i < heartburnItems.length; i++) {
-      heartburnArray.push(heartburnItems[i].ingredients.split(","));
+    function splitArray(array) {
+      return array.map(e => e.ingredients.split(","));
     }
-    console.log("h", heartburnArray);
-    for (let i = 0; i < noHeartburnItems.length; i++) {
-      noHeartburnArray.push(noHeartburnItems[i].ingredients.split(","));
-    }
-    console.log(noHeartburnArray);
+    heartburnArray = splitArray(heartburnItems);
+    noHeartburnArray = splitArray(noHeartburnItems);
 
   }
+  
   function LoopingMultipleArrays(array) {
     array2 = [];
     if (isLoaded(foodItems)) {
-      for (let i = 0; i <= array.length; i++) {
+      for (let i = 0; i < array.length; i++) {
         console.log("i", i);
         count3 = count3 - 1;
         for (let j = 0; j < count3; j++) {
-          console.log("car", count3);
-          if (count4 === array.length) {
-            count4 = array.length - 1;
+          console.log("count3", count3);
+          if (count4 === array.length-1) {
+            count4 = i + 1;
           } else {
             count4++;
           }
           for (let k = 0; k < array[i].length; k++) {
             console.log("count4", count4);
-            if (count4 >= array.length) {
-              count4 = array.length - 1;
-            } else {
-              for (let e = 0; e < array[count4].length; e++) {
+            for (let e = 0; e < array[count4].length; e++) {
                 if (array[i][k] === array[count4][e]) {
                   array2.push(array[i][k]);
                 }
@@ -67,7 +61,6 @@ function YourStats(props) {
             }
           }
         }
-      }
       return array2;
     }
   }
@@ -85,8 +78,18 @@ function YourStats(props) {
   }
   comparison2 = [...new Set(comparison)];
   }
-  
-  
+  let counts = {};
+  if (isLoaded(foodItems)) {
+    
+    for (var i = 0; i < array2.length; i++) {
+      let num = array2[i];
+      counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }
+    
+    console.log(counts);
+    let j = array2.indexOf(" spices");
+  console.log("get", j);
+  }
   
   
   function myFunction(item, index, arr) {
