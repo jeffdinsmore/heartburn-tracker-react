@@ -50,7 +50,7 @@ function EditFoodItemForm(props) {
           <option value="No">No</option>
         </select>
         <br></br><br></br>
-        <button className="btn btn-success btn-sm" type='submit'>Update Food Item</button>
+        <button className="btn btn-success btn-sm" type='submit'>Submit</button>
       </form>
     </React.Fragment>
   );

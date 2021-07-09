@@ -8,24 +8,22 @@ function YourStats(props) {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);
+  // Create a reference to the cities collection
+const citiesRef = useSelector(state => state.firestore.ordered.foodItems);
+
+// Create a query against the collection
 
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  let heartburnItems;
-  let noHeartburnItems;
+  let heartburnItems, noHeartburnItems, heartburnArray, noHeartburnArray, count3, comparison, comparison2, array2, array3, countedIngredients;
   let arrays = [];
-  let heartburnArray;
-  let noHeartburnArray;
-  let count3;
   let count4 = 0;
-  let array2;
-  let comparison;
-  let comparison2;
-  let array3;
-  let obj = {};
+  // let obj = {};
+
   if (isLoaded(foodItems)) {
+    // console.log("state", citiesRef)
+    // const queryRef = citiesRef.where('heartburn', '==', 'Yes');
     heartburnItems = foodItems.filter(f => f.heartburn == "Yes");
     noHeartburnItems = foodItems.filter(f => f.heartburn == "No");
-
     // arrays = [];
     heartburnArray = [];
     noHeartburnArray = [];
@@ -36,24 +34,50 @@ function YourStats(props) {
     }
     heartburnArray = splitArray(heartburnItems);
     noHeartburnArray = splitArray(noHeartburnItems);
-
+    const heartburnArrayCombined = heartburnArray.reduce((accumulator, currentValue) => {
+        return accumulator.concat(currentValue)
+      },
+      []
+    )
+    const noHeartburnArrayCombined = noHeartburnArray.reduce((accumulator, currentValue) => {
+      return accumulator.concat(currentValue)
+    },
+    []
+  )
+  console.log(noHeartburnArrayCombined)
+    // flattened is [0, 1, 2, 3, 4, 5]
+    // console.log("heartburnArray", heartburnArray)
+    console.log("flattened", [...new Set(heartburnArrayCombined)])
+    const intersection = noHeartburnArrayCombined.filter((e) => {
+      return heartburnArrayCombined.indexOf(e) > -1;
+    });
+    console.log("int", intersection)
+    countedIngredients = heartburnArrayCombined.reduce((allItems, item) => {
+      if(item in allItems) {
+        allItems[item]++;
+      } else {
+        allItems[item] = 1;
+      }
+      return allItems;
+    }, {});
+    // console.log("counted", countedIngredients);
   }
 
   function LoopingMultipleArrays(array) {
     array2 = [];
     if (isLoaded(foodItems)) {
       for (let i = 0; i < array.length; i++) {
-        console.log("i", i);
+        // console.log("i", i);
         count3 = count3 - 1;
         for (let j = 0; j < count3; j++) {
-          console.log("count3", count3);
+          // console.log("count3", count3);
           if (count4 === array.length - 1) {
             count4 = i + 1;
           } else {
             count4++;
           }
           for (let k = 0; k < array[i].length; k++) {
-            console.log("count4", count4);
+            // console.log("count4", count4);
             for (let e = 0; e < array[count4].length; e++) {
               if (array[i][k] === array[count4][e]) {
                 array2.push(array[i][k]);
@@ -103,9 +127,9 @@ function YourStats(props) {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
     }
 
-    console.log(counts);
+    // console.log(counts);
     let j = array2.indexOf(" spices");
-    console.log("get", j);
+    // console.log("get", j);
   }
   let count5;
   let array4 = [];
@@ -121,7 +145,7 @@ function YourStats(props) {
       }
     }
   }
-  console.log(array4);
+  // console.log(array4);
   function myFunction(item, index, arr) {
     arr[index] = <li className="stats"><strong>{item} - {counts[item]}</strong></li>;
   }
@@ -137,29 +161,29 @@ function YourStats(props) {
     }
   }
 
-  function countArrayIndexes() {
-    let countOccurrance;
-    let array5 = [];
-    for(let i = 0; i < array3.length; i++) {
-      countOccurrance = 0;
-      console.log("meme")
-      console.log(arrays.length);
-      for(let j = 0; j < 60; j++) {
-        // console.log("mike");
-        // console.log("joe", array3[i], arrays[j]);
-        if(array3[i] === arrays[j]) {
-          countOccurrance++;
-          console.log("me", countOccurrance);
-        }
-      }
-      array5.push(countOccurrance);
-    }
-    return array5;
-  }
+  // function countArrayIndexes() {
+  //   let countOccurrance;
+  //   let array5 = [];
+  //   for(let i = 0; i < array3.length; i++) {
+  //     countOccurrance = 0;
+  //     console.log("meme")
+  //     console.log(arrays.length);
+  //     for(let j = 0; j < 60; j++) {
+  //       // console.log("mike");
+  //       // console.log("joe", array3[i], arrays[j]);
+  //       if(array3[i] === arrays[j]) {
+  //         countOccurrance++;
+  //         console.log("me", countOccurrance);
+  //       }
+  //     }
+  //     array5.push(countOccurrance);
+  //   }
+  //   return array5;
+  // }
   // console.log("arr", array3);
-  console.log(countArrayIndexes());
-  console.log("combine", combineArrays());
-  console.log("array3", array2);
+  // console.log(countArrayIndexes());
+  // console.log("combine", combineArrays());
+  // console.log("array3", array3);
   return (
     <React.Fragment>
       <h2>Your stats</h2>

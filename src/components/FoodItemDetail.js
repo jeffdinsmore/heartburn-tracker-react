@@ -16,6 +16,7 @@ function FoodItemDetail(props) {
     <React.Fragment>
       <h2>Food Item Detail</h2>
       <br></br>
+      <div className="detail">
       <p><strong>Food:</strong> {foodItem.foodName}</p>
       <p><strong>Brand:</strong> {foodItem.brand}</p>
       <p><strong>Ingredients:</strong> {foodItem.ingredients}</p>
@@ -23,8 +24,9 @@ function FoodItemDetail(props) {
       <br></br>
       <p><strong>Date Logged:</strong> {convertDate(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}</p>
       <br></br>
-      <button className="btn btn-success btn-sm" onClick={props.onClickingEdit}>Update Food Item</button>&nbsp;&nbsp;
-      <button className="btn btn-danger btn-sm" onClick={() => onClickingDelete(foodItem.id)}>Delete Food Item</button>
+      <button className="btn btn-success btn-sm" onClick={props.onClickingEdit}>Update Item</button>&nbsp;&nbsp;
+      <button className="btn btn-danger btn-sm" onClick={() => onClickingDelete(foodItem.id)}>Delete Item</button>
+      </div>
       <hr />
     </React.Fragment>
   );

@@ -16,8 +16,8 @@ function FoodItem(props) {
         <td>{props.ingredients}</td>
         <td>{strong(props.heartburn)}</td>
         <td>{props.timeOpen}</td>
-        <td><button className="btn btn-xs btn-info" onClick={() => props.whenFoodItemClicked(props.id)}>Details</button></td></tr>
-      {/* <hr /> */}
+        <td><button className="btn btn-xs btn-info" onClick={() => props.whenFoodItemClicked(props.id)}>Details</button></td>
+      </tr>
     </React.Fragment>
   );
 }
