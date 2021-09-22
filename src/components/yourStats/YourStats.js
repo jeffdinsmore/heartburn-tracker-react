@@ -202,3 +202,161 @@ YourStats.propTypes = {
 };
 
 export default YourStats;
+
+// function tvRemote(words) {
+//   let mode1 = [['a', 'b', 'c', 'd', 'e', 1, 2, 3],['f', 'g', 'h', 'i', 'j', 4, 5, 6],['k', 'l', 'm', 'n', 'o', 7, 8, 9],['p', 'q', 'r', 's', 't', '.', '@', 0],['u', 'v', 'w', 'x', 'y', 'z', '_', '/'], ['aA#', ' ']];
+//   let mode2 = [['A', 'B', 'C', 'D', 'E', 1, 2, 3],['F', 'G', 'H', 'I', 'J', 4, 5, 6],['K', 'L', 'M', 'N', 'O', 7, 8, 9],['P', 'Q', 'R', 'S', 'T', '.', '@', 0],['U', 'V', 'W', 'X', 'Y', 'Z', '_', '/'], ['aA#', ' ']];
+//   for(let i = 0; i < mode1.length; i++) {
+//     for(let j = 0; j < mode1[i].length; j++) {
+//       mode2.push(mode1[i][j]);
+//     }
+//   }
+//   let mode3 = [['^', '~', '?', '!', "\'", "\"", '(', ')'], ['-', ':', ';', '+', '&', '%', '*', '='], ['<', '>', '€', '£', '$', '¥', '¤', "\\"], ["1", "2", "3", "4", ",", ".", "|", "@", "§"], ["#", "¿", "¡", 10, 11, 12, "_", "/"], ['aA#', ' ']];
+//   let array = [0, 0];
+//   let answer = words.length;
+//   let count = 0;
+//   for(let i = 0; i < words.length; i++) {
+//     for(let j = 0; j < mode1.length; j++) {
+//       for(let k = 0; k < mode1[j].length; k++) {
+//         if(words.charAt(i) === mode1[j][k]) {
+//           if(words.charAt(i-1) === mode2[j][k]) {
+//             array.push(5);
+//             array.push(0);
+//           }
+//           array.push(j);
+//           array.push(k);
+//         } else if(words.charAt(i) === mode2[j][k]) {
+//           array.push(5);
+//           array.push(0);
+//           array.push(j);
+//           array.push(k);
+//           count++;
+//         } else if(words.charAt(i) === mode3[j][k]) {
+//           array.push(5);
+//           array.push(0);
+//           array.push(j);
+//           array.push(k);
+//           count++;
+//         }
+//       }
+//     }
+//   }
+//   for(let i = 0; i < array.length-2; i+=2) {
+//     answer = Math.abs(array[i+2] - array[i]) + answer;
+//     answer = Math.abs(array[i+3] - array[i+1]) + answer;
+//     if(Math.abs(array[i+2] - array[i]) === 4) {
+//       answer = answer - 2;
+//     } else if(Math.abs(array[i+2] - array[i]) === 5) {
+//       answer = answer - 4;
+//     }
+//     if(Math.abs(array[i+3] - array[i+1]) === 5) {
+//       answer = answer - 2;
+//     } else if(Math.abs(array[i+2] - array[i]) === 6) {
+//       answer = answer - 4;
+//     } else if(Math.abs(array[i+2] - array[i]) === 7) {
+//       answer = answer - 6;
+//     }
+//     //answer = Math.abs(array[i+2] - array[i]) >= 3 ? answer - (mode1.length - 4) : answer;
+//     //answer = Math.abs(array[i+3] - array[i+1]) >= 4 ? answer - (mode1[0].length - 4) : answer;
+//   }
+//   console.log(array)
+//   console.log(count)
+//   return answer;
+// }
+// console.log(tvRemote("Too Easy?"))
+
+// //array.push(array[j+2] - array[j] <= 4 ? j : j-4);
+// //array.push(array[j+3] - array[j+1] <= 3 ? k : k-3);
+// //[1,1,1,3,5,9,17,31,57,105]
+
+// //if(i < 3) {
+//     //sum = sum + signature[i];
+//     //array.push(signature[i])
+//   //} 
+//   //if(i >= 3) {
+//     //sum = sum + array[i]
+//     //array.push(sum);
+//     //sum = sum - array[i-3]
+//  // }
+
+//-------------------------------------------
+
+// function howManyTimes(time1,time2){
+//   let newTime1 = new Date(time1).getTime()/1000;
+//   let newTime2 = new Date(time2).getTime()/1000;
+//   let answer = newTime1;
+//   for(let i = 0; i < newTime2 - newTime1; i++) {
+//   	answer = answer + 1;
+//   	if(i === 1499) {
+//     	console.log(new Date(answer * 1000).toString())
+//       console.log(answer)
+//       console.log(new Date(answer*1000).getHours())
+//     }
+//   }
+//   return new Date(1471204800 * 1000).toString()
+  
+// }
+
+// console.log(howManyTimes("2016-08-14 11:35:00","2016-08-14 12:05:00"))
+
+// //array.push(array[j+2] - array[j] <= 4 ? j : j-4);
+// //array.push(array[j+3] - array[j+1] <= 3 ? k : k-3);
+// //[1,1,1,3,5,9,17,31,57,105]
+
+// //if(i < 3) {
+//     	//sum = sum + signature[i];
+//     	//array.push(signature[i])
+//     //} 
+//   	//if(i >= 3) {
+//     	//sum = sum + array[i]
+// 			//array.push(sum);
+//       //sum = sum - array[i-3]
+//    // }
+
+//---------------------------------------
+// function tvRemote(words) {
+//   let mode1 = [['a', 'b', 'c', 'd', 'e', 1, 2, 3],['f', 'g', 'h', 'i', 'j', 4, 5, 6],['k', 'l', 'm', 'n', 'o', 7, 8, 9],['p', 'q', 'r', 's', 't', '.', '@', 0],['u', 'v', 'w', 'x', 'y', 'z', '_', '/'], ['aA#', ' ']];
+//   let mode2 = [['A', 'B', 'C', 'D', 'E', 1, 2, 3],['F', 'G', 'H', 'I', 'J', 4, 5, 6],['K', 'L', 'M', 'N', 'O', 7, 8, 9],['P', 'Q', 'R', 'S', 'T', '.', '@', 0],['U', 'V', 'W', 'X', 'Y', 'Z', '_', '/'], ['aA#', ' ']];
+//   for(let i = 0; i < mode1.length; i++) {
+//     for(let j = 0; j < mode1[i].length; j++) {
+//       mode2.push(mode1[i][j]);
+//     }
+//   }
+//   let mode3 = [['^', '~', '?', '!', "\'", "\"", '(', ')'], ['-', ':', ';', '+', '&', '%', '*', '='], ['<', '>', '€', '£', '$', '¥', '¤', "\\"], ["1", "2", "3", "4", ",", ".", "|", "@", "§"], ["#", "¿", "¡", 10, 11, 12, "_", "/"], ['aA#', ' ']];
+//   let array = [0, 0];
+//   let answer = words.length;
+//   let count = 0;
+//   for(let i = 0; i < words.length; i++) {
+//     for(let j = 0; j < mode1.length; j++) {
+//       for(let k = 0; k < mode1[j].length; k++) {
+//         if(words.charAt(i) === mode1[j][k]) {
+//           array.push(j);
+//           array.push(k);
+//         } else if(words.charAt(i) === mode2[j][k]) {
+//           array.push(j <= 4 ? j : j-2);
+//           array.push(k <= 3 ? k : k-2);
+//           count++;
+//         }
+//       }
+//     }
+//   }
+//   for(let i = 0; i < array.length-2; i+=2) {
+//     answer = Math.abs(array[i+2] - array[i]) + answer;
+//     answer = Math.abs(array[i+3] - array[i+1]) + answer;
+//     if(Math.abs(array[i+2] - array[i]) === 4) {
+//       answer = answer - 2;
+//     } else if(Math.abs(array[i+2] - array[i]) === 5) {
+//       answer = answer - 4;
+//     }
+//     if(Math.abs(array[i+3] - array[i+1]) === 5) {
+//       answer = answer - 2;
+//     } else if(Math.abs(array[i+2] - array[i]) === 6) {
+//       answer = answer - 4;
+//     } else if(Math.abs(array[i+2] - array[i]) === 7) {
+//       answer = answer - 6;
+//     }
+//     //answer = Math.abs(array[i+2] - array[i]) >= 3 ? answer - (mode1.length - 4) : answer;
+//     //answer = Math.abs(array[i+3] - array[i+1]) >= 4 ? answer - (mode1[0].length - 4) : answer;
+//   }
+//   return answer;
+// }

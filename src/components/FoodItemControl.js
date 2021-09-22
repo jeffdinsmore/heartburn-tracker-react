@@ -1,36 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NewFoodItemForm from './NewFoodItemForm';
 import FoodItemList from './FoodItemList';
 import FoodItemDetail from './FoodItemDetail';
 import EditFoodItemForm from './EditFoodItemForm';
+//import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
 import { withFirestore, isLoaded } from 'react-redux-firebase';
 
-class FoodItemControl extends React.Component {
+function FoodItemControl(props) {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedFoodItem: null,
-    };
-  }
-
-  componentDidUpdate() {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     selectedFoodItem: null,
+  //   };
+  // }
+  const [selectedFoodItem, setSelectectFoodItems] = useState(null)
+  useEffect(() => {
     console.log("component updated!");
-  }
+  })
 
-  handleClick = () => {
-    const { dispatch } = this.props;
+  const handleClick = () => {
+    const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
 
-    if (this.state.selectedFoodItem != null) {
-      if (this.props.editing) {
+    if (selectedFoodItem != null) {
+      if (props.editing) {
         dispatch(action2);
       }
-      this.setState({
+      setSelectectFoodItems({
         selectedFoodItem: null,
       });
     } else {
@@ -39,14 +40,14 @@ class FoodItemControl extends React.Component {
     }
   }
 
-  handleAddingNewFoodItemToList = () => {
-    const { dispatch } = this.props;
+  const handleAddingNewFoodItemToList = () => {
+    const { dispatch } = props;
     const action = a.toggleForm();
     dispatch(action);
   }
 
-  handleChangingSelectedFoodItem = (id) => {
-    this.props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
+  const handleChangingSelectedFoodItem = (id) => {
+    props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
       const firestoreFoodItem = {
         foodName: foodItem.get("foodName"),
         brand: foodItem.get("brand"),
@@ -55,34 +56,34 @@ class FoodItemControl extends React.Component {
         timeOpen: foodItem.get("timeOpen"),
         id: foodItem.id
       }
-      this.setState({ selectedFoodItem: firestoreFoodItem });
+      setSelectectFoodItems({ selectedFoodItem: firestoreFoodItem });
     });
   }
 
-  handleDeletingFoodItem = (id) => {
-    this.props.firestore.delete({ collection: 'foodItems', doc: id });
-    this.setState({
+  const handleDeletingFoodItem = (id) => {
+    props.firestore.delete({ collection: 'foodItems', doc: id });
+    setSelectectFoodItems({
       selectedFoodItem: null
     });
   }
 
-  handleEditingFoodItemInList = () => {
-    const { dispatch } = this.props;
+  const handleEditingFoodItemInList = () => {
+    const { dispatch } = props;
     const action = a.editing();
     dispatch(action);
-    this.setState({
+    setSelectectFoodItems({
       selectedFoodItem: null
     });
   }
 
-  handleEditClick = () => {
+  const handleEditClick = () => {
     console.log("handleEditClick reached!");
-    const { dispatch } = this.props;
+    const { dispatch } = props;
     const action = a.editing();
     dispatch(action);
   }
 
-  render() {
+  //render() {
     // const auth = this.props.firebase.auth();
     // if (!isLoaded(auth)) {
     //   return (
@@ -101,27 +102,27 @@ class FoodItemControl extends React.Component {
     // if ((isLoaded(auth)) && (auth.currentUser != null)) {
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.props.editing) {
-      currentlyVisibleState = <EditFoodItemForm foodItem={this.state.selectedFoodItem} onEditFoodItem={this.handleEditingFoodItemInList} />
+    if (props.editing) {
+      currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
       buttonText = "Return to Food List";
-    } else if (this.state.selectedFoodItem != null) {
-      currentlyVisibleState = <FoodItemDetail foodItem={this.state.selectedFoodItem} onClickingDelete={this.handleDeletingFoodItem} onClickingEdit={this.handleEditClick} />
+    } else if (selectedFoodItem != null) {
+      currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingEdit={handleEditClick} />
       buttonText = "Return to Food List";
-    } else if (this.props.formVisibleOnPage) {
-      currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={this.handleAddingNewFoodItemToList} />;
+    } else if (props.formVisibleOnPage) {
+      currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
       buttonText = "Return to Food List";
     } else {
-      currentlyVisibleState = <FoodItemList foodItemList={this.props.masterFoodItemList} onFoodItemSelection={this.handleChangingSelectedFoodItem} />;
+      currentlyVisibleState = <FoodItemList foodItemList={props.masterFoodItemList} onFoodItemSelection={handleChangingSelectedFoodItem} />;
       buttonText = "Add Food Item";
     }
     return (
       <React.Fragment>
         {currentlyVisibleState}
         <br></br>
-        <button className="btn btn-info btn-sm" onClick={this.handleClick}>{buttonText}</button>
+        <button className="btn btn-info btn-sm" onClick={handleClick}>{buttonText}</button>
       </React.Fragment>
     );
-  }
+  //}
 }
 // }
 FoodItemControl.propTypes = {
