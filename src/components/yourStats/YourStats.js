@@ -44,14 +44,14 @@ const citiesRef = useSelector(state => state.firestore.ordered.foodItems);
     },
     []
   )
-  console.log(noHeartburnArrayCombined)
+  //console.log(noHeartburnArrayCombined)
     // flattened is [0, 1, 2, 3, 4, 5]
     // console.log("heartburnArray", heartburnArray)
-    console.log("flattened", [...new Set(heartburnArrayCombined)])
+    //console.log("flattened", [...new Set(heartburnArrayCombined)])
     const intersection = noHeartburnArrayCombined.filter((e) => {
       return heartburnArrayCombined.indexOf(e) > -1;
     });
-    console.log("int", intersection)
+    //console.log("int", intersection)
     countedIngredients = heartburnArrayCombined.reduce((allItems, item) => {
       if(item in allItems) {
         allItems[item]++;

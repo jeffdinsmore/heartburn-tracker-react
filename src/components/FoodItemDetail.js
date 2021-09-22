@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function FoodItemDetail(props) {
-  const { foodItem, onClickingDelete } = props;
+  const { foodItem, onClickingModal, onClickingDelete } = props;
   // console.log("open", foodItem);
   function convertDate(seconds, nanoseconds) {
     let d = new Date(seconds / 1000000 + nanoseconds * 1000);
@@ -12,6 +12,7 @@ function FoodItemDetail(props) {
     let n = d.toDateString().substring(4);
     return month + "-" + day + "-" + year;
   }
+  //console.log("proppy", props)
   return (
     <React.Fragment>
       <h2>Food Item Detail</h2>
@@ -25,7 +26,7 @@ function FoodItemDetail(props) {
       <p><strong>Date Logged:</strong> {convertDate(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}</p>
       <br></br>
       <button className="btn btn-success btn-sm" onClick={props.onClickingEdit}>Update Item</button>&nbsp;&nbsp;
-      <button className="btn btn-danger btn-sm" onClick={() => onClickingDelete(foodItem.id)}>Delete Item</button>
+      <button className="btn btn-danger btn-sm" onClick={() => onClickingModal(foodItem.id)}>Delete Item</button>
       </div>
       <hr />
     </React.Fragment>
@@ -34,6 +35,7 @@ function FoodItemDetail(props) {
 
 FoodItemDetail.propTypes = {
   foodItem: PropTypes.object,
+  onClickingModal: PropTypes.func,
   onClickingDelete: PropTypes.func,
   onClickingEdit: PropTypes.func
 };

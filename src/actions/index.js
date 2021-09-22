@@ -31,7 +31,11 @@ export const editingFalse = () => {
     type: c.EDITING_FALSE
   }
 }
-
+export const showModal = () => {
+  return {
+    type: c.SHOW_MODAL
+  }
+}
 export const selectFoodItem = (foodItem) => {
   const { foodName, ingredients, heartburn, id } = foodItem;
   return {

@@ -15,7 +15,7 @@ describe("rootReducer", () => {
       editing: false,
       masterFoodItemList: {},
       formVisibleOnPage: false,
-      
+      showModal: false,
       firestore: store.getState().firestore,
       // selectedFoodItem: null
     });

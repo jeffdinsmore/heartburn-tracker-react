@@ -3,35 +3,31 @@ import NewFoodItemForm from './NewFoodItemForm';
 import FoodItemList from './FoodItemList';
 import FoodItemDetail from './FoodItemDetail';
 import EditFoodItemForm from './EditFoodItemForm';
-//import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
 import { withFirestore, isLoaded } from 'react-redux-firebase';
+import Modal from './Modal';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 function FoodItemControl(props) {
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     selectedFoodItem: null,
-  //   };
-  // }
-  const [selectedFoodItem, setSelectectFoodItems] = useState(null)
+  // const [showModal, setShowModal ] = useState(false);
+  const [state, setState] = useState({selectedFoodItem: null, showModal: false});
+  
   useEffect(() => {
     console.log("component updated!");
   })
-
+  const [ count, setCount ] = useState(0);
   const handleClick = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
 
-    if (selectedFoodItem != null) {
+    if (state.selectedFoodItem != null) {
       if (props.editing) {
         dispatch(action2);
       }
-      setSelectectFoodItems({
+      setState({
         selectedFoodItem: null,
       });
     } else {
@@ -56,22 +52,29 @@ function FoodItemControl(props) {
         timeOpen: foodItem.get("timeOpen"),
         id: foodItem.id
       }
-      setSelectectFoodItems({ selectedFoodItem: firestoreFoodItem });
+      setState({ selectedFoodItem: firestoreFoodItem });
     });
+    // setCount(count + 1);
+    console.log("joey", state)
   }
 
   const handleDeletingFoodItem = (id) => {
     props.firestore.delete({ collection: 'foodItems', doc: id });
-    setSelectectFoodItems({
+    setState({
       selectedFoodItem: null
     });
+  }
+
+  const handleShowingModel = (id) => {
+    setState({showModal: true})
+    console.log("deleted")
   }
 
   const handleEditingFoodItemInList = () => {
     const { dispatch } = props;
     const action = a.editing();
     dispatch(action);
-    setSelectectFoodItems({
+    setState({
       selectedFoodItem: null
     });
   }
@@ -83,7 +86,6 @@ function FoodItemControl(props) {
     dispatch(action);
   }
 
-  //render() {
     // const auth = this.props.firebase.auth();
     // if (!isLoaded(auth)) {
     //   return (
@@ -103,10 +105,10 @@ function FoodItemControl(props) {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (props.editing) {
-      currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
+      currentlyVisibleState = <EditFoodItemForm foodItem={state.selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
       buttonText = "Return to Food List";
-    } else if (selectedFoodItem != null) {
-      currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingEdit={handleEditClick} />
+    } else if (state.selectedFoodItem != null) {
+      currentlyVisibleState = <FoodItemDetail foodItem={state.selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal = {handleShowingModel} onClickingEdit={handleEditClick} />
       buttonText = "Return to Food List";
     } else if (props.formVisibleOnPage) {
       currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
@@ -115,6 +117,7 @@ function FoodItemControl(props) {
       currentlyVisibleState = <FoodItemList foodItemList={props.masterFoodItemList} onFoodItemSelection={handleChangingSelectedFoodItem} />;
       buttonText = "Add Food Item";
     }
+    console.log(state)
     return (
       <React.Fragment>
         {currentlyVisibleState}
@@ -122,7 +125,6 @@ function FoodItemControl(props) {
         <button className="btn btn-info btn-sm" onClick={handleClick}>{buttonText}</button>
       </React.Fragment>
     );
-  //}
 }
 // }
 FoodItemControl.propTypes = {
@@ -130,14 +132,17 @@ FoodItemControl.propTypes = {
   formVisibleOnPage: PropTypes.bool,
   editing: PropTypes.bool,
   selectedFoodItem: PropTypes.object,
+  showModal: PropTypes.bool
 };
 
 const mapStateToProps = state => {
+  console.log("state", state)
   return {
     masterFoodItemList: state.masterFoodItemList,
     formVisibleOnPage: state.formVisibleOnPage,
     editing: state.editing,
-    selectedFoodItem: state.selectedFoodItem
+    selectedFoodItem: state.selectedFoodItem,
+    showModal: state.showModal
   }
 }
 

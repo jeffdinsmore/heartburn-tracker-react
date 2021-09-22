@@ -19,7 +19,7 @@ function FoodItemList(props) {
   // console.log("Joe", foodItems[0].timeOpen.seconds);
   let time = new Date("2016-08-14 11:35:00");
   let time2 = new Date("2016-08-14 12:05:00");
-  console.log("Joey", howManyTimes("2016-08-14 11:35:00", "2016-08-15 11:35:00"));
+  //console.log("Joey", howManyTimes("2016-08-14 11:35:00", "2016-08-15 11:35:00"));
   if (isLoaded(foodItems)) {
 
     function convertDate(nanoseconds, seconds) {
@@ -38,11 +38,11 @@ function FoodItemList(props) {
       return month + "-" + day + "-" + year;
     }
 
-    console.log()
+    //console.log()
     // console.log(foodItems);
 
     let todd = foodItems.map((foodItem) => {
-      console.log(foodItem.timeOpen.nanoseconds);
+      //console.log(foodItem.timeOpen.nanoseconds);
       let date = new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));;
       return <FoodItem
       // whenFoodItemClicked={props.onFoodItemSelection}
@@ -61,7 +61,7 @@ function FoodItemList(props) {
     //   todd2.push(new Date(p));
     // }
     // console.log('todd2', todd2.sort((a, b) => b - a));
-    console.log("todd", todd.sort((a, b) => b.props.timeOpen - a.props.timeOpen));
+    //console.log("todd", todd.sort((a, b) => b.props.timeOpen - a.props.timeOpen));
     // const byTimeOpen = foodItems.orderBy('timeOpen').get();
     // console.log("Go", byTimeOpen);
     // const sortedList = foodItems.sort((a, b) => b.(timeOpen.seconds / 1000000 + timeOpen.nanoseconds * 1000) - a.(timeOpen.seconds / 1000000 + timeOpen.nanoseconds* 1000));

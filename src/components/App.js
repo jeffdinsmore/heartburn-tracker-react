@@ -9,6 +9,8 @@ import Signin from "./Signin";
 import Signup from './Signup';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from 'styled-components';
+import ButtonCount from './ButtonCount';
+
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -42,6 +44,11 @@ function App() {
         <Route path="/foodlist">
           <BodyStyling>
             <FoodItemControl />
+          </BodyStyling>
+        </Route>
+        <Route path="/buttoncount">
+          <BodyStyling>
+            <ButtonCount />
           </BodyStyling>
         </Route>
         <Route path="/">

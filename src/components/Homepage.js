@@ -59,7 +59,7 @@ function Homepage(props) {
       count3=count3 -1;
       
       for (let j = 0; j < count3; j++ ) {
-        console.log("car", count4);
+        //console.log("car", count4);
         if (count4 === heartburnArray.length) {
           count4 = heartburnArray.length -1;
           
@@ -69,7 +69,7 @@ function Homepage(props) {
         
         
         // console.log(j);
-        for (let k = 0; k < heartburnArray[i].length; k++) {console.log("count4", count4);
+        for (let k = 0; k < heartburnArray[i].length; k++) {
           if(count4 >= heartburnArray.length) {
             count4 = heartburnArray.length -1;
           } else {
@@ -87,7 +87,7 @@ function Homepage(props) {
       }
       // console.log("a", array2);
     }
-    console.log("j", array2);
+    //console.log("j", array2);
   }
   // let count = heartburnArray.length;
   // let count2=0;
@@ -136,7 +136,7 @@ function Homepage(props) {
   function loadingFirestore(foodItems) {
     if (isLoaded(foodItems)) {
       let boom = array2;
-      console.log(boom.forEach(myFunction));
+      //console.log(boom.forEach(myFunction));
       // for (let i = 0; i < boom.length; i++) {
         return boom;  
       // }
