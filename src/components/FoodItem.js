@@ -29,7 +29,8 @@ FoodItem.propTypes = {
   heartburn: PropTypes.string,
   timeOpen: PropTypes.object,
   id: PropTypes.string,
-  whenFoodItemClicked: PropTypes.func
+  whenFoodItemClicked: PropTypes.func,
+  isShowing: PropTypes.bool
 };
 
 export default FoodItem;

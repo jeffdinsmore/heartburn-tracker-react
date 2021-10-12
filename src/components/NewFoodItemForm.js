@@ -43,8 +43,8 @@ function NewFoodItemForm(props) {
           placeholder='Separate ingredients with commas'
           required='required' />
         <p className="pTagForm">Heartburn:</p>
-        <select name="heartburn" id="heartburnInput" required='required' >
-          <option value="" disabled selected>Please Select</option>
+        <select name="heartburn" id="heartburnInput" required='required' defaultValue="">
+          <option value="" disabled>Please Select</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>

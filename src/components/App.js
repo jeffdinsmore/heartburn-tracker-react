@@ -10,6 +10,8 @@ import Signup from './Signup';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from 'styled-components';
 import ButtonCount from './ButtonCount';
+import Modal from './Modal';
+import useModal from './useModal';
 
 
 const BodyStyling = styled.div`
@@ -20,11 +22,33 @@ const BodyStyling = styled.div`
   padding-right: 10%;
   // border-radius: 20px;
 `;
-
+  const onClose = null;
 function App() {
+  //const {isShowing, toggle} = useModal()
   return (
     <Router>
+      
       <Header />
+      {/* <div className="modal">
+      <div className="modal-conent">
+        <div className="modal-header">
+          <h4 className="modal-title">Modal title</h4>
+        </div>
+        <div className="modal-body">
+          This is modal content
+        </div>
+        <div className="modal-footer">
+          <button onClick={onClose} className="button">close</button>
+        </div>
+      </div>
+    </div> */}
+    {/* <div className="App">
+      <button className="button-default" onClick={toggle}>Show Modal</button>
+      <Modal
+        isShowing={isShowing}
+        hide={toggle}
+      />
+    </div> */}
       <Switch>
         <Route path="/login">
           <BodyStyling>
@@ -56,7 +80,9 @@ function App() {
             <Homepage />
           </BodyStyling>
         </Route>
+        
       </Switch>
+      
       <Footer />
     </Router>
   );

@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Modal from './Modal';
+//import useModal from './useModal';
 
 function FoodItemDetail(props) {
-  const { foodItem, onClickingModal, onClickingDelete } = props;
+  
+  const { foodItem, showModal, onClickingModal, onClickingDelete, onClickingEdit} = props;
+  //const {isShowing, toggle} = useModal(foodItem.id)
+  console.log("detail", props)
   // console.log("open", foodItem);
   function convertDate(seconds, nanoseconds) {
     let d = new Date(seconds / 1000000 + nanoseconds * 1000);
@@ -15,6 +20,7 @@ function FoodItemDetail(props) {
   //console.log("proppy", props)
   return (
     <React.Fragment>
+      
       <h2>Food Item Detail</h2>
       <br></br>
       <div className="detail">
@@ -25,8 +31,15 @@ function FoodItemDetail(props) {
       <br></br>
       <p><strong>Date Logged:</strong> {convertDate(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}</p>
       <br></br>
-      <button className="btn btn-success btn-sm" onClick={props.onClickingEdit}>Update Item</button>&nbsp;&nbsp;
-      <button className="btn btn-danger btn-sm" onClick={() => onClickingModal(foodItem.id)}>Delete Item</button>
+      <button className="btn btn-success btn-sm" onClick={onClickingEdit}>Update Item</button>&nbsp;&nbsp;
+      <button className="btn btn-danger btn-sm" onClick={showModal().toggle}>Delete Item</button>
+      <Modal
+        foodItem={foodItem}
+        onClickingDelete={onClickingDelete}
+        showModal={showModal()}
+        isShowing={showModal().isShowing}
+        hide={showModal().toggle}
+      />
       </div>
       <hr />
     </React.Fragment>
@@ -37,7 +50,9 @@ FoodItemDetail.propTypes = {
   foodItem: PropTypes.object,
   onClickingModal: PropTypes.func,
   onClickingDelete: PropTypes.func,
-  onClickingEdit: PropTypes.func
+  onClickingEdit: PropTypes.func,
+  showModal: PropTypes.func, 
+  //isShowing: PropTypes.bool
 };
 
 export default FoodItemDetail;

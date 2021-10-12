@@ -1,6 +1,6 @@
 import * as c from '../actions/ActionTypes';
 
-export default (state = false, action) => {
+const editingReducer = (state = false, action) => {
   switch (action.type) {
     case c.EDITING:
       return !state;
@@ -8,3 +8,5 @@ export default (state = false, action) => {
       return state;
   };
 }
+
+export default editingReducer;

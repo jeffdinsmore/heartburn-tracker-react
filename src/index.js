@@ -17,7 +17,8 @@ import 'firebase/auth';
 const store = createStore(rootReducer);
 
 store.subscribe(() =>
-  console.log("store: ", store.getState())
+  //console.log("store: ", store.getState())
+  store.getState()
 );
 
 const rrfProps = {

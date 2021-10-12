@@ -1,26 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from "prop-types";
 
-const Modal = props => {
-  if(!props.show) {
-    return null;
+function Modal(props) {
+  const { isShowing, hide, foodItem, onClickingDelete} = props;
+  if(isShowing) {
+    return(
+      ReactDOM.createPortal(
+        // if(!props.showModal) {
+        //   return null;
+        // }
+        // const [showModal, setShowModal] = useState(false);
+      
+        // function toggle() {
+        //   setShowModal(!showModal);
+        // }
+        //return (
+        <React.Fragment>
+          {console.log("j", props)}
+    
+        <div className="modal">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title"><strong>Delete</strong><br></br>{foodItem.foodName}</h4>
+            </div>
+            <div className="modal-body">
+              Are you sure you want to delete this item? It will be removed permanently. {isShowing}
+            </div>
+            <div className="modal-footer">
+              <button onClick={() => onClickingDelete(foodItem.id)}className="btn btn-danger btn-sm">Delete</button>&nbsp;&nbsp;
+              <button onClick={hide} className="btn btn-secondary btn-sm">Cancel</button>
+            </div>
+          </div>
+        </div>
+        </React.Fragment>, document.body
+      )
+    )
+  } else {
+    return (null);
   }
   
-  return (
-    <div className="modal">
-      <div className="modal-conent">
-        <div className="modal-header">
-          <h4 className="modal-title">Modal title</h4>
-        </div>
-        <div className="modal-body">
-          This is modal content
-        </div>
-        <div className="modal-footer">
-          <button className="button">close</button>
-        </div>
-      </div>
-    </div>
-  )
-
 }
+
+Modal.propTypes = {
+  foodItem: PropTypes.object,
+  onClickingModal: PropTypes.func,
+  onClickingDelete: PropTypes.func,
+  onClickingEdit: PropTypes.func,
+  showModal: PropTypes.func
+};
+
 
 export default Modal;

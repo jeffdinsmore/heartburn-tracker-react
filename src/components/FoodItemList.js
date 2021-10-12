@@ -21,7 +21,7 @@ function FoodItemList(props) {
   let time2 = new Date("2016-08-14 12:05:00");
   //console.log("Joey", howManyTimes("2016-08-14 11:35:00", "2016-08-15 11:35:00"));
   if (isLoaded(foodItems)) {
-
+    console.log("list", props)
     function convertDate(nanoseconds, seconds) {
       let d = new Date(nanoseconds / 1000000 + seconds * 1000);
       let month = d.toDateString().substring(7, 3);
@@ -30,7 +30,7 @@ function FoodItemList(props) {
       let n = d.toDateString().substring(15, 3);
       return month + "-" + day + "-" + year;
     }
-    function convertDate2(date) {
+    const convertDate2 = (date) => {
       let month = date.toDateString().substring(7, 3);
       let day = date.toDateString().substring(10, 8);
       let year = date.toDateString().substring(15, 11);
@@ -42,8 +42,8 @@ function FoodItemList(props) {
     // console.log(foodItems);
 
     let todd = foodItems.map((foodItem) => {
-      //console.log(foodItem.timeOpen.nanoseconds);
-      let date = new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));;
+      //console.log(foodItem);
+      let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
       return <FoodItem
       // whenFoodItemClicked={props.onFoodItemSelection}
       foodName={foodItem.foodName}

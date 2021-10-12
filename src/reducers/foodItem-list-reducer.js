@@ -1,6 +1,6 @@
 import * as c from './../actions/ActionTypes';
 
-export default (state = {}, action) => {
+const foodItemListReducer = (state = {}, action) => {
   const { foodName, ingredients, heartburn, timeOpen, id } = action;
   switch (action.type) {
     case c.ADD_FOODITEM:
@@ -21,3 +21,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default foodItemListReducer;
