@@ -54,7 +54,9 @@ function FoodItemList(props) {
       id={foodItem.id}
       key={foodItem.id} /> 
       
-  })
+  }).sort(function(a, b){
+    return new Date(b.props.timeOpen) - new Date(a.props.timeOpen)
+  });
     // let todd2 = [];
     // for(let i=0; i < foodItems.length; i++) {
     //   let p = ((foodItems[i].timeOpen.nanoseconds / 1000000) + (foodItems[i].timeOpen.seconds * 1000));

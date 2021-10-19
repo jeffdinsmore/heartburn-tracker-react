@@ -52,10 +52,8 @@ const YourStats = props => {
   const compareArrays = (heartburnArray, noHeartburnArray) => {
     let array = [];
     for (let i = 0; i < heartburnArray.length; i++) {
-      for (let j = 0; j < noHeartburnArray.length; j++) {
-        if (heartburnArray[i] === noHeartburnArray[j]) {
-          array.push(heartburnArray[i])
-        }
+      if (noHeartburnArray.indexOf(heartburnArray[i]) !== -1) {
+        array.push(heartburnArray[i])
       }
     }
     return [...new Set(array)];
@@ -95,7 +93,7 @@ const YourStats = props => {
       <p>Here are the food ingredients that may be causing your heartburn:</p>
       {loadingFirestore(foodItems, Object.keys(heartburnObject))}
       <br />
-      <p>Ingredients that are unlikely to give you heartburn from the list above. These ingredients are in foods that did not give you heartburn:</p>
+      <p>Ingredients that are unlikely to give you heartburn from the list above. They are in your food list that did not give you heartburn:</p>
       {/* {LoopingMultipleArrays(heartburnArray)} */}
       {loadingFirestore(foodItems, comparison)}
     </React.Fragment>
