@@ -21,7 +21,7 @@ function FoodItemList(props) {
   let time2 = new Date("2016-08-14 12:05:00");
   //console.log("Joey", howManyTimes("2016-08-14 11:35:00", "2016-08-15 11:35:00"));
   if (isLoaded(foodItems)) {
-    console.log("list", props)
+    console.log("list", props, foodItems)
     function convertDate(nanoseconds, seconds) {
       let d = new Date(nanoseconds / 1000000 + seconds * 1000);
       let month = d.toDateString().substring(7, 3);
@@ -31,7 +31,7 @@ function FoodItemList(props) {
       return month + "-" + day + "-" + year;
     }
     const convertDate2 = (date) => {
-      let month = date.toDateString().substring(7, 3);
+      let month = date.toDateString().substring(7, 4);
       let day = date.toDateString().substring(10, 8);
       let year = date.toDateString().substring(15, 11);
       let n = date.toDateString().substring(15, 3);
@@ -40,23 +40,22 @@ function FoodItemList(props) {
 
     //console.log()
     // console.log(foodItems);
-
     let todd = foodItems.map((foodItem) => {
       //console.log(foodItem);
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
-      return <FoodItem
-      // whenFoodItemClicked={props.onFoodItemSelection}
-      foodName={foodItem.foodName}
-      ingredients={foodItem.ingredients}
-      heartburn={foodItem.heartburn}
-      timeOpen={date}
-      // jane={joe(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}
-      id={foodItem.id}
-      key={foodItem.id} /> 
-      
-  }).sort(function(a, b){
-    return new Date(b.props.timeOpen) - new Date(a.props.timeOpen)
-  });
+      return <FoodItemList
+        // whenFoodItemClicked={props.onFoodItemSelection}
+        foodName={foodItem.foodName}
+        ingredients={foodItem.ingredients}
+        heartburn={foodItem.heartburn}
+        timeOpen={date}
+        // jane={joe(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}
+        id={foodItem.id}
+        key={foodItem.id} />
+
+    }).sort(function (a, b) {
+      return new Date(b.props.timeOpen) - new Date(a.props.timeOpen)
+    });
     // let todd2 = [];
     // for(let i=0; i < foodItems.length; i++) {
     //   let p = ((foodItems[i].timeOpen.nanoseconds / 1000000) + (foodItems[i].timeOpen.seconds * 1000));
@@ -69,31 +68,34 @@ function FoodItemList(props) {
     // const sortedList = foodItems.sort((a, b) => b.(timeOpen.seconds / 1000000 + timeOpen.nanoseconds * 1000) - a.(timeOpen.seconds / 1000000 + timeOpen.nanoseconds* 1000));
     // function joe(seconds, nanoseconds) {
     //   console.log(convertDate(seconds, nanoseconds))
-      
+
     // }
     return (
       <React.Fragment>
         <h2>Your Recorded Food List</h2>
         {/* <hr /> */}
         <table className="Table-mobile-large">
-          <tr className="tableHeader">
-            <th className="headerName">Food Item</th>
-            <th className="headerIngredients">Ingredients</th>
-            <th className="headerHeartburn">Heartburn</th>
-            <th className="headerDate">Date Opened</th>
-            <th className="headerDetails">Details</th>
-          </tr>
-          {todd.map((foodItem) => {
-            // console.log("hey", foodItem.props.timeOpen);
-            return <FoodItem
-              whenFoodItemClicked={props.onFoodItemSelection}
-              foodName={foodItem.props.foodName}
-              ingredients={foodItem.props.ingredients}
-              heartburn={foodItem.props.heartburn}
-              timeOpen={convertDate2(foodItem.props.timeOpen)}
-              id={foodItem.props.id}
-              key={foodItem.props.id} />
-          })}
+          <tbody>
+            <tr className="tableHeader">
+              <th className="headerName">Food Item</th>
+              <th className="headerIngredients">Ingredients</th>
+              <th className="headerHeartburn">Heartburn</th>
+              <th className="headerDate">Date Opened</th>
+              <th className="headerDetails">Details</th>
+            </tr>
+
+            {todd.map((foodItem) => {
+              console.log("hey", foodItem.props.timeOpen);
+              return <FoodItem
+                whenFoodItemClicked={props.onFoodItemSelection}
+                foodName={foodItem.props.foodName}
+                ingredients={foodItem.props.ingredients}
+                heartburn={foodItem.props.heartburn}
+                timeOpen={convertDate2(foodItem.props.timeOpen)}
+                id={foodItem.props.id}
+                key={foodItem.props.id} />
+            })}
+          </tbody>
         </table>
         <hr />
         {/* // {foodItems.map((foodItem) => {
@@ -146,12 +148,12 @@ export default FoodItemList;
 //     	arrayChime.push(i-12);
 //     } 
 //   }
-  
+
 //   for ( let i=0; i < 24; i++) {
 //     array3.push(time2.substr(0,11) + i.toString() + ":00:00");
 //     array4.push(new Date(array[i])/1000 - new Date(time2)/1000);
 //   }
-  
+
 //   console.log(array2);
 //   for (let i = 0; i <= array2.length; i++) {
 //     if (array2[i] >= -12 && array2[i] < 0) {
@@ -187,7 +189,7 @@ export default FoodItemList;
 //     	answer = (answer - answer % 3600) / 3600 
 //     }
 //   }
-  
+
 //   return chime2;
 // }
 // console.log(howManyTimes("2016-08-14 00:35:11","2016-08-14 02:00:12"))
@@ -235,19 +237,19 @@ export default FoodItemList;
 //     }
 //     return answer;
 //   }
-  
+
 //   console.log(checkSeconds(time2));
 //   console.log(checkHour(time2));
 //   if (checkSeconds(time2) === true && checkHour(time2) === true) {
 //   	output = 2;
 //   }
-  
+
 // 	let differenceInSeconds = ((new Date(time2) - new Date(time1)))/1000;
 //   if (differenceInSeconds >= 3600) {
 //   	if(checkSeconds(time2) === true && parseInt(time2.substr(12,2)) <= parseInt(time2.substr(17,2))) {
 //     	output = arrayChime[parseInt(time2.substr(12,2))];
-      
-    
+
+
 //     }
 //   	time2.substr(12,13);
 //   }
@@ -271,7 +273,7 @@ export default FoodItemList;
 //   let array2 = [];
 //   let array3 = [];
 //   let count = 0;
-  
+
 //   for (let i=0; i < arr.length; i++) {
 //   	a = arr[i] * a;
 //     for (let j = 0; j < arr.length; j++) {
@@ -291,11 +293,11 @@ export default FoodItemList;
 //       b = 1;
 //     }
 //   }
-  
+
 //   for (let i=0; i < array3.length; i++) {
 //   	c = array3[i] + c;
 //   }
-  
+
 //   let y = (s*a)/c;
 //   let array4 = arr.map(e => y / e)
 //   return array4;

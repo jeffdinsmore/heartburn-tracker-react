@@ -3,19 +3,10 @@ import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 
 function Modal(props) {
-  const { isShowing, hide, foodItem, onClickingDelete} = props;
+  const { isShowing, hide, foodItem, onClickingDelete, onClickingModal} = props;
   if(isShowing) {
     return(
       ReactDOM.createPortal(
-        // if(!props.showModal) {
-        //   return null;
-        // }
-        // const [showModal, setShowModal] = useState(false);
-      
-        // function toggle() {
-        //   setShowModal(!showModal);
-        // }
-        //return (
         <React.Fragment>
           {console.log("j", props)}
     
@@ -47,7 +38,7 @@ Modal.propTypes = {
   onClickingModal: PropTypes.func,
   onClickingDelete: PropTypes.func,
   onClickingEdit: PropTypes.func,
-  showModal: PropTypes.func
+  //showModal: PropTypes.func
 };
 
 

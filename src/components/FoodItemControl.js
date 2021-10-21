@@ -17,7 +17,6 @@ function FoodItemControl(props) {
     { collection: 'foodItems' }
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  // const [showModal, setShowModal ] = useState(false);
   const [isShowing, setIsShowing] = useState(false);
   const [state, setState] = useState({selectedFoodItem: null, masterFoodItemList: foodItems});
   
@@ -91,10 +90,10 @@ function FoodItemControl(props) {
   }
 
   const handleShowingModal = () => {
+    console.log("modal", isShowing)
     function toggle() {
       setIsShowing(!isShowing);
     }
-    console.log("j", isShowing)
     return {
       isShowing,
       toggle,
@@ -147,9 +146,6 @@ function FoodItemControl(props) {
     } else if (props.formVisibleOnPage) {
       currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
       buttonText = "Return to Food List";
-    // } else if(state.showModal != false) {
-    //   currentlyVisibleState = <Modal foodItem={state.selectedFoodItem} showModal={state.showModal} onClickingDelete={handleDeletingFoodItem} />
-    //   buttonText = "Cancel"
     } else {
       currentlyVisibleState = <FoodItemList foodItemList={props.masterFoodItemList} onFoodItemSelection={handleChangingSelectedFoodItem} />;
       buttonText = "Add Food Item";

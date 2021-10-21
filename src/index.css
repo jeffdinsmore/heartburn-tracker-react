@@ -118,7 +118,9 @@ th {
 .navbar-nav {
   margin-right: 12%;
 }
-
+.nav-link {
+  color: red
+}
 .imageHeader {
   width: 100px;
   margin-left: 10%;
@@ -280,6 +282,9 @@ blockquote {
   }
   .navbar-brand {
     margin-left: 0%;
+  }
+  .nav-link {
+    color: red;
   }
   .navbar-collapse {
     margin-left: 0%;

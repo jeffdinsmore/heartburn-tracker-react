@@ -17,7 +17,7 @@ function FoodItemDetail(props) {
     let n = d.toDateString().substring(4);
     return month + "-" + day + "-" + year;
   }
-  //console.log("proppy", props)
+  console.log("proppy", props)
   return (
     <React.Fragment>
       
@@ -32,13 +32,13 @@ function FoodItemDetail(props) {
       <p><strong>Date Logged:</strong> {convertDate(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}</p>
       <br></br>
       <button className="btn btn-success btn-sm" onClick={onClickingEdit}>Update Item</button>&nbsp;&nbsp;
-      <button className="btn btn-danger btn-sm" onClick={showModal().toggle}>Delete Item</button>
+      <button className="btn btn-danger btn-sm" onClick={onClickingModal().toggle}>Delete Item</button>
       <Modal
         foodItem={foodItem}
         onClickingDelete={onClickingDelete}
-        showModal={showModal()}
-        isShowing={showModal().isShowing}
-        hide={showModal().toggle}
+        onClickingModal={onClickingModal()}
+        isShowing={onClickingModal().isShowing}
+        hide={onClickingModal().toggle}
       />
       </div>
       <hr />
@@ -51,8 +51,8 @@ FoodItemDetail.propTypes = {
   onClickingModal: PropTypes.func,
   onClickingDelete: PropTypes.func,
   onClickingEdit: PropTypes.func,
-  showModal: PropTypes.func, 
-  //isShowing: PropTypes.bool
+  onClickingModal: PropTypes.func, 
+  isShowing: PropTypes.bool
 };
 
 export default FoodItemDetail;

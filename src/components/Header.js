@@ -27,8 +27,6 @@ function Header() {
             <Nav.Link href="/foodlist" to="/foodlist">Your Food List</Nav.Link>
             <Nav.Link href="/yourstats" to="/yourstats">Your Stats</Nav.Link>
           </Nav>
-          
-          
           <Nav>
             <Nav.Link href="/login" to="/login">Login</Nav.Link>
             <Nav.Link href="/signup" to="/signup">

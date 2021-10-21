@@ -27,7 +27,7 @@ FoodItem.propTypes = {
   brand: PropTypes.string,
   ingredients: PropTypes.string,
   heartburn: PropTypes.string,
-  timeOpen: PropTypes.object,
+  timeOpen: PropTypes.string,
   id: PropTypes.string,
   whenFoodItemClicked: PropTypes.func,
   isShowing: PropTypes.bool
