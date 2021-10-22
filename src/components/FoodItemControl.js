@@ -16,48 +16,77 @@ function FoodItemControl(props) {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);
+  let job = withFirestore(FoodItemControl)
+  console.log(job)
+  // const firestore = useSelector(props => props.firestore)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  const [isShowing, setIsShowing] = useState(false);
-  const [state, setState] = useState({selectedFoodItem: null, masterFoodItemList: foodItems});
-  
+  const editing = useSelector(state => state.editing)
+  console.log("mast", editing)
+  const showModal = useSelector(state => state.showModal);
+  const state = useSelector(state => state);
+  const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
+  //const isShowing = useSelector(state => state.showModal);
+  const [isShowing, setIsShowing] = useState(useSelector(state => state.showModal));
+  // const [state, setState] = useState({ selectedFoodItem: null });
+  const [ selectedFoodItem, setSelectedFoodItem ] = useState(null)
   useEffect(() => {
-    
-    console.log("component updated!", state);
+
+    console.log("component updated!");
   }, [])
-  const [ count, setCount ] = useState(0);
+  const [count, setCount] = useState(0);
   const handleClick = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
-
-    if (state.selectedFoodItem != null) {
-      if (props.editing) {
+    console.log("e", editing, selectedFoodItem)
+    if (selectedFoodItem != null) {
+      if (editing) {
         dispatch(action2);
       }
-      setState({
-        selectedFoodItem: null,
-        masterFoodItemList: foodItems
-      });
+      setSelectedFoodItem(null);
     } else {
       dispatch(action);
       // dispatch(action3);
     }
   }
 
-  const useModal = () => {
-    
-  
+  const handleShowingModal = () => {
+
+    const { dispatch } = props;
+    const action = a.showModal();
+    //console.log("modal", isShowing)
+    console.log(selectedFoodItem)
+    if (selectedFoodItem != null) {
+      if (showModal) {
+        dispatch(action);
+        console.log("s", state)
+      }
+    }
     function toggle() {
       setIsShowing(!isShowing);
     }
-  
     return {
       isShowing,
       toggle,
       props,
       useState
     }
-  };
+  }
+
+  // const useModal = () => {
+
+
+  //   function toggle() {
+  //     setIsShowing(!isShowing);
+  //   }
+
+  //   return {
+  //     isShowing,
+  //     toggle,
+  //     props,
+  //     useState
+  //   }
+  // };
 
   const handleAddingNewFoodItemToList = () => {
     const { dispatch } = props;
@@ -75,41 +104,24 @@ function FoodItemControl(props) {
         timeOpen: foodItem.get("timeOpen"),
         id: foodItem.id
       }
-      setState({ selectedFoodItem: firestoreFoodItem});
+      setSelectedFoodItem(firestoreFoodItem);
     });
     // setCount(count + 1);
-    console.log("joey", state)
+    console.log("joey")
   }
 
   const handleDeletingFoodItem = (id) => {
     props.firestore.delete({ collection: 'foodItems', doc: id });
-    setIsShowing(!isShowing)
-    setState({
-      selectedFoodItem: null
-    });
+    setSelectedFoodItem(null);
   }
 
-  const handleShowingModal = () => {
-    console.log("modal", isShowing)
-    function toggle() {
-      setIsShowing(!isShowing);
-    }
-    return {
-      isShowing,
-      toggle,
-      props,
-      useState
-    }
-  }
+
 
   const handleEditingFoodItemInList = () => {
     const { dispatch } = props;
     const action = a.editing();
     dispatch(action);
-    setState({
-      selectedFoodItem: null, 
-      masterFoodItemList: foodItems
-    });
+    setSelectedFoodItem(null);
   }
 
   const handleEditClick = () => {
@@ -119,45 +131,48 @@ function FoodItemControl(props) {
     dispatch(action);
   }
 
-    // const auth = this.props.firebase.auth();
-    // if (!isLoaded(auth)) {
-    //   return (
-    //     <React.Fragment>
-    //       <h1>Loading...</h1>
-    //     </React.Fragment>
-    //   )
-    // }
-    // if ((isLoaded(auth)) && (auth.currentUser == null)) {
-    //   return (
-    //     <React.Fragment>
-    //       <h1>You must be signed in to access the queue.</h1>
-    //     </React.Fragment>
-    //   )
-    // }
-    // if ((isLoaded(auth)) && (auth.currentUser != null)) {
-    let currentlyVisibleState = null;
-    let buttonText = null;
-    if (props.editing) {
-      currentlyVisibleState = <EditFoodItemForm foodItem={state.selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
-      buttonText = "Return to Food List";
-    } else if (state.selectedFoodItem != null) {
-      currentlyVisibleState = <FoodItemDetail foodItem={state.selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal = {handleShowingModal} onClickingEdit={handleEditClick} showModal = {handleShowingModal}/>
-      buttonText = "Return to Food List";
-    } else if (props.formVisibleOnPage) {
-      currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
-      buttonText = "Return to Food List";
-    } else {
-      currentlyVisibleState = <FoodItemList foodItemList={props.masterFoodItemList} onFoodItemSelection={handleChangingSelectedFoodItem} />;
-      buttonText = "Add Food Item";
-    }
-    //console.log(state)
-    return (
-      <React.Fragment>
-        {currentlyVisibleState}
-        <br></br>
-        <button className="btn btn-info btn-sm" onClick={handleClick}>{buttonText}</button>
-      </React.Fragment>
-    );
+  // const auth = this.props.firebase.auth();
+  // if (!isLoaded(auth)) {
+  //   return (
+  //     <React.Fragment>
+  //       <h1>Loading...</h1>
+  //     </React.Fragment>
+  //   )
+  // }
+  // if ((isLoaded(auth)) && (auth.currentUser == null)) {
+  //   return (
+  //     <React.Fragment>
+  //       <h1>You must be signed in to access the queue.</h1>
+  //     </React.Fragment>
+  //   )
+  // }
+  // if ((isLoaded(auth)) && (auth.currentUser != null)) {
+  console.log("mast1", state, props)
+  let currentlyVisibleState = null;
+  let buttonText = null;
+
+  if (editing) {
+    currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
+    buttonText = "Return to Food List";
+  } else if (selectedFoodItem != null) {
+    currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} />
+    buttonText = "Return to Food List";
+  } else if (formVisibleOnPage) {
+    currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
+    buttonText = "Return to Food List";
+  } else {
+    currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} />;
+    buttonText = "Add Food Item";
+  }
+  //console.log("state", state, isShowing)
+
+  return (
+    <React.Fragment>
+      {currentlyVisibleState}
+      <br></br>
+      <button className="btn btn-info btn-sm" onClick={handleClick}>{buttonText}</button>
+    </React.Fragment>
+  );
 }
 // }
 FoodItemControl.propTypes = {
@@ -168,17 +183,17 @@ FoodItemControl.propTypes = {
   isShowing: PropTypes.bool,
 };
 
-const mapStateToProps = state => {
-  //console.log("state", state)
-  return {
-    masterFoodItemList: state.masterFoodItemList,
-    formVisibleOnPage: state.formVisibleOnPage,
-    editing: state.editing,
-    selectedFoodItem: state.selectedFoodItem,
-    isShowing: state.isShowing,
-  }
-}
+// const mapStateToProps = state => {
+//   //console.log("state", state)
+//   return {
+//     //masterFoodItemList: state.masterFoodItemList,
+//     //formVisibleOnPage: state.formVisibleOnPage,
+//     //editing: state.editing,
+//     //selectedFoodItem: {selectedFoodItem},
+//     //isShowing: state.isShowing,
+//   }
+// }
 
-FoodItemControl = connect(mapStateToProps)(FoodItemControl);
+FoodItemControl = connect()(FoodItemControl);
 
 export default withFirestore(FoodItemControl);

@@ -85,7 +85,7 @@ function FoodItemList(props) {
             </tr>
 
             {todd.map((foodItem) => {
-              console.log("hey", foodItem.props.timeOpen);
+              //console.log("hey", foodItem.props.timeOpen);
               return <FoodItem
                 whenFoodItemClicked={props.onFoodItemSelection}
                 foodName={foodItem.props.foodName}

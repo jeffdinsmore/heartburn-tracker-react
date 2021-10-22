@@ -5,7 +5,7 @@ import Modal from './Modal';
 
 function FoodItemDetail(props) {
   
-  const { foodItem, showModal, onClickingModal, onClickingDelete, onClickingEdit} = props;
+  const { foodItem, onClickingModal, onClickingDelete, onClickingEdit} = props;
   //const {isShowing, toggle} = useModal(foodItem.id)
   console.log("detail", props)
   // console.log("open", foodItem);
@@ -48,11 +48,9 @@ function FoodItemDetail(props) {
 
 FoodItemDetail.propTypes = {
   foodItem: PropTypes.object,
-  onClickingModal: PropTypes.func,
   onClickingDelete: PropTypes.func,
   onClickingEdit: PropTypes.func,
-  onClickingModal: PropTypes.func, 
-  isShowing: PropTypes.bool
+  onClickingModal: PropTypes.func
 };
 
 export default FoodItemDetail;

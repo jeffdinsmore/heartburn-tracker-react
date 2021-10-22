@@ -35,10 +35,8 @@ function Modal(props) {
 
 Modal.propTypes = {
   foodItem: PropTypes.object,
-  onClickingModal: PropTypes.func,
   onClickingDelete: PropTypes.func,
-  onClickingEdit: PropTypes.func,
-  //showModal: PropTypes.func
+  onClickingEdit: PropTypes.func
 };
 
 
