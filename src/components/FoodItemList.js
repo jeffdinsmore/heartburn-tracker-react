@@ -2,13 +2,20 @@ import React from "react";
 import FoodItem from "./FoodItem";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
-import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import { query, orderBy, limit } from 'firebase/firestore';
 
 function FoodItemList(props) {
   useFirestoreConnect([
-    { collection: 'foodItems' }
+    { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
   ]);
+
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
+  // function sort(obj) {
+  //   return obj.orderBy('timeOpen');
+  // }
+  // sort(foodItems);
+  
   function howManyTimes(time1, time2) {
     let answer2 = new Date(time1);
     let answer = (new Date(time2) - new Date(time1));
@@ -21,6 +28,10 @@ function FoodItemList(props) {
   let time2 = new Date("2016-08-14 12:05:00");
   //console.log("Joey", howManyTimes("2016-08-14 11:35:00", "2016-08-15 11:35:00"));
   if (isLoaded(foodItems)) {
+    console.log("f", foodItems)
+    // const sort = foodItems.sort(function (a, b) {
+    //   return new Date(b.timeOpen) - new Date(a.timeOpen)
+    // });
     console.log("list", props, foodItems)
     function convertDate(nanoseconds, seconds) {
       let d = new Date(nanoseconds / 1000000 + seconds * 1000);
@@ -53,9 +64,10 @@ function FoodItemList(props) {
         id={foodItem.id}
         key={foodItem.id} />
 
-    }).sort(function (a, b) {
-      return new Date(b.props.timeOpen) - new Date(a.props.timeOpen)
-    });
+    })
+    // .sort(function (a, b) {
+    //   return new Date(b.props.timeOpen) - new Date(a.props.timeOpen)
+    // });
     // let todd2 = [];
     // for(let i=0; i < foodItems.length; i++) {
     //   let p = ((foodItems[i].timeOpen.nanoseconds / 1000000) + (foodItems[i].timeOpen.seconds * 1000));

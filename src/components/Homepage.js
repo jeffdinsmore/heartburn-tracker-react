@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 function Homepage(props) {
   useFirestoreConnect([
-    { collection: 'foodItems' }
+    { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
   ]);
 
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);

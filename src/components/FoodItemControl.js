@@ -14,10 +14,8 @@ import { useSelector } from 'react-redux';
 
 function FoodItemControl(props) {
   useFirestoreConnect([
-    { collection: 'foodItems' }
+    { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
   ]);
-  let job = withFirestore(FoodItemControl)
-  console.log(job)
   // const firestore = useSelector(props => props.firestore)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   const editing = useSelector(state => state.editing)
