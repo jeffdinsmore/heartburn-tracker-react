@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import { firestoreReducer } from 'redux-firestore';
 import editingReducer from './editing-reducer';
 import showModalReducer from './show-modal-reducer';
+import selectedFoodItemReducer from './select-foodItem-reducer';
 
 const rootReducer = combineReducers({
   formVisibleOnPage: formVisibleReducer,

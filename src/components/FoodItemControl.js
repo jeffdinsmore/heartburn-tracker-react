@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NewFoodItemForm from './NewFoodItemForm';
 import FoodItemList from './FoodItemList';
 import FoodItemDetail from './FoodItemDetail';
-import YourStats from './yourStats/YourStats';
+import YourStats from './YourStats';
 import EditFoodItemForm from './EditFoodItemForm';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
@@ -32,18 +32,22 @@ function FoodItemControl(props) {
     console.log("component updated!");
   }, [])
   const [count, setCount] = useState(0);
+  
   const handleClick = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
-    console.log("e", editing, selectedFoodItem)
+    console.log("eeee", editing, props)
     if (selectedFoodItem != null) {
       if (editing) {
         dispatch(action2);
       }
       setSelectedFoodItem(null);
+      console.log("ppp", selectedFoodItem)
     } else {
       dispatch(action);
+      setSelectedFoodItem(null)
+      console.log("jjj", selectedFoodItem)
       // dispatch(action3);
     }
   }

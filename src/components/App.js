@@ -3,7 +3,7 @@ import Header from './Header';
 import FoodItemControl from './FoodItemControl';
 // import FoodItemList from './FoodItemList';
 import Homepage from './Homepage';
-import YourStats from './yourStats/YourStats';
+import YourStats from './YourStats';
 import Footer from './Footer';
 import Signin from "./Signin";
 import Signup from './Signup';

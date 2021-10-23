@@ -17,7 +17,7 @@ describe("rootReducer", () => {
       formVisibleOnPage: false,
       showModal: false,
       firestore: store.getState().firestore,
-      // selectedFoodItem: null
+      selectedFoodItem: null
     });
   });
 

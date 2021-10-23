@@ -7,7 +7,7 @@ const YourStats = props => {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);
-
+  
   // Create a query against the collection
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
 
