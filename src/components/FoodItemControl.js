@@ -19,35 +19,35 @@ function FoodItemControl(props) {
   // const firestore = useSelector(props => props.firestore)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   const editing = useSelector(state => state.editing)
-  console.log("mast", editing)
+  //console.log("mast", editing)
   const showModal = useSelector(state => state.showModal);
-  const state = useSelector(state => state);
+  //const state = useSelector(state => state);
+  const [ state, setState ] = useState({selectedFoodItem: null})
   const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
   //const isShowing = useSelector(state => state.showModal);
   const [isShowing, setIsShowing] = useState(useSelector(state => state.showModal));
   // const [state, setState] = useState({ selectedFoodItem: null });
-  const [ selectedFoodItem, setSelectedFoodItem ] = useState(null)
+  const [ selectedFoodItem, setSelectedFoodItem ] = useState(null);
   useEffect(() => {
 
     console.log("component updated!");
   }, [])
   const [count, setCount] = useState(0);
-  
   const handleClick = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
-    console.log("eeee", editing, props)
-    if (selectedFoodItem != null) {
+    //console.log("eeee", editing, props)
+    if (state.selectedFoodItem != null) {
       if (editing) {
         dispatch(action2);
       }
-      setSelectedFoodItem(null);
-      console.log("ppp", selectedFoodItem)
+      //setSelectedFoodItem(null);
+      setState({selectedFoodItem: null})
+      //console.log("ppp", state, props, state.selectedFoodItem)
     } else {
       dispatch(action);
-      setSelectedFoodItem(null)
-      console.log("jjj", selectedFoodItem)
+      //console.log("jjj", state.selectedFoodItem)
       // dispatch(action3);
     }
   }
@@ -57,11 +57,11 @@ function FoodItemControl(props) {
     const { dispatch } = props;
     const action = a.showModal();
     //console.log("modal", isShowing)
-    console.log(selectedFoodItem)
-    if (selectedFoodItem != null) {
+    //console.log(state.selectedFoodItem)
+    if (state.selectedFoodItem != null) {
       if (showModal) {
         dispatch(action);
-        console.log("s", state)
+        //console.log("s", state)
       }
     }
     function toggle() {
@@ -97,6 +97,8 @@ function FoodItemControl(props) {
   }
 
   const handleChangingSelectedFoodItem = (id) => {
+    const { dispatch } = props;
+    //const action = a.selectFoodItem();
     props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
       const firestoreFoodItem = {
         foodName: foodItem.get("foodName"),
@@ -106,15 +108,16 @@ function FoodItemControl(props) {
         timeOpen: foodItem.get("timeOpen"),
         id: foodItem.id
       }
-      setSelectedFoodItem(firestoreFoodItem);
+      
+      setState({selectedFoodItem: firestoreFoodItem});
     });
     // setCount(count + 1);
-    console.log("joey")
+    //console.log("joey")
   }
 
   const handleDeletingFoodItem = (id) => {
     props.firestore.delete({ collection: 'foodItems', doc: id });
-    setSelectedFoodItem(null);
+    setState({selectedFoodItem: null});
   }
 
 
@@ -123,7 +126,7 @@ function FoodItemControl(props) {
     const { dispatch } = props;
     const action = a.editing();
     dispatch(action);
-    setSelectedFoodItem(null);
+    setState({selectedFoodItem:null});
   }
 
   const handleEditClick = () => {
@@ -154,16 +157,16 @@ function FoodItemControl(props) {
   let buttonText = null;
 
   if (editing) {
-    currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
+    currentlyVisibleState = <EditFoodItemForm foodItem={state.selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
     buttonText = "Return to Food List";
-  } else if (selectedFoodItem != null) {
-    currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} />
+  } else if (state.selectedFoodItem != null) {
+    currentlyVisibleState = <FoodItemDetail foodItem={state.selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} />
     buttonText = "Return to Food List";
   } else if (formVisibleOnPage) {
     currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
     buttonText = "Return to Food List";
   } else {
-    currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} />;
+    currentlyVisibleState = <FoodItemList foodItemList={foodItems} state={ state } onFoodItemSelection={handleChangingSelectedFoodItem} />;
     buttonText = "Add Food Item";
   }
   //console.log("state", state, isShowing)
@@ -185,17 +188,17 @@ FoodItemControl.propTypes = {
   isShowing: PropTypes.bool,
 };
 
-// const mapStateToProps = state => {
-//   //console.log("state", state)
-//   return {
-//     //masterFoodItemList: state.masterFoodItemList,
-//     //formVisibleOnPage: state.formVisibleOnPage,
-//     //editing: state.editing,
-//     //selectedFoodItem: {selectedFoodItem},
-//     //isShowing: state.isShowing,
-//   }
-// }
+const mapStateToProps = state => {
+  //console.log("state", state)
+  return {
+    // masterFoodItemList: state.masterFoodItemList,
+    // formVisibleOnPage: state.formVisibleOnPage,
+    // editing: state.editing,
+    selectedFoodItem: state.selectedFoodItem,
+    // isShowing: state.isShowing,
+  }
+ }
 
-FoodItemControl = connect()(FoodItemControl);
+FoodItemControl = connect(mapStateToProps)(FoodItemControl);
 
 export default withFirestore(FoodItemControl);

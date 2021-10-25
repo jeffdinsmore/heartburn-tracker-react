@@ -36,21 +36,31 @@ export const showModal = () => {
     type: c.SHOW_MODAL
   }
 }
-export const selectFoodItem = (foodItem) => {
-  const { foodName, ingredients, heartburn, id } = foodItem;
+// export const selectFoodItem = (foodItem) => {
+//   const { brand, foodName, ingredients, heartburn, id } = foodItem;
+//   return {
+//     type: c.SELECT_FOODITEM,
+//     brand: brand,
+//     foodName: foodName,
+//     ingredients: ingredients,
+//     heartburn: heartburn,
+//     id: id,
+//   }
+// }
+
+export const selectFoodItem = () => {
   return {
-    type: c.SELECT_FOODITEM,
-    foodName: foodName,
-    ingredients: ingredients,
-    heartburn: heartburn,
-    id: id,
+    type: c.SELECT_FOODITEM
   }
 }
 
-export const unSelectedFoodItem = () => {
+export const unSelectFoodItem = () => {
   return {
-    type: c.UNSELECT_FOODITEM,
+    type: c.UNSELECT_FOODITEM
   }
+  // {
+  //   type: c.UNSELECT_FOODITEM,
+  // }
 }
 
 export const toggleHomepageShowing = () => ({

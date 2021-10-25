@@ -7,7 +7,7 @@ import { query, orderBy, limit } from 'firebase/firestore';
 
 function FoodItemList(props) {
   useFirestoreConnect([
-    { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
+    { collection: 'foodItems', orderBy: ['timeOpen', 'desc']}
   ]);
 
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
@@ -28,7 +28,7 @@ function FoodItemList(props) {
   let time2 = new Date("2016-08-14 12:05:00");
   //console.log("Joey", howManyTimes("2016-08-14 11:35:00", "2016-08-15 11:35:00"));
   if (isLoaded(foodItems)) {
-    console.log("f", foodItems)
+    //console.log("f", foodItems, props)
     // const sort = foodItems.sort(function (a, b) {
     //   return new Date(b.timeOpen) - new Date(a.timeOpen)
     // });
@@ -51,7 +51,7 @@ function FoodItemList(props) {
 
     //console.log()
     // console.log(foodItems);
-    let todd = foodItems.map((foodItem) => {
+    let mapFoodItems = foodItems.map((foodItem) => {
       //console.log(foodItem);
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
       return <FoodItemList
@@ -96,7 +96,7 @@ function FoodItemList(props) {
               <th className="headerDetails">Details</th>
             </tr>
 
-            {todd.map((foodItem) => {
+            {mapFoodItems.map((foodItem) => {
               //console.log("hey", foodItem.props.timeOpen);
               return <FoodItem
                 whenFoodItemClicked={props.onFoodItemSelection}

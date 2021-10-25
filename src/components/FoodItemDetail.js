@@ -7,7 +7,7 @@ function FoodItemDetail(props) {
   
   const { foodItem, onClickingModal, onClickingDelete, onClickingEdit} = props;
   //const {isShowing, toggle} = useModal(foodItem.id)
-  console.log("detail", props)
+  //console.log("detail", props)
   // console.log("open", foodItem);
   function convertDate(seconds, nanoseconds) {
     let d = new Date(seconds / 1000000 + nanoseconds * 1000);

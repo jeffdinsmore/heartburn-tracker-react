@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
   masterFoodItemList: foodItemListReducer,
   editing: editingReducer,
   showModal: showModalReducer,
+  selectedFoodItem: selectedFoodItemReducer,
   firestore: firestoreReducer
 });
 

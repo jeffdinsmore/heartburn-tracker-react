@@ -12,8 +12,6 @@ function Modal(props) {
     return(
       ReactDOM.createPortal(
         <React.Fragment>
-          {console.log("j", props)}
-    
         <div className="modal">
           <div className="modal-content">
             <div className="modal-header">

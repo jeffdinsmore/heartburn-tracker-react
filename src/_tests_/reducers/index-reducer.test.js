@@ -4,7 +4,7 @@ import formVisibleReducer from '../../reducers/form-visible-reducer';
 import foodItemListReducer from '../../reducers/foodItem-list-reducer';
 import * as c from '../../actions/ActionTypes';
 import editingReducer from '../../reducers/editing-reducer';
-// import selectFoodItemReducer from '../../reducers/select-foodItem-reducer';
+import selectFoodItemReducer from '../../reducers/select-foodItem-reducer';
 
 let store = createStore(rootReducer);
 
@@ -64,4 +64,25 @@ describe("rootReducer", () => {
     store.dispatch(action);
     expect(store.getState().editing).toEqual(editingReducer(true, action ));
   });
+
+  test('Check that SELECT_FOODITEM action works for selectFoodItemReducer and root reducer', () => {
+    const action = {
+      type: c.SELECT_FOODITEM,
+      foodName: 'Cookies',
+      ingredients: 'flour, sugar, butter, vanilla',
+      heartburn: 'No',
+      id: 1
+    }
+    store.dispatch(action);
+    expect(store.getState().selectedFoodItem).toEqual(selectFoodItemReducer(undefined, action));
+  });
+
+  test('Check that UNSELECT_FOODITEM action works for selectFoodItemReducer and root reducer', () => {
+    const action = {
+      type: c.UNSELECT_FOODITEM,
+    }
+    store.dispatch(action);
+    expect(store.getState().selectedFoodItem).toEqual(selectFoodItemReducer(undefined, action));
+  });
+
 });
