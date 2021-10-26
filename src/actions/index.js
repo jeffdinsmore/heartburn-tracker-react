@@ -48,9 +48,16 @@ export const showModal = () => {
 //   }
 // }
 
-export const selectFoodItem = () => {
+export const selectFoodItem = (foodItem) => {
+  const { brand, foodName, ingredients, heartburn, timeOpen, id } = foodItem;
   return {
-    type: c.SELECT_FOODITEM
+    type: c.SELECT_FOODITEM,
+    brand: brand,
+    foodName: foodName,
+    ingredients: ingredients,
+    heartburn: heartburn,
+    timeOpen: timeOpen,
+    id: id,
   }
 }
 

@@ -12,7 +12,7 @@ function FoodItem(props) {
   return (
     <React.Fragment>
       <tr>
-        <td>{props.foodName}</td>
+        <td key={props.id}>{props.foodName}</td>
         <td>{props.ingredients}</td>
         <td>{strong(props.heartburn)}</td>
         <td>{props.timeOpen}</td>

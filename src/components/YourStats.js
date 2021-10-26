@@ -7,7 +7,7 @@ const YourStats = props => {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);
-  
+
   // Create a query against the collection
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
 
@@ -75,7 +75,7 @@ const YourStats = props => {
   }
 
   function createList(item, index, arr) {
-    arr[index] = <li className="stats"><strong>{item} - {heartburnObject[item]}</strong></li>;
+    arr[index] = <li key={index}className="stats"><strong>{item} - {heartburnObject[item]}</strong></li>;
   }
 
   function loadingFirestore(foodItems, array) {

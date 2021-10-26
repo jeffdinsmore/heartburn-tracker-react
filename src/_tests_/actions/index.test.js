@@ -24,4 +24,21 @@ it('deleteFoodItem should create DELETE_FOODITEM action', () => {
       id: 1
     });
   });
-});
+
+  it('unSelectFoodItem should be null action', () => {
+    expect(actions.unSelectFoodItem()).toEqual({type: c.UNSELECT_FOODITEM});
+  });
+
+  it('selectFoodItem should create SELECT_FOODITEM action', () => {
+    expect(actions.selectFoodItem({brand: "j", foodName: 'Cookies', ingredients: 'flour, sugar, butter, vanilla', heartburn: 'Redux not working!', timeOpen: "jf", id: 1})).toEqual({
+      type: c.SELECT_FOODITEM,
+      brand: "j",
+      foodName: 'Cookies',
+      ingredients: 'flour, sugar, butter, vanilla',
+      heartburn: 'Redux not working!',
+      timeOpen: 'jf',
+      id: 1
+    });
+  });
+    
+  });

@@ -14,6 +14,7 @@ describe('selectFoodItemReducer', () => {
   // }]
   const currentState = {
     1: {
+      brand: "Newman's Own",
       foodName: 'Cookies',
       ingredients: 'flour, sugar, butter, vanilla',
       heartburn: 'Redux action is not working correctly.',
@@ -28,6 +29,7 @@ describe('selectFoodItemReducer', () => {
   }
 
   const foodItemData = {
+    brand: "Newman's Own",
     foodName: 'Cookies',
     ingredients: 'flour, sugar, butter, vanilla',
     heartburn: 'Redux action is not working correctly.',
@@ -39,19 +41,23 @@ describe('selectFoodItemReducer', () => {
   });
 
   test('Should successfully update selected foodItem', () => {
-    const { foodName, ingredients, heartburn, id } = foodItemData;
+    const { brand, foodName, ingredients, heartburn, timeOpen, id } = foodItemData;
     action = {
       type: c.SELECT_FOODITEM,
+      brand: brand,
       foodName: foodName,
       ingredients: ingredients,
       heartburn: heartburn,
+      timeOpen: timeOpen,
       id: id
     };
     expect(selectFoodItemReducer({}, action)).toEqual({
-      foodName: foodName,
-      ingredients: ingredients,
-      heartburn: heartburn,
-      id: id
+        brand: brand,
+        foodName: foodName,
+        ingredients: ingredients,
+        heartburn: heartburn,
+        timeOpen: timeOpen,
+        id: id
     });
   });
 
