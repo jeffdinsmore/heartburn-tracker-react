@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useFirestoreConnect, isLoaded } from 'react-redux-firebase';
+import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import PropTypes from "prop-types";
 
 const YourStats = () => {
@@ -13,6 +13,7 @@ const YourStats = () => {
 
   let heartburnItems, noHeartburnItems, heartburnArray, noHeartburnArray, comparison, heartburnArrayCombined, noHeartburnArrayCombined;
   let heartburnObject = {};
+  let noHeartburnObject = {};
 
   const splitArray = (array) => {
     return array.map(e => e.ingredients.split(",")).map(f => f.map(g => {
@@ -24,7 +25,7 @@ const YourStats = () => {
     }));
   }
   
-  const heartburnObjectFilter = (array) => {
+  const objectFilter = (array, value) => {
     let object = {};
     for (let i = 0; i < array.length; i++) {
       if (object[array[i]]) {
@@ -36,7 +37,7 @@ const YourStats = () => {
     let keys = Object.keys(object);
     let values = Object.values(object)
     for (let i = 0; i < keys.length; i++) {
-      if (values[i] === 1) {
+      if (values[i] === 1 && value === 1) {
         delete object[keys[i]];
       }
     }
@@ -49,18 +50,18 @@ const YourStats = () => {
     }, []);
   }
 
-  const compareArrays = (heartburnArray, noHeartburnArray) => {
+  const compareArrays = (heartburnArray, noHeartburnArray, heartburnObject) => {
     let array = [];
     for (let i = 0; i < heartburnArray.length; i++) {
       if (noHeartburnArray.indexOf(heartburnArray[i]) !== -1) {
-        array.push(heartburnArray[i])
+        array.push([heartburnArray[i], heartburnObject[heartburnArray[i]]]);
       }
     }
     return [...new Set(array)];
   }
 
   const sortObjectIntoArray = (object) => {
-    return Object.entries(object).sort(([,a], [,b]) => b -a);
+    return Object.entries(object).sort(([,a], [,b]) => b - a);
   }
   
 
@@ -75,32 +76,38 @@ const YourStats = () => {
     noHeartburnArray = splitArray(noHeartburnItems);
     heartburnArrayCombined = flatten(heartburnArray);
     noHeartburnArrayCombined = flatten(noHeartburnArray);
-    heartburnObject = heartburnObjectFilter(heartburnArrayCombined);
-    comparison = compareArrays(Object.keys(heartburnObject), noHeartburnArrayCombined);
+    heartburnObject = objectFilter(heartburnArrayCombined, 1);
+    noHeartburnObject = objectFilter(noHeartburnArrayCombined, 2);
+    comparison = compareArrays(Object.keys(heartburnObject), noHeartburnArrayCombined, noHeartburnObject);
   }
 
   function createList(item, index, arr) {
-    arr[index] = <li key={index}className="stats"><strong>{item} - {heartburnObject[item]}</strong></li>;
+    arr[index] = <li key={index} className="stats"><strong>{item[0]} - {item[1]}</strong></li>;
   }
 
   function loadingFirestore(foodItems, array) {
     if (isLoaded(foodItems)) {
       array.forEach(createList);
       return array;
-    } else {
+    } 
+    if(!isLoaded(foodItems)) {
       return <h3>Loading...</h3>;
     }
+    if(isEmpty(foodItems)) {
+      return <h3>You have not entered any food items yet.</h3>;
+    } 
   }
-  console.log(sortObjectIntoArray(heartburnObject))
+  console.log(comparison, noHeartburnObject)
   return (
     <React.Fragment>
       <h2>Your stats</h2>
       <p>Here are the food ingredients that may be causing your heartburn:</p>
-      {loadingFirestore(foodItems, Object.keys(heartburnObject))}
+      {loadingFirestore(foodItems, sortObjectIntoArray(heartburnObject))}
+      {/* {loadingFirestore(foodItems, Object.keys(heartburnObject))} */}
       <br />
       <p>Ingredients that are unlikely to give you heartburn from the list above. They are in your food list that did not give you heartburn:</p>
       {/* {LoopingMultipleArrays(heartburnArray)} */}
-      {loadingFirestore(foodItems, comparison)}
+      {loadingFirestore(foodItems, comparison.sort(([,a], [,b]) => b - a))}
     </React.Fragment>
   );
 }

@@ -1,5 +1,6 @@
-// import React from "react";
-// import PropTypes from "prop-types";
+import React from "react";
+import PropTypes from "prop-types";
+import firebase from "firebase/app";
 
 // function PasswordReset() {
 
@@ -14,3 +15,15 @@
 //     });
 //   }
 // }
+
+const sendPasswordResetEmail = async (email) => {
+  try {
+    await firebase.auth.sendPasswordResetEmail(email);
+    alert("Password reset link sent!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+export default sendPasswordResetEmail;

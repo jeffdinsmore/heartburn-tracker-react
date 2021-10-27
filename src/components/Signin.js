@@ -1,7 +1,8 @@
 import React from "react";
-import firebase from "firebase/app";
+import firebase, { auth, signInWithEmailAndPassword, signInWithGoogle } from "firebase";
 
 function Signin() {
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   function doSignIn(event) {
     event.preventDefault();
@@ -13,6 +14,29 @@ function Signin() {
       alert(error.message);
     });
   }
+
+
+  const signInWithGoogle = async () => {
+    try {
+      const res = await firebase.auth.signInWithPopup(googleProvider);
+      const user = res.user;
+      const query = await firebase.firestore()
+        .collection("users")
+        .where("uid", "==", user.uid)
+        .get();
+      if (query.docs.length === 0) {
+        await firebase.firestore().collection("users").add({
+          uid: user.uid,
+          name: user.displayName,
+          authProvider: "google",
+          email: user.email,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
 
   function doSignOut() {
     firebase.auth().signOut().then(function () {
