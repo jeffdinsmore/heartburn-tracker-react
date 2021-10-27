@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 
 function Modal(props) {
-  const { foodItem, onClickingDelete, onClickingModal, showModal, onClickingCancel } = props;
+  const { foodItem, onClickingDelete, showModal, onClickingCancel } = props;
 
-  function removeAndClose(id) {
-    onClickingDelete(id);
-  }
   if (showModal) {
     return (
       ReactDOM.createPortal(
@@ -21,7 +18,7 @@ function Modal(props) {
                 Are you sure you want to delete this item? It will be removed permanently.
             </div>
               <div className="modal-footer">
-                <button onClick={() => removeAndClose(foodItem.id)} className="btn btn-danger btn-sm">Delete</button>&nbsp;&nbsp;
+                <button onClick={() => onClickingDelete(foodItem.id)} className="btn btn-danger btn-sm">Delete</button>&nbsp;&nbsp;
               <button onClick={() => onClickingCancel()} className="btn btn-secondary btn-sm">Cancel</button>
               </div>
             </div>
@@ -38,7 +35,6 @@ function Modal(props) {
 Modal.propTypes = {
   foodItem: PropTypes.object,
   onClickingDelete: PropTypes.func,
-  onClickingEdit: PropTypes.func,
   onClickingCancel: PropTypes.func
 };
 

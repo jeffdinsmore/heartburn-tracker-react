@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useFirestoreConnect, isLoaded } from 'react-redux-firebase';
 import PropTypes from "prop-types";
 
-const YourStats = props => {
+const YourStats = () => {
   useFirestoreConnect([
     { collection: 'foodItems' }
   ]);

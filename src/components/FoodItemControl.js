@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import NewFoodItemForm from './NewFoodItemForm';
 import FoodItemList from './FoodItemList';
 import FoodItemDetail from './FoodItemDetail';
 import EditFoodItemForm from './EditFoodItemForm';
+import YourStats from './YourStats';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
