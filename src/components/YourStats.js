@@ -59,6 +59,11 @@ const YourStats = () => {
     return [...new Set(array)];
   }
 
+  const sortObjectIntoArray = (object) => {
+    return Object.entries(object).sort(([,a], [,b]) => b -a);
+  }
+  
+
   useEffect(() => {
     console.log("component updated")
   });
@@ -86,7 +91,7 @@ const YourStats = () => {
       return <h3>Loading...</h3>;
     }
   }
-
+  console.log(sortObjectIntoArray(heartburnObject))
   return (
     <React.Fragment>
       <h2>Your stats</h2>
