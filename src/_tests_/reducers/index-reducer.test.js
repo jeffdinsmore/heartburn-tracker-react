@@ -5,6 +5,7 @@ import foodItemListReducer from '../../reducers/foodItem-list-reducer';
 import * as c from '../../actions/ActionTypes';
 import editingReducer from '../../reducers/editing-reducer';
 import selectFoodItemReducer from '../../reducers/select-foodItem-reducer';
+import showModalReducer from '../../reducers/show-modal-reducer';
 
 let store = createStore(rootReducer);
 
@@ -62,7 +63,7 @@ describe("rootReducer", () => {
       type: c.EDITING
     };
     store.dispatch(action);
-    expect(store.getState().editing).toEqual(editingReducer(true, action ));
+    expect(store.getState().editing).toEqual(editingReducer(true, action));
   });
 
   test('Check that SELECT_FOODITEM action works for selectFoodItemReducer and root reducer', () => {
@@ -83,6 +84,22 @@ describe("rootReducer", () => {
     }
     store.dispatch(action);
     expect(store.getState().selectedFoodItem).toEqual(selectFoodItemReducer(undefined, action));
+  });
+
+  test('Check that default showModal state works for showModalReducer and rootReducer', () => {
+    const action = {
+      type: c.SHOW_MODAL
+    };
+    store.dispatch(action);
+    expect(store.getState().showModal).toEqual(showModalReducer(false, action));
+  });
+
+  test('Check toggle showModal state to true with rootReducer', () => {
+    const action = {
+      type: c.SHOW_MODAL
+    };
+    store.dispatch(action);
+    expect(store.getState().showModal).toEqual(showModalReducer(true, action));
   });
 
 });

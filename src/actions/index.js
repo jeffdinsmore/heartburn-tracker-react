@@ -1,9 +1,10 @@
 import * as c from './../actions/ActionTypes';
 
 export const addFoodItem = (foodItem) => {
-  const { foodName, ingredients, heartburn, id } = foodItem;
+  const { brand, foodName, ingredients, heartburn, id } = foodItem;
   return {
     type: c.ADD_FOODITEM,
+    brand: brand,
     foodName: foodName,
     ingredients: ingredients,
     heartburn: heartburn,
@@ -26,27 +27,11 @@ export const editing = () => {
   }
 }
 
-export const editingFalse = () => {
-  return {
-    type: c.EDITING_FALSE
-  }
-}
 export const showModal = () => {
   return {
     type: c.SHOW_MODAL
   }
 }
-// export const selectFoodItem = (foodItem) => {
-//   const { brand, foodName, ingredients, heartburn, id } = foodItem;
-//   return {
-//     type: c.SELECT_FOODITEM,
-//     brand: brand,
-//     foodName: foodName,
-//     ingredients: ingredients,
-//     heartburn: heartburn,
-//     id: id,
-//   }
-// }
 
 export const selectFoodItem = (foodItem) => {
   const { brand, foodName, ingredients, heartburn, timeOpen, id } = foodItem;
@@ -65,9 +50,6 @@ export const unSelectFoodItem = () => {
   return {
     type: c.UNSELECT_FOODITEM
   }
-  // {
-  //   type: c.UNSELECT_FOODITEM,
-  // }
 }
 
 export const toggleHomepageShowing = () => ({

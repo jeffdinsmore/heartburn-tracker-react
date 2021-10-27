@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Modal from './Modal';
-//import useModal from './useModal';
 
 function FoodItemDetail(props) {
   
-  const { foodItem, onClickingModal, onClickingDelete, onClickingEdit} = props;
+  const { foodItem, onClickingModal, onClickingDelete, onClickingEdit, showModal, onClickingCancel} = props;
   //const {isShowing, toggle} = useModal(foodItem.id)
   //console.log("detail", props)
   // console.log("open", foodItem);
@@ -14,7 +13,6 @@ function FoodItemDetail(props) {
     let month = d.toDateString().substring(7, 3);
     let day = d.toDateString().substring(10, 8);
     let year = d.toDateString().substring(15, 11);
-    let n = d.toDateString().substring(4);
     return month + "-" + day + "-" + year;
   }
   console.log("proppy", props)
@@ -32,13 +30,12 @@ function FoodItemDetail(props) {
       <p><strong>Date Logged:</strong> {convertDate(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}</p>
       <br></br>
       <button className="btn btn-success btn-sm" onClick={onClickingEdit}>Update Item</button>&nbsp;&nbsp;
-      <button className="btn btn-danger btn-sm" onClick={onClickingModal().toggle}>Delete Item</button>
+      <button className="btn btn-danger btn-sm" onClick={onClickingModal}>Delete Item</button>
       <Modal
         foodItem={foodItem}
         onClickingDelete={onClickingDelete}
-        onClickingModal={onClickingModal()}
-        isShowing={onClickingModal().isShowing}
-        hide={onClickingModal().toggle}
+        onClickingCancel={onClickingCancel}
+        showModal={showModal}
       />
       </div>
       <hr />
@@ -50,7 +47,8 @@ FoodItemDetail.propTypes = {
   foodItem: PropTypes.object,
   onClickingDelete: PropTypes.func,
   onClickingEdit: PropTypes.func,
-  onClickingModal: PropTypes.func
+  onClickingModal: PropTypes.func,
+  onClickingCancel: PropTypes.func
 };
 
 export default FoodItemDetail;

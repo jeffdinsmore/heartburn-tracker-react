@@ -3,18 +3,19 @@ import * as c from '../../actions/ActionTypes';
 
 describe('foodItemListReducer', () => {
 
-  // let action;
   const currentState = {
     1: {
       foodName: 'Cookies',
       ingredients: 'flour, sugar, butter, vanilla',
       heartburn: 'Redux action is not working correctly.',
+      timeOpen: '111',
       id: 1
     },
     2: {
       foodName: 'Bread',
       ingredients: 'flour, flaxseed, sugar, granola',
       heartburn: 'Reducer has side effects.',
+      timeOpen: '222',
       id: 2
     }
   };
@@ -24,6 +25,7 @@ describe('foodItemListReducer', () => {
     foodName: 'Cookies',
     ingredients: 'flour, sugar, butter, vanilla',
     heartburn: 'Redux action is not working correctly.',
+    timeOpen: '111',
     id: 1
   };
 
@@ -32,12 +34,13 @@ describe('foodItemListReducer', () => {
   });
 
   test('Should successfully add new food item data to masterFoodItemList', () => {
-    const { foodName, ingredients, heartburn, id } = foodItemData;
+    const { foodName, ingredients, heartburn, timeOpen, id } = foodItemData;
     action = {
       type: c.ADD_FOODITEM,
       foodName: foodName,
       ingredients: ingredients,
       heartburn: heartburn,
+      timeOpen: timeOpen,
       id: id
     };
 
@@ -46,6 +49,7 @@ describe('foodItemListReducer', () => {
         foodName: foodName,
         ingredients: ingredients,
         heartburn: heartburn,
+        timeOpen: timeOpen,
         id: id
       }
     });
@@ -61,6 +65,7 @@ describe('foodItemListReducer', () => {
         foodName: 'Bread',
         ingredients: 'flour, flaxseed, sugar, granola',
         heartburn: 'Reducer has side effects.',
+        timeOpen: '222',
         id: 2
       }
     });

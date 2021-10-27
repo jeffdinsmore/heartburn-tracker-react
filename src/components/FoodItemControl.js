@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import NewFoodItemForm from './NewFoodItemForm';
 import FoodItemList from './FoodItemList';
 import FoodItemDetail from './FoodItemDetail';
-import YourStats from './YourStats';
 import EditFoodItemForm from './EditFoodItemForm';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
-import Modal from './Modal';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import { useSelector } from 'react-redux';
 
@@ -25,15 +23,13 @@ function FoodItemControl(props) {
   //const [ state, setState ] = useState({selectedFoodItem: null})
   const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
   //const isShowing = useSelector(state => state.showModal);
-  const [isShowing, setIsShowing] = useState(useSelector(state => state.showModal));
   // const [state, setState] = useState({ selectedFoodItem: null });
   // const [ selectedFoodItem, setSelectedFoodItem ] = useState(null);
   const selectedFoodItem = useSelector(state => state.selectedFoodItem)
   useEffect(() => {
-    console.log(state)
     console.log("component updated!");
   }, [])
-  //const [count, setCount] = useState(0);
+
   const handleClick = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
@@ -56,28 +52,38 @@ function FoodItemControl(props) {
   }
 
   const handleShowingModal = () => {
-
     const { dispatch } = props;
     const action = a.showModal();
-    //console.log("modal", isShowing)
-    //console.log(state.selectedFoodItem)
     if (selectedFoodItem !== null) {
-      if (showModal) {
-        dispatch(action);
-        //console.log("s", state)
-      }
+
+      dispatch(action);
+      //console.log("modal", isShowing)
+      //console.log(state.selectedFoodItem)
+
+      // if (showModal) {
+      //   dispatch(action);
+      //   console.log("s", state)
+      // }
     }
-    function toggle() {
-      setIsShowing(!isShowing);
-    }
-    return {
-      isShowing,
-      toggle,
-      props,
-      useState
-    }
+    // function toggle() {
+    //   setIsShowing(!isShowing);
+    // }
+    // return {
+    //   isShowing,
+    //   toggle,
+    //   props,
+    //   useState
+    // }
   }
 
+  const handleCancelModal = () => {
+    const { dispatch } = props;
+    const action = a.showModal();
+    if (showModal) {
+      dispatch(action);
+      console.log("s", state)
+    }
+  }
   // const useModal = () => {
 
 
@@ -122,8 +128,10 @@ function FoodItemControl(props) {
   const handleDeletingFoodItem = (id) => {
     const { dispatch } = props;
     const action = a.unSelectFoodItem();
+    const action2 = a.showModal();
     props.firestore.delete({ collection: 'foodItems', doc: id });
     dispatch(action);
+    dispatch(action2);
     //setState({selectedFoodItem: null});
   }
 
@@ -169,7 +177,7 @@ function FoodItemControl(props) {
     currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
     buttonText = "Return to Food List";
   } else if (selectedFoodItem != null) {
-    currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} />
+    currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
     buttonText = "Return to Food List";
   } else if (formVisibleOnPage) {
     currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
@@ -194,7 +202,7 @@ FoodItemControl.propTypes = {
   formVisibleOnPage: PropTypes.bool,
   editing: PropTypes.bool,
   selectedFoodItem: PropTypes.object,
-  isShowing: PropTypes.bool,
+  showModal: PropTypes.bool,
 };
 
 const mapStateToProps = state => {
@@ -206,7 +214,7 @@ const mapStateToProps = state => {
     //selectedFoodItem: state.selectedFoodItem,
     // isShowing: state.isShowing,
   }
- }
+}
 
 FoodItemControl = connect(mapStateToProps)(FoodItemControl);
 

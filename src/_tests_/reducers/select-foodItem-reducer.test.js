@@ -4,17 +4,9 @@ import * as c from '../../actions/ActionTypes';
 describe('selectFoodItemReducer', () => {
 
   let action;
-  // [{
-  //   name: "Pepsi",
-  //   brand: "Pepsi",
-  //   sugarContent: "55",
-  //   pints: 123,
-  //   price: "4",
-  //   id:"1" 
-  // }]
   const currentState = {
     1: {
-      brand: "Newman's Own",
+      brand: "Newman's Own2",
       foodName: 'Cookies',
       ingredients: 'flour, sugar, butter, vanilla',
       heartburn: 'Redux action is not working correctly.',
@@ -52,12 +44,12 @@ describe('selectFoodItemReducer', () => {
       id: id
     };
     expect(selectFoodItemReducer({}, action)).toEqual({
-        brand: brand,
-        foodName: foodName,
-        ingredients: ingredients,
-        heartburn: heartburn,
-        timeOpen: timeOpen,
-        id: id
+      brand: brand,
+      foodName: foodName,
+      ingredients: ingredients,
+      heartburn: heartburn,
+      timeOpen: timeOpen,
+      id: id
     });
   });
 

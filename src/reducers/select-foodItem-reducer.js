@@ -4,14 +4,14 @@ const selectFoodItemReducer = (state = null, action) => {
   const { brand, foodName, ingredients, heartburn, timeOpen, id } = action;
   switch (action.type) {
     case c.SELECT_FOODITEM:
-      return Object.assign({}, state, {
+      return {
           brand: brand,
           foodName: foodName,
           ingredients: ingredients,
           heartburn: heartburn,
           timeOpen: timeOpen,
           id: id,
-      });
+      };
     case c.UNSELECT_FOODITEM:
       return state = null;
     default:
