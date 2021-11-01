@@ -6,6 +6,8 @@ import * as c from '../../actions/ActionTypes';
 import editingReducer from '../../reducers/editing-reducer';
 import selectFoodItemReducer from '../../reducers/select-foodItem-reducer';
 import showModalReducer from '../../reducers/show-modal-reducer';
+import signInNameReducer from '../../reducers/sign-in-name-reducer';
+import loginVisibleReducer from '../../reducers/login-visible-reducer';
 
 let store = createStore(rootReducer);
 
@@ -18,7 +20,9 @@ describe("rootReducer", () => {
       formVisibleOnPage: false,
       showModal: false,
       firestore: store.getState().firestore,
-      selectedFoodItem: null
+      loginName: {user: "Not signed in"},
+      selectedFoodItem: null,
+      loginVisible: false,
     });
   });
 
@@ -101,5 +105,15 @@ describe("rootReducer", () => {
     store.dispatch(action);
     expect(store.getState().showModal).toEqual(showModalReducer(true, action));
   });
+
+  test('Should return default state if no action type is recognized', () => { 
+    const item = {user: "Joe"};
+    const { user } = item;
+    const action = {
+      type: c.SIGN_IN_NAME,
+      user: user
+    };
+      expect(signInNameReducer({}, action )).toEqual({user: "Joe"});
+    });
 
 });
