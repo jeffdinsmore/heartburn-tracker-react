@@ -12,11 +12,26 @@ export const addFoodItem = (foodItem) => {
   }
 }
 
+export const homepageVisible = () => ({
+  type: c.HOMEPAGE
+})
+
+
+
+export const signOut = () => ({
+  type: c.SIGN_OUT
+});
+
+export const loginVisible = () => ({
+  type: c.LOGIN_VISIBLE
+});
+
+
 export const toggleForm = () => ({
   type: c.TOGGLE_FORM
 });
 
-export const deleteFoodItem = id => ({
+export const deleteFoodItem = (id) => ({
   type: c.DELETE_FOODITEM,
   id
 });
@@ -32,6 +47,15 @@ export const showModal = () => {
     type: c.SHOW_MODAL
   }
 }
+
+export const signInName = (input) => {
+  const { user } = input;
+  console.log("jjj", user, input)
+  return {
+    type: c.SIGN_IN_NAME,
+    user: input,
+  }
+};
 
 export const selectFoodItem = (foodItem) => {
   const { brand, foodName, ingredients, heartburn, timeOpen, id } = foodItem;

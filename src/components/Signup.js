@@ -1,14 +1,18 @@
 import React from "react";
 import firebase from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase';
 
 function Signup() {
+  //provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  //const auth = getAuth();
   function doSignUp(event) {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
       alert("successfully signed up!");
-    }).catch(function (error) {
+      //const user = userCredential.user;
+    }).catch((error) => {
       alert(error.message);
     });
   }

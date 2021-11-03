@@ -107,7 +107,8 @@ const YourStats = () => {
       <br />
       <p>Ingredients that are unlikely to give you heartburn from the list above. They are in your food list that did not give you heartburn:</p>
       {/* {LoopingMultipleArrays(heartburnArray)} */}
-      {loadingFirestore(foodItems, comparison.sort(([,a], [,b]) => b - a))}
+      {loadingFirestore(foodItems, comparison)}
+      {/* .sort(([,a], [,b]) => b - a) */}
     </React.Fragment>
   );
 }

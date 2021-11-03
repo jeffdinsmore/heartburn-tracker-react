@@ -2,12 +2,17 @@ import React from 'react';
 // import FoodItem from "./FoodItem";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import PropTypes from "prop-types";
+import Nav from 'react-bootstrap/Nav';
+import { createBrowserHistory } from 'history';
 
 function Homepage(props) {
   useFirestoreConnect([
     { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
   ]);
+  const history = createBrowserHistory();
 
+
+  console.log(history, props)
   
   return (
     <React.Fragment>
@@ -38,6 +43,8 @@ function Homepage(props) {
         <li className="list">Peppermint</li>
       </ul>
       <br />
+
+      {/* <Nav.Link href="/foodlist" to="/foodlist">Go To Your Food List</Nav.Link> */}
     </React.Fragment>
   );
 

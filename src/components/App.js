@@ -9,6 +9,10 @@ import Signup from './Signup';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from 'styled-components';
 import ButtonCount from './ButtonCount';
+import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
+import PropTypes from "prop-types";
+import { useSelector } from 'react-redux';
+import Routes from "./Routes";
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -19,7 +23,12 @@ const BodyStyling = styled.div`
   // border-radius: 20px;
 `;
 
-function App() {
+function App(props) {
+  const auth = props.firebase.auth();
+  if ((isLoaded(auth)) && (auth.currentUser != null)) {
+  }
+  const state = useSelector(state => state);
+  console.log("props", props, state)
   return (
     <Router>
 
@@ -37,7 +46,7 @@ function App() {
         </Route>
         <Route path="/yourstats">
           <BodyStyling>
-            <YourStats />
+            <FoodItemControl />
           </BodyStyling>
         </Route>
         <Route path="/foodlist">
@@ -52,7 +61,7 @@ function App() {
         </Route>
         <Route path="/">
           <BodyStyling>
-            <Homepage />
+            <FoodItemControl />
           </BodyStyling>
         </Route>
       </Switch>
@@ -62,4 +71,4 @@ function App() {
   );
 }
 
-export default App;
+export default withFirestore(App);

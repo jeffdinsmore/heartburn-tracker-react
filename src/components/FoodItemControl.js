@@ -3,18 +3,27 @@ import NewFoodItemForm from './NewFoodItemForm';
 import FoodItemList from './FoodItemList';
 import FoodItemDetail from './FoodItemDetail';
 import EditFoodItemForm from './EditFoodItemForm';
-import YourStats from './YourStats';
+import Homepage from './Homepage';
+//import YourStats from './YourStats';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import firebase, { getAuth, onAuthStateChanged } from 'firebase';
+//import { propTypes } from 'react-bootstrap/esm/Image';
 import { useSelector } from 'react-redux';
+import Signin from './Signin';
+import Header from './Header';
+import Footer from './Footer'
+import { createBrowserHistory } from 'history';
+import YourStats from './YourStats';
+
 
 function FoodItemControl(props) {
   useFirestoreConnect([
     { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
   ]);
+  const history = createBrowserHistory();
   // const firestore = useSelector(props => props.firestore)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   const editing = useSelector(state => state.editing)
@@ -23,6 +32,8 @@ function FoodItemControl(props) {
   const state = useSelector(state => state);
   //const [ state, setState ] = useState({selectedFoodItem: null})
   const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
+  const loginName = useSelector(state => state.signInName);
+  const loginVisible = useSelector(state => state.loginVisible)
   //const isShowing = useSelector(state => state.showModal);
   // const [state, setState] = useState({ selectedFoodItem: null });
   // const [ selectedFoodItem, setSelectedFoodItem ] = useState(null);
@@ -31,11 +42,35 @@ function FoodItemControl(props) {
     console.log("component updated!");
   }, [])
 
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      const { dispatch } = props;
+      //const action = a.signInName();
+      
+      if(user) {
+        console.log("fdfd", user.email)
+        // if (signInName === "Signed out" || signInName === "Not signed in") {
+          dispatch(a.signInName(user.email));
+          console.log("s", state)
+        }
+      // } else {
+  
+      
+    })
+  }, [])
+  
   const handleClick = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
     const action3 = a.unSelectFoodItem();
+    const action4 = a.togglefooditemlistShowing()
+    if(history.location.pathname === '/foodlist') {
+      history.push('/add-food-item')
+    } else {
+      history.push('/foodlist')
+    }
+    //history.push('/addfooditem')
     //console.log("eeee", editing, props)
     if (selectedFoodItem != null) {
       if (editing) {
@@ -56,25 +91,9 @@ function FoodItemControl(props) {
     const { dispatch } = props;
     const action = a.showModal();
     if (selectedFoodItem !== null) {
-
       dispatch(action);
-      //console.log("modal", isShowing)
-      //console.log(state.selectedFoodItem)
-
-      // if (showModal) {
-      //   dispatch(action);
-      //   console.log("s", state)
-      // }
+      dispatch(a.signInName("sherry"))
     }
-    // function toggle() {
-    //   setIsShowing(!isShowing);
-    // }
-    // return {
-    //   isShowing,
-    //   toggle,
-    //   props,
-    //   useState
-    // }
   }
 
   const handleCancelModal = () => {
@@ -85,25 +104,12 @@ function FoodItemControl(props) {
       console.log("s", state)
     }
   }
-  // const useModal = () => {
-
-
-  //   function toggle() {
-  //     setIsShowing(!isShowing);
-  //   }
-
-  //   return {
-  //     isShowing,
-  //     toggle,
-  //     props,
-  //     useState
-  //   }
-  // };
 
   const handleAddingNewFoodItemToList = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
     dispatch(action);
+    history.push('/')
   }
 
   const handleChangingSelectedFoodItem = (id) => {
@@ -154,6 +160,14 @@ function FoodItemControl(props) {
     dispatch(action);
   }
 
+  const handleClickSignin = () => {
+    const { dispatch } = props;
+    const action = a.signInName;
+    if (loginName === "Signed out" || loginName === "Not signed in") {
+      dispatch(action);
+      console.log("s", state)
+    }
+  }
   // const auth = this.props.firebase.auth();
   // if (!isLoaded(auth)) {
   //   return (
@@ -169,33 +183,55 @@ function FoodItemControl(props) {
   //     </React.Fragment>
   //   )
   // }
-  // if ((isLoaded(auth)) && (auth.currentUser != null)) {
-  console.log("mast1", state, props)
+
+  console.log("mast1", history, state, props)
   let currentlyVisibleState = null;
   let buttonText = null;
+  let buttonClass = "btn btn-info btn-sm";
+  const auth = props.firebase.auth();
+  // if ((isLoaded(auth)) && (auth.currentUser != null)) {
+      if (editing) {
+        currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
+        buttonText = "Return to Food List";
+      } else if (selectedFoodItem != null) {
+        currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
+        buttonText = "Return to Food List";
+      // } else if (formVisibleOnPage) {
+      //   currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
+      //   buttonText = "Return to Food List";
+      } else if(history.location.pathname === '/') {
+        currentlyVisibleState = <Homepage />;buttonText = "Go To Your Food List";
+      } else if(history.location.pathname === "/add-food-item") {
+        currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
+        buttonText = "Cancel";
+        buttonClass = "btn btn-secondary btn-sm";
+      } else if(history.location.pathname === "/yourstats") {
+        currentlyVisibleState = <YourStats />
+        buttonText = "See Food List";
+      } else {
+        currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} />;
+        buttonText = "Add Food Item";
+      }
+      //console.log("state", state, isShowing)
+    
+      return (
+        <React.Fragment>
+          {currentlyVisibleState}
+          <br></br>
+          <button className={buttonClass} onClick={handleClick}>{buttonText}</button>
+          {/* <Signin data={state} proppy={props} /> */}
+          {/* <Footer data={state} proppy={props} /> */}
+        </React.Fragment>
+      );
+    // } else {
+    //   return (
+    //     <React.Fragment>
+    //     {currentlyVisibleState}
+    //     <h3>Please sign in to access your pages</h3>
+    //     </React.Fragment>
+    //   )
+    // }
 
-  if (editing) {
-    currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
-    buttonText = "Return to Food List";
-  } else if (selectedFoodItem != null) {
-    currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
-    buttonText = "Return to Food List";
-  } else if (formVisibleOnPage) {
-    currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
-    buttonText = "Return to Food List";
-  } else {
-    currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} />;
-    buttonText = "Add Food Item";
-  }
-  //console.log("state", state, isShowing)
-
-  return (
-    <React.Fragment>
-      {currentlyVisibleState}
-      <br></br>
-      <button className="btn btn-info btn-sm" onClick={handleClick}>{buttonText}</button>
-    </React.Fragment>
-  );
 }
 // }
 FoodItemControl.propTypes = {
@@ -204,6 +240,7 @@ FoodItemControl.propTypes = {
   editing: PropTypes.bool,
   selectedFoodItem: PropTypes.object,
   showModal: PropTypes.bool,
+  loginName: PropTypes.string
 };
 
 const mapStateToProps = state => {
