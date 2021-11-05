@@ -57,7 +57,9 @@ const YourStats = () => {
         array.push([heartburnArray[i], heartburnObject[heartburnArray[i]]]);
       }
     }
-    return [...new Set(array)];
+    // return [...new Set(array)];
+    console.log("arr", array)
+    return array;
   }
 
   const sortObjectIntoArray = (object) => {
@@ -97,7 +99,14 @@ const YourStats = () => {
       return <h3>You have not entered any food items yet.</h3>;
     } 
   }
-  console.log(comparison, noHeartburnObject)
+  function sortArray(array) {
+    if (isLoaded(foodItems)) {
+      return array.sort(([,a], [,b]) => b - a);
+    } else {
+      return array;
+    }
+  }
+  console.log("comp", comparison, noHeartburnObject)
   return (
     <React.Fragment>
       <h2>Your stats</h2>
@@ -107,7 +116,7 @@ const YourStats = () => {
       <br />
       <p>Ingredients that are unlikely to give you heartburn from the list above. They are in your food list that did not give you heartburn:</p>
       {/* {LoopingMultipleArrays(heartburnArray)} */}
-      {loadingFirestore(foodItems, comparison)}
+      {loadingFirestore(foodItems, sortArray(comparison))}
       {/* .sort(([,a], [,b]) => b - a) */}
     </React.Fragment>
   );
