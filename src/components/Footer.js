@@ -9,22 +9,22 @@ function Footer(props) {
   const auth = props.firebase.auth();
   const state = useSelector(state => state);
   //const { dispatch } = props;
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      const { dispatch } = props;
-      //const action = a.signInName();
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged((user) => {
+  //     const { dispatch } = props;
+  //     //const action = a.signInName();
       
-      if(user) {
-        console.log("fdfd", user.email)
-        // if (loginName === "Signed out" || loginName === "Not signed in") {
-          dispatch(a.signInName(user.email));
-          console.log("s", state)
-        }
-      // } else {
+  //     if(user) {
+  //       console.log("fdfd", user.email)
+  //       // if (loginName === "Signed out" || loginName === "Not signed in") {
+  //         dispatch(a.signInName(user.email));
+  //         console.log("s", state)
+  //       }
+  //     // } else {
   
-      //}
-    })
-  }, [])
+  //     //}
+  //   })
+  // }, [])
 
   const currentUser = useSelector(state => state.loginName.user)
   const { data } = props;

@@ -5,7 +5,7 @@ const signInNameReducer = (state = { user: "Not signed in" }, action) => {
   switch (action.type) {
     case c.SIGN_IN_NAME:
       return state = {
-        user: user
+        user: user,
       };
     case c.SIGN_OUT:
       return state = { user: "Signed out" };

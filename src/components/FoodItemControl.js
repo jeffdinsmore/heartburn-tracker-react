@@ -208,6 +208,9 @@ function FoodItemControl(props) {
       } else if(history.location.pathname === "/yourstats") {
         currentlyVisibleState = <YourStats />
         buttonText = "See Food List";
+      } else if(history.location.pathname === "/login") {
+        currentlyVisibleState = <Signin />
+        buttonText = "Logout";
       } else {
         currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} />;
         buttonText = "Add Food Item";
@@ -220,7 +223,7 @@ function FoodItemControl(props) {
           <br></br>
           <button className={buttonClass} onClick={handleClick}>{buttonText}</button>
           {/* <Signin data={state} proppy={props} /> */}
-          {/* <Footer data={state} proppy={props} /> */}
+          <Footer data={state} proppy={props} />
         </React.Fragment>
       );
     // } else {

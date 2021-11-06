@@ -21,6 +21,7 @@ describe("rootReducer", () => {
       showModal: false,
       firestore: store.getState().firestore,
       loginName: {user: "Not signed in"},
+      userId: {user: "Not signed in"},
       selectedFoodItem: null,
       loginVisible: false,
     });

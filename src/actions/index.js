@@ -50,7 +50,6 @@ export const showModal = () => {
 
 export const signInName = (input) => {
   const { user } = input;
-  console.log("jjj", user, input)
   return {
     type: c.SIGN_IN_NAME,
     user: input,

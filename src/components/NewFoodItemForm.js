@@ -1,14 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useFirestore } from 'react-redux-firebase'
+import firebase from 'firebase';
 
 function NewFoodItemForm(props) {
   const firestore = useFirestore();
+
+  const getUserId = async () => {
+    let uid = "";
+    await firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        // console.log("add2", user.uid)
+        uid = user.uid;
+      }
+    })
+    return uid;
+  }
+  
+  console.log("add", props, getUserId())
   function addFoodItemToFirestore(event) {
     event.preventDefault();
     props.onNewFoodItemCreation();
 
-    return firestore.collection('foodItems').add(
+    return firestore.collection('users').doc(getUserId()).collection('foodItems').add(
       {
         foodName: event.target.foodName.value,
         brand: event.target.brand.value,
@@ -56,7 +70,7 @@ function NewFoodItemForm(props) {
 }
 
 NewFoodItemForm.propTypes = {
-  onNewFoodItemCreation: PropTypes.func
+  onNewFoodItemCreation: PropTypes.func,
 };
 
 export default NewFoodItemForm;

@@ -11,7 +11,8 @@ function Signup() {
     const password = event.target.password.value;
     firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
       alert("successfully signed up!");
-      //const user = userCredential.user;
+      const user = userCredential.user.uid;
+      firebase.firestore().collection('users').doc(user).set({email})
     }).catch((error) => {
       alert(error.message);
     });

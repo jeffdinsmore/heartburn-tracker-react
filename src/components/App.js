@@ -13,6 +13,7 @@ import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-fireba
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux';
 import Routes from "./Routes";
+import FoodItemList from './FoodItemList';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -36,7 +37,7 @@ function App(props) {
       <Switch>
         <Route path="/login">
           <BodyStyling>
-            <Signin />
+            <FoodItemControl />
           </BodyStyling>
         </Route>
         <Route path="/signup">
