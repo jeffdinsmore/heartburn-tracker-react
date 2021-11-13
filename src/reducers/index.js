@@ -8,6 +8,7 @@ import selectFoodItemReducer from './select-foodItem-reducer';
 import homepageVisibleReducer from './homepage-visible-reducer';
 import signInNameReducer from './sign-in-name-reducer';
 import loginVisibleReducer from './login-visible-reducer';
+import userIdReducer from './user-id-reducer';
 
 const rootReducer = combineReducers({
   formVisibleOnPage: formVisibleReducer,
@@ -16,7 +17,7 @@ const rootReducer = combineReducers({
   showModal: showModalReducer,
   selectedFoodItem: selectFoodItemReducer,
   loginName: signInNameReducer,
-  userId: signInNameReducer,
+  userId: userIdReducer,
   loginVisible: loginVisibleReducer,
   firestore: firestoreReducer
 });

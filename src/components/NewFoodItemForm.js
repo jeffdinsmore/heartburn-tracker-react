@@ -22,14 +22,14 @@ function NewFoodItemForm(props) {
     event.preventDefault();
     props.onNewFoodItemCreation();
 
-    return firestore.collection('users').doc(getUserId()).collection('foodItems').add(
-      {
+    return firestore.collection('users').doc(props.userId.userId).collection('foodItems').add(
+      Object.assign({}, {
         foodName: event.target.foodName.value,
         brand: event.target.brand.value,
         ingredients: event.target.ingredients.value,
         heartburn: event.target.heartburn.value,
         timeOpen: firestore.FieldValue.serverTimestamp()
-      }
+      })
     );
   }
 

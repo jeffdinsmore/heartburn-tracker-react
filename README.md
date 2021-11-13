@@ -73,9 +73,29 @@ Further Capstone Info Listed Below
 
 ## Setup/Installation Requirements
 
+### Setting Up Firestore In Firebase
+
+* _Follow the "Create a Cloud Firestore database" instructions here: https://firebase.google.com/docs/firestore/quickstart_
+
+### Setting Up The Cloned Repository
+
 * _Clone this repository_
 * _Open repository in your preferred code builder program. (This was built in VS Code)_
 * _In the terminal, cd into the heartburn-tracker-react folder_
+* _In the terminal, type "touch .env"_
+* _On the side navigation in the project overview of Firebase, click the settings icon next to the "Project Overview" tab_
+* _Copy the "const firebaseConfig" object_
+* _Paste into the .env file_
+* _Copy and paste the following in the .env file:<br />
+**REACT_APP_FIREBASE_API_KEY = "replace with apiKey from firestore object"**<br />
+**REACT_APP_FIREBASE_AUTH_DOMAIN = "replace with authDomain from firestore object"**<br />
+**REACT_APP_FIREBASE_PROJECT_ID = "replace with projectId from firestore object"**<br />
+**REACT_APP_FIREBASE_STORAGE_BUCKET = "replace with storageBucket from firestore object"**<br />
+**REACT_APP_FIREBASE_MESSAGING_SENDER_ID = "replace with messagingeSenderId from firestore object"**<br />
+**REACT_APP_FIREBASE_APP_ID = "replace with appId from firestore object"**<br />
+**REACT_APP_FIREBASE_MEASUREMENT_ID = "replace with measurementId from firestore object"**_
+* _Replace all the info inside the quotes with the corresponding info from the object from firebase_
+* _Delete the pasted object from firebase in your .env file_
 * _Type in the terminal "npm install" and press enter_
 * _To run the program, type "npm run start" in the terminal_
 * _The program should now be running_
@@ -95,12 +115,13 @@ _Any known issues, please reach out to Jeff Dinsmore by email at hello@jeffdinsm
 * _JavaScript_
 * _JSX_
 * _CSS_
+* _Jest_
 * _VS Code_
 * _NoSQL - Firebase/Firestore_
 
 ## License
 
-Copyright (c) 2020, **_Jeff Dinsmore_**
+Copyright (c) 2020 - Updated Nov 2021, **_Jeff Dinsmore_**
 
 This software is licensed under the MIT license.
 

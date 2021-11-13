@@ -56,6 +56,14 @@ export const signInName = (input) => {
   }
 };
 
+export const userId = (input) => {
+  const { userId } = input;
+  return {
+    type: c.USER_ID,
+    userId: input,
+  }
+};
+
 export const selectFoodItem = (foodItem) => {
   const { brand, foodName, ingredients, heartburn, timeOpen, id } = foodItem;
   return {

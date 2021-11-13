@@ -11,3 +11,4 @@ export const SIGN_IN_NAME = 'SIGN_IN_NAME';
 export const SIGN_OUT = 'SIGN_OUT';
 export const HOMEPAGE = 'HOMEPAGE';
 export const LOGIN_VISIBLE = 'LOGIN_VISIBLE';
+export const USER_ID = "USER_ID";

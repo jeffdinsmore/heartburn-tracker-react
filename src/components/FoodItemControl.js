@@ -33,7 +33,8 @@ function FoodItemControl(props) {
   //const [ state, setState ] = useState({selectedFoodItem: null})
   const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
   const loginName = useSelector(state => state.signInName);
-  const loginVisible = useSelector(state => state.loginVisible)
+  const loginVisible = useSelector(state => state.loginVisible);
+  const userId = useSelector(state => state.userId);
   //const isShowing = useSelector(state => state.showModal);
   // const [state, setState] = useState({ selectedFoodItem: null });
   // const [ selectedFoodItem, setSelectedFoodItem ] = useState(null);
@@ -42,30 +43,42 @@ function FoodItemControl(props) {
     console.log("component updated!");
   }, [])
 
+  const getUserData = () => {
+
+  }
+
+
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      const { dispatch } = props;
-      //const action = a.signInName();
-      
-      if(user) {
-        console.log("fdfd", user.email)
-        // if (signInName === "Signed out" || signInName === "Not signed in") {
-          dispatch(a.signInName(user.email));
-          console.log("s", state)
-        }
-      // } else {
-  
-      
-    })
+    (async () => {
+      try {
+        firebase.auth().onAuthStateChanged((user) => {
+          const { dispatch } = props;
+          //const action = a.signInName();
+
+          if (user) {
+            console.log("fdfd", user.email)
+            // if (signInName === "Signed out" || signInName === "Not signed in") {
+            dispatch(a.signInName(user.email));
+            dispatch(a.userId(user.uid));
+            console.log("s", state)
+          }
+          // } else {
+        })
+      } catch (error) {
+        alert(error);
+        // } finally {
+        // }
+      }
+    })();
   }, [])
-  
+
   const handleClick = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
     const action3 = a.unSelectFoodItem();
     const action4 = a.togglefooditemlistShowing()
-    if(history.location.pathname === '/foodlist') {
+    if (history.location.pathname === '/foodlist') {
       history.push('/add-food-item')
     } else {
       history.push('/foodlist')
@@ -190,50 +203,50 @@ function FoodItemControl(props) {
   let buttonClass = "btn btn-info btn-sm";
   const auth = props.firebase.auth();
   // if ((isLoaded(auth)) && (auth.currentUser != null)) {
-      if (editing) {
-        currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
-        buttonText = "Return to Food List";
-      } else if (selectedFoodItem != null) {
-        currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
-        buttonText = "Return to Food List";
-      // } else if (formVisibleOnPage) {
-      //   currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
-      //   buttonText = "Return to Food List";
-      } else if(history.location.pathname === '/') {
-        currentlyVisibleState = <Homepage />;buttonText = "Go To Your Food List";
-      } else if(history.location.pathname === "/add-food-item") {
-        currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
-        buttonText = "Cancel";
-        buttonClass = "btn btn-secondary btn-sm";
-      } else if(history.location.pathname === "/yourstats") {
-        currentlyVisibleState = <YourStats />
-        buttonText = "See Food List";
-      } else if(history.location.pathname === "/login") {
-        currentlyVisibleState = <Signin />
-        buttonText = "Logout";
-      } else {
-        currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} />;
-        buttonText = "Add Food Item";
-      }
-      //console.log("state", state, isShowing)
-    
-      return (
-        <React.Fragment>
-          {currentlyVisibleState}
-          <br></br>
-          <button className={buttonClass} onClick={handleClick}>{buttonText}</button>
-          {/* <Signin data={state} proppy={props} /> */}
-          <Footer data={state} proppy={props} />
-        </React.Fragment>
-      );
-    // } else {
-    //   return (
-    //     <React.Fragment>
-    //     {currentlyVisibleState}
-    //     <h3>Please sign in to access your pages</h3>
-    //     </React.Fragment>
-    //   )
-    // }
+  if (editing) {
+    currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
+    buttonText = "Return to Food List";
+  } else if (selectedFoodItem != null) {
+    currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
+    buttonText = "Return to Food List";
+    // } else if (formVisibleOnPage) {
+    //   currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
+    //   buttonText = "Return to Food List";
+  } else if (history.location.pathname === '/') {
+    currentlyVisibleState = <Homepage />; buttonText = "Go To Your Food List";
+  } else if (history.location.pathname === "/add-food-item") {
+    currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} userId={userId} />;
+    buttonText = "Cancel";
+    buttonClass = "btn btn-secondary btn-sm";
+  } else if (history.location.pathname === "/yourstats") {
+    currentlyVisibleState = <YourStats />
+    buttonText = "See Food List";
+  } else if (history.location.pathname === "/login") {
+    currentlyVisibleState = <Signin />
+    buttonText = "Logout";
+  } else {
+    currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} />;
+    buttonText = "Add Food Item";
+  }
+  //console.log("state", state, isShowing)
+
+  return (
+    <React.Fragment>
+      {currentlyVisibleState}
+      <br></br>
+      <button className={buttonClass} onClick={handleClick}>{buttonText}</button>
+      {/* <Signin data={state} proppy={props} /> */}
+      <Footer data={state} proppy={props} />
+    </React.Fragment>
+  );
+  // } else {
+  //   return (
+  //     <React.Fragment>
+  //     {currentlyVisibleState}
+  //     <h3>Please sign in to access your pages</h3>
+  //     </React.Fragment>
+  //   )
+  // }
 
 }
 // }
