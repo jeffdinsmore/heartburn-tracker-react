@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux';
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import PropTypes from "prop-types";
 
-const YourStats = () => {
+const YourStats = (props) => {
   useFirestoreConnect([
-    { collection: 'foodItems' }
+    {
+      collection: 'users', doc: props.userId.userId,
+      subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+    }
   ]);
 
   // Create a query against the collection

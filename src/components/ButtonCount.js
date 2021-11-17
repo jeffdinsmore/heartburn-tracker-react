@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ButtonCount() {
+const ButtonCount = () => {
   const [ count, setCount ] = useState(0);
   const [ count2, setCount2 ] = useState(0);
   const onCount = () => {

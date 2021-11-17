@@ -1,12 +1,12 @@
-import EditFoodItemForm from "./EditFoodItemForm";
-import FoodItemDetail from "./FoodItemDetail";
-import FoodItemList from "./FoodItemList";
+import EditFoodItemForm from "./foodViews/EditFoodItemForm";
+import FoodItemDetail from "./foodViews/FoodItemDetail";
+import FoodItemList from "./foodViews/FoodItemList";
 import Homepage from "./Homepage";
-import NewFoodItemForm from "./NewFoodItemForm";
+import NewFoodItemForm from "./foodViews/NewFoodItemForm";
 import sendPasswordResetEmail from "./PasswordReset";
-import Signin from "./Signin";
-import Signup from "./Signup";
-import YourStats from "./YourStats";
+import Signin from "./auth/Signin";
+import Signup from "./auth/Signup";
+import YourStats from "./foodViews/YourStats";
 
 
 const Routes = [

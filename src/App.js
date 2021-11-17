@@ -1,19 +1,18 @@
 import React from 'react';
-import Header from './Header';
-import FoodItemControl from './FoodItemControl';
-import Homepage from './Homepage';
-import YourStats from './YourStats';
-import Footer from './Footer';
-import Signin from "./Signin";
-import Signup from './Signup';
+import Header from './components/layout/Header';
+import FoodItemControl from './components/FoodItemControl';
+import Footer from './components/Footer';
+import Signin from "./components/auth/Signin";
+import Signup from './components/auth/Signup';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from 'styled-components';
-import ButtonCount from './ButtonCount';
+import ButtonCount from './components/ButtonCount';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux';
-import Routes from "./Routes";
-import FoodItemList from './FoodItemList';
+import Routes from "./components/Routes";
+import { BrowserRouter } from 'react-router-dom';
+import FoodItemList from './components/foodViews/FoodItemList';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -31,6 +30,7 @@ function App(props) {
   const state = useSelector(state => state);
   console.log("props", props, state)
   return (
+    <BrowserRouter>
     <Router>
 
       <Header />
@@ -50,17 +50,17 @@ function App(props) {
             <FoodItemControl />
           </BodyStyling>
         </Route>
-        <Route path="/foodlist">
-          <BodyStyling>
-            <FoodItemControl />
-          </BodyStyling>
+        <Route path="/foodlist" component={FoodItemList}>
+          {/* <BodyStyling>
+            <FoodItemList />
+          </BodyStyling> */}
         </Route>
         <Route path="/buttoncount">
           <BodyStyling>
             <ButtonCount />
           </BodyStyling>
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <BodyStyling>
             <FoodItemControl />
           </BodyStyling>
@@ -69,6 +69,7 @@ function App(props) {
 
       <Footer />
     </Router>
+    </BrowserRouter>
   );
 }
 

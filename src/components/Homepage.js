@@ -6,13 +6,13 @@ import Nav from 'react-bootstrap/Nav';
 import { createBrowserHistory } from 'history';
 
 function Homepage(props) {
-  useFirestoreConnect([
-    { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
-  ]);
+  // useFirestoreConnect([
+  //   { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
+  // ]);
   const history = createBrowserHistory();
 
 
-  console.log(history, props)
+  console.log("home", history, props)
   
   return (
     <React.Fragment>

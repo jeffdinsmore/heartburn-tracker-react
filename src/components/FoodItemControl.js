@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import NewFoodItemForm from './NewFoodItemForm';
-import FoodItemList from './FoodItemList';
-import FoodItemDetail from './FoodItemDetail';
-import EditFoodItemForm from './EditFoodItemForm';
+import NewFoodItemForm from './foodViews/NewFoodItemForm';
+import FoodItemList from './foodViews/FoodItemList';
+import FoodItemDetail from './foodViews/FoodItemDetail';
+import EditFoodItemForm from './foodViews/EditFoodItemForm';
 import Homepage from './Homepage';
 //import YourStats from './YourStats';
 import { connect } from 'react-redux';
@@ -12,29 +12,62 @@ import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-fireba
 import firebase, { getAuth, onAuthStateChanged } from 'firebase';
 //import { propTypes } from 'react-bootstrap/esm/Image';
 import { useSelector } from 'react-redux';
-import Signin from './Signin';
-import Header from './Header';
+import Signin from './auth/Signin';
+import Header from './layout/Header';
 import Footer from './Footer'
 import { createBrowserHistory } from 'history';
-import YourStats from './YourStats';
+import { withRouter } from 'react-router-dom';
+import YourStats from './foodViews/YourStats';
 
 
 function FoodItemControl(props) {
-  useFirestoreConnect([
-    { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
-  ]);
+  const state = useSelector(state => state);
+  useEffect(() => {
+    (async () => {
+      try {
+        firebase.auth().onAuthStateChanged((user) => {
+          const { dispatch } = props;
+          //const action = a.signInName();
+
+          if (user) {
+            console.log("fdfd", user.email)
+            // if (signInName === "Signed out" || signInName === "Not signed in") {
+            dispatch(a.signInName(user.email));
+            dispatch(a.userId(user.uid));
+            console.log("s", state, props)
+          }
+          // } else {
+        })
+      } catch (error) {
+        alert(error);
+        // } finally {
+        // }
+      }
+    })();
+  }, [])
+
+  const userId = useSelector(state => state.userId);
+  console.log("router", withRouter(FoodItemControl), userId.userId)
+
+  
+  // useFirestoreConnect([
+  //   {
+  //     collection: 'users', doc: userId.userId,
+  //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+  //   }
+  // ]);
   const history = createBrowserHistory();
   // const firestore = useSelector(props => props.firestore)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   const editing = useSelector(state => state.editing)
   //console.log("mast", editing)
   const showModal = useSelector(state => state.showModal);
-  const state = useSelector(state => state);
+  
   //const [ state, setState ] = useState({selectedFoodItem: null})
   const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
   const loginName = useSelector(state => state.signInName);
   const loginVisible = useSelector(state => state.loginVisible);
-  const userId = useSelector(state => state.userId);
+  
   //const isShowing = useSelector(state => state.showModal);
   // const [state, setState] = useState({ selectedFoodItem: null });
   // const [ selectedFoodItem, setSelectedFoodItem ] = useState(null);
@@ -48,29 +81,7 @@ function FoodItemControl(props) {
   }
 
 
-  useEffect(() => {
-    (async () => {
-      try {
-        firebase.auth().onAuthStateChanged((user) => {
-          const { dispatch } = props;
-          //const action = a.signInName();
-
-          if (user) {
-            console.log("fdfd", user.email)
-            // if (signInName === "Signed out" || signInName === "Not signed in") {
-            dispatch(a.signInName(user.email));
-            dispatch(a.userId(user.uid));
-            console.log("s", state)
-          }
-          // } else {
-        })
-      } catch (error) {
-        alert(error);
-        // } finally {
-        // }
-      }
-    })();
-  }, [])
+  
 
   const handleClick = () => {
     const { dispatch } = props;
@@ -213,19 +224,19 @@ function FoodItemControl(props) {
     //   currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
     //   buttonText = "Return to Food List";
   } else if (history.location.pathname === '/') {
-    currentlyVisibleState = <Homepage />; buttonText = "Go To Your Food List";
+    currentlyVisibleState = <Homepage {...props}/>; buttonText = "Go To Your Food List";
   } else if (history.location.pathname === "/add-food-item") {
     currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} userId={userId} />;
     buttonText = "Cancel";
     buttonClass = "btn btn-secondary btn-sm";
   } else if (history.location.pathname === "/yourstats") {
-    currentlyVisibleState = <YourStats />
+    currentlyVisibleState = <YourStats userId={userId}/>
     buttonText = "See Food List";
   } else if (history.location.pathname === "/login") {
     currentlyVisibleState = <Signin />
     buttonText = "Logout";
   } else {
-    currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} />;
+    currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} userId={userId} />;
     buttonText = "Add Food Item";
   }
   //console.log("state", state, isShowing)
@@ -270,6 +281,6 @@ const mapStateToProps = state => {
   }
 }
 
-FoodItemControl = connect(mapStateToProps)(FoodItemControl);
+FoodItemControl = withRouter(connect(mapStateToProps)(FoodItemControl));
 
 export default withFirestore(FoodItemControl);

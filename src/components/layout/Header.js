@@ -1,9 +1,12 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 //import { Link } from "react-router-dom";
 import styled from 'styled-components';
 //import firebase from "firebase/app";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import SignedInLinks from './SignedInLinks';
+import SignedOutLinks from './SignedOutLinks';
 // import { Navbar } from 'react-bootstrap/Navbar'
 
 // const HeartburnHeader = styled.h1`
@@ -16,24 +19,14 @@ import Nav from 'react-bootstrap/Nav';
 
 // `;
 
-function Header() {
+const Header = () => {
   return (
     <React.Fragment>
       <Navbar className="nav-bar" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="/" to="/">My Heartburn Tracker</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="/foodlist" to="/fooditemcontrol">Food List</Nav.Link>
-            <Nav.Link href="/add-food-item" to="/fooditemcontrol">Add Food</Nav.Link>
-            <Nav.Link href="/yourstats" to="/fooditemcontrol">Your Stats</Nav.Link>
-          </Nav>
-          <Nav>
-            <Nav.Link href="/login" to="/login">Login</Nav.Link>
-            <Nav.Link href="/signup" to="/signup">
-              Sign up
-            </Nav.Link>
-          </Nav>
+          <SignedOutLinks />
         </Navbar.Collapse>
       </Navbar>
       <br /><br />

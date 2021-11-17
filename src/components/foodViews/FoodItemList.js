@@ -5,12 +5,22 @@ import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 
 function FoodItemList(props) {
-  useFirestoreConnect([
-    { collection: 'foodItems', orderBy: ['timeOpen', 'desc'] }
-  ]);
+  
+  console.log("listy", props);
+  // useFirestoreConnect([
+  //   {
+  //     collection: 'users', doc: props.userId.userId,
+  //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+  //   }
+  // ]);
 
+  // useFirestoreConnect([
+  //   { collection: 'foodItems', orderBy: ['timeOpen', 'desc'] }
+  // ]);
+  //console.log("item", props)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-
+  const firestate = useSelector(state => state.firestore);
+  console.log("fire", firestate, props)
   const convertDate = (date) => {
     let month = date.toDateString().substring(7, 4);
     let day = date.toDateString().substring(10, 8);

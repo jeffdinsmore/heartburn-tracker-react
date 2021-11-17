@@ -2,15 +2,15 @@ import React, { useEffect } from "react";
 import firebase, { auth, signInWithEmailAndPassword, signInWithGoogle, GoogleAuthProvider } from "firebase";
 import { Redirect, Route, useHistory } from "react-router";
 import PropTypes from 'prop-types';
-import * as a from './../actions';
+import * as a from '../../actions';
 import { useSelector } from 'react-redux';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
 
 
 function Signin(props) {
-  useFirestoreConnect([
-    { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
-  ]);
+  // useFirestoreConnect([
+  //   { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
+  // ]);
   const loginName = useSelector(state => state.loginName)
   // useEffect(() => {
   //   firebase.auth().onAuthStateChanged((user) => {
