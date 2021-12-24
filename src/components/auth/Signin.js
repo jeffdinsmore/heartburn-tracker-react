@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import * as a from '../../actions';
 import { useSelector } from 'react-redux';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
+import { createBrowserHistory } from 'history';
 
 
 function Signin(props) {
@@ -12,6 +13,11 @@ function Signin(props) {
   //   { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
   // ]);
   const loginName = useSelector(state => state.loginName)
+  //const history = createBrowserHistory();
+
+  const createAccount = () => {
+    history.push('/signup');
+  }
   // useEffect(() => {
   //   firebase.auth().onAuthStateChanged((user) => {
   //     const { dispatch } = props;
@@ -30,6 +36,7 @@ function Signin(props) {
   // }, [])
 
   const history = useHistory();
+  console.log(history)
   //const loginName = useSelector(state => state.loginName.user)
   const state = useSelector(state => state);
   // const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -111,9 +118,9 @@ function Signin(props) {
         <button className="btn btn-sm btn-success" type='submit'>Login</button>
       </form>
       <br></br>
-      <p>Already signed in? Logout here:</p>
-
-      <button className="btn btn-info btn-sm" onClick={doSignOut}>Logout</button>
+      <p>Don't have an account?</p>
+      <button className="btn btn-info btn-sm" onClick={() => createAccount()}>Sign up</button>
+      {/* <button className="btn btn-info btn-sm" onClick={doSignOut}>Logout</button> */}
     </React.Fragment>
   );
 }

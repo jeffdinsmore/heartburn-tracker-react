@@ -11,7 +11,7 @@ const SignedOutLinks = () => {
         <Nav.Link href="/signup" to="/signup">Sign up</Nav.Link>
         <Nav.Link href="/login" to="/signin">Login</Nav.Link>
         <Nav.Link to="/" className='btn btn-warning p-1 rounded-circle btn-sm'>
-          JJ
+          Not Signed In
         </Nav.Link>
       </Nav>
     </React.Fragment>
