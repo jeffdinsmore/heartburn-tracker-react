@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import firebase, { auth, signInWithEmailAndPassword, signInWithGoogle, GoogleAuthProvider } from "firebase";
 import { Redirect, Route, useHistory } from "react-router";
 import { createBrowserHistory } from 'history';
+import { Link } from "react-router-dom";
 
 const SignedInLinks = () => {
   const history = useHistory();
@@ -27,8 +28,8 @@ const SignedInLinks = () => {
     <React.Fragment>
 
       <Nav className="mr-auto">
-        <Nav.Link href="/foodlist" to="/fooditemcontrol">Food List</Nav.Link>
-        <Nav.Link href="/add-food-item" to="/fooditemcontrol">Add Food</Nav.Link>
+        <Nav.Link as={Link} to="/foodlist">Food List</Nav.Link>
+        <Nav.Link as={Link} to="/add-food-item">Add Food</Nav.Link>
         <Nav.Link href="/yourstats" to="/fooditemcontrol">Your Stats</Nav.Link>
       </Nav>
       <Nav>

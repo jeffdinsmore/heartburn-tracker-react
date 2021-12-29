@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <React.Fragment>
       <Navbar className="nav-bar" collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="/" to="/">My Heartburn Tracker</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">My Heartburn Tracker</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           {links}
