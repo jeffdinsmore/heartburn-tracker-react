@@ -235,7 +235,7 @@ function FoodItemControl(props) {
   // } else if (history.location.pathname === "/login") {
   //   currentlyVisibleState = <Signin />
   } else {
-    currentlyVisibleState = <FoodItemList foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} userId={userId} />;
+    currentlyVisibleState = <FoodItemList {...props} foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} userId={userId} />;
     buttonText = "Add Food Item";
   }
   //console.log("state", state, isShowing)

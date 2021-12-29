@@ -127,6 +127,7 @@ function Signin(props) {
 
 Signin.propTypes = {
   onSigningIn: PropTypes.func,
+  doSignOut: PropTypes.func,
   masterFoodItemList: PropTypes.object,
   formVisibleOnPage: PropTypes.bool,
   editing: PropTypes.bool,

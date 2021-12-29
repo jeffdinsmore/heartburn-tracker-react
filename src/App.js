@@ -31,44 +31,50 @@ function App(props) {
   console.log("props", props, state)
   return (
     <BrowserRouter>
-    <Router>
+      <Router>
 
-      <Header />
-      <Switch>
-        <Route path="/login">
-          <BodyStyling>
-            <Signin />
-          </BodyStyling>
-        </Route>
-        <Route path="/signup">
-          <BodyStyling>
-            <Signup />
-          </BodyStyling>
-        </Route>
-        <Route path="/yourstats">
-          <BodyStyling>
-            <FoodItemControl />
-          </BodyStyling>
-        </Route>
-        <Route path="/foodlist" component={FoodItemList}>
-          {/* <BodyStyling>
-            <FoodItemList />
-          </BodyStyling> */}
-        </Route>
-        <Route path="/buttoncount">
-          <BodyStyling>
-            <ButtonCount />
-          </BodyStyling>
-        </Route>
-        <Route exact path="/">
-          <BodyStyling>
-            <FoodItemControl />
-          </BodyStyling>
-        </Route>
-      </Switch>
+        <Header />
+        <Switch>
+          <Route path="/login">
+            <BodyStyling>
+              <Signin />
+            </BodyStyling>
+          </Route>
+          <Route path="/signup">
+            <BodyStyling>
+              <Signup />
+            </BodyStyling>
+          </Route>
+          <Route path="/yourstats">
+            <BodyStyling>
+              <FoodItemControl />
+            </BodyStyling>
+          </Route>
+          <Route path="/add-food-item">
+            <BodyStyling>
+              <FoodItemControl />
+            </BodyStyling>
+          </Route>
+          {/* <Route path="/foodlist" component={FoodItemList}> */}
+          <Route path="/foodlist">
+            <BodyStyling>
+              <FoodItemControl />
+            </BodyStyling>
+          </Route>
+          <Route path="/buttoncount">
+            <BodyStyling>
+              <ButtonCount />
+            </BodyStyling>
+          </Route>
+          <Route exact path="/">
+            <BodyStyling>
+              <FoodItemControl />
+            </BodyStyling>
+          </Route>
+        </Switch>
 
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
     </BrowserRouter>
   );
 }
