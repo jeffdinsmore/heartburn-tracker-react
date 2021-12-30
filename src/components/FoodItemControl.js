@@ -16,7 +16,7 @@ import Signin from './auth/Signin';
 import Header from './layout/Header';
 import Footer from './Footer'
 import { createBrowserHistory } from 'history';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useRouteMatch, useHistory } from 'react-router-dom';
 import YourStats from './foodViews/YourStats';
 
 
@@ -65,7 +65,7 @@ function FoodItemControl(props) {
   
   //const [ state, setState ] = useState({selectedFoodItem: null})
   const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
-  const loginName = useSelector(state => state.signInName);
+  const loginName = useSelector(state => state.loginName.user);
   const loginVisible = useSelector(state => state.loginVisible);
   
   //const isShowing = useSelector(state => state.showModal);
@@ -88,8 +88,10 @@ function FoodItemControl(props) {
     const action = a.toggleForm();
     const action2 = a.editing();
     const action3 = a.unSelectFoodItem();
-    const action4 = a.togglefooditemlistShowing()
-    if (history.location.pathname === '/foodlist') {
+    //const action4 = a.togglefooditemlistShowing()
+    if (loginName === "Not signed in") {
+      history.push('/add-food-item')
+    } else if (history.location.pathname === '/foodlist') {
       history.push('/add-food-item')
     } else {
       history.push('/foodlist')
@@ -208,7 +210,7 @@ function FoodItemControl(props) {
   //   )
   // }
 
-  console.log("mast1", history, state, props)
+  console.log("mast1", history, state, props, loginName)
   let currentlyVisibleState = null;
   let buttonText = null;
   let buttonClass = "btn btn-info btn-sm";
@@ -244,7 +246,7 @@ function FoodItemControl(props) {
     <React.Fragment>
       {currentlyVisibleState}
       <br></br>
-      <button className={buttonClass} onClick={handleClick}>{buttonText}</button>
+      <button style={{display: loginName !== "Not signed in" ? 'inline-block' : "none"}} className={buttonClass} onClick={handleClick}>{buttonText}</button>
       {/* <Signin data={state} proppy={props} /> */}
       <Footer data={state} proppy={props} />
     </React.Fragment>
