@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
-import firebase, { getAuth, onAuthStateChanged } from 'firebase';
+import firebase, { db, auth, firebased, analytics, getAuth, onAuthStateChanged } from 'firebase';
 //import { propTypes } from 'react-bootstrap/esm/Image';
 import { useSelector } from 'react-redux';
 import Signin from './auth/Signin';
@@ -21,6 +21,8 @@ import YourStats from './foodViews/YourStats';
 
 
 function FoodItemControl(props) {
+  const db = firebase.firestore();
+  const dbFoodItems = [];
   const state = useSelector(state => state);
   useEffect(() => {
     (async () => {
@@ -46,6 +48,20 @@ function FoodItemControl(props) {
     })();
   }, [])
 
+  useEffect(() => {
+        const subscriber = db.collection('foodItems')
+        .onSnapshot((querySnapshot) => {
+          querySnapshot.forEach((doc, i) => {
+            dbFoodItems.push({...doc.data(), key: doc.id,
+            })
+            console.log(i);
+          })
+        })
+      
+    ;
+    return () => subscriber();
+  }, [])
+
   const userId = useSelector(state => state.userId);
   console.log("router", withRouter(FoodItemControl), userId.userId)
 
@@ -57,7 +73,7 @@ function FoodItemControl(props) {
   //   }
   // ]);
   const history = createBrowserHistory();
-  // const firestore = useSelector(props => props.firestore)
+  const firestore = useSelector(props => props.firestore)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   const editing = useSelector(state => state.editing)
   //console.log("mast", editing)
@@ -100,6 +116,7 @@ function FoodItemControl(props) {
     //console.log("eeee", editing, props)
     if (selectedFoodItem != null) {
       if (editing) {
+        history.push('/foodItem/:selectedFoodItem')
         dispatch(action2);
       }
       dispatch(action3);
@@ -139,9 +156,15 @@ function FoodItemControl(props) {
   }
 
   const handleChangingSelectedFoodItem = (id) => {
+    // props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
+    // {
+    //   collection: 'users', doc: props.userId.userId,
+    //   subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+    // }
+
     const { dispatch } = props;
     //const action = a.selectFoodItem();
-    props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
+    props.firestore.get({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
       const firestoreFoodItem = {
         foodName: foodItem.get("foodName"),
         brand: foodItem.get("brand"),
@@ -150,7 +173,9 @@ function FoodItemControl(props) {
         timeOpen: foodItem.get("timeOpen"),
         id: foodItem.id
       }
+      const name = firestoreFoodItem.foodName.split(" ").join("");
       dispatch(a.selectFoodItem(firestoreFoodItem))
+      history.push('/foodItem' + '/' + name)
       // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
       // //setState({selectedFoodItem: firestoreFoodItem});
     });
@@ -209,12 +234,12 @@ function FoodItemControl(props) {
   //     </React.Fragment>
   //   )
   // }
-
-  console.log("mast1", history, state, props, loginName)
+    console.log("db", dbFoodItems)
+  console.log("mast1", firestore, state, props, loginName)
   let currentlyVisibleState = null;
   let buttonText = null;
   let buttonClass = "btn btn-info btn-sm";
-  const auth = props.firebase.auth();
+  //const auth = props.firebase.auth();
   // if ((isLoaded(auth)) && (auth.currentUser != null)) {
   if (editing) {
     currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />

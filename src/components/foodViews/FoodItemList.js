@@ -6,13 +6,13 @@ import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 
 function FoodItemList(props) {
   
-  console.log("listy", props);
-  // useFirestoreConnect([
-  //   {
-  //     collection: 'users', doc: props.userId.userId,
-  //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-  //   }
-  // ]);
+  //console.log("listy", props);
+  useFirestoreConnect([
+    {
+      collection: 'users', doc: props.userId.userId,
+      subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+    }
+  ]);
 
   // useFirestoreConnect([
   //   { collection: 'foodItems', orderBy: ['timeOpen', 'desc'] }
