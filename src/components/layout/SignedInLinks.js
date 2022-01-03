@@ -30,7 +30,7 @@ const SignedInLinks = () => {
       <Nav className="mr-auto">
         <Nav.Link as={Link} to="/foodlist">Food List</Nav.Link>
         <Nav.Link as={Link} to="/add-food-item">Add Food</Nav.Link>
-        <Nav.Link href="/yourstats" to="/fooditemcontrol">Your Stats</Nav.Link>
+        <Nav.Link as={Link} to="/yourstats">Your Stats</Nav.Link>
       </Nav>
       <Nav>
         <Nav.Link onClick={doSignOut} to="/">Logout</Nav.Link>

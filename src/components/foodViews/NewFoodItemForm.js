@@ -21,15 +21,18 @@ function NewFoodItemForm(props) {
   function addFoodItemToFirestore(event) {
     event.preventDefault();
     props.onNewFoodItemCreation();
-
+    console.log("timestamp", firestore.FieldValue.serverTimestamp())
+    //let timestamp = {seconds: 1640835181, nanoseconds: 19000000}
     return firestore.collection('users').doc(props.userId.userId).collection('foodItems').add(
       Object.assign({}, {
         foodName: event.target.foodName.value,
         brand: event.target.brand.value,
         ingredients: event.target.ingredients.value,
         heartburn: event.target.heartburn.value,
+        //timeOpen: timestamp
         timeOpen: firestore.FieldValue.serverTimestamp()
       })
+      
     );
   }
 

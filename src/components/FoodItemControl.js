@@ -23,6 +23,7 @@ import YourStats from './foodViews/YourStats';
 function FoodItemControl(props) {
   const db = firebase.firestore();
   const dbFoodItems = [];
+  
   const state = useSelector(state => state);
   useEffect(() => {
     (async () => {
@@ -65,6 +66,13 @@ function FoodItemControl(props) {
   const userId = useSelector(state => state.userId);
   console.log("router", withRouter(FoodItemControl), userId.userId)
 
+  // useFirestoreConnect([
+  //   {
+  //     collection: 'users', doc: userId.userId,
+  //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+  //   }
+  // ]);
+  
   
   // useFirestoreConnect([
   //   {
@@ -187,7 +195,7 @@ function FoodItemControl(props) {
     const { dispatch } = props;
     const action = a.unSelectFoodItem();
     const action2 = a.showModal();
-    props.firestore.delete({ collection: 'foodItems', doc: id });
+    props.firestore.delete({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] });
     dispatch(action);
     dispatch(action2);
     //setState({selectedFoodItem: null});
@@ -235,7 +243,7 @@ function FoodItemControl(props) {
   //   )
   // }
     console.log("db", dbFoodItems)
-  console.log("mast1", firestore, state, props, loginName)
+  console.log("mast1", firestore, state, props)
   let currentlyVisibleState = null;
   let buttonText = null;
   let buttonClass = "btn btn-info btn-sm";
@@ -257,7 +265,7 @@ function FoodItemControl(props) {
     buttonText = "Cancel";
     buttonClass = "btn btn-secondary btn-sm";
   } else if (history.location.pathname === "/yourstats") {
-    currentlyVisibleState = <YourStats userId={userId}/>
+    currentlyVisibleState = <YourStats userId={userId} masterFoodList={foodItems}/>
     buttonText = "See Food List";
   // } else if (history.location.pathname === "/login") {
   //   currentlyVisibleState = <Signin />
