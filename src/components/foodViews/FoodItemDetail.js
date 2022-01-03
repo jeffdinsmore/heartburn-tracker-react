@@ -29,7 +29,7 @@ function FoodItemDetail(props) {
       <br></br>
       <p><strong>Date Logged:</strong> {convertDate(foodItem.timeOpen.nanoseconds, foodItem.timeOpen.seconds)}</p>
       <br></br>
-      <button className="btn btn-success btn-sm" onClick={onClickingEdit}>Update Item</button>&nbsp;&nbsp;
+      <button className="btn btn-success btn-sm" onClick={() => onClickingEdit(foodItem)}>Update Item</button>&nbsp;&nbsp;
       <button className="btn btn-danger btn-sm" onClick={onClickingModal}>Delete Item</button>
       <Modal
         foodItem={foodItem}

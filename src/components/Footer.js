@@ -28,12 +28,12 @@ function Footer(props) {
 
   const currentUser = useSelector(state => state.loginName.user)
   const { data } = props;
-  console.log("footer", state, props)
+  //console.log("footer", state, props)
   //const [ currentUser, setCurrentUser ] = useState("Not signed in")
   useEffect(() => {
   if ((isLoaded(auth)) && (auth.currentUser != null)) {
     //setCurrentUser("Signed in as:" + auth.currentUser.email);
-    console.log("user", currentUser)
+    //console.log("user", currentUser)
   }
     //setCurrentUser("Signed in as:");
     console.log("component updated!", currentUser);

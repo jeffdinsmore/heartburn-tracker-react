@@ -108,6 +108,7 @@ function FoodItemControl(props) {
   
 
   const handleClick = () => {
+    console.log("history", history.location.pathname)
     const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
@@ -117,14 +118,22 @@ function FoodItemControl(props) {
       history.push('/add-food-item')
     } else if (history.location.pathname === '/foodlist') {
       history.push('/add-food-item')
-    } else {
-      history.push('/foodlist')
+    } else if (history.location.pathname == '/foodItem/edit') {
+      history.push('/foodlists')
     }
+    // else {
+    //   history.push('/foodlist')
+    // }
     //history.push('/addfooditem')
     //console.log("eeee", editing, props)
     if (selectedFoodItem != null) {
+      let id = selectedFoodItem.id
+      if (history.location.pathname === '/foodItem/edit/' + id) {
+        history.push('/add-food-item')
+      }
       if (editing) {
-        history.push('/foodItem/:selectedFoodItem')
+        
+        history.push('/foodlist')
         dispatch(action2);
       }
       dispatch(action3);
@@ -181,9 +190,9 @@ function FoodItemControl(props) {
         timeOpen: foodItem.get("timeOpen"),
         id: foodItem.id
       }
-      const name = firestoreFoodItem.foodName.split(" ").join("");
+      // const name = firestoreFoodItem.foodName.split(" ").join("");
       dispatch(a.selectFoodItem(firestoreFoodItem))
-      history.push('/foodItem' + '/' + name)
+      history.push('/foodItem' + '/' + firestoreFoodItem.id)
       // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
       // //setState({selectedFoodItem: firestoreFoodItem});
     });
@@ -209,14 +218,18 @@ function FoodItemControl(props) {
     const action2 = a.unSelectFoodItem();
     dispatch(action);
     dispatch(action2);
+    //history.push()
     //setState({selectedFoodItem:null});
   }
 
-  const handleEditClick = () => {
+  const handleEditClick = (foodItem) => {
     console.log("handleEditClick reached!");
     const { dispatch } = props;
     const action = a.editing();
     dispatch(action);
+    const name = foodItem.foodName.split(" ").join("");
+      
+    history.push('/foodItem/edit' + '/' + foodItem.id)
   }
 
   const handleClickSignin = () => {
@@ -250,8 +263,9 @@ function FoodItemControl(props) {
   //const auth = props.firebase.auth();
   // if ((isLoaded(auth)) && (auth.currentUser != null)) {
   if (editing) {
-    currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} />
-    buttonText = "Return to Food List";
+    currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} userId={userId} />
+    buttonClass = "btn btn-secondary btn-sm";
+    buttonText = "Cancel";
   } else if (selectedFoodItem != null) {
     currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
     buttonText = "Return to Food List";

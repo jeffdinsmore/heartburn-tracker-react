@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useFirestore } from 'react-redux-firebase';
+import { useStore } from "react-redux";
+import { userId } from "../../actions";
 
 function EditFoodItemForm(props) {
   const firestore = useFirestore();
   const { foodItem } = props;
+  console.log("props", props, userId)
   function handleEditFoodItemFormSubmission(event) {
     event.preventDefault();
     props.onEditFoodItem();
@@ -14,8 +17,10 @@ function EditFoodItemForm(props) {
       ingredients: event.target.ingredients.value,
       heartburn: event.target.heartburn.value
     }
-    return firestore.update({ collection: 'foodItems', doc: foodItem.id }, propertiesToUpdate)
+    return firestore.update({ collection: useStore, doc: props.userId.userId, subcollections: [{ collection: 'foodItems', doc: foodItem.id }]}, propertiesToUpdate)
   }
+
+  // ({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] })
 
   return (
     <React.Fragment>
