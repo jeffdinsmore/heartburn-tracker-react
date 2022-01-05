@@ -122,6 +122,8 @@ function FoodItemControl(props) {
       history.push('/foodlists')
     } else if (history.location.pathname == '/') {
       history.push('/foodlist')
+    } else if (history.location.pathname === '/yourstats') {
+      history.push('/foodlist')
     }
     // else {
     //   history.push('/foodlist')
