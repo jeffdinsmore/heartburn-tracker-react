@@ -120,7 +120,7 @@ function FoodItemControl(props) {
       history.push('/add-food-item')
     } else if (history.location.pathname == '/foodItem/edit/' + id) { console.log("jjjjj")
       history.push('/foodItem/' + id)
-      handleChangingSelectedFoodItem(id);
+      dispatch(action2)
     } else if (history.location.pathname == '/') {
       history.push('/foodlist')
     } else if (history.location.pathname === '/yourstats') {
@@ -128,6 +128,9 @@ function FoodItemControl(props) {
     } else if (history.location.pathname == '/foodItem/' + id) {
       history.push('/foodlist')
       dispatch(action3);
+    } else if (history.location.pathname === '/add-food-item') {
+      dispatch(action)
+      history.goBack()
     }
     // else {
     //   history.push('/foodlist')
@@ -176,7 +179,7 @@ function FoodItemControl(props) {
     const { dispatch } = props;
     const action = a.toggleForm();
     dispatch(action);
-    history.push('/')
+    history.goBack();
   }
 
   const handleChangingSelectedFoodItem = (id) => {
@@ -272,6 +275,7 @@ function FoodItemControl(props) {
     currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} userId={userId} />
     buttonClass = "btn btn-secondary btn-sm";
     buttonText = "Cancel";
+    console.log("current", currentlyVisibleState)
   } else if (selectedFoodItem != null) {
     currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
     buttonText = "Return to Food List";
