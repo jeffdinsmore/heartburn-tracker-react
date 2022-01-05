@@ -33,11 +33,11 @@ function FoodItemControl(props) {
           //const action = a.signInName();
 
           if (user) {
-            console.log("fdfd", user.email)
+            //console.log("fdfd", user.email)
             // if (signInName === "Signed out" || signInName === "Not signed in") {
             dispatch(a.signInName(user.email));
             dispatch(a.userId(user.uid));
-            console.log("s", state, props)
+            //console.log("s", state, props)
           }
           // } else {
         })
@@ -55,7 +55,6 @@ function FoodItemControl(props) {
           querySnapshot.forEach((doc, i) => {
             dbFoodItems.push({...doc.data(), key: doc.id,
             })
-            console.log(i);
           })
         })
       
@@ -64,7 +63,6 @@ function FoodItemControl(props) {
   }, [])
 
   const userId = useSelector(state => state.userId);
-  console.log("router", withRouter(FoodItemControl), userId.userId)
 
   // useFirestoreConnect([
   //   {
@@ -107,23 +105,29 @@ function FoodItemControl(props) {
 
   
 
-  const handleClick = () => {
-    console.log("history", history.location.pathname)
+  const handleClick = (selected) => {
+    const id = selected ? selected.id : null;
+    console.log("history", history.location.pathname, state)
     const { dispatch } = props;
     const action = a.toggleForm();
     const action2 = a.editing();
     const action3 = a.unSelectFoodItem();
+    
     //const action4 = a.togglefooditemlistShowing()
     if (loginName === "Not signed in") {
       history.push('/add-food-item')
     } else if (history.location.pathname === '/foodlist') {
       history.push('/add-food-item')
-    } else if (history.location.pathname == '/foodItem/edit') {
-      history.push('/foodlists')
+    } else if (history.location.pathname == '/foodItem/edit/' + id) { console.log("jjjjj")
+      history.push('/foodItem/' + id)
+      handleChangingSelectedFoodItem(id);
     } else if (history.location.pathname == '/') {
       history.push('/foodlist')
     } else if (history.location.pathname === '/yourstats') {
       history.push('/foodlist')
+    } else if (history.location.pathname == '/foodItem/' + id) {
+      history.push('/foodlist')
+      dispatch(action3);
     }
     // else {
     //   history.push('/foodlist')
@@ -135,12 +139,12 @@ function FoodItemControl(props) {
       if (history.location.pathname === '/foodItem/edit/' + id) {
         history.push('/add-food-item')
       }
-      if (editing) {
+      // if (editing) {
         
-        history.push('/foodlist')
-        dispatch(action2);
-      }
-      dispatch(action3);
+
+      //   dispatch(action2);
+      // }
+      //dispatch(action3);
       //setSelectedFoodItem(null);
       //setState({selectedFoodItem: null})
       //console.log("ppp", state, props, state.selectedFoodItem)
@@ -165,7 +169,6 @@ function FoodItemControl(props) {
     const action = a.showModal();
     if (showModal) {
       dispatch(action);
-      console.log("s", state)
     }
   }
 
@@ -196,7 +199,8 @@ function FoodItemControl(props) {
       }
       // const name = firestoreFoodItem.foodName.split(" ").join("");
       dispatch(a.selectFoodItem(firestoreFoodItem))
-      history.push('/foodItem' + '/' + firestoreFoodItem.id)
+      history.push('/foodItem/' + firestoreFoodItem.id)
+      console.log(state)
       // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
       // //setState({selectedFoodItem: firestoreFoodItem});
     });
@@ -229,9 +233,9 @@ function FoodItemControl(props) {
   const handleEditClick = (foodItem) => {
     console.log("handleEditClick reached!");
     const { dispatch } = props;
+    console.log("handleEdit", state, props, foodItem)
     const action = a.editing();
     dispatch(action);
-    const name = foodItem.foodName.split(" ").join("");
       
     history.push('/foodItem/edit' + '/' + foodItem.id)
   }
@@ -241,7 +245,6 @@ function FoodItemControl(props) {
     const action = a.signInName;
     if (loginName === "Signed out" || loginName === "Not signed in") {
       dispatch(action);
-      console.log("s", state)
     }
   }
   // const auth = this.props.firebase.auth();
@@ -259,8 +262,7 @@ function FoodItemControl(props) {
   //     </React.Fragment>
   //   )
   // }
-    console.log("db", dbFoodItems)
-  console.log("mast1", firestore, state, props)
+  console.log("mast1", state, props)
   let currentlyVisibleState = null;
   let buttonText = null;
   let buttonClass = "btn btn-info btn-sm";
@@ -297,7 +299,7 @@ function FoodItemControl(props) {
     <React.Fragment>
       {currentlyVisibleState}
       <br></br>
-      <button style={{display: loginName !== "Not signed in" ? 'inline-block' : "none"}} className={buttonClass} onClick={handleClick}>{buttonText}</button>
+      <button style={{display: loginName !== "Not signed in" ? 'inline-block' : "none"}} className={buttonClass} onClick={() => handleClick(selectedFoodItem)}>{buttonText}</button>
       {/* <Signin data={state} proppy={props} /> */}
       <Footer data={state} proppy={props} />
     </React.Fragment>

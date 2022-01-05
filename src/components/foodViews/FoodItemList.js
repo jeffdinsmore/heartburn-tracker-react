@@ -17,10 +17,8 @@ function FoodItemList(props) {
   // useFirestoreConnect([
   //   { collection: 'foodItems', orderBy: ['timeOpen', 'desc'] }
   // ]);
-  //console.log("item", props)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   const firestate = useSelector(state => state.firestore);
-  console.log("fire", firestate, props)
   const convertDate = (date) => {
     let month = date.toDateString().substring(7, 4);
     let day = date.toDateString().substring(10, 8);
@@ -38,7 +36,6 @@ function FoodItemList(props) {
   }
 
   if (isLoaded(foodItems)) {
-    console.log("list", props, foodItems)
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
       return <FoodItemList
@@ -65,7 +62,6 @@ function FoodItemList(props) {
             </tr>
 
             {mapFoodItems.map((foodItem) => {
-              //console.log("hey", foodItem.props.timeOpen);
               return <FoodItem
                 whenFoodItemClicked={props.onFoodItemSelection}
                 foodName={foodItem.props.foodName}

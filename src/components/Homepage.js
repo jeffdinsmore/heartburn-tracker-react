@@ -10,10 +10,7 @@ function Homepage(props) {
   //   { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
   // ]);
   const history = createBrowserHistory();
-
-
-  console.log("home", history, props)
-  
+    
   return (
     <React.Fragment>
       <br />

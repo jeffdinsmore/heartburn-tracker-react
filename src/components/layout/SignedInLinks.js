@@ -23,7 +23,6 @@ const SignedInLinks = () => {
     });
   }
   //const history = createBrowserHistory();
-  console.log(history)
   return (
     <React.Fragment>
 

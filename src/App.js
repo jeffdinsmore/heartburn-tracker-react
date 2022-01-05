@@ -28,7 +28,7 @@ function App(props) {
   if ((isLoaded(auth)) && (auth.currentUser != null)) {
   }
   const state = useSelector(state => state);
-  console.log("props", props, state)
+  //console.log("props", props, state)
   return (
     <BrowserRouter>
       <Router>

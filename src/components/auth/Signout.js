@@ -11,7 +11,6 @@ import { createBrowserHistory } from 'history';
   function doSignOut() {
     firebase.auth().signOut().then(function () {
       alert("Successfully signed out!");
-      console.log("Joey");
       return (<Redirect to="/" />);
     }).catch(function (error) {
       alert(error.message);

@@ -7,7 +7,6 @@ import { userId } from "../../actions";
 function EditFoodItemForm(props) {
   const firestore = useFirestore();
   const { foodItem } = props;
-  console.log("props", props, userId)
   function handleEditFoodItemFormSubmission(event) {
     event.preventDefault();
     props.onEditFoodItem();

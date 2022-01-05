@@ -36,18 +36,15 @@ function Signin(props) {
   // }, [])
 
   const history = useHistory();
-  console.log(history)
   //const loginName = useSelector(state => state.loginName.user)
   const state = useSelector(state => state);
   // const googleProvider = new firebase.auth.GoogleAuthProvider();
   //const auth = getAuth();
-  console.log("pppf", props, state)
   const handleClickSignin = () => {
     //const { dispatch } = props;
     //const action = a.signInName;
     // if (loginName === "Signed out" || loginName === "Not signed in") {
       //dispatch(action);
-      console.log("s", state)
     //}
   }
 
@@ -95,7 +92,6 @@ function Signin(props) {
   function doSignOut() {
     firebase.auth().signOut().then(function () {
       alert("Successfully signed out!");
-      console.log("Joey");
       return (<Redirect to="/" />);
     }).catch(function (error) {
       alert(error.message);

@@ -6,8 +6,6 @@ function FoodItemDetail(props) {
   
   const { foodItem, onClickingModal, onClickingDelete, onClickingEdit, showModal, onClickingCancel} = props;
   //const {isShowing, toggle} = useModal(foodItem.id)
-  //console.log("detail", props)
-  // console.log("open", foodItem);
   function convertDate(seconds, nanoseconds) {
     let d = new Date(seconds / 1000000 + nanoseconds * 1000);
     let month = d.toDateString().substring(7, 3);
@@ -15,7 +13,6 @@ function FoodItemDetail(props) {
     let year = d.toDateString().substring(15, 11);
     return month + "-" + day + "-" + year;
   }
-  console.log("proppy", props)
   return (
     <React.Fragment>
       
