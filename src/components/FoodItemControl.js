@@ -120,6 +120,8 @@ function FoodItemControl(props) {
       history.push('/add-food-item')
     } else if (history.location.pathname == '/foodItem/edit') {
       history.push('/foodlists')
+    } else if (history.location.pathname == '/') {
+      history.push('/foodlist')
     }
     // else {
     //   history.push('/foodlist')
