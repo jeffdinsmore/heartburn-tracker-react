@@ -16,7 +16,7 @@ function EditFoodItemForm(props) {
       ingredients: event.target.ingredients.value,
       heartburn: event.target.heartburn.value
     }
-    return firestore.update({ collection: useStore, doc: props.userId.userId, subcollections: [{ collection: 'foodItems', doc: foodItem.id }]}, propertiesToUpdate)
+    return firestore.update({ collection: 'users', doc: props.userId.userId, subcollections: [{ collection: 'foodItems', doc: foodItem.id }]}, propertiesToUpdate)
   }
 
   // ({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] })
