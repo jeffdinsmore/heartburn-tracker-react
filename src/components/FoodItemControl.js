@@ -130,7 +130,12 @@ function FoodItemControl(props) {
       dispatch(action3);
     } else if (history.location.pathname === '/add-food-item') {
       dispatch(action)
-      history.goBack()
+      if(selectedFoodItem !== null) {
+        history.push('/foodlist')
+      } else {
+        history.goBack()
+      }
+      
     }
     // else {
     //   history.push('/foodlist')
@@ -220,7 +225,6 @@ function FoodItemControl(props) {
     dispatch(action2);
     //setState({selectedFoodItem: null});
   }
-
 
 
   const handleEditingFoodItemInList = () => {

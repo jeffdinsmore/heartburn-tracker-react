@@ -7,8 +7,13 @@ import firebase, { auth, signInWithEmailAndPassword, signInWithGoogle, GoogleAut
 import { Redirect, Route, useHistory } from "react-router";
 import { createBrowserHistory } from 'history';
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import PropTypes from "prop-types";
 
-const SignedInLinks = () => {
+function SignedInLinks (props) {
+  const { routerClick } = props;
+  const state = useSelector(state => state)
+  console.log(props, state)
   const history = useHistory();
   function doSignOut() {
     firebase.auth().signOut().then(function () {
@@ -27,18 +32,22 @@ const SignedInLinks = () => {
     <React.Fragment>
 
       <Nav className="mr-auto">
-        <Nav.Link as={Link} to="/foodlist">Food List</Nav.Link>
-        <Nav.Link as={Link} to="/add-food-item">Add Food</Nav.Link>
-        <Nav.Link as={Link} to="/yourstats">Your Stats</Nav.Link>
+        <Nav.Link as={Link} to="/foodlist" onClick={routerClick}>Food List</Nav.Link>
+        <Nav.Link as={Link} to="/add-food-item" onClick={routerClick}>Add Food</Nav.Link>
+        <Nav.Link as={Link} to="/yourstats" onClick={routerClick}>Your Stats</Nav.Link>
       </Nav>
       <Nav>
         <Nav.Link onClick={doSignOut} to="/">Logout</Nav.Link>
-        <Nav.Link to="/" className='btn btn-warning p-1 rounded-circle btn-sm'>
+        <Nav.Link as={Link} to="/" className='btn btn-warning p-1 rounded-circle btn-sm' onClick={routerClick}>
           JJ
         </Nav.Link>
       </Nav>
     </React.Fragment>
   );
 }
+
+SignedInLinks.propTypes = {
+  routerClick: PropTypes.func
+};
 
 export default SignedInLinks;
