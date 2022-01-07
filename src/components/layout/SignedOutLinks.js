@@ -1,5 +1,5 @@
 import React from 'react';
-//import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 
 const SignedOutLinks = () => {
@@ -8,8 +8,8 @@ const SignedOutLinks = () => {
       <Nav className="mr-auto">
       </Nav>
       <Nav>
-        <Nav.Link href="/signup" to="/signup">Sign up</Nav.Link>
-        <Nav.Link href="/login" to="/signin">Login</Nav.Link>
+        <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
+        <Nav.Link as={Link} to="/login">Login</Nav.Link>
         <Nav.Link to="/" className='btn btn-warning p-1 rounded-circle btn-sm'>
           Not Signed In
         </Nav.Link>

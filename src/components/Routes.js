@@ -36,7 +36,7 @@ const Routes = [
     component: sendPasswordResetEmail,
   },
   {
-    path: '/signin',
+    path: '/login',
     component: Signin,
   },
   {

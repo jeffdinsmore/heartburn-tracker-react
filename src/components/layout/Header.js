@@ -27,6 +27,7 @@ function Header (props) {
   const state = useSelector(state => state);
   const editing = useSelector(state => state.editing);
   const selectedFoodItem = useSelector(state => state.selectedFoodItem);
+  
   function handleClick() {
     const { dispatch } = props;
     console.log("handleClick", props)
@@ -66,13 +67,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => {
-  //console.log("state", state)
   return {
-    // masterFoodItemList: state.masterFoodItemList,
-    // formVisibleOnPage: state.formVisibleOnPage,
-    // editing: state.editing,
-    //selectedFoodItem: state.selectedFoodItem,
-    // isShowing: state.isShowing,
   }
 }
 Header = withRouter(connect(mapStateToProps)(Header));
