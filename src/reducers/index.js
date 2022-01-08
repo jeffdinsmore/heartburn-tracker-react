@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   selectedFoodItem: selectFoodItemReducer,
   loginName: signInNameReducer,
   userId: userIdReducer,
-  loginVisible: loginVisibleReducer,
+  //loginVisible: loginVisibleReducer,
   firestore: firestoreReducer
 });
 

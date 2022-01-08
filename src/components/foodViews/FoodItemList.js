@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import FoodItem from "./FoodItem";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import { masterFoodList } from "../../actions";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 function FoodItemList(props) {
+  const { foodItems } = props;
+  console.log("listy", props);
+  //function fireConnect() {
+    // useFirestoreConnect([
+    //   {
+    //     collection: 'users', doc: props.userId.userId,
+    //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+    //   }
+    // ]);
+  //}
   
-  //console.log("listy", props);
-  useFirestoreConnect([
-    {
-      collection: 'users', doc: props.userId.userId,
-      subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-    }
-  ]);
 
   // useFirestoreConnect([
   //   { collection: 'foodItems', orderBy: ['timeOpen', 'desc'] }
   // ]);
-  const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  const firestate = useSelector(state => state.firestore);
+  //const foodItems = useSelector(state => state.firestore.ordered.foodItems);
+  //const firestate = useSelector(state => state.firestore);
   const convertDate = (date) => {
     let month = date.toDateString().substring(7, 4);
     let day = date.toDateString().substring(10, 8);
@@ -26,16 +31,30 @@ function FoodItemList(props) {
     let n = date.toDateString().substring(15, 3);
     return month + "-" + day + "-" + year;
   }
+  useEffect(() => {
+    props.addMasterFoodList(foodItems);
+    }, [])
+    
+    console.log("loaded", isLoaded(foodItems))
+    
+    if(props.userId.userId === "Not signed in") {
+      return (
+        <React.Fragment>
+          <h3>Loading...</h3>
+        </React.Fragment>
+      )
+    }
 
-  if (!isLoaded(foodItems)) {
-    return (
-      <React.Fragment>
-        <h3>Loading...</h3>
-      </React.Fragment>
-    )
-  }
+  //   if (!isLoaded(foodItems)) {
+  //   return (
+  //     <React.Fragment>
+  //       <h3>Loading...</h3>
+  //     </React.Fragment>
+  //   )
+  // }
 
-  if (isLoaded(foodItems)) {
+  else if (isLoaded(foodItems)) {
+  
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
       return <FoodItemList
@@ -87,7 +106,8 @@ function FoodItemList(props) {
 }
 
 FoodItemList.propTypes = {
-  onFoodItemSelection: PropTypes.func
+  onFoodItemSelection: PropTypes.func,
+  addMasterFoodList: PropTypes.func
 };
 
 export default FoodItemList;

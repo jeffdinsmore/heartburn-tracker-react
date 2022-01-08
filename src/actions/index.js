@@ -16,7 +16,12 @@ export const homepageVisible = () => ({
   type: c.HOMEPAGE
 })
 
-
+export const masterFoodList = (list) => {
+  return {
+    type: c.MASTER_FOOD_LIST,
+    masterFoodItemList: list
+  }
+}
 
 export const signOut = () => ({
   type: c.SIGN_OUT

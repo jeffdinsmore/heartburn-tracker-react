@@ -12,3 +12,4 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const HOMEPAGE = 'HOMEPAGE';
 export const LOGIN_VISIBLE = 'LOGIN_VISIBLE';
 export const USER_ID = "USER_ID";
+export const MASTER_FOOD_LIST = 'MASTER_FOOD_LIST';

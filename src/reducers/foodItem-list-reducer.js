@@ -1,8 +1,10 @@
 import * as c from './../actions/ActionTypes';
 
 const foodItemListReducer = (state = {}, action) => {
-  const { foodName, ingredients, heartburn, timeOpen, id } = action;
+  const { foodName, ingredients, heartburn, timeOpen, id, masterFoodItemList } = action;
   switch (action.type) {
+    case c.MASTER_FOOD_LIST:
+      return Object.assign({}, state, masterFoodItemList);
     case c.ADD_FOODITEM:
       return Object.assign({}, state, {
         [id]: {

@@ -18,12 +18,17 @@ import Footer from './Footer'
 import { createBrowserHistory } from 'history';
 import { withRouter, useRouteMatch, useHistory } from 'react-router-dom';
 import YourStats from './foodViews/YourStats';
+import 'firebase/firestore';
+// const firebase = require("firebase/firebase");
+// // Required for side-effects
+// require("firebase/firestore");
 
 
 function FoodItemControl(props) {
+
   const db = firebase.firestore();
   const dbFoodItems = [];
-  
+
   const state = useSelector(state => state);
   useEffect(() => {
     (async () => {
@@ -37,6 +42,7 @@ function FoodItemControl(props) {
             // if (signInName === "Signed out" || signInName === "Not signed in") {
             dispatch(a.signInName(user.email));
             dispatch(a.userId(user.uid));
+            getData(user.uid)
             //console.log("s", state, props)
           }
           // } else {
@@ -50,28 +56,68 @@ function FoodItemControl(props) {
   }, [])
 
   useEffect(() => {
-        const subscriber = db.collection('foodItems')
-        .onSnapshot((querySnapshot) => {
-          querySnapshot.forEach((doc, i) => {
-            dbFoodItems.push({...doc.data(), key: doc.id,
-            })
+    const subscriber = db.collection('foodItems')
+      .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc, i) => {
+          dbFoodItems.push({
+            ...doc.data(), key: doc.id,
           })
         })
-      
-    ;
+      })
+
+      ;
     return () => subscriber();
   }, [])
+  useEffect(() => {
+    
+  })
 
   const userId = useSelector(state => state.userId);
 
+  async function getData(userid) {
+    //console.log("get", userid)
+    const ref = await firebase
+      .firestore().get({ collection: 'users', doc: userid, subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+        })
+      // ]);
+    //}
+      // .collection("users")
+      // .doc(userid)
+      // .get();
+      //console.log('get', ref)
+    //const snapshot = await ref.get();
+    console.log('get', ref)
+    // ref.forEach(doc => {
+    //   console.log("11111", doc.id, '=>', doc.data());
+    // });
+  // })
+}
+
+  const addFoodList = (list) => {
+    const { dispatch } = props;
+    dispatch(a.masterFoodList(list));
+  }
+  // .get({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] }).
+  // useEffect(() => {
+  //   props.firestore.get({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems' }], storeAs: 'foodItems' }).then((foodItems) => {
+  //     //dispatch(a.masterFoodItemList(foodItems))
+  //     console.log("food", foodItems)
+  //     // const name = firestoreFoodItem.foodName.split(" ").join("");
+  //     //dispatch(a.selectFoodItem(firestoreFoodItem))
+  //     //history.push('/foodItem/' + firestoreFoodItem.id)
+  //     //console.log(state)
+  //     // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
+  //     // //setState({selectedFoodItem: firestoreFoodItem});
+  //   });
+  // }, [])
   // useFirestoreConnect([
   //   {
   //     collection: 'users', doc: userId.userId,
   //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
   //   }
   // ]);
-  
-  
+
+
   // useFirestoreConnect([
   //   {
   //     collection: 'users', doc: userId.userId,
@@ -84,12 +130,12 @@ function FoodItemControl(props) {
   const editing = useSelector(state => state.editing)
   //console.log("mast", editing)
   const showModal = useSelector(state => state.showModal);
-  
+  const masterFoodItemList = useSelector(state => state.masterFoodItemList);
   //const [ state, setState ] = useState({selectedFoodItem: null})
   const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
   const loginName = useSelector(state => state.loginName.user);
-  const loginVisible = useSelector(state => state.loginVisible);
-  
+  //const loginVisible = useSelector(state => state.loginVisible);
+
   //const isShowing = useSelector(state => state.showModal);
   // const [state, setState] = useState({ selectedFoodItem: null });
   // const [ selectedFoodItem, setSelectedFoodItem ] = useState(null);
@@ -97,13 +143,18 @@ function FoodItemControl(props) {
   useEffect(() => {
     console.log("component updated!");
   }, [])
+  useEffect(() => {
+    console.log("upadted")
+    const { dispatch } = props;
+    dispatch(a.masterFoodList(foodItems));
+  }, [])
 
   const getUserData = () => {
 
   }
 
 
-  
+
 
   const handleClick = (selected) => {
     const id = selected ? selected.id : null;
@@ -112,13 +163,16 @@ function FoodItemControl(props) {
     const action = a.toggleForm();
     const action2 = a.editing();
     const action3 = a.unSelectFoodItem();
-    
+
+    dispatch(a.masterFoodList(foodItems))
     //const action4 = a.togglefooditemlistShowing()
+
     if (loginName === "Not signed in") {
       history.push('/add-food-item')
     } else if (history.location.pathname === '/foodlist') {
       history.push('/add-food-item')
-    } else if (history.location.pathname == '/foodItem/edit/' + id) { console.log("jjjjj")
+    } else if (history.location.pathname == '/foodItem/edit/' + id) {
+      console.log("jjjjj")
       history.push('/foodItem/' + id)
       dispatch(action2)
     } else if (history.location.pathname == '/') {
@@ -130,12 +184,12 @@ function FoodItemControl(props) {
       dispatch(action3);
     } else if (history.location.pathname === '/add-food-item') {
       dispatch(action)
-      if(selectedFoodItem !== null) {
+      if (selectedFoodItem !== null) {
         history.push('/foodlist')
       } else {
         history.goBack()
       }
-      
+
     }
     // else {
     //   history.push('/foodlist')
@@ -148,7 +202,7 @@ function FoodItemControl(props) {
         history.push('/add-food-item')
       }
       // if (editing) {
-        
+
 
       //   dispatch(action2);
       // }
@@ -243,7 +297,7 @@ function FoodItemControl(props) {
     console.log("handleEdit", state, props, foodItem)
     const action = a.editing();
     dispatch(action);
-      
+
     history.push('/foodItem/edit' + '/' + foodItem.id)
   }
 
@@ -269,37 +323,45 @@ function FoodItemControl(props) {
   //     </React.Fragment>
   //   )
   // }
-  console.log("mast1", state, props)
+  console.log("mast1", state, props, foodItems)
   let currentlyVisibleState = null;
   let buttonText = null;
   let buttonClass = "btn btn-info btn-sm";
   //const auth = props.firebase.auth();
   // if ((isLoaded(auth)) && (auth.currentUser != null)) {
-  if (editing) {
-    currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} userId={userId} />
-    buttonClass = "btn btn-secondary btn-sm";
-    buttonText = "Cancel";
-    console.log("current", currentlyVisibleState)
-  } else if (selectedFoodItem != null) {
-    currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
-    buttonText = "Return to Food List";
-    // } else if (formVisibleOnPage) {
-    //   currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
-    //   buttonText = "Return to Food List";
-  } else if (history.location.pathname === '/') {
-    currentlyVisibleState = <Homepage {...props}/>; buttonText = "Go To Your Food List";
-  } else if (history.location.pathname === "/add-food-item") {
-    currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} userId={userId} />;
-    buttonText = "Cancel";
-    buttonClass = "btn btn-secondary btn-sm";
-  } else if (history.location.pathname === "/yourstats") {
-    currentlyVisibleState = <YourStats userId={userId} masterFoodList={foodItems}/>
-    buttonText = "See Food List";
-  // } else if (history.location.pathname === "/login") {
-  //   currentlyVisibleState = <Signin />
+  console.log(isLoaded(db))
+  if (isLoaded(db)) {
+
+
+    if (editing) {
+      currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} userId={userId} />
+      buttonClass = "btn btn-secondary btn-sm";
+      buttonText = "Cancel";
+      console.log("current", currentlyVisibleState)
+    } else if (selectedFoodItem != null) {
+      currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
+      buttonText = "Return to Food List";
+      // } else if (formVisibleOnPage) {
+      //   currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
+      //   buttonText = "Return to Food List";
+    } else if (history.location.pathname === '/foodlist') {
+      currentlyVisibleState = <FoodItemList {...props} foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} userId={userId} addMasterFoodList={addFoodList} foodItems={foodItems} />;
+      buttonText = "Add Food Item";
+    } else if (history.location.pathname === "/add-food-item") {
+      currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} userId={userId} />;
+      buttonText = "Cancel";
+      buttonClass = "btn btn-secondary btn-sm";
+    } else if (history.location.pathname === "/yourstats") {
+      currentlyVisibleState = <YourStats userId={userId} masterFoodList={foodItems} />
+      buttonText = "See Food List";
+      // } else if (history.location.pathname === "/login") {
+      //   currentlyVisibleState = <Signin />
+    } else {
+      currentlyVisibleState = <Homepage {...props} />; buttonText = "Go To Your Food List";
+
+    }
   } else {
-    currentlyVisibleState = <FoodItemList {...props} foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} userId={userId} />;
-    buttonText = "Add Food Item";
+    currentlyVisibleState = "Loading"
   }
   //console.log("state", state, isShowing)
 
@@ -307,7 +369,7 @@ function FoodItemControl(props) {
     <React.Fragment>
       {currentlyVisibleState}
       <br></br>
-      <button style={{display: loginName !== "Not signed in" ? 'inline-block' : "none"}} className={buttonClass} onClick={() => handleClick(selectedFoodItem)}>{buttonText}</button>
+      <button style={{ display: loginName !== "Not signed in" ? 'inline-block' : "none" }} className={buttonClass} onClick={() => handleClick(selectedFoodItem)}>{buttonText}</button>
       {/* <Signin data={state} proppy={props} /> */}
       <Footer data={state} proppy={props} />
     </React.Fragment>
