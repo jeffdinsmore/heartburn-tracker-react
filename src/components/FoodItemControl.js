@@ -77,13 +77,20 @@ function FoodItemControl(props) {
   async function getData(userid) {
     //console.log("get", userid)
     const ref = await firebase
-      .firestore().get({ collection: 'users', doc: userid, subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-        })
+      .firestore()
+      // .get({ collection: 'users', doc: userid, subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+      //   })
       // ]);
     //}
-      // .collection("users")
-      // .doc(userid)
-      // .get();
+      .collection("users")
+      .doc(userid)
+      .collection('fooditems')
+      .doc()
+      .get()
+      // .listCollections()
+      // .then(collections => collections.forEach(collection => {
+      //   console.log('Found subcollection with id: ', collection.id)
+      // }))
       //console.log('get', ref)
     //const snapshot = await ref.get();
     console.log('get', ref)
@@ -330,8 +337,8 @@ function FoodItemControl(props) {
   //const auth = props.firebase.auth();
   // if ((isLoaded(auth)) && (auth.currentUser != null)) {
   console.log(isLoaded(db))
-  if (isLoaded(db)) {
-
+  //if (isLoaded(db)) {
+  if(userId.userId !== null) {
 
     if (editing) {
       currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} userId={userId} />

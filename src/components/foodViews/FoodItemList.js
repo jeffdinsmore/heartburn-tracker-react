@@ -10,12 +10,12 @@ function FoodItemList(props) {
   const { foodItems } = props;
   console.log("listy", props);
   //function fireConnect() {
-    // useFirestoreConnect([
-    //   {
-    //     collection: 'users', doc: props.userId.userId,
-    //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-    //   }
-    // ]);
+    useFirestoreConnect([
+      {
+        collection: 'users', doc: props.userId.userId,
+        subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+      }
+    ]);
   //}
   
 
