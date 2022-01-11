@@ -73,7 +73,12 @@ function FoodItemControl(props) {
   })
 
   const userId = useSelector(state => state.userId);
-
+    //   useFirestoreConnect([
+    //   {
+    //     collection: 'users', doc: props.userId.userId,
+    //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+    //   }
+    // ]);
   async function getData(userid) {
     //console.log("get", userid)
     const ref = await firebase
