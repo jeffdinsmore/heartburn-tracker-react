@@ -4,15 +4,15 @@ import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import PropTypes from "prop-types";
 
 const YourStats = (props) => {
+
+  useFirestoreConnect([
+    {
+      collection: 'users', doc: props.userId.userId,
+      subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+    }
+  ]);
   const id = useSelector(state => state.userId.userId) 
-
-  // useFirestoreConnect([
-  //   {
-  //     collection: 'users', doc: props.userId.userId,
-  //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-  //   }
-  // ]);
-
+  const state = useSelector(state => state);
   // Create a query against the collection
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   let heartburnItems, noHeartburnItems, heartburnArray, noHeartburnArray, comparison, heartburnArrayCombined, noHeartburnArrayCombined;
@@ -73,7 +73,7 @@ const YourStats = (props) => {
   useEffect(() => {
     console.log("component updated")
   });
-
+  console.log('stats', props, state, foodItems)
   if (props.masterFoodList !== undefined) {
     heartburnItems = foodItems.filter(f => f.heartburn === "Yes");
     noHeartburnItems = foodItems.filter(f => f.heartburn === "No");
