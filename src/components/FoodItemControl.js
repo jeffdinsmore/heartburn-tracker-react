@@ -199,7 +199,12 @@ function FoodItemControl(props) {
       if (selectedFoodItem !== null) {
         history.push('/foodlist')
       } else {
-        history.goBack()
+        if(editing) {
+          history.push('/');
+        } else {
+          history.goBack()
+        }
+        
       }
 
     }
@@ -239,6 +244,7 @@ function FoodItemControl(props) {
   }
 
   const handleCancelModal = () => {
+    console.log("Modal canceled")
     const { dispatch } = props;
     const action = a.showModal();
     if (showModal) {
@@ -320,6 +326,12 @@ function FoodItemControl(props) {
       dispatch(action);
     }
   }
+
+  const handleUnselectFoodItem = () => {
+    const { dispatch } = props;
+    const action = a.unSelectFoodItem;
+    dispatch(action);
+  }
   // const auth = this.props.firebase.auth();
   // if (!isLoaded(auth)) {
   //   return (
@@ -357,6 +369,15 @@ function FoodItemControl(props) {
       //   currentlyVisibleState = <NewFoodItemForm onNewFoodItemCreation={handleAddingNewFoodItemToList} />;
       //   buttonText = "Return to Food List";
     } else if (history.location.pathname === '/foodlist') {
+      console.log('s,s', showModal, selectedFoodItem)
+      if(showModal) {
+        console.log("s", showModal)
+        handleCancelModal()
+      }
+      if(selectedFoodItem !== null) {
+        console.log(selectedFoodItem)
+        handleUnselectFoodItem()
+      }
       currentlyVisibleState = <FoodItemList {...props} foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} userId={userId} addMasterFoodList={addFoodList} foodItems={foodItems} />;
       buttonText = "Add Food Item";
     } else if (history.location.pathname === "/add-food-item") {
