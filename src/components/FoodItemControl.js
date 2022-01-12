@@ -372,11 +372,11 @@ function FoodItemControl(props) {
       console.log('s,s', showModal, selectedFoodItem)
       if(showModal) {
         console.log("s", showModal)
-        handleCancelModal()
+        {handleCancelModal()}
       }
       if(selectedFoodItem !== null) {
         console.log(selectedFoodItem)
-        handleUnselectFoodItem()
+        {handleUnselectFoodItem()}
       }
       currentlyVisibleState = <FoodItemList {...props} foodItemList={foodItems} onFoodItemSelection={handleChangingSelectedFoodItem} userId={userId} addMasterFoodList={addFoodList} foodItems={foodItems} />;
       buttonText = "Add Food Item";
