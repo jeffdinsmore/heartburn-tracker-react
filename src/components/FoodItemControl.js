@@ -16,9 +16,11 @@ import Signin from './auth/Signin';
 import Header from './layout/Header';
 import Footer from './Footer'
 import { createBrowserHistory } from 'history';
-import { withRouter, useRouteMatch, useHistory } from 'react-router-dom';
+import { withRouter, useRouteMatch, useHistory, Link } from 'react-router-dom';
 import YourStats from './foodViews/YourStats';
 import 'firebase/firestore';
+import Nav from 'react-bootstrap/Nav';
+import { Button, Navbar, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 // const firebase = require("firebase/firebase");
 // // Required for side-effects
 // require("firebase/firestore");
@@ -404,6 +406,9 @@ function FoodItemControl(props) {
       <br></br>
       <button style={{ display: loginName !== "Not signed in" ? 'inline-block' : "none" }} className={buttonClass} onClick={() => handleClick(selectedFoodItem)}>{buttonText}</button>
       {/* <Signin data={state} proppy={props} /> */}
+      <Nav.Link as={Link} className={buttonClass} style={{color:'white', width: '140px'}} to={'/foodlist'}>
+    Add Food Item
+</Nav.Link>
       <Footer data={state} proppy={props} />
     </React.Fragment>
   );
