@@ -14,7 +14,6 @@
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-bootstrap-validation": "^0.1.11",
-    "react-compose": "^2.0.0",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-redux-firebase": "^3.1.1",
@@ -23,7 +22,6 @@
     "redux": "^4.0.5",
     "redux-firestore": "^0.12.0",
     "styled-components": "^5.2.1",
-    "use-force-update": "^1.0.7",
     "use-react-router": "^1.0.7",
     "web-vitals": "^0.2.4"
   },

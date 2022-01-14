@@ -5,6 +5,24 @@ import PropTypes from "prop-types";
 
 const YourStats = (props) => {
 
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       firebase.auth().onAuthStateChanged((user) => {
+  //         const { dispatch } = props;
+  //         if (user) {
+  //           dispatch(a.signInName(user.email));
+  //           dispatch(a.userId(user.uid));
+  //           //getData(user.uid)
+  //           console.log("s", state, props)
+  //         }
+  //       })
+  //     } catch (error) {
+  //       alert(error);
+  //     }
+  //   })();
+  // }, [])
+
   useFirestoreConnect([
     {
       collection: 'users', doc: props.userId.userId,

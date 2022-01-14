@@ -11,7 +11,7 @@ import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-fireba
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux';
 import Routes from "./components/Routes";
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import FoodItemList from './components/foodViews/FoodItemList';
 import Homepage from './components/Homepage';
 
@@ -31,7 +31,6 @@ function App(props) {
   const state = useSelector(state => state);
   //console.log("props", props, state)
   return (
-    <BrowserRouter>
       <Router>
 
         <Header />
@@ -69,14 +68,23 @@ function App(props) {
           </Route>
           <Route exact path="/">
             <BodyStyling>
+              <Homepage />
+            </BodyStyling>
+          </Route>
+          <Route path="/edit/foodItem">
+            <BodyStyling>
+              <FoodItemControl />
+            </BodyStyling>
+          </Route>
+          <Route path="/foodItem">
+            <BodyStyling>
               <FoodItemControl />
             </BodyStyling>
           </Route>
         </Switch>
-
         <Footer />
+        
       </Router>
-    </BrowserRouter>
   );
 }
 

@@ -1,16 +1,34 @@
-import React from 'react';
-// import FoodItem from "./FoodItem";
-import { useFirestoreConnect } from 'react-redux-firebase';
+import React, { useEffect } from 'react';
 import PropTypes from "prop-types";
 import Nav from 'react-bootstrap/Nav';
 import { createBrowserHistory } from 'history';
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
+import * as a from './../actions';
+import firebase from 'firebase';
 
 function Homepage(props) {
-  // useFirestoreConnect([
-  //   { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
-  // ]);
+  const { loginName } = props;
+
+  useEffect(() => {
+    (async () => {
+      try {
+        firebase.auth().onAuthStateChanged((user) => {
+          const { dispatch } = props;
+          if (user) {
+            dispatch(a.signInName(user.email));
+            dispatch(a.userId(user.uid));
+          }
+        })
+      } catch (error) {
+        alert(error);
+      }
+      console.log("Home component did mount")
+    })();
+  }, [])
+
   const history = createBrowserHistory();
-    
+    console.log('home', props)
   return (
     <React.Fragment>
       <br />
@@ -42,13 +60,25 @@ function Homepage(props) {
       <br />
 
       {/* <Nav.Link href="/foodlist" to="/foodlist">Go To Your Food List</Nav.Link> */}
+
+      <Nav.Link as={Link} className='btn btn-info btn-sm' style={{color:'white', marginLeft: "10px", padding: '4px 10px', display: loginName !== "Not signed in" ? 'inline-block' : "none" }} to='/foodlist'>
+        See Food Items
+</Nav.Link>
     </React.Fragment>
   );
 
 }
 
 Homepage.propTypes = {
-  onFoodItemSelection: PropTypes.func
+  userId: PropTypes.string,
+  firestore: PropTypes.func,
+  loginName: PropTypes.string,
 };
 
-export default Homepage;
+const mapStateToProps = state => ({
+  userId: state.userId.userId,
+  firestore: state.firestore,
+  loginName: state.loginName.user
+});
+
+export default connect(mapStateToProps)(Homepage);

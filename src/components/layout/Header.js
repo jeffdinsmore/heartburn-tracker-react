@@ -66,7 +66,7 @@ Header.propTypes = {
   loginName: PropTypes.string
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = () => {
   return {
   }
 }

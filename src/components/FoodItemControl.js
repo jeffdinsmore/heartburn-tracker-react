@@ -30,7 +30,8 @@ function FoodItemControl(props) {
 
   const db = firebase.firestore();
   const dbFoodItems = [];
-
+  //const { history } = props;
+  //const history = useHistory();
   const state = useSelector(state => state);
   useEffect(() => {
     (async () => {
@@ -76,12 +77,6 @@ function FoodItemControl(props) {
   
   const pathName = useSelector(state => state.history.path)
   const userId = useSelector(state => state.userId);
-    //   useFirestoreConnect([
-    //   {
-    //     collection: 'users', doc: props.userId.userId,
-    //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-    //   }
-    // ]);
   async function getData(userid) {
     //console.log("get", userid)
     const ref = await firebase
@@ -112,48 +107,15 @@ function FoodItemControl(props) {
     const { dispatch } = props;
     dispatch(a.masterFoodList(list));
   }
-  // .get({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] }).
-  // useEffect(() => {
-  //   props.firestore.get({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems' }], storeAs: 'foodItems' }).then((foodItems) => {
-  //     //dispatch(a.masterFoodItemList(foodItems))
-  //     console.log("food", foodItems)
-  //     // const name = firestoreFoodItem.foodName.split(" ").join("");
-  //     //dispatch(a.selectFoodItem(firestoreFoodItem))
-  //     //history.push('/foodItem/' + firestoreFoodItem.id)
-  //     //console.log(state)
-  //     // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
-  //     // //setState({selectedFoodItem: firestoreFoodItem});
-  //   });
-  // }, [])
-  // useFirestoreConnect([
-  //   {
-  //     collection: 'users', doc: userId.userId,
-  //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-  //   }
-  // ]);
-
-
-  // useFirestoreConnect([
-  //   {
-  //     collection: 'users', doc: userId.userId,
-  //     subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-  //   }
-  // ]);
+  
   const history = createBrowserHistory();
   const firestore = useSelector(props => props.firestore)
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   const editing = useSelector(state => state.editing)
-  //console.log("mast", editing)
   const showModal = useSelector(state => state.showModal);
   const masterFoodItemList = useSelector(state => state.masterFoodItemList);
-  //const [ state, setState ] = useState({selectedFoodItem: null})
   const formVisibleOnPage = useSelector(state => state.formVisibleOnPage);
   const loginName = useSelector(state => state.loginName.user);
-  //const loginVisible = useSelector(state => state.loginVisible);
-
-  //const isShowing = useSelector(state => state.showModal);
-  // const [state, setState] = useState({ selectedFoodItem: null });
-  // const [ selectedFoodItem, setSelectedFoodItem ] = useState(null);
   const selectedFoodItem = useSelector(state => state.selectedFoodItem)
   useEffect(() => {
     console.log("component updated!");
@@ -183,29 +145,29 @@ function FoodItemControl(props) {
     //const action4 = a.togglefooditemlistShowing()
 
     if (loginName === "Not signed in") {
-      props.history.push('/add-food-item')
+      history.push('/add-food-item')
     } else if (history.location.pathname === '/foodlist') {
-      props.history.push('/add-food-item')
-    } else if (history.location.pathname == '/foodItem/edit/' + id) {
+      history.push('/add-food-item')
+    } else if (history.location.pathname === '/edit/foodItem/' + id) {
       console.log("jjjjj")
-      props.history.push('/foodItem/' + id)
+      history.push('/foodItem/' + id)
       dispatch(action2)
-    } else if (history.location.pathname == '/') {
-      props.history.push('/foodlist')
+    } else if (history.location.pathname === '/') {
+      history.push('/foodlist')
     } else if (history.location.pathname === '/yourstats') {
-      props.history.push('/foodlist')
-    } else if (history.location.pathname == '/foodItem/' + id) {
-      props.history.push('/foodlist')
+      history.push('/foodlist')
+    } else if (history.location.pathname == '/foodItem/') {
+      history.push('/foodlist')
       dispatch(action3);
     } else if (history.location.pathname === '/add-food-item') {
       dispatch(action)
       if (selectedFoodItem !== null) {
-        props.history.push('/foodlist')
+        history.push('/foodlist')
       } else {
         if(editing) {
-          props.history.push('/');
+          history.push('/');
         } else {
-          props.history.goBack()
+          history.goBack()
         }
         
       }
@@ -218,8 +180,8 @@ function FoodItemControl(props) {
     //console.log("eeee", editing, props)
     if (selectedFoodItem != null) {
       let id = selectedFoodItem.id
-      if (history.location.pathname === '/foodItem/edit/' + id) {
-        props.history.push('/add-food-item')
+      if (history.location.pathname === '/edit/foodItem/' + id) {
+        history.push('/add-food-item')
       }
       // if (editing) {
 
@@ -285,11 +247,12 @@ function FoodItemControl(props) {
       //console.log('ppppppppppppp', path)
       dispatch(a.selectFoodItem(firestoreFoodItem))
       dispatch(a.history(path))
-      props.history.push('/foodItem/' + firestoreFoodItem.id)
+      //history.push('/foodItem/' + firestoreFoodItem.id)
       console.log(state)
       // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
       // //setState({selectedFoodItem: firestoreFoodItem});
     });
+    history.push('/foodItem/')
     // setCount(count + 1);
     //console.log("joey")
   }
@@ -322,7 +285,7 @@ function FoodItemControl(props) {
     const action = a.editing();
     dispatch(action);
 
-    props.history.push('/foodItem/edit' + '/' + foodItem.id)
+    history.push('/edit/foodItem/' + foodItem.id)
   }
 
   const handleClickSignin = () => {
@@ -353,7 +316,7 @@ function FoodItemControl(props) {
   //     </React.Fragment>
   //   )
   // }
-  console.log("mast1", state, props, pathName)
+  console.log("mast1", state, props, pathName, history.location.pathname)
   let currentlyVisibleState = null;
   let buttonText = null;
   let buttonClass = "btn btn-info btn-sm";
@@ -365,13 +328,14 @@ function FoodItemControl(props) {
   //if (isLoaded(db)) {
   if(userId.userId !== null) {
 
-    if (history.location.pathname.slice(0,15) === '/edit/foodItem/') {
+    //if (history.location.pathname.slice(0,15) === '/edit/foodItem/') {
+      if(editing) {
       console.log('aaaaaaaaaa')
       currentlyVisibleState = <EditFoodItemForm foodItem={selectedFoodItem} onEditFoodItem={handleEditingFoodItemInList} userId={userId} />
       buttonClass = "btn btn-secondary btn-sm";
       buttonText = "Cancel";
       console.log("current", currentlyVisibleState)
-    } else if (selectedFoodItem !== null) {
+    } else if (history.location.pathname === '/foodItem/' && selectedFoodItem !== null) {
       console.log('bbbbbbbbb')
     //} else if(pathName !== null && pathName.slice(0,10) === '/foodItem/') {
       currentlyVisibleState = <FoodItemDetail foodItem={selectedFoodItem} onClickingDelete={handleDeletingFoodItem} onClickingModal={handleShowingModal} onClickingEdit={handleEditClick} onClickingCancel={handleCancelModal} showModal={showModal} />
@@ -415,15 +379,15 @@ function FoodItemControl(props) {
     currentlyVisibleState = "Loading"
   }
   //console.log("state", state, isShowing)
-
+  console.log("button", buttonNav)
   return (
     <React.Fragment>
       {currentlyVisibleState}
       <br></br>
-      {/* <button style={{ display: loginName !== "Not signed in" ? 'inline-block' : "none" }} className={buttonClass} onClick={() => handleClick(selectedFoodItem)}>{buttonText}</button> */}
+      <button style={{ display: loginName !== "Not signed in" ? 'inline-block' : "none" }} className={buttonClass} onClick={() => handleClick(selectedFoodItem)}>{buttonText}</button>
       {/* <Signin data={state} proppy={props} /> */}
 
-      <Nav.Link as={Link} className={buttonClass} style={{color:'white', width: buttonWidth, padding: '4px', display: loginName !== "Not signed in" ? 'inline-block' : "none" }} to={buttonNav}>
+      <Nav.Link as={Link} className={buttonClass} style={{color:'white', marginLeft: "10px", padding: '4px 10px', display: loginName !== "Not signed in" ? 'inline-block' : "none" }} to={buttonNav}>
         {buttonText}
 </Nav.Link>
       <Footer data={state} proppy={props} />
@@ -450,17 +414,11 @@ FoodItemControl.propTypes = {
   history: PropTypes.string
 };
 
-const mapStateToProps = state => {
-  //console.log("state", state)
+const mapStateToProps = () => {
   return {
-    // masterFoodItemList: state.masterFoodItemList,
-    // formVisibleOnPage: state.formVisibleOnPage,
-    // editing: state.editing,
-    //selectedFoodItem: state.selectedFoodItem,
-    // isShowing: state.isShowing,
   }
 }
 
-FoodItemControl = withRouter(connect(mapStateToProps)(FoodItemControl));
+FoodItemControl = connect(mapStateToProps)(FoodItemControl);
 
 export default withFirestore(FoodItemControl);
