@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from "prop-types";
 import Nav from 'react-bootstrap/Nav';
-import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import * as a from './../actions';
@@ -27,8 +26,6 @@ function Homepage(props) {
     })();
   }, [])
 
-  const history = createBrowserHistory();
-    console.log('home', props)
   return (
     <React.Fragment>
       <br />
@@ -61,12 +58,11 @@ function Homepage(props) {
 
       {/* <Nav.Link href="/foodlist" to="/foodlist">Go To Your Food List</Nav.Link> */}
 
-      <Nav.Link as={Link} className='btn btn-info btn-sm' style={{color:'white', marginLeft: "10px", padding: '4px 10px', display: loginName !== "Not signed in" ? 'inline-block' : "none" }} to='/foodlist'>
+      <Nav.Link as={Link} className='btn btn-info btn-sm' style={{ color: 'white', padding: '4px 10px', display: loginName !== "Not signed in" ? 'inline-block' : "none" }} to='/foodlist'>
         See Food Items
-</Nav.Link>
+      </Nav.Link>
     </React.Fragment>
   );
-
 }
 
 Homepage.propTypes = {
