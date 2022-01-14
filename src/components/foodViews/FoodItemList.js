@@ -83,6 +83,7 @@ function FoodItemList(props) {
             {mapFoodItems.map((foodItem) => {
               return <FoodItem
                 whenFoodItemClicked={props.onFoodItemSelection}
+                userId={props.userId.userId}
                 foodName={foodItem.props.foodName}
                 ingredients={foodItem.props.ingredients}
                 heartburn={foodItem.props.heartburn}

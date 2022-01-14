@@ -9,6 +9,7 @@ import homepageVisibleReducer from './homepage-visible-reducer';
 import signInNameReducer from './sign-in-name-reducer';
 import loginVisibleReducer from './login-visible-reducer';
 import userIdReducer from './user-id-reducer';
+import historyReducer from './history-reducer';
 
 const rootReducer = combineReducers({
   formVisibleOnPage: formVisibleReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   loginName: signInNameReducer,
   userId: userIdReducer,
   //loginVisible: loginVisibleReducer,
+  history: historyReducer,
   firestore: firestoreReducer
 });
 

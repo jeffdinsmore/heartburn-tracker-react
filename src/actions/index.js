@@ -61,6 +61,14 @@ export const signInName = (input) => {
   }
 };
 
+export const history = (input) => {
+  const { path } = input;
+  return {
+    type: c.HISTORY,
+    path: input,
+  }
+};
+
 export const userId = (input) => {
   const { userId } = input;
   return {

@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import Routes from "./components/Routes";
 import { BrowserRouter } from 'react-router-dom';
 import FoodItemList from './components/foodViews/FoodItemList';
+import Homepage from './components/Homepage';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;

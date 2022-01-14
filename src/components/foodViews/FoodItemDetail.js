@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Modal from '../Modal';
 
 function FoodItemDetail(props) {
-  
+  console.log('detail', props)
   const { foodItem, onClickingModal, onClickingDelete, onClickingEdit, showModal, onClickingCancel} = props;
   //const {isShowing, toggle} = useModal(foodItem.id)
   function convertDate(seconds, nanoseconds) {

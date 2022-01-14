@@ -23,6 +23,7 @@ describe("rootReducer", () => {
       loginName: {user: "Not signed in"},
       userId: {userId: null},
       selectedFoodItem: null,
+      history: {history: null}
       //loginVisible: false,
     });
   });
