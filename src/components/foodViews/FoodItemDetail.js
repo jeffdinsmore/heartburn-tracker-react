@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Modal from '../Modal';
+import { useSelector } from "react-redux";
 
 function FoodItemDetail(props) {
-  console.log('detail', props)
+  const state = useSelector(state => state)
+  console.log('detail', state, props)
   const { foodItem, onClickingModal, onClickingDelete, onClickingEdit, showModal, onClickingCancel} = props;
   //const {isShowing, toggle} = useModal(foodItem.id)
   function convertDate(seconds, nanoseconds) {

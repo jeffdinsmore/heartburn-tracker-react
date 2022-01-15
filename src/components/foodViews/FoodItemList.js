@@ -5,25 +5,23 @@ import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { masterFoodList } from "../../actions";
 import { propTypes } from "react-bootstrap/esm/Image";
+import * as a from '../../actions';
+import { createBrowserHistory } from 'history';
 
 function FoodItemList(props) {
   const { foodItems } = props;
+  const history = createBrowserHistory();
+  const userId = useSelector(state => state.userId.userId);
+  const state = useSelector(state => state);
   console.log("listy", props);
-  //function fireConnect() {
+
     useFirestoreConnect([
       {
         collection: 'users', doc: props.userId.userId,
         subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
       }
     ]);
-  //}
-  
 
-  // useFirestoreConnect([
-  //   { collection: 'foodItems', orderBy: ['timeOpen', 'desc'] }
-  // ]);
-  //const foodItems = useSelector(state => state.firestore.ordered.foodItems);
-  //const firestate = useSelector(state => state.firestore);
   const convertDate = (date) => {
     let month = date.toDateString().substring(7, 4);
     let day = date.toDateString().substring(10, 8);
@@ -35,6 +33,39 @@ function FoodItemList(props) {
     props.addMasterFoodList(foodItems);
     }, [])
     
+    const handleChangingSelectedFoodItem = (id) => {
+      // props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
+      // {
+      //   collection: 'users', doc: props.userId.userId,
+      //   subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+      // }
+  
+      const { dispatch } = props;
+      //const action = a.selectFoodItem();
+      props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
+        const firestoreFoodItem = {
+          foodName: foodItem.get("foodName"),
+          brand: foodItem.get("brand"),
+          ingredients: foodItem.get("ingredients"),
+          heartburn: foodItem.get("heartburn"),
+          timeOpen: foodItem.get("timeOpen"),
+          id: foodItem.id
+        }
+        // const name = firestoreFoodItem.foodName.split(" ").join("");
+        const path = '/foodItem/' + firestoreFoodItem.id;
+        //console.log('ppppppppppppp', path)
+        dispatch(a.selectFoodItem(firestoreFoodItem))
+        dispatch(a.history(path))
+        //history.push('/foodItem/' + firestoreFoodItem.id)
+        console.log(state)
+        // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
+        // //setState({selectedFoodItem: firestoreFoodItem});
+      });
+      history.push('/foodItem/')
+      // setCount(count + 1);
+      //console.log("joey")
+    }
+
     console.log("loaded", isLoaded(foodItems))
     
     if(props.userId.userId === "Not signed in") {
@@ -82,7 +113,7 @@ function FoodItemList(props) {
 
             {mapFoodItems.map((foodItem) => {
               return <FoodItem
-                whenFoodItemClicked={props.onFoodItemSelection}
+                whenFoodItemClicked={handleChangingSelectedFoodItem}
                 userId={props.userId.userId}
                 foodName={foodItem.props.foodName}
                 ingredients={foodItem.props.ingredients}

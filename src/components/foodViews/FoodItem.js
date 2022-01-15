@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function FoodItem(props) {
+
+  
   function strong(heartburn) {
     if (heartburn === "Yes") {
       return <strong><em>{heartburn}</em></strong>;

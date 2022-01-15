@@ -12,23 +12,36 @@ import Nav from 'react-bootstrap/Nav';
 function NewFoodItemForm(props) {
   const firestore = useFirestore();
   const history = createBrowserHistory();
-  const { userId, loginName } = props;
+  const { userId, loginName, selectedFoodItem, editing, dispatch } = props;
 
-  const getUserId = async () => {
-    let uid = "";
-    await firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        uid = user.uid;
-      }
-    })
-    return uid;
-  }
+  // const getUserId = async () => {
+  //   let uid = "";
+  //   await firebase.auth().onAuthStateChanged((user) => {
+  //     if (user) {
+  //       uid = user.uid;
+  //     }
+  //   })
+  //   return uid;
+  // }
 
   const handleAddingNewFoodItemToList = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
     dispatch(action);
     history.goBack();
+  }
+
+  const handleClick = () => {
+    if(editing) {
+      dispatch(a.editing())
+      history.push('/foodlist')
+    } else if(selectedFoodItem !== null) {
+      dispatch(a.unSelectFoodItem());
+      history.push('/foodlist')
+    } else {
+      history.goBack();
+    }
+    
   }
 
   function addFoodItemToFirestore(event) {
@@ -47,7 +60,7 @@ function NewFoodItemForm(props) {
 
     );
   }
-
+  console.log("newfood item", props)
   return (
     <React.Fragment>
       <h2>Add A Food Item To Your Tracker</h2>
@@ -81,23 +94,28 @@ function NewFoodItemForm(props) {
         <button className="btn btn-success btn-sm" type='submit'>Submit</button>
       </form>
       <br></br>
-      <Nav.Link as={Link} className='btn btn-secondary btn-sm' style={{ color: 'white', padding: '4px 10px', display: 'inline-block'}} to='/foodlist'>
+      <button className='btn btn-secondary btn-sm' onClick={() => handleClick()} >
         Cancel
-      </Nav.Link>
+      </button>
     </React.Fragment>
   );
 }
 
 NewFoodItemForm.propTypes = {
   userId: PropTypes.string,
-  firestore: PropTypes.func,
+  firestore: PropTypes.object,
   loginName: PropTypes.string,
+  selectedFoodItem: PropTypes.object,
+  editing: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   userId: state.userId.userId,
   firestore: state.firestore,
-  loginName: state.loginName.user
+  loginName: state.loginName.user,
+  selectedFoodItem: state.selectedFoodItem,
+  editing: state.editing,
+  
 });
 
 export default connect(mapStateToProps)(NewFoodItemForm);

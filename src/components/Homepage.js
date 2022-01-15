@@ -25,7 +25,7 @@ function Homepage(props) {
       console.log("Home component did mount")
     })();
   }, [])
-
+  console.log("home", props)
   return (
     <React.Fragment>
       <br />
@@ -67,14 +67,18 @@ function Homepage(props) {
 
 Homepage.propTypes = {
   userId: PropTypes.string,
-  firestore: PropTypes.func,
+  firestore: PropTypes.object,
   loginName: PropTypes.string,
+  selectedFoodItem: PropTypes.object,
+  editing: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   userId: state.userId.userId,
   firestore: state.firestore,
-  loginName: state.loginName.user
+  loginName: state.loginName.user,
+  selectedFoodItem: state.selectedFoodItem,
+  editing: state.editing
 });
 
 export default connect(mapStateToProps)(Homepage);
