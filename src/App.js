@@ -14,6 +14,7 @@ import Routes from "./components/Routes";
 import { HashRouter } from 'react-router-dom';
 import FoodItemList from './components/foodViews/FoodItemList';
 import Homepage from './components/Homepage';
+import NewFoodItemForm from './components/foodViews/NewFoodItemForm';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -52,7 +53,7 @@ function App(props) {
           </Route>
           <Route path="/add-food-item">
             <BodyStyling>
-              <FoodItemControl />
+              <NewFoodItemForm />
             </BodyStyling>
           </Route>
           {/* <Route path="/foodlist" component={FoodItemList}> */}
