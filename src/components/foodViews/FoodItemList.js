@@ -8,22 +8,39 @@ import { propTypes } from "react-bootstrap/esm/Image";
 import * as a from '../../actions';
 import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 
 function FoodItemList(props) {
-  const { userId, foodItems, loginName } = props;
-  console.log('list', props)
+  const { userId, loginName, dispatch } = props;
+  
+  console.log('list', props, )
   const history = createBrowserHistory();
   //const userId = useSelector(state => state.userId.userId);
   const state = useSelector(state => state);
-  console.log("listy", props, state);
+  const ref = firebase.firestore().collections('users').doc(userId).collections('foodItems');
 
+  function getFoodItems() {
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      console.log(items)
+      dispatch(a.masterFoodList(items))
+    })
+  }
+
+  useEffect(() => {
+    getFoodItems();
+  }, [])
+  
   useFirestoreConnect([
     {
       collection: 'users', doc: userId,
       subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
     }
   ]);
-
+  const foodItems = useSelector(state => state.firestore.ordered.foodItems);
   const convertDate = (date) => {
     let month = date.toDateString().substring(7, 4);
     let day = date.toDateString().substring(10, 8);
@@ -72,7 +89,7 @@ function FoodItemList(props) {
     // setCount(count + 1);
     //console.log("joey")
   }
-
+  console.log("listy", props, state, foodItems);
   console.log("loaded", isLoaded(foodItems))
 
   if (loginName === "Not signed in") {
@@ -149,7 +166,9 @@ FoodItemList.propTypes = {
   firestore: PropTypes.object,
   loginName: PropTypes.string,
   selectedFoodItem: PropTypes.object,
-  editing: PropTypes.bool
+  editing: PropTypes.bool,
+  foodItems: PropTypes.object,
+  masterFoodList: PropTypes.object
 };
 
 const mapStateToProps = state => ({
@@ -158,7 +177,8 @@ const mapStateToProps = state => ({
   loginName: state.loginName.user,
   selectedFoodItem: state.selectedFoodItem,
   editing: state.editing,
-
+  foodItems: state.firestore.ordered.foodItems,
+  masterFoodList: state.masterFoodItemList
 });
 
 export default connect(mapStateToProps)(FoodItemList);
