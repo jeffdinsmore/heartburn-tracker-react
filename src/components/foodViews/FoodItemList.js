@@ -7,20 +7,22 @@ import { masterFoodList } from "../../actions";
 import { propTypes } from "react-bootstrap/esm/Image";
 import * as a from '../../actions';
 import { createBrowserHistory } from 'history';
+import { connect } from 'react-redux';
 
 function FoodItemList(props) {
-  const { foodItems } = props;
+  const { userId, foodItems, loginName } = props;
+  console.log('list', props)
   const history = createBrowserHistory();
-  const userId = useSelector(state => state.userId.userId);
+  //const userId = useSelector(state => state.userId.userId);
   const state = useSelector(state => state);
-  console.log("listy", props);
+  console.log("listy", props, state);
 
-    useFirestoreConnect([
-      {
-        collection: 'users', doc: props.userId.userId,
-        subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-      }
-    ]);
+  useFirestoreConnect([
+    {
+      collection: 'users', doc: userId,
+      subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+    }
+  ]);
 
   const convertDate = (date) => {
     let month = date.toDateString().substring(7, 4);
@@ -30,51 +32,56 @@ function FoodItemList(props) {
     return month + "-" + day + "-" + year;
   }
   useEffect(() => {
-    props.addMasterFoodList(foodItems);
-    }, [])
-    
-    const handleChangingSelectedFoodItem = (id) => {
-      // props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
-      // {
-      //   collection: 'users', doc: props.userId.userId,
-      //   subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-      // }
-  
-      const { dispatch } = props;
-      //const action = a.selectFoodItem();
-      props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
-        const firestoreFoodItem = {
-          foodName: foodItem.get("foodName"),
-          brand: foodItem.get("brand"),
-          ingredients: foodItem.get("ingredients"),
-          heartburn: foodItem.get("heartburn"),
-          timeOpen: foodItem.get("timeOpen"),
-          id: foodItem.id
-        }
-        // const name = firestoreFoodItem.foodName.split(" ").join("");
-        const path = '/foodItem/' + firestoreFoodItem.id;
-        //console.log('ppppppppppppp', path)
-        dispatch(a.selectFoodItem(firestoreFoodItem))
-        dispatch(a.history(path))
-        //history.push('/foodItem/' + firestoreFoodItem.id)
-        console.log(state)
-        // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
-        // //setState({selectedFoodItem: firestoreFoodItem});
-      });
-      history.push('/foodItem/')
-      // setCount(count + 1);
-      //console.log("joey")
-    }
+    addMasterFoodList(foodItems);
+  }, []);
 
-    console.log("loaded", isLoaded(foodItems))
-    
-    if(props.userId.userId === "Not signed in") {
-      return (
-        <React.Fragment>
-          <h3>Loading...</h3>
-        </React.Fragment>
-      )
-    }
+  const addMasterFoodList = (list) => {
+    const { dispatch } = props;
+    dispatch(a.masterFoodList(list));
+  };
+
+  const handleChangingSelectedFoodItem = (id) => {
+    // props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
+    // {
+    //   collection: 'users', doc: props.userId.userId,
+    //   subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
+    // }
+
+    const { dispatch } = props;
+    //const action = a.selectFoodItem();
+    props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
+      const firestoreFoodItem = {
+        foodName: foodItem.get("foodName"),
+        brand: foodItem.get("brand"),
+        ingredients: foodItem.get("ingredients"),
+        heartburn: foodItem.get("heartburn"),
+        timeOpen: foodItem.get("timeOpen"),
+        id: foodItem.id
+      }
+      // const name = firestoreFoodItem.foodName.split(" ").join("");
+      const path = '/foodItem/' + firestoreFoodItem.id;
+      //console.log('ppppppppppppp', path)
+      dispatch(a.selectFoodItem(firestoreFoodItem))
+      dispatch(a.history(path))
+      //history.push('/foodItem/' + firestoreFoodItem.id)
+      console.log(state)
+      // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
+      // //setState({selectedFoodItem: firestoreFoodItem});
+    });
+    history.push('/foodItem/')
+    // setCount(count + 1);
+    //console.log("joey")
+  }
+
+  console.log("loaded", isLoaded(foodItems))
+
+  if (loginName === "Not signed in") {
+    return (
+      <React.Fragment>
+        <h3>Loading...</h3>
+      </React.Fragment>
+    )
+  }
 
   //   if (!isLoaded(foodItems)) {
   //   return (
@@ -84,8 +91,8 @@ function FoodItemList(props) {
   //   )
   // }
 
-  else if (isLoaded(foodItems)) {
-  
+  //else if (isLoaded(foodItems)) {
+  else if(userId !== null) {
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
       return <FoodItemList
@@ -114,7 +121,7 @@ function FoodItemList(props) {
             {mapFoodItems.map((foodItem) => {
               return <FoodItem
                 whenFoodItemClicked={handleChangingSelectedFoodItem}
-                userId={props.userId.userId}
+                userId={userId}
                 foodName={foodItem.props.foodName}
                 ingredients={foodItem.props.ingredients}
                 heartburn={foodItem.props.heartburn}
@@ -138,8 +145,20 @@ function FoodItemList(props) {
 }
 
 FoodItemList.propTypes = {
-  onFoodItemSelection: PropTypes.func,
-  addMasterFoodList: PropTypes.func
+  userId: PropTypes.string,
+  firestore: PropTypes.object,
+  loginName: PropTypes.string,
+  selectedFoodItem: PropTypes.object,
+  editing: PropTypes.bool
 };
 
-export default FoodItemList;
+const mapStateToProps = state => ({
+  userId: state.userId.userId,
+  firestore: state.firestore,
+  loginName: state.loginName.user,
+  selectedFoodItem: state.selectedFoodItem,
+  editing: state.editing,
+
+});
+
+export default connect(mapStateToProps)(FoodItemList);

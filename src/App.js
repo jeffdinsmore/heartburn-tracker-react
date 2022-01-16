@@ -59,7 +59,7 @@ function App(props) {
           {/* <Route path="/foodlist" component={FoodItemList}> */}
           <Route path="/foodlist">
             <BodyStyling>
-              <FoodItemControl />
+              <FoodItemList />
             </BodyStyling>
           </Route>
           <Route path="/buttoncount">
