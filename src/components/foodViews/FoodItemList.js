@@ -17,21 +17,21 @@ function FoodItemList(props) {
   const history = createBrowserHistory();
   //const userId = useSelector(state => state.userId.userId);
   const state = useSelector(state => state);
-  const ref = firebase.firestore().collections('users').doc(userId).collections('foodItems');
+  // const ref = firebase.firestore().collections('users').doc(userId).collections('foodItems');
 
-  function getFoodItems() {
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      console.log(items)
-      dispatch(a.masterFoodList(items))
-    })
-  }
+  // function getFoodItems() {
+  //   ref.onSnapshot((querySnapshot) => {
+  //     const items = [];
+  //     querySnapshot.forEach((doc) => {
+  //       items.push(doc.data());
+  //     });
+  //     console.log(items)
+  //     dispatch(a.masterFoodList(items))
+  //   })
+  // }
 
   useEffect(() => {
-    getFoodItems();
+    //getFoodItems();
   }, [])
   
   useFirestoreConnect([
@@ -53,7 +53,7 @@ function FoodItemList(props) {
   }, []);
 
   const addMasterFoodList = (list) => {
-    const { dispatch } = props;
+    //const { dispatch } = props;
     dispatch(a.masterFoodList(list));
   };
 
@@ -64,7 +64,7 @@ function FoodItemList(props) {
     //   subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
     // }
 
-    const { dispatch } = props;
+    //const { dispatch } = props;
     //const action = a.selectFoodItem();
     props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
       const firestoreFoodItem = {
@@ -92,7 +92,8 @@ function FoodItemList(props) {
   console.log("listy", props, state, foodItems);
   console.log("loaded", isLoaded(foodItems))
 
-  if (loginName === "Not signed in") {
+  //if (loginName === "Not signed in") {
+    if(foodItems === undefined) {
     return (
       <React.Fragment>
         <h3>Loading...</h3>
@@ -109,7 +110,7 @@ function FoodItemList(props) {
   // }
 
   //else if (isLoaded(foodItems)) {
-  else if(userId !== null) {
+  else if(userId !== null && foodItems !== undefined) {
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
       return <FoodItemList
