@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
 
 function FoodItem(props) {
 
-  
+
   function strong(heartburn) {
     if (heartburn === "Yes") {
       return <strong><em>{heartburn}</em></strong>;
@@ -18,7 +19,7 @@ function FoodItem(props) {
         <td>{props.ingredients}</td>
         <td>{strong(props.heartburn)}</td>
         <td>{props.timeOpen}</td>
-        <td><button className="btn btn-xs btn-info" onClick={() => props.whenFoodItemClicked(props.id)}>Details</button></td>
+        <td><Link className="btn btn-xs btn-info"  onClick={() => props.whenFoodItemClicked(props.id)} to='/foodItem'>Details</Link></td>
       </tr>
     </React.Fragment>
   );

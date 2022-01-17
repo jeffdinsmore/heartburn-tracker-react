@@ -15,6 +15,7 @@ import { HashRouter } from 'react-router-dom';
 import FoodItemList from './components/foodViews/FoodItemList';
 import Homepage from './components/Homepage';
 import NewFoodItemForm from './components/foodViews/NewFoodItemForm';
+import FoodItemDetail from './components/foodViews/FoodItemDetail';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -79,7 +80,7 @@ function App(props) {
           </Route>
           <Route path="/foodItem">
             <BodyStyling>
-              <FoodItemControl />
+              <FoodItemDetail />
             </BodyStyling>
           </Route>
         </Switch>

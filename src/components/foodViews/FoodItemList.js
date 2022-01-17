@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import FoodItem from "./FoodItem";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
-import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import { useFirestoreConnect, isLoaded, isEmpty, withFirestore } from 'react-redux-firebase';
 import { masterFoodList } from "../../actions";
 import { propTypes } from "react-bootstrap/esm/Image";
 import * as a from '../../actions';
 import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
+
 
 function FoodItemList(props) {
   const { userId, loginName, dispatch } = props;
@@ -41,6 +42,7 @@ function FoodItemList(props) {
     }
   ]);
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
+
   const convertDate = (date) => {
     let month = date.toDateString().substring(7, 4);
     let day = date.toDateString().substring(10, 8);
@@ -58,12 +60,6 @@ function FoodItemList(props) {
   };
 
   const handleChangingSelectedFoodItem = (id) => {
-    // props.firestore.get({ collection: 'foodItems', doc: id }).then((foodItem) => {
-    // {
-    //   collection: 'users', doc: props.userId.userId,
-    //   subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
-    // }
-
     //const { dispatch } = props;
     //const action = a.selectFoodItem();
     props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
@@ -75,17 +71,19 @@ function FoodItemList(props) {
         timeOpen: foodItem.get("timeOpen"),
         id: foodItem.id
       }
-      // const name = firestoreFoodItem.foodName.split(" ").join("");
       const path = '/foodItem/' + firestoreFoodItem.id;
       //console.log('ppppppppppppp', path)
       dispatch(a.selectFoodItem(firestoreFoodItem))
       dispatch(a.history(path))
+      console.log('aaaaaaaaaa', firestoreFoodItem)
       //history.push('/foodItem/' + firestoreFoodItem.id)
-      console.log(state)
+      
       // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
       // //setState({selectedFoodItem: firestoreFoodItem});
+      console.log("updatedddddddddddddddd", state, props)
+    //history.push('/foodItem')
     });
-    history.push('/foodItem/')
+    
     // setCount(count + 1);
     //console.log("joey")
   }
@@ -164,22 +162,26 @@ function FoodItemList(props) {
 
 FoodItemList.propTypes = {
   userId: PropTypes.string,
-  firestore: PropTypes.object,
+  firestore2: PropTypes.object,
   loginName: PropTypes.string,
   selectedFoodItem: PropTypes.object,
   editing: PropTypes.bool,
-  foodItems: PropTypes.object,
-  masterFoodList: PropTypes.object
+  foodItems: PropTypes.array,
+  masterFoodList: PropTypes.object,
+  history: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   userId: state.userId.userId,
-  firestore: state.firestore,
+  firestore2: state.firestore,
   loginName: state.loginName.user,
   selectedFoodItem: state.selectedFoodItem,
   editing: state.editing,
   foodItems: state.firestore.ordered.foodItems,
-  masterFoodList: state.masterFoodItemList
+  masterFoodList: state.masterFoodItemList,
+  history: state.history,
 });
 
-export default connect(mapStateToProps)(FoodItemList);
+FoodItemList = connect(mapStateToProps)(FoodItemList);
+
+export default withFirestore(FoodItemList);
