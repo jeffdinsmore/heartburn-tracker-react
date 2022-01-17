@@ -9,12 +9,13 @@ import * as a from '../../actions';
 import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
+import { Link } from 'react-router-dom';
 
 
 function FoodItemList(props) {
   const { userId, loginName, dispatch } = props;
-  
-  console.log('list', props, )
+
+  console.log('list', props,)
   const history = createBrowserHistory();
   //const userId = useSelector(state => state.userId.userId);
   const state = useSelector(state => state);
@@ -34,7 +35,7 @@ function FoodItemList(props) {
   useEffect(() => {
     //getFoodItems();
   }, [])
-  
+
   useFirestoreConnect([
     {
       collection: 'users', doc: userId,
@@ -77,13 +78,13 @@ function FoodItemList(props) {
       dispatch(a.history(path))
       console.log('aaaaaaaaaa', firestoreFoodItem)
       //history.push('/foodItem/' + firestoreFoodItem.id)
-      
+
       // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
       // //setState({selectedFoodItem: firestoreFoodItem});
       console.log("updatedddddddddddddddd", state, props)
-    //history.push('/foodItem')
+      //history.push('/foodItem')
     });
-    
+
     // setCount(count + 1);
     //console.log("joey")
   }
@@ -91,7 +92,7 @@ function FoodItemList(props) {
   console.log("loaded", isLoaded(foodItems))
 
   //if (loginName === "Not signed in") {
-    if(foodItems === undefined) {
+  if (foodItems === undefined) {
     return (
       <React.Fragment>
         <h3>Loading...</h3>
@@ -108,7 +109,7 @@ function FoodItemList(props) {
   // }
 
   //else if (isLoaded(foodItems)) {
-  else if(userId !== null && foodItems !== undefined) {
+  else if (userId !== null && foodItems !== undefined) {
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
       return <FoodItemList
@@ -148,6 +149,9 @@ function FoodItemList(props) {
           </tbody>
         </table>
         <hr />
+        <Link className='btn btn-info btn-sm' to='/add-food-item'>
+          Add Food Item
+        </Link>
       </React.Fragment>
     );
   }

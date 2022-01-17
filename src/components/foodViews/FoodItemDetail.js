@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import * as a from '../../actions';
 import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function FoodItemDetail(props) {
 
@@ -84,6 +85,9 @@ function FoodItemDetail(props) {
       />
       </div>
       <hr />
+      <Link as={Link} className='btn btn-info btn-sm' to='/foodlist'>
+        See Food Items
+      </Link>
     </React.Fragment>
   );
 }
