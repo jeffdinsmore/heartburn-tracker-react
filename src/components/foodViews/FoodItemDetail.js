@@ -5,11 +5,12 @@ import { useSelector } from "react-redux";
 import * as a from '../../actions';
 import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
 
 function FoodItemDetail(props) {
 
-  const history = createBrowserHistory();
+  const history = useHistory();
   const state = useSelector(state => state)
   console.log('detail', state, props)
   const { foodItem, onClickingModal, onClickingDelete, onClickingEdit, showModal, onClickingCancel, userId, selectedFoodItem } = props;
@@ -18,9 +19,10 @@ function FoodItemDetail(props) {
     const { dispatch } = props;
     const action = a.unSelectFoodItem();
     const action2 = a.showModal();
-    props.firestore.delete({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] });
+    props.firestore.delete({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] });
     dispatch(action);
     dispatch(action2);
+    history.push('/foodlist')
     //setState({selectedFoodItem: null});
   }
 
@@ -40,7 +42,7 @@ function FoodItemDetail(props) {
     const action = a.editing();
     dispatch(action);
 
-    history.push('/edit/foodItem/' + foodItem.id)
+    history.push('/edit/foodItem')
   }
 
   const handleCancelModal = () => {
@@ -75,7 +77,7 @@ function FoodItemDetail(props) {
       <br></br>
       <p><strong>Date Logged:</strong> {convertDate(foodItem !== null ? foodItem.timeOpen.nanoseconds : 0, foodItem !== null ? foodItem.timeOpen.seconds : 0)}</p>
       <br></br>
-      <button className="btn btn-success btn-sm" onClick={() => onClickingEdit(foodItem)}>Update Item</button>&nbsp;&nbsp;
+      <Link className="btn btn-success btn-sm" onClick={() => handleEditClick(foodItem)}to='/edit/foodItem'>Update Item</Link>&nbsp;&nbsp;
       <button className="btn btn-danger btn-sm" onClick={handleShowingModal}>Delete Item</button>
       <Modal
         foodItem={foodItem}
@@ -120,5 +122,6 @@ const mapStateToProps = state => ({
   showModal: state.showModal,
 });
 
+FoodItemDetail = connect(mapStateToProps)(FoodItemDetail);
 
-export default connect(mapStateToProps)(FoodItemDetail);
+export default withFirestore(FoodItemDetail);

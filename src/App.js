@@ -16,6 +16,7 @@ import FoodItemList from './components/foodViews/FoodItemList';
 import Homepage from './components/Homepage';
 import NewFoodItemForm from './components/foodViews/NewFoodItemForm';
 import FoodItemDetail from './components/foodViews/FoodItemDetail';
+import EditFoodItemForm from './components/foodViews/EditFoodItemForm';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -75,7 +76,7 @@ function App(props) {
           </Route>
           <Route path="/edit/foodItem">
             <BodyStyling>
-              <FoodItemControl />
+              <EditFoodItemForm />
             </BodyStyling>
           </Route>
           <Route path="/foodItem">

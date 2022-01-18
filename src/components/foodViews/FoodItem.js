@@ -19,7 +19,7 @@ function FoodItem(props) {
         <td>{props.ingredients}</td>
         <td>{strong(props.heartburn)}</td>
         <td>{props.timeOpen}</td>
-        <td><Link className="btn btn-xs btn-info"  onClick={() => props.whenFoodItemClicked(props.id)} to='/foodItem'>Details</Link></td>
+        <td><Link className="btn btn-xs btn-info" onClick={() => props.whenFoodItemClicked(props.id)} to='/foodItem'>Details</Link></td>
       </tr>
     </React.Fragment>
   );

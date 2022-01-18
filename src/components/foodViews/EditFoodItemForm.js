@@ -1,22 +1,77 @@
 import React from "react";
+import { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import * as a from '../../actions';
 import { useFirestore } from 'react-redux-firebase';
 import { useStore } from "react-redux";
 import { userId } from "../../actions";
+import { useHistory, Link } from 'react-router-dom';
 
 function EditFoodItemForm(props) {
   const firestore = useFirestore();
-  const { foodItem } = props;
+  const history = useHistory();
+  const { foodItem, userId, editing, dispatch, selectedFoodItem } = props;
+  console.log('edit', props)
+
+  const handleEditingFoodItemInList = () => {
+    const { dispatch } = props;
+    const action = a.editing();
+    const action2 = a.unSelectFoodItem();
+    dispatch(action);
+    dispatch(action2);
+    //history.push()
+    //setState({selectedFoodItem:null});
+  }
+
+  const handleClick = () => {
+    if(editing) {
+      dispatch(a.editing())
+      history.push('/foodlist')
+    } else if(selectedFoodItem !== null) {
+      dispatch(a.unSelectFoodItem());
+      history.push('/foodlist')
+    } else {
+      history.goBack();
+    }  
+  }
+
+  const handleChangingSelectedFoodItem = (id) => {
+    //const { dispatch } = props;
+    //const action = a.selectFoodItem();
+    props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
+      const firestoreFoodItem = {
+        foodName: foodItem.get("foodName"),
+        brand: foodItem.get("brand"),
+        ingredients: foodItem.get("ingredients"),
+        heartburn: foodItem.get("heartburn"),
+        timeOpen: foodItem.get("timeOpen"),
+        id: foodItem.id
+      }
+      const path = '/foodItem/' + firestoreFoodItem.id;
+      //console.log('ppppppppppppp', path)
+      dispatch(a.selectFoodItem(firestoreFoodItem))
+      dispatch(a.history(path))
+      console.log('aaaaaaaaaa', firestoreFoodItem)
+      //history.push('/foodItem/' + firestoreFoodItem.id)
+
+      // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
+      // //setState({selectedFoodItem: firestoreFoodItem});
+      console.log("updatedddddddddddddddd", props)
+      //history.push('/foodItem')
+    });
+  }
+
   function handleEditFoodItemFormSubmission(event) {
     event.preventDefault();
-    props.onEditFoodItem();
+    handleEditingFoodItemInList();
     const propertiesToUpdate = {
       foodName: event.target.foodName.value,
       brand: event.target.brand.value,
       ingredients: event.target.ingredients.value,
       heartburn: event.target.heartburn.value
     }
-    return firestore.update({ collection: 'users', doc: props.userId.userId, subcollections: [{ collection: 'foodItems', doc: foodItem.id }]}, propertiesToUpdate)
+    history.push('/foodlist')
+    return firestore.update({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: foodItem.id }]}, propertiesToUpdate)
   }
 
   // ({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] })
@@ -31,24 +86,24 @@ function EditFoodItemForm(props) {
           type='text'
           name='foodName'
           placeholder='Food name'
-          defaultValue={foodItem.foodName}
+          defaultValue={foodItem !== null ? foodItem.foodName : "loading"}
           required='required' />
         <p className="pTagForm">Brand:</p>
         <input className="field"
           type='text'
           name='brand'
           placeholder='Name brand'
-          defaultValue={foodItem.brand}
+          defaultValue={foodItem !== null ? foodItem.brand : "loading"}
           required='required' />
         <p className="pTagForm">Ingredients:</p>
         <textarea className="field2"
           type='text'
           name='ingredients'
           placeholder='Separate ingredients with commas'
-          defaultValue={foodItem.ingredients}
+          defaultValue={foodItem !== null ? foodItem.ingredients : "loading"}
           required='required' />
         <p className="pTagForm">Heartburn:</p>
-        <select name="heartburn" className="field" id="heartburnInput" defaultValue={foodItem.heartburn}>
+        <select name="heartburn" className="field" id="heartburnInput" defaultValue={foodItem !== null ? foodItem.heartburn : "loading"}>
           <option value="" disabled>Please Select</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
@@ -56,13 +111,44 @@ function EditFoodItemForm(props) {
         <br></br><br></br>
         <button className="btn btn-success btn-sm" type='submit'>Submit</button>
       </form>
+      <br></br>
+      {/* <button className='btn btn-secondary btn-sm' onClick={() => handleClick()} >
+        Cancel
+      </button> */}
+      
+      <Link className="btn btn-sm btn-secondary" to='/foodItem'>Cancel</Link>
     </React.Fragment>
   );
 }
 
 EditFoodItemForm.propTypes = {
+  foodItem: PropTypes.object,
+  onClickingDelete: PropTypes.func,
+  onClickingEdit: PropTypes.func,
+  onClickingModal: PropTypes.func,
+  onClickingCancel: PropTypes.func,
+  userId: PropTypes.string,
+  firestore2: PropTypes.object,
+  loginName: PropTypes.string,
+  selectedFoodItem: PropTypes.object,
+  editing: PropTypes.bool,
+  foodItems: PropTypes.array,
+  masterFoodList: PropTypes.object,
+  showModal: PropTypes.bool,
   masterFoodItemList: PropTypes.object,
-  onEditFoodItem: PropTypes.func,
 };
 
-export default EditFoodItemForm;
+const mapStateToProps = state => ({
+  userId: state.userId.userId,
+  firestore2: state.firestore,
+  loginName: state.loginName.user,
+  selectedFoodItem: state.selectedFoodItem,
+  editing: state.editing,
+  foodItems: state.firestore.ordered.foodItems,
+  masterFoodList: state.masterFoodItemList,
+  foodItem: state.selectedFoodItem,
+  showModal: state.showModal,
+});
+
+
+export default connect(mapStateToProps)(EditFoodItemForm);
