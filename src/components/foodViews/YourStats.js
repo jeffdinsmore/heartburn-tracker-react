@@ -4,9 +4,10 @@ import { withFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-red
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from '../../actions';
+import { Link } from 'react-router-dom';
 
 const YourStats = (props) => {
-
+  const { userId } = props;
   // useEffect(() => {
   //   (async () => {
   //     try {
@@ -27,7 +28,7 @@ const YourStats = (props) => {
 
   useFirestoreConnect([
     {
-      collection: 'users', doc: props.userId.userId,
+      collection: 'users', doc: userId,
       subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
     }
   ]);
@@ -94,7 +95,7 @@ const YourStats = (props) => {
     console.log("Yourstats component updated")
   });
   console.log('stats', props, state, foodItems)
-  if (props.masterFoodList !== undefined) {
+  if (foodItems !== undefined) {
     heartburnItems = foodItems.filter(f => f.heartburn === "Yes");
     noHeartburnItems = foodItems.filter(f => f.heartburn === "No");
     heartburnArray = splitArray(heartburnItems);
@@ -111,7 +112,7 @@ const YourStats = (props) => {
   }
 
   function loadingFirestore(foodItems, array) {
-    if (isLoaded(foodItems)) {
+    if (foodItems !== undefined) {
       array.forEach(createList);
       return array;
     } 
@@ -140,6 +141,10 @@ const YourStats = (props) => {
       {/* {LoopingMultipleArrays(heartburnArray)} */}
       {loadingFirestore(foodItems, sortArray(comparison))}
       {/* .sort(([,a], [,b]) => b - a) */}
+      <br></br><br></br>
+      <Link className='btn btn-info btn-sm' to='/foodlist'>
+        See Food List
+      </Link>
     </React.Fragment>
   );
 }
@@ -147,7 +152,6 @@ const YourStats = (props) => {
 
 
 YourStats.propTypes = {
-  //onFoodItemSelection: PropTypes.func,
   userId: PropTypes.string,
   firestore2: PropTypes.object,
   loginName: PropTypes.string,

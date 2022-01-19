@@ -88,7 +88,7 @@ function FoodItemDetail(props) {
       </div>
       <hr />
       <Link as={Link} className='btn btn-info btn-sm' to='/foodlist'>
-        See Food Items
+        See Food List
       </Link>
     </React.Fragment>
   );

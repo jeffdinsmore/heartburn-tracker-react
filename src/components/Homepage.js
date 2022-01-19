@@ -59,7 +59,7 @@ function Homepage(props) {
       {/* <Nav.Link href="/foodlist" to="/foodlist">Go To Your Food List</Nav.Link> */}
 
       <Link className='btn btn-info btn-sm' style={{ display: loginName !== "Not signed in" ? 'inline-block' : "none" }} to='/foodlist'>
-        See Food Items
+        See Food List
       </Link>
     </React.Fragment>
   );
