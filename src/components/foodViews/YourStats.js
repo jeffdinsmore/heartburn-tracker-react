@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import { withFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import * as a from '../../actions';
 
 const YourStats = (props) => {
 
@@ -89,7 +91,7 @@ const YourStats = (props) => {
   
 
   useEffect(() => {
-    console.log("component updated")
+    console.log("Yourstats component updated")
   });
   console.log('stats', props, state, foodItems)
   if (props.masterFoodList !== undefined) {
@@ -142,9 +144,28 @@ const YourStats = (props) => {
   );
 }
 
+
+
 YourStats.propTypes = {
-  onFoodItemSelection: PropTypes.func
+  //onFoodItemSelection: PropTypes.func,
+  userId: PropTypes.string,
+  firestore2: PropTypes.object,
+  loginName: PropTypes.string,
+  selectedFoodItem: PropTypes.object,
+  editing: PropTypes.bool,
+  foodItems: PropTypes.array,
+  masterFoodList: PropTypes.object,
 };
 
-export default YourStats;
+const mapStateToProps = state => ({
+  userId: state.userId.userId,
+  firestore2: state.firestore,
+  loginName: state.loginName.user,
+  selectedFoodItem: state.selectedFoodItem,
+  editing: state.editing,
+  foodItems: state.firestore.ordered.foodItems,
+  masterFoodList: state.masterFoodItemList,
+});
+
+export default withFirestore(connect(mapStateToProps)(YourStats));
 

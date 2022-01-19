@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { useFirestore } from 'react-redux-firebase'
 import firebase from 'firebase';
 import * as a from '../../actions';
-import { createBrowserHistory } from 'history';
+//import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 
 
 function NewFoodItemForm(props) {
   const firestore = useFirestore();
-  const history = createBrowserHistory();
+  const history = useHistory();
   const { userId, loginName, selectedFoodItem, editing, dispatch } = props;
 
   // const getUserId = async () => {

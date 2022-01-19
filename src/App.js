@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './components/layout/Header';
-import FoodItemControl from './components/FoodItemControl';
 import Footer from './components/Footer';
 import Signin from "./components/auth/Signin";
 import Signup from './components/auth/Signup';
@@ -17,6 +16,7 @@ import Homepage from './components/Homepage';
 import NewFoodItemForm from './components/foodViews/NewFoodItemForm';
 import FoodItemDetail from './components/foodViews/FoodItemDetail';
 import EditFoodItemForm from './components/foodViews/EditFoodItemForm';
+import YourStats from './components/foodViews/YourStats';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -50,7 +50,7 @@ function App(props) {
           </Route>
           <Route path="/yourstats">
             <BodyStyling>
-              <FoodItemControl />
+              <YourStats />
             </BodyStyling>
           </Route>
           <Route path="/add-food-item">

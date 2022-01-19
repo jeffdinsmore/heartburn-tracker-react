@@ -31,7 +31,7 @@ function FoodItemDetail(props) {
     const action = a.showModal();
     if (selectedFoodItem !== null) {
       dispatch(action);
-      dispatch(a.signInName("sherry"))
+      //dispatch(a.signInName("sherry"))
     }
   }
 
