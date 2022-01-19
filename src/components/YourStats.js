@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from '../actions';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase';
 
 const YourStats = (props) => {
   const { userId } = props;
@@ -25,7 +26,22 @@ const YourStats = (props) => {
   //     }
   //   })();
   // }, [])
-
+  useEffect(() => {
+    (async () => {
+      try {
+        firebase.auth().onAuthStateChanged((user) => {
+          const { dispatch } = props;
+          if (user) {
+            dispatch(a.signInName(user.email));
+            dispatch(a.userId(user.uid));
+          }
+        })
+      } catch (error) {
+        alert(error);
+      }
+      console.log("Home component did mount")
+    })();
+  }, [])
   useFirestoreConnect([
     {
       collection: 'users', doc: userId,

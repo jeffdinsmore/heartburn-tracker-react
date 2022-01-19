@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useFirestore } from 'react-redux-firebase'
 import firebase from 'firebase';
@@ -12,7 +12,22 @@ function NewFoodItemForm(props) {
   const firestore = useFirestore();
   const history = useHistory();
   const { userId, loginName, selectedFoodItem, editing, dispatch } = props;
-
+  useEffect(() => {
+    (async () => {
+      try {
+        firebase.auth().onAuthStateChanged((user) => {
+          const { dispatch } = props;
+          if (user) {
+            dispatch(a.signInName(user.email));
+            dispatch(a.userId(user.uid));
+          }
+        })
+      } catch (error) {
+        alert(error);
+      }
+      console.log("Home component did mount")
+    })();
+  }, [])
   const handleAddingNewFoodItemToList = () => {
     const { dispatch } = props;
     const action = a.toggleForm();

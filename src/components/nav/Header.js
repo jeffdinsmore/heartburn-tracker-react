@@ -20,12 +20,13 @@ import PropTypes from "prop-types";
 // `;
 
 function Header(props) {
+  const { loginName, editing, selectedFoodItem, dispatch } = props;
   const state = useSelector(state => state);
-  const editing = useSelector(state => state.editing);
-  const selectedFoodItem = useSelector(state => state.selectedFoodItem);
+  //const editing = useSelector(state => state.editing);
+  //const selectedFoodItem = useSelector(state => state.selectedFoodItem);
 
   function handleClick() {
-    const { dispatch } = props;
+    //const { dispatch } = props;
     console.log("handleClick", props)
     if (editing) {
       dispatch(a.editing())
@@ -35,8 +36,8 @@ function Header(props) {
     }
 
   }
-
-  const links = state.loginName.user === "Not signed in" ? <SignedOutLinks state={state} routerClick={handleClick} /> : <SignedInLinks routerClick={handleClick} state={state} {...props} />
+  console.log('head', state, props)
+  const links = loginName === "Not signed in" ? <SignedOutLinks state={state} routerClick={handleClick} {...props} /> : <SignedInLinks routerClick={handleClick} state={state} {...props} />
   return (
     <React.Fragment>
       <Navbar className="nav-bar" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -57,7 +58,8 @@ Header.propTypes = {
   editing: PropTypes.bool,
   selectedFoodItem: PropTypes.object,
   showModal: PropTypes.bool,
-  loginName: PropTypes.string
+  loginName: PropTypes.string,
+  userId: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
@@ -66,7 +68,8 @@ const mapStateToProps = (state) => {
     editing: state.editing,
     selectedFoodItem: state.selectedFoodItem,
     showModal: state.showModal,
-    loginName: state.loginName,
+    loginName: state.loginName.user,
+    userId: state.userId.userId,
   }
 }
 Header = withRouter(connect(mapStateToProps)(Header));

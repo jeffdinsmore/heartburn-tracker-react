@@ -3,7 +3,7 @@ import Header from './components/nav/Header';
 import Footer from './components/Footer';
 import Signin from "./components/auth/Signin";
 import Signup from './components/auth/Signup';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import styled from 'styled-components';
 import ButtonCount from './components/ButtonCount';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
@@ -84,6 +84,7 @@ function App(props) {
               <FoodItemDetail />
             </BodyStyling>
           </Route>
+          <Redirect from="*" to="/" />
         </Switch>
         <Footer />
         

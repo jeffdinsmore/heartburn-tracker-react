@@ -19,7 +19,20 @@ function FoodItemList(props) {
   const state = useSelector(state => state);
 
   useEffect(() => {
-    
+    (async () => {
+      try {
+        firebase.auth().onAuthStateChanged((user) => {
+          const { dispatch } = props;
+          if (user) {
+            dispatch(a.signInName(user.email));
+            dispatch(a.userId(user.uid));
+          }
+        })
+      } catch (error) {
+        alert(error);
+      }
+      console.log("Home component did mount")
+    })();
   }, [])
 
   useFirestoreConnect([
@@ -67,13 +80,7 @@ function FoodItemList(props) {
   console.log("listy", props, state, foodItems);
   console.log("loaded", isLoaded(foodItems))
 
-  if (foodItems === undefined) {
-    return (
-      <React.Fragment>
-        <h3>Loading...</h3>
-      </React.Fragment>
-    )
-  }
+
 
   //   if (!isLoaded(foodItems)) {
   //   return (
@@ -84,7 +91,8 @@ function FoodItemList(props) {
   // }
 
   //else if (isLoaded(foodItems)) {
-  else if (userId !== null && foodItems !== undefined) {
+    console.log('id', userId, foodItems)
+  if (userId !== null && foodItems !== undefined) {
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
       return <FoodItemList
@@ -95,7 +103,7 @@ function FoodItemList(props) {
         id={foodItem.id}
         key={foodItem.id} />
     })
-
+    
     return (
       <React.Fragment>
         <h2>Your Recorded Food List</h2>
@@ -128,7 +136,15 @@ function FoodItemList(props) {
         </Link>
       </React.Fragment>
     );
-  }
+  } else {
+    // if (foodItems === undefined || userId === null) {
+      return (
+        <React.Fragment>
+          <h3>Loading...</h3>
+        </React.Fragment>
+      )
+    }
+  
 
   if (isEmpty(foodItems)) {
     return (
@@ -157,7 +173,7 @@ const mapStateToProps = state => ({
   editing: state.editing,
   foodItems: state.firestore.ordered.foodItems,
   masterFoodList: state.masterFoodItemList,
-  history: state.history,
+  //history: state.history,
 });
 
 FoodItemList = connect(mapStateToProps)(FoodItemList);
