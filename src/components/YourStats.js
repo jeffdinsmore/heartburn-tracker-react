@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { withFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import * as a from '../../actions';
+import * as a from '../actions';
 import { Link } from 'react-router-dom';
 
 const YourStats = (props) => {
@@ -32,7 +32,7 @@ const YourStats = (props) => {
       subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
     }
   ]);
-  const id = useSelector(state => state.userId.userId) 
+  const id = useSelector(state => state.userId.userId)
   const state = useSelector(state => state);
   // Create a query against the collection
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
@@ -49,7 +49,7 @@ const YourStats = (props) => {
       }
     }));
   }
-  
+
   const objectFilter = (array, value) => {
     let object = {};
     for (let i = 0; i < array.length; i++) {
@@ -82,14 +82,13 @@ const YourStats = (props) => {
         array.push([heartburnArray[i], heartburnObject[heartburnArray[i]]]);
       }
     }
-    // return [...new Set(array)];
     return array;
   }
 
   const sortObjectIntoArray = (object) => {
-    return Object.entries(object).sort(([,a], [,b]) => b - a);
+    return Object.entries(object).sort(([, a], [, b]) => b - a);
   }
-  
+
 
   useEffect(() => {
     console.log("Yourstats component updated")
@@ -115,17 +114,17 @@ const YourStats = (props) => {
     if (foodItems !== undefined) {
       array.forEach(createList);
       return array;
-    } 
-    if(!isLoaded(foodItems)) {
+    }
+    if (!isLoaded(foodItems)) {
       return <h3>Loading...</h3>;
     }
-    if(isEmpty(foodItems)) {
+    if (isEmpty(foodItems)) {
       return <h3>You have not entered any food items yet.</h3>;
-    } 
+    }
   }
   function sortArray(array) {
     if (isLoaded(foodItems)) {
-      return array.sort(([,a], [,b]) => b - a);
+      return array.sort(([, a], [, b]) => b - a);
     } else {
       return array;
     }
@@ -135,12 +134,9 @@ const YourStats = (props) => {
       <h2>Your stats</h2>
       <p>Here are the food ingredients that may be causing your heartburn:</p>
       {loadingFirestore(foodItems, sortObjectIntoArray(heartburnObject))}
-      {/* {loadingFirestore(foodItems, Object.keys(heartburnObject))} */}
       <br />
       <p>Ingredients that are unlikely to give you heartburn from the list above. They are in your food list that did not give you heartburn:</p>
-      {/* {LoopingMultipleArrays(heartburnArray)} */}
       {loadingFirestore(foodItems, sortArray(comparison))}
-      {/* .sort(([,a], [,b]) => b - a) */}
       <br></br><br></br>
       <Link className='btn btn-info btn-sm' to='/foodlist'>
         See Food List

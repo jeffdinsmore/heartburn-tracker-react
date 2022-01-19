@@ -5,16 +5,14 @@ import PropTypes from 'prop-types';
 import * as a from '../../actions';
 import { useSelector } from 'react-redux';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
-import { createBrowserHistory } from 'history';
 
+function doSignOut() {
+  firebase.auth().signOut().then(function () {
+    alert("Successfully signed out!");
+    return (<Redirect to="/" />);
+  }).catch(function (error) {
+    alert(error.message);
+  });
+}
 
-  function doSignOut() {
-    firebase.auth().signOut().then(function () {
-      alert("Successfully signed out!");
-      return (<Redirect to="/" />);
-    }).catch(function (error) {
-      alert(error.message);
-    });
-  }
-
-  export default withFirestore(doSignOut);
+export default withFirestore(doSignOut);

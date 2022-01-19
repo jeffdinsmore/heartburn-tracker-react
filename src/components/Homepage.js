@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import * as a from './../actions';
+import * as a from '../actions';
 import firebase from 'firebase';
 
 function Homepage(props) {
@@ -55,8 +55,6 @@ function Homepage(props) {
         <li className="list">Peppermint</li>
       </ul>
       <br />
-
-      {/* <Nav.Link href="/foodlist" to="/foodlist">Go To Your Food List</Nav.Link> */}
 
       <Link className='btn btn-info btn-sm' style={{ display: loginName !== "Not signed in" ? 'inline-block' : "none" }} to='/foodlist'>
         See Food List

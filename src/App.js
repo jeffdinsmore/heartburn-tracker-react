@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './components/layout/Header';
+import Header from './components/nav/Header';
 import Footer from './components/Footer';
 import Signin from "./components/auth/Signin";
 import Signup from './components/auth/Signup';
@@ -11,12 +11,12 @@ import PropTypes from "prop-types";
 import { useSelector } from 'react-redux';
 import Routes from "./components/Routes";
 import { HashRouter } from 'react-router-dom';
-import FoodItemList from './components/foodViews/FoodItemList';
+import FoodItemList from './components/FoodItemList';
 import Homepage from './components/Homepage';
-import NewFoodItemForm from './components/foodViews/NewFoodItemForm';
-import FoodItemDetail from './components/foodViews/FoodItemDetail';
-import EditFoodItemForm from './components/foodViews/EditFoodItemForm';
-import YourStats from './components/foodViews/YourStats';
+import NewFoodItemForm from './components/NewFoodItemForm';
+import FoodItemDetail from './components/FoodItemDetail';
+import EditFoodItemForm from './components/EditFoodItemForm';
+import YourStats from './components/YourStats';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;

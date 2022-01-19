@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useFirestore } from 'react-redux-firebase'
 import firebase from 'firebase';
-import * as a from '../../actions';
-//import { createBrowserHistory } from 'history';
+import * as a from '../actions';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
@@ -14,16 +13,6 @@ function NewFoodItemForm(props) {
   const history = useHistory();
   const { userId, loginName, selectedFoodItem, editing, dispatch } = props;
 
-  // const getUserId = async () => {
-  //   let uid = "";
-  //   await firebase.auth().onAuthStateChanged((user) => {
-  //     if (user) {
-  //       uid = user.uid;
-  //     }
-  //   })
-  //   return uid;
-  // }
-
   const handleAddingNewFoodItemToList = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
@@ -32,16 +21,16 @@ function NewFoodItemForm(props) {
   }
 
   const handleClick = () => {
-    if(editing) {
+    if (editing) {
       dispatch(a.editing())
       history.push('/foodlist')
-    } else if(selectedFoodItem !== null) {
+    } else if (selectedFoodItem !== null) {
       dispatch(a.unSelectFoodItem());
       history.push('/foodlist')
     } else {
       history.goBack();
     }
-    
+
   }
 
   function addFoodItemToFirestore(event) {
@@ -115,7 +104,7 @@ const mapStateToProps = state => ({
   loginName: state.loginName.user,
   selectedFoodItem: state.selectedFoodItem,
   editing: state.editing,
-  
+
 });
 
 export default connect(mapStateToProps)(NewFoodItemForm);

@@ -1,20 +1,12 @@
-import React, { useEffect } from "react";
-import firebase, { auth, signInWithEmailAndPassword, signInWithGoogle, GoogleAuthProvider } from "firebase";
+import React from "react";
+import firebase from "firebase";
 import { Redirect, Route, useHistory } from "react-router";
 import PropTypes from 'prop-types';
-import * as a from '../../actions';
 import { useSelector } from 'react-redux';
-import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
-import { createBrowserHistory } from 'history';
-
+import { withFirestore } from 'react-redux-firebase';
 
 function Signin(props) {
-  // useFirestoreConnect([
-  //   { collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }
-  // ]);
   const loginName = useSelector(state => state.loginName)
-  //const history = createBrowserHistory();
-
   const createAccount = () => {
     history.push('/signup');
   }
@@ -22,7 +14,7 @@ function Signin(props) {
   //   firebase.auth().onAuthStateChanged((user) => {
   //     const { dispatch } = props;
   //     //const action = a.signInName();
-      
+
   //     if(user) {
   //       console.log("fdfd", user.email)
   //       // if (loginName === "Signed out" || loginName === "Not signed in") {
@@ -30,7 +22,7 @@ function Signin(props) {
   //         console.log("s", state)
   //       }
   //     // } else {
-  
+
   //     //}
   //   })
   // }, [])
@@ -44,7 +36,7 @@ function Signin(props) {
     //const { dispatch } = props;
     //const action = a.signInName;
     // if (loginName === "Signed out" || loginName === "Not signed in") {
-      //dispatch(action);
+    //dispatch(action);
     //}
   }
 
@@ -54,12 +46,9 @@ function Signin(props) {
     const password = event.target.signinPassword.value;
     firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
       console.log("Successfully signed in!");
-      //handleClickSignin()
       setTimeout(() => {
         history.push("/");
       }, 800);
-      
-      //const user = userCredential.user;
     }).catch((error) => {
       alert(error.message);
       console.log(error)

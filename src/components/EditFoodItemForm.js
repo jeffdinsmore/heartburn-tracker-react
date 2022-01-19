@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import * as a from '../../actions';
+import * as a from '../actions';
 import { useFirestore } from 'react-redux-firebase';
 import { useStore } from "react-redux";
-import { userId } from "../../actions";
 import { useHistory, Link } from 'react-router-dom';
 
 function EditFoodItemForm(props) {
@@ -19,25 +18,21 @@ function EditFoodItemForm(props) {
     const action2 = a.unSelectFoodItem();
     dispatch(action);
     dispatch(action2);
-    //history.push()
-    //setState({selectedFoodItem:null});
   }
 
   const handleClick = () => {
-    if(editing) {
+    if (editing) {
       dispatch(a.editing())
       history.push('/foodlist')
-    } else if(selectedFoodItem !== null) {
+    } else if (selectedFoodItem !== null) {
       dispatch(a.unSelectFoodItem());
       history.push('/foodlist')
     } else {
       history.goBack();
-    }  
+    }
   }
 
   const handleChangingSelectedFoodItem = (id) => {
-    //const { dispatch } = props;
-    //const action = a.selectFoodItem();
     props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
       const firestoreFoodItem = {
         foodName: foodItem.get("foodName"),
@@ -48,16 +43,10 @@ function EditFoodItemForm(props) {
         id: foodItem.id
       }
       const path = '/foodItem/' + firestoreFoodItem.id;
-      //console.log('ppppppppppppp', path)
       dispatch(a.selectFoodItem(firestoreFoodItem))
       dispatch(a.history(path))
       console.log('aaaaaaaaaa', firestoreFoodItem)
-      //history.push('/foodItem/' + firestoreFoodItem.id)
-
-      // .foodName, firestoreFoodItem.brand, firestoreFoodItem.ingredients, firestoreFoodItem.heartburn, firestoreFoodItem.timeOpen, firestoreFoodItem.id))
-      // //setState({selectedFoodItem: firestoreFoodItem});
       console.log("updatedddddddddddddddd", props)
-      //history.push('/foodItem')
     });
   }
 
@@ -71,10 +60,8 @@ function EditFoodItemForm(props) {
       heartburn: event.target.heartburn.value
     }
     history.push('/foodlist')
-    return firestore.update({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: foodItem.id }]}, propertiesToUpdate)
+    return firestore.update({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: foodItem.id }] }, propertiesToUpdate)
   }
-
-  // ({ collection: 'users', doc: userId.userId, subcollections: [{ collection: 'foodItems', doc: id }] })
 
   return (
     <React.Fragment>
@@ -115,7 +102,7 @@ function EditFoodItemForm(props) {
       {/* <button className='btn btn-secondary btn-sm' onClick={() => handleClick()} >
         Cancel
       </button> */}
-      
+
       <Link className="btn btn-sm btn-secondary" to='/foodItem'>Cancel</Link>
     </React.Fragment>
   );

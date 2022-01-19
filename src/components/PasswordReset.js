@@ -16,7 +16,7 @@ import firebase from "firebase/app";
 //   }
 // }
 
-const sendPasswordResetEmail = async (email) => {
+async function sendPasswordResetEmail(email) {
   try {
     await firebase.auth.sendPasswordResetEmail(email);
     alert("Password reset link sent!");

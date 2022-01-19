@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Modal from '../Modal';
+import Modal from './Modal';
 import { useSelector } from "react-redux";
-import * as a from '../../actions';
-import { createBrowserHistory } from 'history';
+import * as a from '../actions';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
@@ -23,7 +22,6 @@ function FoodItemDetail(props) {
     dispatch(action);
     dispatch(action2);
     history.push('/foodlist')
-    //setState({selectedFoodItem: null});
   }
 
   const handleShowingModal = () => {
@@ -31,7 +29,6 @@ function FoodItemDetail(props) {
     const action = a.showModal();
     if (selectedFoodItem !== null) {
       dispatch(action);
-      //dispatch(a.signInName("sherry"))
     }
   }
 
@@ -54,8 +51,6 @@ function FoodItemDetail(props) {
     }
   }
 
-
-  //const {isShowing, toggle} = useModal(foodItem.id)
   function convertDate(seconds, nanoseconds) {
     let d = new Date(seconds / 1000000 + nanoseconds * 1000);
     let month = d.toDateString().substring(7, 3);
@@ -66,25 +61,25 @@ function FoodItemDetail(props) {
   console.log("Detail component did mount");
   return (
     <React.Fragment>
-      
+
       <h2>Food Item Detail</h2>
       <br></br>
       <div className="detail">
-      <p><strong>Food:</strong> {foodItem !== null ? foodItem.foodName : "loading"}</p>
-      <p><strong>Brand:</strong> {foodItem !== null ? foodItem.brand : "loading"}</p>
-      <p><strong>Ingredients:</strong> {foodItem !== null ? foodItem.ingredients : "loading"}</p>
-      <p><strong>Heartburn:</strong> <em>{foodItem !== null ? foodItem.heartburn : "loading"}</em></p>
-      <br></br>
-      <p><strong>Date Logged:</strong> {convertDate(foodItem !== null ? foodItem.timeOpen.nanoseconds : 0, foodItem !== null ? foodItem.timeOpen.seconds : 0)}</p>
-      <br></br>
-      <Link className="btn btn-success btn-sm" onClick={() => handleEditClick(foodItem)}to='/edit/foodItem'>Update Item</Link>&nbsp;&nbsp;
-      <button className="btn btn-danger btn-sm" onClick={handleShowingModal}>Delete Item</button>
-      <Modal
-        foodItem={foodItem}
-        onClickingDelete={handleDeletingFoodItem}
-        onClickingCancel={handleCancelModal}
-        showModal={showModal}
-      />
+        <p><strong>Food:</strong> {foodItem !== null ? foodItem.foodName : "loading"}</p>
+        <p><strong>Brand:</strong> {foodItem !== null ? foodItem.brand : "loading"}</p>
+        <p><strong>Ingredients:</strong> {foodItem !== null ? foodItem.ingredients : "loading"}</p>
+        <p><strong>Heartburn:</strong> <em>{foodItem !== null ? foodItem.heartburn : "loading"}</em></p>
+        <br></br>
+        <p><strong>Date Logged:</strong> {convertDate(foodItem !== null ? foodItem.timeOpen.nanoseconds : 0, foodItem !== null ? foodItem.timeOpen.seconds : 0)}</p>
+        <br></br>
+        <Link className="btn btn-success btn-sm" onClick={() => handleEditClick(foodItem)} to='/edit/foodItem'>Update Item</Link>&nbsp;&nbsp;
+        <button className="btn btn-danger btn-sm" onClick={handleShowingModal}>Delete Item</button>
+        <Modal
+          foodItem={foodItem}
+          onClickingDelete={handleDeletingFoodItem}
+          onClickingCancel={handleCancelModal}
+          showModal={showModal}
+        />
       </div>
       <hr />
       <Link as={Link} className='btn btn-info btn-sm' to='/foodlist'>
