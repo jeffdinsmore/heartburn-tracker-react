@@ -10,9 +10,12 @@ function SignedInLinks(props) {
   const state = useSelector(state => state)
   console.log(props, state)
   const history = useHistory();
+
   function doSignOut() {
     firebase.auth().signOut().then(function () {
       console.log("Successfully signed out!");
+      window.localStorage.removeItem("uId")
+      window.localStorage.removeItem("email")
       setTimeout(() => {
         history.push("/");
         history.go(0);

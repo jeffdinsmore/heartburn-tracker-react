@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
 
 function Header(props) {
   const { loginName, editing, selectedFoodItem, dispatch } = props;
+
   const state = useSelector(state => state);
   //const editing = useSelector(state => state.editing);
   //const selectedFoodItem = useSelector(state => state.selectedFoodItem);
@@ -36,7 +37,7 @@ function Header(props) {
     }
 
   }
-  console.log('head', state, props)
+  console.log('head', state, props, loginName)
   const links = loginName === "Not signed in" ? <SignedOutLinks state={state} routerClick={handleClick} {...props} /> : <SignedInLinks routerClick={handleClick} state={state} {...props} />
   return (
     <React.Fragment>
@@ -68,8 +69,9 @@ const mapStateToProps = (state) => {
     editing: state.editing,
     selectedFoodItem: state.selectedFoodItem,
     showModal: state.showModal,
-    loginName: state.loginName.user,
-    userId: state.userId.userId,
+    loginName2: state.loginName.user,
+    loginName: !window.localStorage.getItem('email') ? 'Not signed in' : window.localStorage.getItem('email'),
+    userId: window.localStorage.getItem('uId'),
   }
 }
 Header = withRouter(connect(mapStateToProps)(Header));

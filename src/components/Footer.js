@@ -7,6 +7,7 @@ import * as a from './../actions';
 
 function Footer(props) {
   const auth = props.firebase.auth();
+  const email = !window.localStorage.getItem('email') ? 'Not signed in' : window.localStorage.getItem('email');
   const currentUser = useSelector(state => state.loginName.user)
   const { data } = props;
 
@@ -19,7 +20,7 @@ function Footer(props) {
     <React.Fragment>
       <div id="footer">
         <ul id="footerUl">
-          <li id="footerLi">{currentUser}</li>
+          <li id="footerLi">{email}</li>
           <li id="footerLi">Created by: Jeff Dinsmore</li>
         </ul>
       </div>

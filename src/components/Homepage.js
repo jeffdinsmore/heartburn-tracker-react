@@ -7,7 +7,7 @@ import * as a from '../actions';
 import firebase from 'firebase';
 
 function Homepage(props) {
-  const { loginName } = props;
+  const { loginName, userId } = props;
 
   useEffect(() => {
     (async () => {
@@ -25,6 +25,24 @@ function Homepage(props) {
       console.log("Home component did mount")
     })();
   }, [])
+
+  // useEffect(() => {
+  //   if(!window.localStorage.getItem('uId') || window.localStorage.getItem('uId') === null) {
+  //     window.localStorage.setItem('uId', userId);
+  //   } else if(userId === null) {
+  //     window.localStorage.setItem('uId', userId);
+  //   }
+    
+    
+  // }, [userId]);
+
+  // useEffect(() => {
+  //   if(!window.localStorage.getItem('email') || window.localStorage.getItem('email') === 'Not signed in') {
+  //     window.localStorage.setItem('email', loginName);
+  //   }
+    
+  // }, [loginName]);
+
   console.log("home", props)
   return (
     <React.Fragment>

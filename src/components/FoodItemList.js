@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FoodItem from "./FoodItem";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
@@ -13,8 +13,10 @@ import { Link, useHistory } from 'react-router-dom';
 
 function FoodItemList(props) {
   const { userId, loginName, dispatch } = props;
-
-  console.log('list', props,)
+  const [uId, setUId] = useState(null);
+  const [login, setLogin] = useState("Not signed in");
+  const u = window.localStorage.getItem('uId')
+  console.log('list', props, u)
   const history = useHistory();
   const state = useSelector(state => state);
 
@@ -26,6 +28,7 @@ function FoodItemList(props) {
           if (user) {
             dispatch(a.signInName(user.email));
             dispatch(a.userId(user.uid));
+            window.localStorage.setItem('uId', user.uid);
           }
         })
       } catch (error) {
@@ -34,6 +37,24 @@ function FoodItemList(props) {
       console.log("Home component did mount")
     })();
   }, [])
+
+  useEffect(() => {
+    try {
+      setUId(JSON.parse(window.localStorage.getItem('uId')));
+      setLogin(JSON.parse(window.localStorage.getItem('email')));
+    } catch(error) {
+      console.log(error);
+      return undefined;
+    }
+  }, []);
+  
+  async function getUserId() {
+    const answer = await JSON.parse(window.localStorage.getItem('uId'));
+    return answer;
+  }
+  // useEffect(() => {
+  //   window.localStorage.setItem('uId', uId);
+  // }, [uId]);
 
   useFirestoreConnect([
     {
@@ -77,7 +98,7 @@ function FoodItemList(props) {
     });
   }
 
-  console.log("listy", props, state, foodItems);
+  console.log("listy", props, state, foodItems, typeof u);
   console.log("loaded", isLoaded(foodItems))
 
 
@@ -91,7 +112,7 @@ function FoodItemList(props) {
   // }
 
   //else if (isLoaded(foodItems)) {
-    console.log('id', userId, foodItems)
+    console.log('id', uId, userId, login, foodItems)
   if (userId !== null && foodItems !== undefined) {
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
@@ -120,7 +141,7 @@ function FoodItemList(props) {
             {mapFoodItems.map((foodItem) => {
               return <FoodItem
                 whenFoodItemClicked={handleChangingSelectedFoodItem}
-                userId={userId}
+                userId={uId}
                 foodName={foodItem.props.foodName}
                 ingredients={foodItem.props.ingredients}
                 heartburn={foodItem.props.heartburn}
@@ -166,9 +187,9 @@ FoodItemList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: state.userId.userId,
+  userId: window.localStorage.getItem('uId'),
   firestore2: state.firestore,
-  loginName: state.loginName.user,
+  loginName: window.localStorage.getItem('email'),
   selectedFoodItem: state.selectedFoodItem,
   editing: state.editing,
   foodItems: state.firestore.ordered.foodItems,

@@ -44,8 +44,10 @@ function Signin(props) {
     event.preventDefault();
     const email = event.target.signinEmail.value;
     const password = event.target.signinPassword.value;
-    firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
-      console.log("Successfully signed in!");
+    firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
+      console.log("Successfully signed in!", user.user.uid);
+      window.localStorage.setItem('uId', user.user.uid)
+      window.localStorage.setItem('email', user.user.email)
       setTimeout(() => {
         history.push("/");
       }, 800);
@@ -53,6 +55,7 @@ function Signin(props) {
       alert(error.message);
       console.log(error)
     });
+    console.log("ddddddddddddd")
   }
 
 
