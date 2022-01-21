@@ -109,7 +109,7 @@ const YourStats = (props) => {
   useEffect(() => {
     console.log("Yourstats component updated")
   });
-  console.log('stats', props, state, foodItems)
+  console.log('stats', props, state, foodItems, isEmpty(foodItems))
   if (foodItems !== undefined) {
     heartburnItems = foodItems.filter(f => f.heartburn === "Yes");
     noHeartburnItems = foodItems.filter(f => f.heartburn === "No");
@@ -127,7 +127,7 @@ const YourStats = (props) => {
   }
 
   function loadingFirestore(foodItems, array) {
-    if (foodItems !== undefined) {
+    if (foodItems !== undefined && !isEmpty(foodItems)) {
       array.forEach(createList);
       return array;
     }
@@ -145,6 +145,10 @@ const YourStats = (props) => {
       return array;
     }
   }
+
+  if(foodItems && foodItems.length > 1) {
+
+  
   return (
     <React.Fragment>
       <h2>Your stats</h2>
@@ -159,6 +163,29 @@ const YourStats = (props) => {
       </Link>
     </React.Fragment>
   );
+} else if(foodItems && foodItems.length > 0) {
+  return (
+<React.Fragment>
+    <h3>It appears there is no correlation between your food ingredients and heartburn. Add more foods to add more data.</h3>
+    <hr></hr>
+    <br />
+    <Link className='btn btn-info btn-sm' to='/add-food-item'>
+        Add Food Item
+      </Link>
+  </React.Fragment>
+  );
+} else {
+  return (
+  <React.Fragment>
+    <h3>You have no food Items in your list. Add food Items below.</h3>
+    <hr></hr>
+    <br />
+    <Link className='btn btn-info btn-sm' to='/add-food-item'>
+        Add Food Item
+      </Link>
+  </React.Fragment>
+  );
+}
 }
 
 

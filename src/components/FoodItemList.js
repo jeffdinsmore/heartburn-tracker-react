@@ -112,7 +112,7 @@ function FoodItemList(props) {
   // }
 
   //else if (isLoaded(foodItems)) {
-    console.log('id', uId, userId, login, foodItems)
+    console.log('id', uId, userId, login, foodItems, isLoaded(foodItems) && foodItems && foodItems.length === 0)
   if (userId !== null && foodItems !== undefined) {
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
@@ -157,7 +157,20 @@ function FoodItemList(props) {
         </Link>
       </React.Fragment>
     );
-  } else {
+  // } else if(isLoaded(foodItems) && foodItems && foodItems.length === 0) {
+  //   return (
+  //     <React.Fragment>
+  //     <h3>Add food items to see them in the list.</h3>
+  //     </React.Fragment>
+  //   )
+  // }
+          }  if (isEmpty(foodItems)) {
+            return (
+              <React.Fragment><span>No food items have been entered in your list.</span>
+              </React.Fragment>
+            )
+          }
+  else {
     // if (foodItems === undefined || userId === null) {
       return (
         <React.Fragment>
@@ -167,12 +180,12 @@ function FoodItemList(props) {
     }
   
 
-  if (isEmpty(foodItems)) {
-    return (
-      <React.Fragment><span>No food items have been entered in your list.</span>
-      </React.Fragment>
-    )
-  }
+  // if (isEmpty(foodItems)) {
+  //   return (
+  //     <React.Fragment><span>No food items have been entered in your list.</span>
+  //     </React.Fragment>
+  //   )
+  // }
 }
 
 FoodItemList.propTypes = {
