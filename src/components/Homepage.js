@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from "prop-types";
-import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import * as a from '../actions';
 import firebase from 'firebase';
 
 function Homepage(props) {
-  const { loginName, userId } = props;
+  const { loginName } = props;
 
   useEffect(() => {
     (async () => {
@@ -24,7 +23,7 @@ function Homepage(props) {
       }
       console.log("Home component did mount")
     })();
-  }, [])
+  }, [props])
 
   // useEffect(() => {
   //   if(!window.localStorage.getItem('uId') || window.localStorage.getItem('uId') === null) {

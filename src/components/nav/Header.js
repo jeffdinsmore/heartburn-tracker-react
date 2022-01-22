@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import { useSelector } from 'react-redux';
@@ -74,6 +72,5 @@ const mapStateToProps = (state) => {
     userId: window.localStorage.getItem('uId'),
   }
 }
-Header = withRouter(connect(mapStateToProps)(Header));
 
-export default Header;
+export default withRouter(connect(mapStateToProps)(Header));

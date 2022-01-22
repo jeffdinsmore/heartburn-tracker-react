@@ -1,6 +1,5 @@
 import React from "react";
 import firebase from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase';
 
 function Signup() {
   //provider.addScope('https://www.googleapis.com/auth/contacts.readonly');

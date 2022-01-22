@@ -6,11 +6,7 @@ import Signup from './components/auth/Signup';
 import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import styled from 'styled-components';
 import ButtonCount from './components/ButtonCount';
-import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
-import PropTypes from "prop-types";
-import { useSelector } from 'react-redux';
-import Routes from "./components/Routes";
-import { HashRouter } from 'react-router-dom';
+import { withFirestore, isLoaded } from 'react-redux-firebase';
 import FoodItemList from './components/FoodItemList';
 import Homepage from './components/Homepage';
 import NewFoodItemForm from './components/NewFoodItemForm';
@@ -31,7 +27,6 @@ function App(props) {
   const auth = props.firebase.auth();
   if ((isLoaded(auth)) && (auth.currentUser != null)) {
   }
-  const state = useSelector(state => state);
   //console.log("props", props, state)
   return (
       <Router>

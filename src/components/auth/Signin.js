@@ -1,12 +1,11 @@
 import React from "react";
 import firebase from "firebase";
-import { Redirect, Route, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { withFirestore } from 'react-redux-firebase';
 
 function Signin(props) {
-  const loginName = useSelector(state => state.loginName)
+
   const createAccount = () => {
     history.push('/signup');
   }
@@ -29,16 +28,9 @@ function Signin(props) {
 
   const history = useHistory();
   //const loginName = useSelector(state => state.loginName.user)
-  const state = useSelector(state => state);
   // const googleProvider = new firebase.auth.GoogleAuthProvider();
   //const auth = getAuth();
-  const handleClickSignin = () => {
-    //const { dispatch } = props;
-    //const action = a.signInName;
-    // if (loginName === "Signed out" || loginName === "Not signed in") {
-    //dispatch(action);
-    //}
-  }
+
 
   function doSignIn(event) {
     event.preventDefault();
@@ -80,15 +72,6 @@ function Signin(props) {
   //     alert(err.message);
   //   }
   // };
-
-  function doSignOut() {
-    firebase.auth().signOut().then(function () {
-      alert("Successfully signed out!");
-      return (<Redirect to="/" />);
-    }).catch(function (error) {
-      alert(error.message);
-    });
-  }
 
   return (
     <React.Fragment>

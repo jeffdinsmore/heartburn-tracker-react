@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from '../actions';
 import { useFirestore } from 'react-redux-firebase';
-import { useStore } from "react-redux";
+// import { useStore } from "react-redux";
 import { useHistory, Link } from 'react-router-dom';
 
 function EditFoodItemForm(props) {
   const firestore = useFirestore();
   const history = useHistory();
-  const { foodItem, userId, editing, dispatch, selectedFoodItem } = props;
+  const { foodItem, userId } = props;
   console.log('edit', props)
 
   const handleEditingFoodItemInList = () => {
@@ -20,35 +20,35 @@ function EditFoodItemForm(props) {
     dispatch(action2);
   }
 
-  const handleClick = () => {
-    if (editing) {
-      dispatch(a.editing())
-      history.push('/foodlist')
-    } else if (selectedFoodItem !== null) {
-      dispatch(a.unSelectFoodItem());
-      history.push('/foodlist')
-    } else {
-      history.goBack();
-    }
-  }
+  // const handleClick = () => {
+  //   if (editing) {
+  //     dispatch(a.editing())
+  //     history.push('/foodlist')
+  //   } else if (selectedFoodItem !== null) {
+  //     dispatch(a.unSelectFoodItem());
+  //     history.push('/foodlist')
+  //   } else {
+  //     history.goBack();
+  //   }
+  // }
 
-  const handleChangingSelectedFoodItem = (id) => {
-    props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
-      const firestoreFoodItem = {
-        foodName: foodItem.get("foodName"),
-        brand: foodItem.get("brand"),
-        ingredients: foodItem.get("ingredients"),
-        heartburn: foodItem.get("heartburn"),
-        timeOpen: foodItem.get("timeOpen"),
-        id: foodItem.id
-      }
-      const path = '/foodItem/' + firestoreFoodItem.id;
-      dispatch(a.selectFoodItem(firestoreFoodItem))
-      dispatch(a.history(path))
-      console.log('aaaaaaaaaa', firestoreFoodItem)
-      console.log("updatedddddddddddddddd", props)
-    });
-  }
+  // const handleChangingSelectedFoodItem = (id) => {
+  //   props.firestore.get({ collection: 'users', doc: userId, subcollections: [{ collection: 'foodItems', doc: id }] }).then((foodItem) => {
+  //     const firestoreFoodItem = {
+  //       foodName: foodItem.get("foodName"),
+  //       brand: foodItem.get("brand"),
+  //       ingredients: foodItem.get("ingredients"),
+  //       heartburn: foodItem.get("heartburn"),
+  //       timeOpen: foodItem.get("timeOpen"),
+  //       id: foodItem.id
+  //     }
+  //     const path = '/foodItem/' + firestoreFoodItem.id;
+  //     dispatch(a.selectFoodItem(firestoreFoodItem))
+  //     dispatch(a.history(path))
+  //     console.log('aaaaaaaaaa', firestoreFoodItem)
+  //     console.log("updatedddddddddddddddd", props)
+  //   });
+  // }
 
   function handleEditFoodItemFormSubmission(event) {
     event.preventDefault();

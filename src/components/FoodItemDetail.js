@@ -5,14 +5,14 @@ import { useSelector } from "react-redux";
 import * as a from '../actions';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
+import { withFirestore } from 'react-redux-firebase';
 
 function FoodItemDetail(props) {
 
   const history = useHistory();
   const state = useSelector(state => state)
   console.log('detail', state, props)
-  const { foodItem, onClickingModal, onClickingDelete, onClickingEdit, showModal, onClickingCancel, userId, selectedFoodItem } = props;
+  const { foodItem, showModal, userId, selectedFoodItem } = props;
 
   const handleDeletingFoodItem = (id) => {
     const { dispatch } = props;
@@ -117,6 +117,6 @@ const mapStateToProps = state => ({
   showModal: state.showModal,
 });
 
-FoodItemDetail = connect(mapStateToProps)(FoodItemDetail);
+//FoodItemDetail = connect(mapStateToProps)(FoodItemDetail);
 
-export default withFirestore(FoodItemDetail);
+export default withFirestore(connect(mapStateToProps)(FoodItemDetail));

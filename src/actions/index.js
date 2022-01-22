@@ -54,7 +54,6 @@ export const showModal = () => {
 }
 
 export const signInName = (input) => {
-  const { user } = input;
   return {
     type: c.SIGN_IN_NAME,
     user: input,
@@ -62,7 +61,6 @@ export const signInName = (input) => {
 };
 
 export const history = (input) => {
-  const { path } = input;
   return {
     type: c.HISTORY,
     path: input,
@@ -70,7 +68,6 @@ export const history = (input) => {
 };
 
 export const userId = (input) => {
-  const { userId } = input;
   return {
     type: c.USER_ID,
     userId: input,

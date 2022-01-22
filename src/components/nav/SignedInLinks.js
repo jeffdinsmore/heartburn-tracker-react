@@ -1,6 +1,6 @@
 import Nav from 'react-bootstrap/Nav';
-import React, { useEffect } from "react";
-import firebase, { auth, signInWithEmailAndPassword, signInWithGoogle, GoogleAuthProvider } from "firebase";
+import React from "react";
+import firebase from "firebase";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import PropTypes from "prop-types";

@@ -5,9 +5,7 @@ import { firestoreReducer } from 'redux-firestore';
 import editingReducer from './editing-reducer';
 import showModalReducer from './show-modal-reducer';
 import selectFoodItemReducer from './select-foodItem-reducer';
-import homepageVisibleReducer from './homepage-visible-reducer';
 import signInNameReducer from './sign-in-name-reducer';
-import loginVisibleReducer from './login-visible-reducer';
 import userIdReducer from './user-id-reducer';
 import historyReducer from './history-reducer';
 
@@ -19,7 +17,6 @@ const rootReducer = combineReducers({
   selectedFoodItem: selectFoodItemReducer,
   loginName: signInNameReducer,
   userId: userIdReducer,
-  //loginVisible: loginVisibleReducer,
   history: historyReducer,
   firestore: firestoreReducer
 });

@@ -3,11 +3,9 @@ import { useSelector } from 'react-redux';
 import { withFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import * as a from '../actions';
 import { Link } from 'react-router-dom';
-import firebase from 'firebase';
 
-const YourStats = (props) => {
+function YourStats(props) {
   const { userId } = props;
   // useEffect(() => {
   //   (async () => {
@@ -26,29 +24,29 @@ const YourStats = (props) => {
   //     }
   //   })();
   // }, [])
-  useEffect(() => {
-    (async () => {
-      try {
-        firebase.auth().onAuthStateChanged((user) => {
-          const { dispatch } = props;
-          if (user) {
-            dispatch(a.signInName(user.email));
-            dispatch(a.userId(user.uid));
-          }
-        })
-      } catch (error) {
-        alert(error);
-      }
-      console.log("Home component did mount")
-    })();
-  }, [])
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       firebase.auth().onAuthStateChanged((user) => {
+  //         if (user) {
+  //           dispatch(a.signInName(user.email));
+  //           dispatch(a.userId(user.uid));
+  //         }
+  //       })
+  //     } catch (error) {
+  //       alert(error);
+  //     }
+  //     console.log("Home component did mount")
+  //   })();
+  // }, []);
+
   useFirestoreConnect([
     {
       collection: 'users', doc: userId,
       subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
     }
   ]);
-  const id = useSelector(state => state.userId.userId)
+
   const state = useSelector(state => state);
   // Create a query against the collection
   const foodItems = useSelector(state => state.firestore.ordered.foodItems);
@@ -174,7 +172,7 @@ const YourStats = (props) => {
       </Link>
   </React.Fragment>
   );
-} else {
+} else if(foodItems && foodItems.length === 0) {
   return (
   <React.Fragment>
     <h3>You have no food Items in your list. Add food Items below.</h3>
@@ -184,6 +182,12 @@ const YourStats = (props) => {
         Add Food Item
       </Link>
   </React.Fragment>
+  );
+} else {
+  return (
+    <React.Fragment>
+      <h3>Loading...</h3>
+    </React.Fragment>
   );
 }
 }

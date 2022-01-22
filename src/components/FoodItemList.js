@@ -3,21 +3,19 @@ import FoodItem from "./FoodItem";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty, withFirestore } from 'react-redux-firebase';
-import { masterFoodList } from "../actions";
-import { propTypes } from "react-bootstrap/esm/Image";
+// import { propTypes } from "react-bootstrap/esm/Image";
 import * as a from '../actions';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 function FoodItemList(props) {
-  const { userId, loginName, dispatch } = props;
+  const { userId, dispatch } = props;
   const [uId, setUId] = useState(null);
   const [login, setLogin] = useState("Not signed in");
   const u = window.localStorage.getItem('uId')
   console.log('list', props, u)
-  const history = useHistory();
   const state = useSelector(state => state);
 
   useEffect(() => {
@@ -48,10 +46,7 @@ function FoodItemList(props) {
     }
   }, []);
   
-  async function getUserId() {
-    const answer = await JSON.parse(window.localStorage.getItem('uId'));
-    return answer;
-  }
+
   // useEffect(() => {
   //   window.localStorage.setItem('uId', uId);
   // }, [uId]);
@@ -68,7 +63,7 @@ function FoodItemList(props) {
     let month = date.toDateString().substring(7, 4);
     let day = date.toDateString().substring(10, 8);
     let year = date.toDateString().substring(15, 11);
-    let n = date.toDateString().substring(15, 3);
+    //let n = date.toDateString().substring(15, 3);
     return month + "-" + day + "-" + year;
   }
   useEffect(() => {
@@ -210,6 +205,6 @@ const mapStateToProps = state => ({
   //history: state.history,
 });
 
-FoodItemList = connect(mapStateToProps)(FoodItemList);
+//FoodItemList = connect(mapStateToProps)(FoodItemList);
 
-export default withFirestore(FoodItemList);
+export default withFirestore(connect(mapStateToProps)(FoodItemList));

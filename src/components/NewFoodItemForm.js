@@ -4,14 +4,13 @@ import { useFirestore } from 'react-redux-firebase'
 import firebase from 'firebase';
 import * as a from '../actions';
 import { connect } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
+import { useHistory } from 'react-router-dom';
 
 
 function NewFoodItemForm(props) {
   const firestore = useFirestore();
   const history = useHistory();
-  const { userId, loginName, selectedFoodItem, editing, dispatch } = props;
+  const { userId, selectedFoodItem, editing, dispatch } = props;
   useEffect(() => {
     (async () => {
       try {
