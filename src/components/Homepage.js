@@ -23,7 +23,7 @@ function Homepage(props) {
       }
       console.log("Home component did mount")
     })();
-  }, [props])
+  }, [])
 
   // useEffect(() => {
   //   if(!window.localStorage.getItem('uId') || window.localStorage.getItem('uId') === null) {

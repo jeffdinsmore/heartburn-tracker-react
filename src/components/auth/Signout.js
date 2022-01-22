@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
-import firebase, { auth, signInWithEmailAndPassword, signInWithGoogle, GoogleAuthProvider } from "firebase";
-import { Redirect, Route, useNavigate } from "react-router";
-import PropTypes from 'prop-types';
-import * as a from '../../actions';
-import { useSelector } from 'react-redux';
-import { withFirestore, useFirestoreConnect, isLoaded } from 'react-redux-firebase';
+import React from "react";
+import firebase from "firebase";
+import { Redirect } from "react-router";
+import { withFirestore } from 'react-redux-firebase';
 
 function doSignOut() {
   console.log('aaaaaaaaaaaaaa')

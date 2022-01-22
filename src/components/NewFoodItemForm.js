@@ -27,6 +27,7 @@ function NewFoodItemForm(props) {
       console.log("Home component did mount")
     })();
   }, [])
+  
   const handleAddingNewFoodItemToList = () => {
     const { dispatch } = props;
     const action = a.toggleForm();

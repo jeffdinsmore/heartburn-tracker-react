@@ -107,7 +107,9 @@ function YourStats(props) {
   useEffect(() => {
     console.log("Yourstats component updated")
   });
+
   console.log('stats', props, state, foodItems, isEmpty(foodItems))
+  
   if (foodItems !== undefined) {
     heartburnItems = foodItems.filter(f => f.heartburn === "Yes");
     noHeartburnItems = foodItems.filter(f => f.heartburn === "No");
