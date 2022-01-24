@@ -37,9 +37,10 @@ function Signin(props) {
     const email = event.target.signinEmail.value;
     const password = event.target.signinPassword.value;
     firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
-      console.log("Successfully signed in!", user.user.uid);
+      console.log("Successfully signed in!", user.user);
       window.localStorage.setItem('uId', user.user.uid)
       window.localStorage.setItem('email', user.user.email)
+      window.localStorage.setItem('name', user.user.name)
       setTimeout(() => {
         history.push("/");
       }, 800);

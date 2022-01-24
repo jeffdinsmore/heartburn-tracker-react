@@ -35,6 +35,7 @@ function SignedInLinks(props) {
       </Nav>
       <Nav>
         <Nav.Link onClick={doSignOut} to="/">Logout</Nav.Link>
+        <Nav.Link as={Link} to="/edit-your-account">Account</Nav.Link>
         {/* <Nav.Link as={Link} to="/" className='btn btn-warning p-1 rounded-circle btn-sm' onClick={routerClick}>
           JJ
         </Nav.Link> */}

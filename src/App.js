@@ -13,6 +13,7 @@ import NewFoodItemForm from './components/NewFoodItemForm';
 import FoodItemDetail from './components/FoodItemDetail';
 import EditFoodItemForm from './components/EditFoodItemForm';
 import YourStats from './components/YourStats';
+import EditUserForm from './components/EditUserForm';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -33,6 +34,11 @@ function App(props) {
 
         <Header />
         <Switch>
+        <Route path="/edit-your-account">
+            <BodyStyling>
+              <EditUserForm />
+            </BodyStyling>
+          </Route>
           <Route path="/login">
             <BodyStyling>
               <Signin />
