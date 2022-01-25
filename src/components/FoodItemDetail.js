@@ -50,7 +50,7 @@ function FoodItemDetail(props) {
       dispatch(action);
     }
   }
-
+//34797292572, 2201572
   function convertDate(seconds, nanoseconds) {
     let d = new Date(seconds / 1000000 + nanoseconds * 1000);
     let month = d.toDateString().substring(7, 3);
