@@ -109,7 +109,7 @@ function YourStats(props) {
   });
 
   console.log('stats', props, state, foodItems, isEmpty(foodItems))
-  
+
   if (foodItems !== undefined) {
     heartburnItems = foodItems.filter(f => f.heartburn === "Yes");
     noHeartburnItems = foodItems.filter(f => f.heartburn === "No");
@@ -207,7 +207,7 @@ YourStats.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: window.localStorage.getItem('uId'),
+  userId: window.localStorage.getItem('uid'),
   firestore2: state.firestore,
   loginName: window.localStorage.getItem('email'),
   selectedFoodItem: state.selectedFoodItem,

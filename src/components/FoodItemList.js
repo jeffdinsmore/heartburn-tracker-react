@@ -12,9 +12,9 @@ import { Link } from 'react-router-dom';
 
 function FoodItemList(props) {
   const { userId, dispatch } = props;
-  const [uId, setUId] = useState(null);
+  const [uid, setUid] = useState(null);
   const [login, setLogin] = useState("Not signed in");
-  const u = window.localStorage.getItem('uId')
+  const u = window.localStorage.getItem('uid')
   console.log('list', props, u)
   const state = useSelector(state => state);
 
@@ -26,7 +26,7 @@ function FoodItemList(props) {
           if (user) {
             dispatch(a.signInName(user.email));
             dispatch(a.userId(user.uid));
-            window.localStorage.setItem('uId', user.uid);
+            window.localStorage.setItem('uid', user.uid);
           }
         })
       } catch (error) {
@@ -38,7 +38,7 @@ function FoodItemList(props) {
 
   useEffect(() => {
     try {
-      setUId(JSON.parse(window.localStorage.getItem('uId')));
+      setUid(JSON.parse(window.localStorage.getItem('uid')));
       setLogin(JSON.parse(window.localStorage.getItem('email')));
     } catch(error) {
       console.log(error);
@@ -48,8 +48,8 @@ function FoodItemList(props) {
   
 
   // useEffect(() => {
-  //   window.localStorage.setItem('uId', uId);
-  // }, [uId]);
+  //   window.localStorage.setItem('uid', uid);
+  // }, [uid]);
 
   useFirestoreConnect([
     {
@@ -107,7 +107,7 @@ function FoodItemList(props) {
   // }
 
   //else if (isLoaded(foodItems)) {
-    console.log('id', uId, userId, login, foodItems, isLoaded(foodItems) && foodItems && foodItems.length === 0)
+    console.log('id', uid, userId, login, foodItems, isLoaded(foodItems) && foodItems && foodItems.length === 0)
   if (userId !== null && foodItems !== undefined) {
     let mapFoodItems = foodItems.map((foodItem) => {
       let date = foodItem.timeOpen === null ? new Date() : new Date((foodItem.timeOpen.nanoseconds / 1000000) + (foodItem.timeOpen.seconds * 1000));
@@ -136,7 +136,7 @@ function FoodItemList(props) {
             {mapFoodItems.map((foodItem) => {
               return <FoodItem
                 whenFoodItemClicked={handleChangingSelectedFoodItem}
-                userId={uId}
+                userId={uid}
                 foodName={foodItem.props.foodName}
                 ingredients={foodItem.props.ingredients}
                 heartburn={foodItem.props.heartburn}
@@ -195,7 +195,7 @@ FoodItemList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: window.localStorage.getItem('uId'),
+  userId: window.localStorage.getItem('uid'),
   firestore2: state.firestore,
   loginName: window.localStorage.getItem('email'),
   selectedFoodItem: state.selectedFoodItem,

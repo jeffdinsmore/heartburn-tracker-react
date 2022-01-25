@@ -7,7 +7,8 @@ import firebase from 'firebase';
 
 function Homepage(props) {
   const { loginName } = props;
-
+  // const user = firebase.auth().currentUser;
+  // console.log('userAccount', user, user.metadata.creationTime, user.metadata.lastSignInTime);
   useEffect(() => {
     (async () => {
       try {
@@ -26,10 +27,10 @@ function Homepage(props) {
   }, [])
 
   // useEffect(() => {
-  //   if(!window.localStorage.getItem('uId') || window.localStorage.getItem('uId') === null) {
-  //     window.localStorage.setItem('uId', userId);
+  //   if(!window.localStorage.getItem('uid') || window.localStorage.getItem('uid') === null) {
+  //     window.localStorage.setItem('uid', userId);
   //   } else if(userId === null) {
-  //     window.localStorage.setItem('uId', userId);
+  //     window.localStorage.setItem('uid', userId);
   //   }
     
     

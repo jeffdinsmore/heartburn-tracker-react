@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
     showModal: state.showModal,
     loginName2: state.loginName.user,
     loginName: !window.localStorage.getItem('email') ? 'Not signed in' : window.localStorage.getItem('email'),
-    userId: window.localStorage.getItem('uId'),
+    userId: window.localStorage.getItem('uid'),
   }
 }
 

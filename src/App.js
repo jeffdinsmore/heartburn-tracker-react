@@ -14,6 +14,7 @@ import FoodItemDetail from './components/FoodItemDetail';
 import EditFoodItemForm from './components/EditFoodItemForm';
 import YourStats from './components/YourStats';
 import EditUserForm from './components/EditUserForm';
+import UserAccountInfo from './components/UserAccountInfo';
 
 const BodyStyling = styled.div`
   // background-color: lightGray;
@@ -34,6 +35,11 @@ function App(props) {
 
         <Header />
         <Switch>
+        <Route path="/account-info">
+            <BodyStyling>
+              <UserAccountInfo />
+            </BodyStyling>
+          </Route>
         <Route path="/edit-your-account">
             <BodyStyling>
               <EditUserForm />

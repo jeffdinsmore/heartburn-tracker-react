@@ -27,7 +27,7 @@ function NewFoodItemForm(props) {
       console.log("Home component did mount")
     })();
   }, [])
-  
+
   const handleAddingNewFoodItemToList = () => {
     const { dispatch } = props;
     const action = a.toggleForm();
@@ -114,7 +114,7 @@ NewFoodItemForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: window.localStorage.getItem('uId'),
+  userId: window.localStorage.getItem('uid'),
   firestore: state.firestore,
   loginName: window.localStorage.getItem('email'),
   selectedFoodItem: state.selectedFoodItem,

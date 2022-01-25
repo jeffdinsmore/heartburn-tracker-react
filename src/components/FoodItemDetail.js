@@ -106,7 +106,7 @@ FoodItemDetail.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: window.localStorage.getItem('uId'),
+  userId: window.localStorage.getItem('uid'),
   firestore2: state.firestore,
   loginName: window.localStorage.getItem('email'),
   selectedFoodItem: state.selectedFoodItem,

@@ -9,7 +9,7 @@ import { useHistory, Link } from 'react-router-dom';
 function EditUserForm(props) {
   const firestore = useFirestore();
   const history = useHistory();
-  const { foodItem, userId, loginName, userCity, userState, userName } = props;
+  const { foodItem, userId, loginName, userCity, userState, userFirstName, userLastName } = props;
   console.log('edit', props)
 
   const handleEditingUser = () => {
@@ -55,14 +55,19 @@ function EditUserForm(props) {
     handleEditingUser();
     console.log("haaaaaaaaaapppppppy")
     const propertiesToUpdate = {
-      name: event.target.name.value,
+      firstName: event.target.firstName.value,
+      lastName: event.target.lastName.value,
       email: event.target.email.value,
       city: event.target.city.value,
-      state: event.target.state.value
+      userState: event.target.userState.value
     }
     console.log("userEdit", propertiesToUpdate)
     history.push('/foodlist')
-    return firestore.update({ collection: 'users', doc: userId }, propertiesToUpdate, {merge: true})
+    window.localStorage.setItem('firstName', propertiesToUpdate.firstName)
+    window.localStorage.setItem('lastName', propertiesToUpdate.lastName)
+    window.localStorage.setItem('userState', propertiesToUpdate.userState)
+    window.localStorage.setItem('city', propertiesToUpdate.city)
+    return firestore.update({ collection: 'users', doc: userId }, propertiesToUpdate)
   }
 
   return (
@@ -70,12 +75,19 @@ function EditUserForm(props) {
       <h2>Edit Your Account Info</h2>
       <br />
       <form onSubmit={handleEditUserFormSubmission}>
-        <p className="pTagForm">Name:</p>
+        <p className="pTagForm">First Name:</p>
         <input className="field"
           type='text'
-          name='name'
-          placeholder='Your name'
-          defaultValue={userName !== null ? userName : "loading"}
+          name='firstName'
+          placeholder='Your first name'
+          defaultValue={userFirstName !== null ? userFirstName : "loading"}
+          required='required' />
+        <p className="pTagForm">Last Name:</p>
+        <input className="field"
+          type='text'
+          name='lastName'
+          placeholder='Your last name'
+          defaultValue={userLastName !== null ? userLastName : "loading"}
           required='required' />
         <p className="pTagForm">Email:</p>
         <input className="field"
@@ -85,14 +97,14 @@ function EditUserForm(props) {
           defaultValue={loginName !== null ? loginName : "loading"}
           required='required' />
         <p className="pTagForm">City:</p>
-        <input className="field2"
+        <input className="field"
           type='text'
           name='city'
           placeholder='Your city'
           defaultValue={userCity !== null ? userCity : "loading"}
           required='required' />
         <p className="pTagForm">State:</p>
-        <select name="state" className="field" id="heartburnInput" defaultValue={userState !== undefined ? userState : "AK"}>
+        <select name="userState" className="field" id="heartburnInput" defaultValue={userState !== undefined ? userState : "AK"}>
           <option value="" disabled>Please Select</option>
           <option value="AK">AK</option>
           <option value="AL">AL</option>
@@ -176,10 +188,11 @@ EditUserForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: window.localStorage.getItem('uId'),
+  userId: window.localStorage.getItem('uid'),
   firestore2: state.firestore,
   loginName: window.localStorage.getItem('email'),
-  userName: window.localStorage.getItem('name'),
+  userFirstName: window.localStorage.getItem('firstName'),
+  userLastName: window.localStorage.getItem('lastName'),
   userCity: window.localStorage.getItem('city'),
   userState: window.localStorage.getItem('state'),
   selectedFoodItem: state.selectedFoodItem,

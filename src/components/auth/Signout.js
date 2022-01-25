@@ -5,7 +5,7 @@ import { withFirestore } from 'react-redux-firebase';
 
 function doSignOut() {
   console.log('aaaaaaaaaaaaaa')
-  window.localStorage.removeItem("uId")
+  window.localStorage.removeItem("uid")
   firebase.auth().signOut().then(function () {
     alert("Successfully signed out!");
     window.localStorage.clear();
@@ -13,7 +13,7 @@ function doSignOut() {
   }).catch(function (error) {
     alert(error.message);
   });
-  window.localStorage.removeItem("uId")
+  window.localStorage.removeItem("uid")
   window.localStorage.removeItem("email")
 }
 
