@@ -15,8 +15,9 @@ function SignedInLinks(props) {
   function doSignOut() {
     firebase.auth().signOut().then(function () {
       console.log("Successfully signed out!");
-      window.localStorage.removeItem("uid")
-      window.localStorage.removeItem("email")
+      // window.localStorage.removeItem("uid")
+      // window.localStorage.removeItem("email")
+      window.localStorage.clear()
       setTimeout(() => {
         history.push("/");
         history.go(0);

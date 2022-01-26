@@ -3,9 +3,11 @@ import firebase from "firebase";
 import { useHistory } from "react-router";
 import PropTypes from 'prop-types';
 import { withFirestore } from 'react-redux-firebase';
+import { connect } from 'react-redux';
 
 function Signin(props) {
-
+  const { firestore } = props;
+  console.log(props)
   const createAccount = () => {
     history.push('/signup');
   }
@@ -36,18 +38,62 @@ function Signin(props) {
     event.preventDefault();
     const email = event.target.signinEmail.value;
     const password = event.target.signinPassword.value;
-    firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
-      console.log("Successfully signed in!", user.user);
-      window.localStorage.setItem('uid', user.user.uid)
-      window.localStorage.setItem('email', user.user.email)
-      window.localStorage.setItem('name', user.user.name)
-      setTimeout(() => {
-        history.push("/");
-      }, 800);
+
+    firebase.auth().signInWithEmailAndPassword(email, password).then((data) => {
+      console.log("Successfully signed in!",data.user);
+      window.localStorage.setItem('uid', data.user.uid);
+      window.localStorage.setItem('email', data.user.email);
+      window.localStorage.setItem('firstName', data.user.firstName);
+      window.localStorage.setItem('lastName', data.user.lastName);
+      window.localStorage.setItem('city', data.user.city);
+      window.localStorage.setItem('userState', data.user.userState);
+      window.localStorage.setItem('creationTime', data.user.metadata.creationTime);
+      window.localStorage.setItem('lastSignInTime', data.user.metadata.lastSignInTime);
+
+
+      // setTimeout(() => {
+      //   history.push("/");
+      // }, 800);
     }).catch((error) => {
       alert(error.message);
       console.log(error)
     });
+    console.log('made it here')
+    firestore.get({ collection: 'users', doc: window.localStorage.getItem('uid') }).then((user) => {
+      const userInfo = {
+        firstName: user.get('firstName'),
+        lastName: user.get('lastName'),
+        city: user.get('city'),
+        userState: user.get('userState'),
+
+      }
+      console.log("user", userInfo)
+      window.localStorage.setItem('lastName', userInfo.lastName);
+      window.localStorage.setItem('firstName', userInfo.firstName);
+      window.localStorage.setItem('city', userInfo.city);
+      window.localStorage.setItem('userState', userInfo.userState);
+    }).catch((error) => {
+      alert(error.message);
+      console.log(error)
+      //     const firestoreFoodItem = {
+      //       foodName: foodItem.get("foodName"),
+      //       brand: foodItem.get("brand"),
+      //       ingredients: foodItem.get("ingredients"),
+      //       heartburn: foodItem.get("heartburn"),
+      //       timeOpen: foodItem.get("timeOpen"),
+      //       id: foodItem.id
+      //     }
+      //     const path = '/foodItem/' + firestoreFoodItem.id;
+      //     dispatch(a.selectFoodItem(firestoreFoodItem))
+      //     dispatch(a.history(path))
+      //     console.log('aaaaaaaaaa', firestoreFoodItem)
+      //     console.log("updatedddddddddddddddd", props)
+      //   });
+      })
+    
+    setTimeout(() => {
+      history.push("/");
+    }, 800);
     console.log("ddddddddddddd")
   }
 
@@ -108,4 +154,16 @@ Signin.propTypes = {
   loginName: PropTypes.string
 };
 
-export default withFirestore(Signin);
+const mapStateToProps = (state) => {
+  return {
+    masterFoodItemList: state.masterFoodItemList,
+    editing: state.editing,
+    selectedFoodItem: state.selectedFoodItem,
+    showModal: state.showModal,
+    firestore2: state.firestore,
+    loginName: !window.localStorage.getItem('email') ? 'Not signed in' : window.localStorage.getItem('email'),
+    userId: window.localStorage.getItem('uid'),
+  }
+}
+
+export default withFirestore(connect(mapStateToProps)(Signin))
