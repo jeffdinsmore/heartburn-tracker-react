@@ -1,17 +1,20 @@
 import { Nav, NavDropdown } from 'react-bootstrap';
-import React from "react";
+import React, { useEffect } from "react";
 import firebase from "firebase";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import PropTypes from "prop-types";
 
 function SignedInLinks(props) {
-  const { routerClick } = props;
-  const firstName = window.localStorage.getItem('firstName');
+  const { routerClick, firstName } = props;
+  //const firstName = window.localStorage.getItem('firstName');
   const state = useSelector(state => state)
   console.log(props, state)
   const history = useHistory();
-
+  let name;
+  useEffect(() => {
+    name = window.localStorage.getItem('firstName')
+  }, [])
   function doSignOut() {
     firebase.auth().signOut().then(function () {
       console.log("Successfully signed out!");
@@ -40,7 +43,7 @@ function SignedInLinks(props) {
         {/* <Nav.Link as={Link} to="/edit-your-account">{firstName ? firstName : 'Account'}</Nav.Link> */}
         <NavDropdown
           id="nav-dropdown-dark-example"
-          title={firstName ? 'Welcome, ' + firstName : 'Account'}
+          title={name !== undefined ? 'Welcome, ' + name : 'Account'}
           //menuVariant="dark"
         >
           <NavDropdown.Item as={Link} to="/account-info">Account</NavDropdown.Item>

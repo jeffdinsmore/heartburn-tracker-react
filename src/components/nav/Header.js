@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, withRouter } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import SignedInLinks from './SignedInLinks';
@@ -18,8 +18,9 @@ import PropTypes from "prop-types";
 // `;
 
 function Header(props) {
-  const { loginName, editing, selectedFoodItem, dispatch } = props;
+  const { loginName, editing, selectedFoodItem, dispatch, firstName } = props;
 
+  
   const state = useSelector(state => state);
   //const editing = useSelector(state => state.editing);
   //const selectedFoodItem = useSelector(state => state.selectedFoodItem);
@@ -70,6 +71,7 @@ const mapStateToProps = (state) => {
     loginName2: state.loginName.user,
     loginName: !window.localStorage.getItem('email') ? 'Not signed in' : window.localStorage.getItem('email'),
     userId: window.localStorage.getItem('uid'),
+    firstName: window.localStorage.getItem('firstName'),
   }
 }
 

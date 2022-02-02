@@ -4,12 +4,17 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import * as a from '../actions';
 import firebase from 'firebase';
-import { withFirestore, useFirestoreConnect } from 'react-redux-firebase';
+import { withFirestore, useFirestoreConnect, useFirestore } from 'react-redux-firebase';
 
 function Homepage(props) {
-  const { loginName } = props;
+  const { loginName, firestore } = props;
   // const user = firebase.auth().currentUser;
   // console.log('userAccount', user, user.metadata.creationTime, user.metadata.lastSignInTime);
+
+  useFirestoreConnect([
+    { collection: 'users', doc: window.localStorage.getItem('uid') }
+  ]);
+
   useEffect(() => {
     (async () => {
       try {
@@ -28,6 +33,20 @@ function Homepage(props) {
     })();
   }, [])
 
+  useEffect(() => {
+    (async () => {
+      if(firestore.ordered.users) {
+        const lastName = await firestore.ordered.users[0].lastName;
+        const firstName = await firestore.ordered.users[0].firstName;
+        const city = await firestore.ordered.users[0].city;
+        const userState = await firestore.ordered.users[0].userState;
+        window.localStorage.setItem('lastName', lastName);
+        window.localStorage.setItem('firstName', firstName);
+        window.localStorage.setItem('city', city);
+        window.localStorage.setItem('userState', userState);
+      }
+    })();
+  }, [firestore.ordered.users]);
   // useEffect(() => {
   //   (async () => {
   //     try {

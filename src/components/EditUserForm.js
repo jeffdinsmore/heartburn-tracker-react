@@ -69,7 +69,7 @@ function EditUserForm(props) {
     window.localStorage.setItem('city', propertiesToUpdate.city)
     return firestore.update({ collection: 'users', doc: userId }, propertiesToUpdate)
   }
-
+  console.log(props)
   return (
     <React.Fragment>
       <h2>Edit Your Account Info</h2>
@@ -104,7 +104,7 @@ function EditUserForm(props) {
           defaultValue={userCity !== null ? userCity : "loading"}
           required='required' />
         <p className="pTagForm">State:</p>
-        <select name="userState" className="field" id="heartburnInput" defaultValue={userState !== undefined ? userState : "AK"}>
+        <select name="userState" className="field" id="heartburnInput" defaultValue={userState !== undefined ? userState : "AL"}>
           <option value="" disabled>Please Select</option>
           <option value="AK">AK</option>
           <option value="AL">AL</option>
@@ -194,7 +194,7 @@ const mapStateToProps = state => ({
   userFirstName: window.localStorage.getItem('firstName'),
   userLastName: window.localStorage.getItem('lastName'),
   userCity: window.localStorage.getItem('city'),
-  userState: window.localStorage.getItem('state'),
+  userState: window.localStorage.getItem('userState'),
   selectedFoodItem: state.selectedFoodItem,
   editing: state.editing,
   foodItems: state.firestore.ordered.foodItems,

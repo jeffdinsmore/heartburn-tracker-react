@@ -63,20 +63,20 @@ function Signin(props) {
       console.log(error)
     });
 
-    props.firestore.get({ collection: 'users', doc: userId }).then((user) => {
-      console.log('made it here', user)
-      const userInfo = {
-        city: user.get('city'),
-        email: user.get('email'),
-        firstName: user.get('firstName'),
-        lastName: user.get('lastName'),
-        userState: user.get('userState'),
-      };
-      console.log("user", userInfo)
-      window.localStorage.setItem('lastName', userInfo.lastName);
-      window.localStorage.setItem('firstName', userInfo.firstName);
-      window.localStorage.setItem('city', userInfo.city);
-      window.localStorage.setItem('userState', userInfo.userState);
+    // props.firestore.get({ collection: 'users', doc: userId }).then((user) => {
+    //   console.log('made it here', user)
+    //   const userInfo = {
+    //     city: user.get('city'),
+    //     email: user.get('email'),
+    //     firstName: user.get('firstName'),
+    //     lastName: user.get('lastName'),
+    //     userState: user.get('userState'),
+    //   };
+    //   console.log("user", userInfo)
+    //   window.localStorage.setItem('lastName', userInfo.lastName);
+    //   window.localStorage.setItem('firstName', userInfo.firstName);
+    //   window.localStorage.setItem('city', userInfo.city);
+    //   window.localStorage.setItem('userState', userInfo.userState);
     // }).catch((error) => {
     //   alert(error.message);
     //   console.log(error)
@@ -94,7 +94,7 @@ function Signin(props) {
       //     console.log('aaaaaaaaaa', firestoreFoodItem)
       //     console.log("updatedddddddddddddddd", props)
       //   });
-      });
+      //});
     
     setTimeout(() => {
       history.push("/");

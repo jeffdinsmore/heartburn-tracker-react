@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 
 function FoodItemList(props) {
-  const { userId, dispatch } = props;
+  const { userId, dispatch, foodItems } = props;
   const [uid, setUid] = useState(null);
   const [login, setLogin] = useState("Not signed in");
   const u = window.localStorage.getItem('uid')
@@ -57,7 +57,7 @@ function FoodItemList(props) {
       subcollections: [{ collection: 'foodItems', orderBy: [['timeOpen', 'desc']] }], storeAs: 'foodItems'
     }
   ]);
-  const foodItems = useSelector(state => state.firestore.ordered.foodItems);
+  //const foodItems = useSelector(state => state.firestore.ordered.foodItems);
 
   const convertDate = (date) => {
     let month = date.toDateString().substring(7, 4);
@@ -119,7 +119,7 @@ function FoodItemList(props) {
         id={foodItem.id}
         key={foodItem.id} />
     })
-    
+    console.log("list map", mapFoodItems)
     return (
       <React.Fragment>
         <h2>Your Recorded Food List</h2>
